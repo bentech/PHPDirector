@@ -1,14 +1,14 @@
 <?php
 if(isset($_POST["options"])){
  header("location: options.php");
+ define("PHPdirector", 1);
 include("../config.php");
 include("../includes/function.inc.php");
 $connect1 = mysql_connect($cfg["db_host"], $cfg["db_user"], $cfg["db_pass"]);
-mysql_select_db($cfg["db_name"], $connect1) or die(mysql_error());
+mysql_select_db($cfg["db_name"]) or die(mysql_error());
 $result1 = mysql_query("SELECT * FROM pp_config");
 
 $row1 = mysql_fetch_array($result1);
-
 mysql_query("UPDATE pp_config SET name = '$_POST[name]'");
 mysql_query("UPDATE pp_config SET vids_per_page = '$_POST[vids_per_page]'");
 mysql_query("UPDATE pp_config SET exerntalheader = '$_POST[exerntalheader]'");
