@@ -77,11 +77,11 @@ Please Use Firefox
 <?php
 if(config('logo') == "default"){
 ?>		
-<div id='logo'><h1><a href='#' title='Centralized Internet Content'>PHP<span class='title'>Director</span></a></h1>
+<div id='logo'><img src="images/phpdirectorbeta.png" width="243" height="52" alt="Php Director">
 <?php
 }else{
 ?>
-<div id='logo'><img src="<?php echo config('logo');?>">
+<div id='logo'><img src="<?php echo config('logo');?> alt='Php Director'">
 <?php
 }
 ?>
