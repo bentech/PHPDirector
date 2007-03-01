@@ -1,10 +1,7 @@
 <?php
 define("PHPdirector", 1);
 ?>
-<?php
-include("../config.php"); 
-include("../includes/function.inc.php");
-?>
+<?php require("../config.php"); ?>
 <?php
 // we must never forget to start the session
 session_start();
@@ -40,7 +37,7 @@ setcookie("phpdirectoradmintab", "true", time()+9600);
 <body>
 
 <div id="admin-header">
-  <h1><?php echo config("name");?> - Admin </h1>
+  <h1><?php echo $cfg["name"];?> - Admin </h1>
 </div>
 <ul id="admin-menu">
 <li><a href="../index.php">Home</a></li>
