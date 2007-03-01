@@ -48,7 +48,7 @@ function MM_swapImage() { //v3.0
 //-->
 </script>
 </head>
-<body onload="MM_preloadImages('/images/arrowdownani.gif')" onload="MM_preloadImages('/images/arrowupani.gif')">
+<body onload="MM_preloadImages('images/arrowdownani.gif')" onload="MM_preloadImages('images/arrowupani.gif')">
 
 <?php
 if ($pagetype == ""){
