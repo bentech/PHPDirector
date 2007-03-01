@@ -15,13 +15,13 @@
 
 1.copy all files to server.
 
-2.Goto http://www.yourwebsitehere.com/phpdirector/install/
+2.Goto http://www.yourwebsitehere.com/yourfoldername/
 
 3.Follow easy to use installation
 
 4.All should be working
 
-5.Admin area - Goto http://www.yourwebsitehere.com/phpdirector/admin/
+5.Admin area - Goto http://www.yourwebsitehere.com/yourfoldername/admin/
 
 
 
