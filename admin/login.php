@@ -1,27 +1,17 @@
 <?php
-define("PHPdirector", 1);
-?>
-<?php require("../config.php"); ?>
-<?php
-// we must never forget to start the session
+if (isset($_POST['txtUserId']) && ($_POST['txtPassword'])){
+    header("location: index.php");
+}
 session_start();
-
-$errorMessage = '';
-if (isset($_POST['txtUserId']) && isset($_POST['txtPassword'])) {
-    // check if the username and password combination is correct
-    if ($_POST['txtUserId'] === $cfg["admin_user"] && $_POST['txtPassword'] === $cfg["admin_pass"]) {
-        // the username and password match, 
-        // set the session
-        $_SESSION['phpdirector'] = true;
-setcookie("phpdirectoradmintab", "true", time()+9600);
-
-        // after login we move to the main page
-        header('Location: index.php');
-		
-        exit;
-    } else {
+define("PHPdirector", 1);
+include("../config.php");
+if ($_POST['txtUserId'] == $cfg["admin_user"] && $_POST['txtPassword'] == $cfg["admin_pass"]){
+    $_SESSION['phpdirector'] = true;
+	$errorMessage = '';
+}else{
+	if (isset($_POST['txtUserId']) && ($_POST['txtPassword'])){
         $errorMessage = 'Sorry, wrong username / password';
-    }
+	}
 }
 ?>
 <html>
@@ -33,7 +23,6 @@ setcookie("phpdirectoradmintab", "true", time()+9600);
 <link media="screen" type="text/css" href="../css/admin_main.css" rel="stylesheet"/>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
-
 <body>
 
 <div id="admin-header">
@@ -50,7 +39,7 @@ if ($errorMessage != '') {
   <?php
 }
 ?>
-<form action="" method="post" name="frmLogin" id="frmLogin">
+<form action="login.php" method="post" name="frmLogin" id="frmLogin">
   <div align="center">
     <p>&nbsp;</p>
     <p><span class="categoria_h">User Id</span>
@@ -63,4 +52,5 @@ if ($errorMessage != '') {
     </p>
   </div>
 </form>
+</body>
 </html>
