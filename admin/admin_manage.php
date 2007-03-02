@@ -125,17 +125,19 @@ while($row = mysql_fetch_array($result)){
 		if ($row['picture'] == null){
 			echo "<td><a href='videos.php?id=".show_sql($row["id"])."'><img border='0' src='images/noimage.bmp' height='64'></a>";
 		}else{
-			$yt_pic_broken = explode("/", show_sql($row['picture']));
-			$yt_pic_final = $yt_pic_broken[5];
-			if ($yt_pic_final = "2.jpg"){
-					$yt_pic_getstart = explode("2.jpg", show_sql($row['picture']));
-					$yt_pic_link_final = $yt_pic_getstart[0];
-					echo "
-						<a href='admin_videos.php?id=".show_sql($row[id])."'>
+			if($row["video_type"] == "YouTube"){
+				$yt_pic_broken = explode("/", show_sql($row['picture']));
+				$yt_pic_final = $yt_pic_broken[5];
+				if ($yt_pic_final = "2.jpg"){
+						$yt_pic_getstart = explode("2.jpg", show_sql($row['picture']));
+						$yt_pic_link_final = $yt_pic_getstart[0];
+						echo"
+							<a href='admin_videos.php?id=".show_sql($row[id])."'>
 							<img border='1' src='".$yt_pic_link_final."3.jpg' height='64'>
 							<img border='1' src='".$yt_pic_link_final."2.jpg' height='64'>
 							<img border='1' src='".$yt_pic_link_final."1.jpg' height='64'>
-						</a>";
+							</a>
+						";
 			}else{
 			echo "
 				<td>
@@ -144,7 +146,18 @@ while($row = mysql_fetch_array($result)){
 				</a>
 			";
 			}
-		}
+			}else{
+			$tehpic = $row[picture];
+			$amp = array("&amp;");
+			$new_replace  = array("&");
+			$newphrase = str_replace("$amp", "$new_replace", "$tehpic");
+			echo"
+			<a href='admin_videos.php?id=".show_sql($row[id])."'>
+			<center><img border='1' src='$newphrase' height='64'><center>
+			</a>
+			";
+			}
+			}
 ?>
 	</td>
 	
