@@ -66,6 +66,7 @@ if ($row['picture'] == ""){
 //no pic
 	  echo "<td><img border='0' src='images/noimage.bmp' height='64'>";
 }else{
+	if($row["video_type"] == "YouTube"){
    		//pic
 		//this double checks if the image is valid for getting multiple images from youtube
    		$yt_pic_broken = explode("/", $row['picture']);
@@ -77,13 +78,26 @@ if ($row['picture'] == ""){
 		//this shows 3 images
 	
    			echo "<img border='1' src='".$yt_pic_link_final."1.jpg' height='97' ><img border='1' src='".$yt_pic_link_final."2.jpg' height='97'><img border='1' src='".$yt_pic_link_final."3.jpg' height='97' >";
-   
-   		}else{
-	
-			echo "<img border='0' src='".$row['picture']."' height='64'>";
-		}
-   }
-
+		}else{
+			echo "
+				<td>
+					<a href='videos.php?id=".show_sql($row[id])."'>
+					<img border='0' src='".show_sql($row['picture'])."' height='64'>
+				</a>
+			";
+			}
+			}else{
+			$tehpic = $row[picture];
+			$amp = array("&amp;");
+			$new_replace  = array("&");
+			$newphrase = str_replace("$amp", "$new_replace", "$tehpic");
+			echo"
+			<a href='admin_videos.php?id=".show_sql($row[id])."'>
+			<img border='1' src='$newphrase' height='64'>
+			</a>
+			";
+			}
+			}
 
 
 
@@ -125,7 +139,17 @@ if ($_GET['pt'] == "rejected"){
 //VIDEOS
 ?>
 <br />
-<object width="425" height="330"><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/<?php echo "".$row['file'];?>" type="application/x-shockwave-flash" wmode="transparent" width="425" height="330"></embed></object>
+<?php
+if($row["video_type"] == "YouTube"){
+echo'
+<object width="425" height="330"><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/'.$row['file'].' type="application/x-shockwave-flash" wmode="transparent" width="425" height="330"></embed></object>
+';
+}else{
+echo'
+<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId='.$row['file'].'" flashvars=""> </embed>
+';
+}
+?>
 <br />
 <?php echo "<b>Made by:</b> ".$row['creator'];?>
 <br />
