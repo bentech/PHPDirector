@@ -76,12 +76,11 @@ echo"<center>No video specified<center>";
 include("footer.php");
 exit;
 }
-$result1 = mysql_query("SELECT * FROM pp_files WHERE file='$videoid'");
+$result1 = mysql_query("SELECT * FROM pp_files WHERE file='$geturl'");
 $row1 = mysql_fetch_array($result1);
 
 if ($row1['file'] == $geturl){
 echo "<p>".LAN_22."</p>";
-echo "This Video Allready Exists";
 echo "<p><a href='submit.php'>Submit Another Video?</a></p>";
 include("footer.php");
 exit;
