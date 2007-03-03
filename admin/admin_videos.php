@@ -139,16 +139,8 @@ if ($_GET['pt'] == "rejected"){
 //VIDEOS
 ?>
 <br />
-<?php
-if($row["video_type"] == "YouTube"){
-echo'
-<object width="425" height="330"><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/'.$row['file'].' type="application/x-shockwave-flash" wmode="transparent" width="425" height="330"></embed></object>
-';
-}else{
-echo'
-<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId='.$row['file'].'" flashvars=""> </embed>
-';
-}
+<?php 
+include("../includes/players.inc.php");
 ?>
 <br />
 <?php echo "<b>Made by:</b> ".$row['creator'];?>

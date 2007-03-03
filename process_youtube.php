@@ -101,15 +101,6 @@ $videoid = getytid($_POST['ytstring']);
 	or die(mysql_error());
 	$row1 = mysql_fetch_array( $result1 );
 
-	///DISABLED VIDEOS///
-if ($videoid == config('disabled videos')){
-	
-echo "<p>".$LAN_20."</p>";
-echo "<p><a href='submit.php'>Submit Another?</a></p>";
-include("footer.php");
-exit;
-}
-
 if ( $row1['file'] == $videoid){
 echo "<p>".$LAN_22."</p>";
 echo "This Video Allready Exists";
