@@ -126,7 +126,7 @@ exit;
 
 mysql_query("INSERT INTO pp_files (name, creator, description, date, file, approved, ip, picture) VALUES ('$inserttitle', '$insertauthor', '$insertdes', CURDATE(), '$videoid', '0', '$ip', '$insertthumb')")	or die(mysql_error());
 
-				echo "<P>".LAN_24." <b><u>".$inserttitle."</b></u>".LAN_25."</P>";
+				echo "<P>".LAN_24." <b><u>".$inserttitle."</b></u> ".LAN_25."</P>";
 				include("footer.php");
 				exit;
 		}//check for blank end
