@@ -58,7 +58,7 @@ require("header.php");
 			</td>
 			<td rowspan="3" valign="middle">
 			<div align="center">
-				<form action="processgoogle.php" method="post">
+				<form action="process_google.php" method="post">
 					<input type="text" name="gvideo" size="50" /> </div></td>
 			<td></td>
 			<td height="13"></td>
