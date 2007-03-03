@@ -1,7 +1,6 @@
 <?php
-include("db.php");
-include("includes/function.inc.php");
-include("lang/".config('lang')."/lang.inc.php");
+define("PHPdirector", 1);
+include("header.php");
 function between($beg, $end, $str) {
 	$a = explode($beg, $str, 2);
 	$b = explode($end, $a[1]);
@@ -12,86 +11,85 @@ function getimage($id){
 	$amp = array("&amp;");
 	$new_replace  = array("&");
 	$newphrase = str_replace("$amp", "$new_replace", "$gv_contet");
-	$return_var = between('&lt;img src=&quot;', '&quot; width=&quot;', $newphrase);
+	$image = between('&lt;img src=&quot;', '&quot; width=&quot;', $newphrase);
 	return $image;
 }
 function getdesc($id){		
-	$gv_contet = @file_get_contents("http://video.google.com/videosearch?q=$id&output=rss");
-	$amp = array("&apos;", "&quot;");
-	$new_replace  = array("'", "\"");
-	$newphrase = str_replace("$amp", "$new_replace", "$gv_contet");
-	$return_var = between('&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;', '</description>', $newphrase);
+	$gv_contet1 = @file_get_contents("http://video.google.com/videosearch?q=$id&output=rss");
+	$amp1 = array("&apos;", "&quot;");
+	$new_replace1  = array("'", "\"");
+	$newphrase1 = str_replace("$amp1", "$new_replace1", "$gv_contet1");
+	$desc = between('&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;', '</description>', $newphrase1);
 	return $desc;
 }
 function gettitle($id){
-	$gv_contet = @file_get_contents("http://video.google.com/videosearch?q=$id&output=rss");
-	$amp = array("&apos;", "&quot;", "&amp;");
-	$new_replace  = array("'", "\"", "&");
-	$newphrase = str_replace("$amp", "$new_replace", "$gv_contet");
-	$return_var = between('<item><title>', '</title>', $newphrase);
+	$gv_contet2 = @file_get_contents("http://video.google.com/videosearch?q=$id&output=rss");
+	$amp2 = array("&apos;", "&quot;", "&amp;");
+	$new_replace2  = array("'", "\"", "&");
+	$newphrase2 = str_replace("$amp2", "$new_replace2", "$gv_contet2");
+	$title = between('<item><title>', '</title>', $newphrase2);
 	return $title;
 }
 function thedate($id){
-	$gv_contet = @file_get_contents("http://video.google.com/videosearch?q=$id&output=rss");
-	$return_var = between('<pubDate>', '00:00:00 PDT</pubDate>', $gv_contet);
+	$gv_contet3 = @file_get_contents("http://video.google.com/videosearch?q=$id&output=rss");
+	$date = between('<pubDate>', '00:00:00 PDT</pubDate>', $gv_contet3);
 	return $date;
 }
 function getauthor($id){
-	$gv_contet = @file_get_contents("http://video.google.com/videosearch?q=$id&output=rss");
-	$amp = array("&apos;", "&quot;", "&amp;");
-	$new_replace  = array("'", "\"", "&");
-	$newphrase = str_replace("$amp", "$new_replace", "$gv_contet");
-	$return_var = between('<author>', '</author>', $newphrase);
+	$gv_contet4 = @file_get_contents("http://video.google.com/videosearch?q=$id&output=rss");
+	$amp4 = array("&apos;", "&quot;", "&amp;");
+	$new_replace4 = array("'", "\"", "&");
+	$newphrase4 = str_replace("$amp4", "$new_replace4", "$gv_contet4");
+	$author = between('<author>', '</author>', $newphrase4);
 	return $author;
 }
 
-$baseurl = $_POST["gvideo"];;
+$baseurl = $_POST["gvideo"];
 $url = between('?', '&q', $baseurl);
 $url2 = between('=-', '&q', $baseurl);
 if($url2 == null){
 	$url3 = between('=', '&q', $baseurl);
+}else{
+	$url4 = between('=', '&q', $baseurl);
 }
 if($url2 == null){
-gettitle($url3);echo"<br>";
-thedate($url3);echo"<br>";
-getauthor($url3);echo"<br>";
-echo"<img src=\"";getimage($url3);echo ">";
-echo"<br><br><br>";
-getdesc($url3);
+$geturl = $url3;
+$gettitle = gettitle($url3);
+$thedate = thedate($url3);
+$getauthor = getauthor($url3);
+$getimage = getimage($url3);
+$getimage2 = $getimage;
+$getdesc = getdesc($url3);
 }
 if($url3 == null){
-gettitle($url2);echo"<br>";
-thedate($url2);echo"<br>";
-getauthor($url2);echo"<br>";
-echo"<img src=\"";getimage($url2);echo ">";
-echo"<br><br><br>";
-getdesc($url2);
+$geturl = $url4;
+$gettitle = gettitle($url2);
+$thedate = thedate($url2);
+$getauthor = getauthor($url2);
+$getimage = getimage($url2);
+$getimage2 = $getimage;
+$getdesc = getdesc($url2);
 }
-$result1 = mysql_query("SELECT * FROM pp_files WHERE file='$videoid'");
-$row1 = mysql_fetch_array($result1);
-include("header.php");
-
-
-if ($videoid == config('disabled videos')){
-echo "<p>".$LAN_20."</p>";
-echo "<p><a href='submit.php'>Submit Another?</a></p>";
+if(!isset($_POST["gvideo"])){
+echo"<center>No video specified<center>";
 include("footer.php");
 exit;
 }
-if ($row1['file'] == $baseurl){
-echo "<p>".$LAN_22."</p>";
+$result1 = mysql_query("SELECT * FROM pp_files WHERE file='$videoid'");
+$row1 = mysql_fetch_array($result1);
+
+if ($row1['file'] == $geturl){
+echo "<p>".LAN_22."</p>";
 echo "This Video Allready Exists";
 echo "<p><a href='submit.php'>Submit Another Video?</a></p>";
 include("footer.php");
 exit;
-}
-	
+}	
+
 $ip = $_SERVER['REMOTE_ADDR'];
+mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture) VALUES ('$gettitle', 'GoogleVideo' ,'$getauthor', '$getdesc', CURDATE(), '$geturl', '0', '$ip', '$getimage2')")	or die(mysql_error());
 
-mysql_query("INSERT INTO pp_files (name, creator, description, date, file, approved, ip, picture) VALUES ('$title', '$author', '$desc', CURDATE(), '$baseurl', '0', '$ip', '$image')")	or die(mysql_error());
-
-	echo "<P>".LAN_24." <b><u> ".$inserttitle." </b></u>".LAN_25."</P>";
+	echo "<center><P>".LAN_24." <b><u> $gettitle</b></u> ".LAN_25."</P>";
+	echo "<p><a href='submit.php'>Submit Another Video?</a></p></center>";
 	include("footer.php");
-	exit;
-echo "<p><a href='submit.php'>".LAN_21."</a></p>";
 ?>

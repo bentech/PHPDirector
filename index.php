@@ -65,7 +65,7 @@ if ((empty($page)) || ($page <= 0)){
 	if($sort1 == "rating"){
 	$query  = "
 	SELECT ppf.*, ppr.total_value/ppr.total_votes as r 
-	FROM `pp_files` AS ppf
+	FROM pp_files AS ppf
 	INNER JOIN pp_rating as ppr ON ppr.id=ppf.id 
 	ORDER BY r $order1 LIMIT $limitvalue, $limit";
 	

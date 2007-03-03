@@ -9,6 +9,16 @@ setcookie("$id", $id, $twomonths);
 
 <html>
 <head>
+<script language="Javascript" type="text/javascript">
+<!--
+	function show_hide(tblid, show) {
+		if (tbl = document.getElementById(tblid)) {
+			if (null == show) show = tbl.style.display == 'none';
+			tbl.style.display = (show ? '' : 'none');
+		}
+	}
+//!-->
+</script>
 <script type="text/javascript" language="javascript" src="js/behavior.js"></script>
 <script type="text/javascript" language="javascript" src="js/rating.js"></script>
 </head>

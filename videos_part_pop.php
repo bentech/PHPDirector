@@ -6,12 +6,22 @@ mysql_query("UPDATE pp_files SET views = '$new_views'
 WHERE id = '$id'");
 }
 ?>
-
-<object width="425" height="350"><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/<?php echo "".$row['file'];?>" type="application/x-shockwave-flash" wmode="transparent" width="425" height="350"></embed></object>
-<br /><?php echo "<b>".LAN_36.":</b> ".$row['creator']; //Creator?>
+<?php 
+if($row["video_type"] == "YouTube"){
+echo'
+<object width="425" height="350"><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/'.$row['file'].'" type="application/x-shockwave-flash" wmode="transparent" width="425" height="350"></embed></object>
+';
+}else{
+echo'
+<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId='.$row['file'].'" flashvars=""> </embed>
+';
+}
+?>
+<br /><?php echo "<b>".LAN_36.":</b> ".$row['creator'];?>
 <br/><span class="Warning">Rate to close the page</span>
 <?php rating_bar($row['id'],5); ?>
-<?php echo "<b>".LAN_35.":</b> ".$row['description']; //description?>
+<a href="javascript:void();" onclick="show_hide('exampletbl')">+/- <?php echo LAN_35; ?></a>
+<?php echo "<b>:</b> <table border='0' id='exampletbl'><tr><td>".$row['description']."</td></tr></table>";?>
 <br>
 <center>
 <?php

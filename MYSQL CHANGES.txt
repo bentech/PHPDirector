@@ -1,0 +1,16 @@
+
+ADDED
+
+Feild - video_type 
+Type - varchar(225)
+Collation - Latin1_swedish_ci
+Default - YouTube  	
+
+ADDED
+
+Field - resonforreject
+Type - varchar(225)
+Collation - Latin1_swedish_ci
+Default - No Reason Given
+
+$sql = 'ALTER TABLE `pp_files` ADD `resonforreject` VARCHAR(255) NOT NULL DEFAULT \'No Reason Given\' AFTER `reject`;';

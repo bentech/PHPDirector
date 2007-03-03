@@ -3,7 +3,38 @@
 <a href="#">Most Popular</a> &middot; 
 <a href="#">Today's Favorites</a> &middot; 
 <a href="#">All Time Favorites</a><br>-->
-PHPDirector 2007 is &copy; Copyright of <a href="http://www.crossstar.co.uk/phpdirector/">PHPDirector Group</a>
+<?php
+
+
+$v3 = ' is &'.ghasdnd.'; Copyright';
+$v1 = ellalgae;
+$v4 = ' '.aadsbr.''.asdga.''.bgsd.'">'.ellalgae.'Dire';
+$v2 = ' 200';
+
+// detach messy
+$detach = $v1;
+unset($v1);
+$v1 = $detach;
+
+// detach pretty, but slower
+eval(detach('$v2'));
+
+$v1 .= 'Direc'.hd23.'';
+$v3 .= ' of';
+$v4 .= 'c'.hd23.' '.ehjrty.'</a>';
+$v2 .= '7';
+
+
+
+echo "$v1$v2$v3$v4";
+
+function detach($v) {
+   $e = '$detach = ' . $v . ';';
+   $e .= 'unset('.$v.');';
+   $e .= $v . ' = $detach;';
+   return $e;
+}
+?>
 </div>
 </body></html>
 <?php

@@ -15,6 +15,16 @@ include("lang/".config('lang')."/lang.inc.php");
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<script language="Javascript" type="text/javascript">
+<!--
+	function show_hide(tblid, show) {
+		if (tbl = document.getElementById(tblid)) {
+			if (null == show) show = tbl.style.display == 'none';
+			tbl.style.display = (show ? '' : 'none');
+		}
+	}
+//!-->
+</script>
 <title><?php echo config('name');?></title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/thickbox.js"></script>

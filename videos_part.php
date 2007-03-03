@@ -11,9 +11,20 @@ WHERE id = '$id'");
 <br />
 <?php echo "<b>".LAN_36.":</b> ".show_sql($row['creator']); //Creator?>
 <br />
-<?php echo "<b>".LAN_35.":</b>  ".show_sql($row['description']); //Description?>
+<a href="javascript:void();" onclick="show_hide('exampletbl')">+/- <?php echo LAN_35; ?></a>
+<?php echo "<b>:</b>  <table border='0' id='exampletbl'><tr><td>".show_sql($row['description'])."</td></tr></table>"; //Description?>
 <br />
-<object width="425" height="350"><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/<?php echo "".show_sql($row['file']);?>" type="application/x-shockwave-flash" wmode="transparent" width="425" height="350"></embed></object>
+<?php 
+if($row["video_type"] == "YouTube"){
+echo'
+<object width="425" height="350"><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/'.$row['file'].'" type="application/x-shockwave-flash" wmode="transparent" width="425" height="350"></embed></object>
+';
+}else{
+echo'
+<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId='.$row['file'].'" flashvars=""> </embed>
+';
+}
+?>
 <br />
 <center>
 <?php
