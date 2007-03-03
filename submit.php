@@ -20,7 +20,7 @@ require("header.php");
 			</td>
 			<td rowspan="3" valign="middle">
 			<div align="center">
-				<form action="process.php" method="post">
+				<form action="process_youtube.php" method="post">
 					<input type="text" name="ytstring" size="50" /> </div></td>
 			<td></td>
 			<td height="13"></td>
@@ -58,7 +58,7 @@ require("header.php");
 			</td>
 			<td rowspan="3" valign="middle">
 			<div align="center">
-				<form action="process2.php" method="post">
+				<form action="processgoogle.php" method="post">
 					<input type="text" name="gvideo" size="50" /> </div></td>
 			<td></td>
 			<td height="13"></td>
