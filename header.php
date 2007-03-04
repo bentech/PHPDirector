@@ -57,6 +57,7 @@ function MM_swapImage() { //v3.0
 }
 //-->
 </script>
+<link rel="stylesheet" href="<?php echo config('cssstyle');?>" type="text/css" />
 </head>
 <body onload="MM_preloadImages('images/arrowdownani.gif')" onload="MM_preloadImages('images/arrowupani.gif')">
 
@@ -75,12 +76,10 @@ $pagetype = "all";
 Please Use Firefox
 <a href="http://www.spreadfirefox.com/?q=affiliates&amp;id=195437&amp;t=210"><img border="0" alt="Firefox 2" title="Firefox 2" src="http://sfx-images.mozilla.org/affiliates/Buttons/firefox2/firefox-spread-btn-1b.png"/></a>
 </iframe>
-<link rel='stylesheet' href='<?php echo config('cssstyle');?>' type='text/css' />
 <center>
 <div id='content'>
 <div id='header'>
 <?}else{?>
-<link rel="stylesheet" href="<?php echo config('cssstyle');?>" type="text/css" />
 <div id='content'>	
 <div id='header'>
 <!--<div id='top_info'>Browse <a href='#'>Today's favorites</a> or <a href='#'>All time favorites</a></div>-->
