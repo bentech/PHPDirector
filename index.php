@@ -200,6 +200,13 @@ while($row = mysql_fetch_array($result)){
 			<p><img height='97' width='130' src="<?php if ($row['picture'] == ""){
 			echo "images/noimage.bmp";
 			}else{
+			$tehpic = $row[picture];
+			$amp = array("&amp;");
+			$new_replace  = array("&");
+			$newphrase = str_replace("$amp", "$new_replace", "$tehpic");
+			echo"
+			$newphrase
+			";
 			echo $row['picture'];
 			}?>" class="thumbnail" alt="<?php show_sql(substr($row['name'], 0,10))?>" />
 			<?php echo show_sql(substr($row['description'], 0, 450)); //BUGGY: if &quote; or something splitten, you doesn't see &, you see &quo or something 
