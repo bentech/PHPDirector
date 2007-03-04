@@ -13,4 +13,9 @@ Type - varchar(225)
 Collation - Latin1_swedish_ci
 Default - No Reason Given
 
+Changed
+Field - picture
+Type - varchar(225)
+
+
 $sql = 'ALTER TABLE `pp_files` ADD `resonforreject` VARCHAR(255) NOT NULL DEFAULT \'No Reason Given\' AFTER `reject`;';
