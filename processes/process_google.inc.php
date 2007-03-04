@@ -41,7 +41,9 @@ function getauthor($id){
 	$author = between('<author>', '</author>', $newphrase4);
 	return $author;
 }
-
+define("PHPdirector", 1);	       // for config foo
+define("submtitab", 1);
+require("header.php");  
 $baseurl = $videourl;
 $url = between('?', '&q', $baseurl);
 $url2 = between('=-', '&q', $baseurl);
@@ -95,4 +97,5 @@ mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date,
 
 	echo "<center><P>".LAN_24." <b><u> $gettitle</b></u> ".LAN_25."</P>";
 	echo "<p><a href='submit.php'>Submit Another Video?</a></p></center>";
+			include("footer.php");
 ?>

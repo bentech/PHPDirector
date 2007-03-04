@@ -11,10 +11,6 @@ return $check[1];
 }
 
 $videourl = $_POST['videourl'];
-
-define("PHPdirector", 1);	       // for config foo
-define("submtitab", 1);
-require("header.php");    
 $source = getsource($videourl);
 
 if ($source == "youtube"){ //youtube
@@ -26,5 +22,4 @@ echo "Currently In Development";
 }else{
 echo "This Source is not supported"; //not supported
 }
-include("footer.php");
 ?>

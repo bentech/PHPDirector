@@ -91,6 +91,9 @@ return $yt_view_count;
 }
 ?>
 <?php
+define("PHPdirector", 1);	       // for config foo
+define("submtitab", 1);
+require("header.php");    
 //check if its allready there
 $videoid = getytid($videourl);
 	$result1 = mysql_query("SELECT * FROM pp_files WHERE file='$videoid'")
@@ -119,4 +122,5 @@ mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date,
 		}//check for blank end
 
 		echo "<p><a href='submit.php'>".LAN_21."</a></p>";
+		include("footer.php");
  ?>
