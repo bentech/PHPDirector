@@ -91,7 +91,7 @@ if(config('logo') == "default"){
 <?php
 }else{
 ?>
-<div id='logo'><img src="<?php echo config('logo');?> alt='Php Director'">
+<div id='logo'><img src="<?php echo config('logo');?>" alt='Php Director'">
 <?php
 }
 ?>
