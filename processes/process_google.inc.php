@@ -1,7 +1,4 @@
 <?php
-define("PHPdirector", 1);
-define("submtitab", 1);
-include("header.php");
 function between($beg, $end, $str) {
 	$a = explode($beg, $str, 2);
 	$b = explode($end, $a[1]);
@@ -45,7 +42,7 @@ function getauthor($id){
 	return $author;
 }
 
-$baseurl = $_POST["gvideo"];
+$baseurl = $videourl;
 $url = between('?', '&q', $baseurl);
 $url2 = between('=-', '&q', $baseurl);
 if($url2 == null){
@@ -71,7 +68,7 @@ $getimage = getimage($url2);
 $getimage2 = $getimage;
 $getdesc = getdesc($url2);
 }
-if(!isset($_POST["gvideo"])){
+if(!isset($baseurl)){
 echo"<center>No video specified<center>";
 include("footer.php");
 exit;
@@ -86,10 +83,16 @@ include("footer.php");
 exit;
 }	
 
+if ($getimage2 == null){
+echo "<p>".LAN_23."</p>";
+echo "<p><a href='submit.php'>Submit Another Video?</a></p>";
+include("footer.php");
+exit;
+}	
+
 $ip = $_SERVER['REMOTE_ADDR'];
 mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture) VALUES ('$gettitle', 'GoogleVideo' ,'$getauthor', '$getdesc', CURDATE(), '$geturl', '0', '$ip', '$getimage2')")	or die(mysql_error());
 
 	echo "<center><P>".LAN_24." <b><u> $gettitle</b></u> ".LAN_25."</P>";
 	echo "<p><a href='submit.php'>Submit Another Video?</a></p></center>";
-	include("footer.php");
 ?>

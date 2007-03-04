@@ -41,7 +41,7 @@ $limit = config('vids_per_page');
 
     // count(*) is better for large databases (thanks Greg!)
 	if ($pagetype == "all"){
-    $query_count   = mysql_query("SELECT * FROM pp_files WHERE approved='1'");
+    $query_count   = mysql_query("SELECT * FROM pp_files WHERE approved='1' AND reject='0'");
 	}
 
 		if ($pagetype == "feature"){ 
@@ -49,7 +49,7 @@ $limit = config('vids_per_page');
 	}
 
 		if ($pagetype == "pictures"){
-    $query_count   = mysql_query("SELECT * FROM pp_files WHERE approved='1'");
+    $query_count   = mysql_query("SELECT * FROM pp_files WHERE approved='1' AND reject='0'");
 	}
 
     $totalrows  = mysql_num_rows($query_count);
@@ -71,13 +71,13 @@ if ((empty($page)) || ($page <= 0)){
 	
 	}else{
 		if ($pagetype == "all"){
-    $query  = "SELECT * FROM pp_files WHERE approved='1' ORDER BY $sort $order1 LIMIT $limitvalue, $limit ";
+    $query  = "SELECT * FROM pp_files WHERE approved='1' AND reject='0' ORDER BY $sort $order1 LIMIT $limitvalue, $limit ";
     // Pulls what we want from the database
 	}	
 	}
 
 			if ($pagetype == "pictures"){
-    $query  = "SELECT * FROM pp_files WHERE approved='1' ORDER BY $sort $order1 LIMIT 0, 110 ";
+    $query  = "SELECT * FROM pp_files WHERE approved='1' AND reject='0' ORDER BY $sort $order1 LIMIT 0, 110 ";
     // Pulls what we want from the database
 	}
 
