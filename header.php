@@ -19,6 +19,9 @@ include("lang/".config('lang')."/lang.inc.php");
 
 <?php
 if ($pagetype == null){
+$pagetype = $_GET["pt"];
+}
+if ($pagetype == null){
 $pagetype = "all";
 }
 ?>
