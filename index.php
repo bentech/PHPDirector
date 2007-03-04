@@ -145,33 +145,33 @@ exit;
 <p>
 <b>&nbsp;&nbsp;&nbsp;Sort By:&nbsp;</b>
 <?php echo LAN_31; //Ratings?>
-<a href="?sort=rating&order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('rateup','','images/arrowupani.gif',1)">
+<a href="?sort=rating&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('rateup','','images/arrowupani.gif',1)">
 <img src="images/arrowup.gif" name="rateup" border="0" id="rateup" title="Worst Rated Videos" alt="arrow up" /></a>
 
-<a href="?sort=rating&order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('ratedwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="ratedwn" border="0" id="ratedwn" title="Best Rated Videos" alt="arrow down" /></a>
+<a href="?sort=rating&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('ratedwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="ratedwn" border="0" id="ratedwn" title="Best Rated Videos" alt="arrow down" /></a>
 
 &nbsp;
 <?php echo LAN_32; //views ?>
 
-<a href="?sort=views&order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewup','','images/arrowupani.gif',1)">
+<a href="?sort=views&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewup','','images/arrowupani.gif',1)">
 <img src="images/arrowup.gif" name="viewup" border="0" id="viewup" title="Least Viewed Videos" alt="arrow up" /></a>
 
-<a href="?sort=views&order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewdwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="viewdwn" border="0" id="viewdwn" title="Most Viewed Videos" alt="arrow down" /></a>
+<a href="?sort=views&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewdwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="viewdwn" border="0" id="viewdwn" title="Most Viewed Videos" alt="arrow down" /></a>
 
 &nbsp;
 <?php echo LAN_33; //name ?>
 
-<a href="?sort=name&order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('nameup','','images/arrowupani.gif',1)">
+<a href="?sort=name&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('nameup','','images/arrowupani.gif',1)">
 <img src="images/arrowup.gif" name="nameup" border="0" id="nameup" title="A-Z" alt="arrow up" /></a>
 
-<a href="?sort=name&order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('namedwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="namedwn" border="0" id="namedwn" title="Z-A" alt="arrow down" /></a>
+<a href="?sort=name&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('namedwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="namedwn" border="0" id="namedwn" title="Z-A" alt="arrow down" /></a>
 
 &nbsp;
 <?php echo LAN_34; //date ?>
 
-<a href="?sort=date&order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('dateup','','images/arrowupani.gif',1)"> <img src="images/arrowup.gif" name="dateup" border="0" id="dateup" title="Least Recent Videos" alt="arrow up" /></a>
+<a href="?sort=date&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('dateup','','images/arrowupani.gif',1)"> <img src="images/arrowup.gif" name="dateup" border="0" id="dateup" title="Least Recent Videos" alt="arrow up" /></a>
 
-<a href="?sort=date&order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('datedown','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="datedown" border="0" id="datedown" title="Most Recent Videos" alt="arrow down" /></a>
+<a href="?sort=date&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('datedown','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="datedown" border="0" id="datedown" title="Most Recent Videos" alt="arrow down" /></a>
 </p>
 </div>
 <?
@@ -207,7 +207,6 @@ while($row = mysql_fetch_array($result)){
 			echo"
 			$newphrase
 			";
-			echo $row['picture'];
 			}?>" class="thumbnail" alt="<?php show_sql(substr($row['name'], 0,10))?>" />
 			<?php echo show_sql(substr($row['description'], 0, 450)); //BUGGY: if &quote; or something splitten, you doesn't see &, you see &quo or something 
  			if (strlen($row['description']) >450){
@@ -230,7 +229,7 @@ if ($totalrows < $limit){
         $pageprev = $page-1;
         // Fancy way of subtracting 1 from $page
 
-        echo("<a href='index.php?pt=$pagetype&page=$pageprev&sort=$sort&order=$order1'>PREV</a> &nbsp;");
+        echo("<a href='index.php?pt=$pagetype&amp;page=$pageprev&amp;sort=$sort&amp;order=$order1'>PREV</a> &nbsp;");
         /* Tip: It is a good idea NOT to use $PHP_SELF in this link. It may work,
 but to be 99.9% sure that it will, be sure to use the actual name of the file
 this script will be running on. Also, the   adds a space to the end of
@@ -258,7 +257,7 @@ than $numofpages (4.08). */
             echo($i." ");
         }else{
 		?>
-        <a href='index.php?pt=<?php echo $pagetype; ?>&page=<?php echo $i; ?>&sort=<?php echo $sort;?>&order=<?php echo $order1;?>'><?php echo $i; ?></a>
+        <a href='index.php?pt=<?php echo $pagetype; ?>&amp;page=<?php echo $i; ?>&amp;sort=<?php echo $sort;?>&amp;order=<?php echo $order1;?>'><?php echo $i; ?></a>
 			<?
         }
 
@@ -279,7 +278,7 @@ remainder, it returns zero. In our example, it will return 0.8 */
             echo($i." ");
         }else{
 		?>
-            <a href='index.php?pt=<?php echo $pagetype; ?>&page=<?php echo $i; ?>&sort=<?php echo $sort;?>&order=<?php echo $order1;?>'><?php echo $i; ?></a>
+            <a href='index.php?pt=<?php echo $pagetype; ?>&amp;page=<?php echo $i; ?>&amp;sort=<?php echo $sort;?>&amp;order=<?php echo $order1;?>'><?php echo $i; ?></a>
 			<?
         }
         /* This is the exact statement that turns pages into link form that is used
@@ -294,7 +293,7 @@ are pages in front of the current one. */
         $pagenext   = $page+1;
         // Fancy way of adding 1 to page
 		?>
-        <a href='index.php?pt=<?php echo $pagetype; ?>&page=<?php echo $pagenext;?>&sort=<?php echo $sort;?>&order=<?php echo $order1;?>'>NEXT</a></div>
+        <a href='index.php?pt=<?php echo $pagetype; ?>&amp;page=<?php echo $pagenext;?>&amp;sort=<?php echo $sort;?>&amp;order=<?php echo $order1;?>'>NEXT</a></div>
 	<?
         /* Since there are pages remaining, this outputs NEXT in link form. */
     }else{
@@ -308,8 +307,5 @@ scripts have finished executing; however, it's a nice little backup. */
 	echo "<br/><br/><br/><br/><br/><br/>";
 
 
-?>
-</p>
-<?php
 include("footer.php");
 ?>
