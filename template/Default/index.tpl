@@ -45,8 +45,9 @@ Date
 		
 
 			<p class="description"><b>by: </b> {creator} - <b>Views: </b>{Views}</p>
-			<p><img height='97' width='130' src="{picture}" class="thumbnail" />
+			<p><img height='97' width='130' src="{picture}" class="thumbnail" /></p>
 <p>{Description}</p>
 
 <p>{Pages}</p>
+</div></div>
 {footer}
