@@ -75,17 +75,6 @@ require("header.php");
 //check if its allready there
 $dmid = getdmid($videourl);
 
-$result1 = mysql_query("SELECT * FROM pp_files WHERE file='$dmid'") or die(mysql_error());
-$row1 = mysql_fetch_array( $result1 );
-if ( $row1['file'] == $dmid){
-echo "<p>".$LAN_22."</p>";
-echo "This Video Allready Exists";
-echo "<p><a href='submit.php'>Submit Another Video?</a></p>";
-include("footer.php");
-exit;
-}	
-echo "2".$file."<br />";
-
 		if($dmid !== null){
 		$inserttitle  = safe_sql_insert(gettitle($dmid));
 		$insertauthor = safe_sql_insert(getauthor($dmid));
@@ -93,7 +82,19 @@ echo "2".$file."<br />";
 		$insertthumb  = safe_sql_insert(getthumb($dmid));
 		$file 		  = safe_sql_insert($dmid);
 		$ip           = safe_sql_insert($_SERVER['REMOTE_ADDR']);
-		echo "3".$file."<br />";
+		
+		
+	$result1 = mysql_query("SELECT * FROM pp_files WHERE file='$file'")
+	or die(mysql_error());
+	$row1 = mysql_fetch_array( $result1 );
+	
+	if ( $row1['file'] == $file){
+echo "<p>".$LAN_22."</p>";
+echo "This Video Allready Exists";
+echo "<p><a href='submit.php'>Submit Another Video?</a></p>";
+include("footer.php");
+exit;
+}	
 
 mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture) VALUES ('$inserttitle', 'dailymotion' , '$insertauthor', '$insertdes', CURDATE(), '$file', '0', '$ip', '$insertthumb')")	or die(mysql_error());
 

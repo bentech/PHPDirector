@@ -10,7 +10,7 @@ require("header.php");
 		<tr>
 			<td>
 <div align="center">
-	<table height="259" width="1029" border="0" cellpadding="0" cellspacing="0" >
+	<table height="192" width="1029" border="0" cellpadding="0" cellspacing="0" >
 		<!--DWLayoutTable--><tr>
 			<td>&nbsp;</td>
 			<td valign="middle" colspan="6">
@@ -36,32 +36,22 @@ require("header.php");
 			<td></td>
 			<td></td>
 			<td></td>
-			<td></td>
-			<td></td>
+			<td width="332"></td>
+			<td width="37"></td>
 			<td></td>
 			<td></td>
 			<td height="14"></td>
 			</tr>
 		<tr>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td valign="top" colspan="2">
-			<p align="center"><span class="style2"><span class="style3">&nbsp;Example</span>:<u>http://www.youtube.com/watch?v=jr3JEwXtudA</u><span class="style3">&nbsp;</span></span><p align="center">
-			<span class="style2"><span class="style3">Example</span>:<u>http://video.google.com/videoplay?docid=-6459339159268485356</u></span></td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td height="76">&nbsp;</td>
-		</tr>
-		<tr>
 			<td width="253">&nbsp;</td>
 			<td width="55">&nbsp;</td>
 			<td width="26">&nbsp;</td>
-			<td width="332">&nbsp;</td>
-			<td width="37">&nbsp;</td>
+			<td valign="top" colspan="2">
+			<p align="center"><span class="style2"><span class="style3">&nbsp;Example</span>:<u>http://www.youtube.com/watch?v=jr3JEwXtudA</u><span class="style3">&nbsp;</span></span><p align="center">
+			<span class="style2"><span class="style3">Example</span>:<u>http://video.google.com/videoplay?docid=-6459339159268485356</u></span></td>
 			<td width="83">&nbsp;</td>
 			<td width="14">&nbsp;</td>
-			<td height="67" width="229">&nbsp;</td>
+			<td height="76" width="229">&nbsp;</td>
 		</tr>
 	</table></div>
 <?php include("footer.php")?>
