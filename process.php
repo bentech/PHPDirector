@@ -18,7 +18,7 @@ include("processes/process_youtube.inc.php");
 }elseif ($source == "google"){ //google
 include("processes/process_google.inc.php");
 }elseif ($source == "dailymotion"){ //dailymotion
-echo "Currently In Development";
+include("processes/process_dailymotion.inc.php");
 }else{
 echo "This Source is not supported"; //not supported
 }
