@@ -26,9 +26,9 @@ if (!isset($_SESSION['phpdirector'])
 version = 0.1
 patch = 1
 if(version == nversion && patch == npatch){
-document.write("<b>Time to upgrade!</b> <a href='http://sourceforge.net/projects/phpdirector/'>Upgrade!</a>")
-}else{
 document.write("<b>Your version is recent. Good Job!</b>")
+}else{
+document.write("<b>Time to upgrade!</b> <a href='http://sourceforge.net/projects/phpdirector/'>Upgrade!</a>")
 }
 </script>
 
