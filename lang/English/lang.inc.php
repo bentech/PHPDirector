@@ -90,4 +90,6 @@ define("Admin_37", "Approved");
 define("Admin_38", "Rejected");
 define("Admin_39", "Username");
 define("Admin_40", "Passwrod");
+define("Admin_41", "Password");
+define("Admin_42", "News");
 ?>
