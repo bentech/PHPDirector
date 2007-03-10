@@ -5,6 +5,9 @@ if (isset($_POST['txtUserId']) && ($_POST['txtPassword'])){
 }
 define("PHPdirector", 1);
 include("../config.php");
+include("../db.php");
+include("../includes/function.inc.php");
+include("../lang/".config('lang')."/lang.inc.php");
 if ($_POST['txtUserId'] == $cfg["admin_user"] && $_POST['txtPassword'] == $cfg["admin_pass"]){
 	$errorMessage = '';
 }else{
