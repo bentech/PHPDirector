@@ -10,6 +10,7 @@ $result1 = mysql_query("SELECT * FROM pp_config");
 
 $row1 = mysql_fetch_array($result1);
 mysql_query("UPDATE pp_config SET name = '$_POST[name]'");
+mysql_query("UPDATE pp_config SET news = '$_POST[news]'");
 mysql_query("UPDATE pp_config SET vids_per_page = '$_POST[vids_per_page]'");
 mysql_query("UPDATE pp_config SET logo = '$_POST[logo]'");
 mysql_query("UPDATE pp_config SET cssstyle = '$_POST[cssstyle]'");
@@ -37,6 +38,7 @@ $row2 = mysql_fetch_array($result2);
 
 <table border="0" width="auto" height="auto">
 <tr><td><?php echo Admin_22; ?>:</td><td><input type="text" value="<?php echo $row2["name"]; ?>" name="name"></td></tr>
+<tr><td><?php echo Admin_41; ?>:</td><td><input type="text" value="<?php echo $row2["news"]; ?>" name="news"></td></tr>
 <tr><td><?php echo Admin_23; ?>:</td><td><input type="text" value="<?php echo $row2["vids_per_page"]; ?>" name="vids_per_page"></td></tr>
 <tr><td>*<?php echo Admin_24; ?>:</td><td><input type="text" value="<?php echo $row2["logo"]; ?>" name="logo"></td></tr>
 <tr><td><?php echo Admin_25; ?>:</td><td><input type="text" value="<?php echo $row2["cssstyle"]; ?>" name="cssstyle"></td></tr>
