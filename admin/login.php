@@ -15,7 +15,7 @@ if ($_POST['txtUserId'] == $cfg["admin_user"] && $_POST['txtPassword'] == $cfg["
 ?>
 <html>
 <head>
-<title>Admin Login</title>
+<title><?php echo Admin_0;?></title>
 <meta content="text/html; charset=iso-8859-1" http-equiv="content-type"/>
 <meta content="Copyright 2007 Cross Star Studios" name="copyright"/>
 <meta content="Ben Swanson" name="author"/>
@@ -25,10 +25,10 @@ if ($_POST['txtUserId'] == $cfg["admin_user"] && $_POST['txtPassword'] == $cfg["
 <body>
 
 <div id="admin-header">
-  <h1><?php echo $cfg["name"];?> - Admin </h1>
+  <h1><?php echo $cfg["name"];?> - <?php echo Admin_0;?> </h1>
 </div>
 <ul id="admin-menu">
-<li><a href="../index.php">Home</a></li>
+<li><a href="../index.php"><?php echo Admin_1;?></a></li>
 </ul>
 
 <?php
@@ -41,9 +41,9 @@ if ($errorMessage != '') {
 <form action="login.php" method="post" name="frmLogin" id="frmLogin">
   <div align="center">
     <p>&nbsp;</p>
-    <p><span class="categoria_h">User Id</span>
+    <p><span class="categoria_h"><?php echo Admin_39;?>:</span>
       <input name="txtUserId" type="text" id="txtUserId">
-      <span class="categoria_h">Password</span>
+      <span class="categoria_h"><?php echo Admin_40;?>:</span>
       <input name="txtPassword" type="password" id="txtPassword">
     </p>
     <p>

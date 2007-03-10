@@ -30,9 +30,7 @@ $row = mysql_fetch_array( $result );
 
 	    	if($row['name']  == null){
 			if ($_GET['vidpage'] == "approve"){
-					echo("<div align='center'><h2>No Videos To Approve</h2></div>");
-			}else{
-					echo("<div align='center'><h2>This Video Doesnt exist</h2></div>");
+					echo("<div align='center'><h2>".Admin_31."</h2></div>");
 			}
 		exit;
 			}
@@ -41,10 +39,10 @@ $row = mysql_fetch_array( $result );
 <?php 
 echo "<div align='center'>";
 echo "<p><h2>".$row['name']."</h2></p>";
-echo "<p><b>This Video is Currently:</b>";
-if($row['approved'] == "1"){echo "<font color='#00CC00' face='Arial Black' size='4'>Aprroved";}else{echo "<font color='#FF0000' face='Arial Black' size='4'>Not Aprroved";}
+echo "<p><b>".Admin_36.":</b>";
+if($row['approved'] == "1"){echo "<font color='#00CC00' face='Arial Black' size='4'>".Admin_37."";}else{echo "<font color='#FF0000' face='Arial Black' size='4'>Not Aprroved";}
 if($row['feature'] == "1"){echo "...Featured";}
-if($row['reject'] == "1"){echo "<font color='#FF0000' face='Arial Black' size='4'>...Rejected";}
+if($row['reject'] == "1"){echo "<font color='#FF0000' face='Arial Black' size='4'>...".Admin_38."";}
 echo "</font></font></font><br>";
 
 
@@ -96,34 +94,34 @@ if ($row['picture'] == ""){
 ////PICTURES END
 echo "<div style='border:3px dashed #808080; position: absolute; z-index: 1; left: 200px; top: 350px; padding-left:4px; padding-right:4px; padding-top:1px; padding-bottom:1px;' id='layer1'>";
 if ( $row['approved'] == "0" ){
-	echo "<a href='?id=".$row[id]."&what=approve&vidpage=".$_GET['vidpage']."'>Approve</a>";
+	echo "<a href='?id=".$row[id]."&what=approve&vidpage=".$_GET['vidpage']."'>".Admin_16."</a>";
 }else{
-	echo "<a href='?id=".$row[id]."&what=unapprove&vidpage=".$_GET['vidpage']."'>UnApprove</a>";
+	echo "<a href='?id=".$row[id]."&what=unapprove&vidpage=".$_GET['vidpage']."'>".Admin_15."</a>";
 }
 //UN FEATURE or feature
 //only feature on approved vids
 if ( $row['feature'] == "0" ){	
 	if ($_GET['pt'] == "all"){
-		echo "<p><a href='?id=".$row[id]."&what=featureapprove&vidpage=".$_GET['vidpage']."'>Feature</a></p>";
+		echo "<p><a href='?id=".$row[id]."&what=featureapprove&vidpage=".$_GET['vidpage']."'>".Admin_18."</a></p>";
 	}else{
-echo "<p><a href='?id=".$row[id]."&what=featureapprove&vidpage=".$_GET['vidpage']."'>Approve then Feature</a></p>";
+echo "<p><a href='?id=".$row[id]."&what=featureapprove&vidpage=".$_GET['vidpage']."'>".Admin_35."</a></p>";
 	}
 		
 		
 }else{
-	echo "<p><a href='?id=".$row[id]."&what=unfeature&vidpage=".$_GET['vidpage']."'>UnFeature</a></p>";
+	echo "<p><a href='?id=".$row[id]."&what=unfeature&vidpage=".$_GET['vidpage']."'>".Admin_17."</a></p>";
 }
 		
 			
 //REJECT OR DELETE
 		//reject or not
 if ($_GET['pt'] == "rejected"){
-		echo "<a href='?id=".$row[id]."&what=unreject&vidpage=".$_GET['vidpage']."'>  approve</a> or ";
+		echo "<a href='?id=".$row[id]."&what=unreject&vidpage=".$_GET['vidpage']."'>".Admin_16."</a> or ";
 }else{
-		echo "<a href='?id=".$row[id]."&what=reject&vidpage=".$_GET['vidpage']."'>  Reject  </a> or ";
+		echo "<a href='?id=".$row[id]."&what=reject&vidpage=".$_GET['vidpage']."'>".Admin_19."</a> or ";
 }
 //delete
-		echo "<a href='?id=".$row[id]."&what=delete&vidpage=".$_GET['vidpage']."'>Delete</a></div>";
+		echo "<a href='?id=".$row[id]."&what=delete&vidpage=".$_GET['vidpage']."'>".Admin_21."</a></div>";
 		
 
 
@@ -134,9 +132,9 @@ if ($_GET['pt'] == "rejected"){
 include("../includes/players.inc.php");
 ?>
 <br />
-<?php echo "<b>Made by:</b> ".$row['creator'];?>
+<?php echo "<b>".LAN_36.":</b> ".$row['creator'];?>
 <br />
-<?php echo "<b>Description:</b>  ".$row['description'];?>
+<?php echo "<b>".LAN_35.":</b>  ".$row['description'];?>
 <br />
 
 <?

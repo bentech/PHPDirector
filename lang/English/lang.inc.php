@@ -49,4 +49,45 @@ define("LAN_38", "Submit Another Video?");
 /*
 Admin
 */
+define("Admin_0", "Admin");
+define("Admin_1", "Home");
+define("Admin_2", "Logout");
+define("Admin_3", "List All");
+define("Admin_4", "Approve Videos");
+define("Admin_5", "Featured Videos");
+define("Admin_6", "Rejected Videos");
+define("Admin_7", "Easy Approve");
+define("Admin_8", "Options");
+define("Admin_9", "Video Name");
+define("Admin_10", "Description");
+define("Admin_11", "Date");
+define("Admin_12", "Author");
+define("Admin_13", "Pictures");
+define("Admin_14", "Actions");
+define("Admin_15", "UnApprove");
+define("Admin_16", "Approve");
+define("Admin_17", "UnFeature");
+define("Admin_18", "Feature");
+define("Admin_19", "Reject");
+define("Admin_20", "or");
+define("Admin_21", "Delete");
+define("Admin_22", "Name");
+define("Admin_23", "Videos Per Page");
+define("Admin_24", "Logo");
+define("Admin_25", "CSS Url");
+define("Admin_26", "Lang");
+define("Admin_27", "If you have a header you would like instead of our type in the URL otherwise type false");
+define("Admin_28", "If default logo type in default otherwise type in URL");
+define("Admin_29", "English or German");
+define("Admin_30", "Everything is required, Nothing can be blank");
+define("Admin_31", "No Videos To Approve");
+define("Admin_32", "Please select a tab choosing what to do");
+define("Admin_33", "Welcome To Admin");
+define("Admin_34", "Videos");
+define("Admin_35", "Approve then Feature");
+define("Admin_36", "This Video is Currently");
+define("Admin_37", "Approved");
+define("Admin_38", "Rejected");
+define("Admin_39", "Username");
+define("Admin_40", "Passwrod");
 ?>

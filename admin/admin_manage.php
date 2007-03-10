@@ -12,8 +12,7 @@ include("admin_header.php");
 <?php 
 	if ($pagevalue == ""){
 	?>
-    <div align='center'><p><h2>Welcome To The Admin Area</h2></p></div>
-<p>Thank you for helping moderate the videos</p>
+    <div align='center'><p><h2><?php echo Admin_33;?></h2></p></div>
 	<?
 	exit;
 	}
@@ -67,27 +66,27 @@ $checking = $check["cnt"];
 	}
 	
 if ($pagevalue == "all"){
-    echo "<h2>Movies</tr></h2>";   
+    echo "<h2>".Admin_34."</tr></h2>";   
 }	
 if ($pagevalue == "feature"){
-    echo "<h2>Featured Movies</h2></tr>";
+    echo "<h2>".Admin_5."</h2></tr>";
 }
 if ($pagevalue == "approve"){
-    echo "<h2>Movies that need approving</h2></tr>";
+    echo "<h2>".Admin_4."</h2></tr>";
 }	
 if ($pagevalue == "rejected"){
-    echo "<h2>Movies that have been rejected</h2></tr>";
+    echo "<h2>".Admin_6."</h2></tr>";
 }
 ?>	
 <table cellspacing="0" cellpadding="0" border="1" id="categorias"><tbody>
 	<tr class="categoria_h">
 		<th class="s1">ID</th>
-		<th class="s2">Video Name</th>
-		<th class="s3">Description</th>
-		<th class="s4">Date</th>
-		<th class="s5">Author</th>
-		<th class="s6">Pictures</th>
-		<th class="s7">Actions</th>
+		<th class="s2"><?php echo Admin_9; ?></th>
+		<th class="s3"><?php echo Admin_10; ?></th>
+		<th class="s4"><?php echo Admin_11; ?></th>
+		<th class="s5"><?php echo Admin_12; ?></th>
+		<th class="s6"><?php echo Admin_13; ?></th>
+		<th class="s7"><?php echo Admin_14; ?></th>
 	</tr>
 <?php
 while($row = mysql_fetch_array($result)){				
@@ -158,26 +157,26 @@ while($row = mysql_fetch_array($result)){
 	<td class="s7">
 		<?php
 		if ($row['approved'] == "0"){
-			echo "<a href='?id=".show_sql($row[id])."&what=approve&pt=".$pagevalue."&page=".$page."'>Approve</a>";
+			echo "<a href='?id=".show_sql($row[id])."&what=approve&pt=".$pagevalue."&page=".$page."'>".Admin_16."</a>";
 		}else{
-			echo "<a href='?id=".show_sql($row[id])."&what=unapprove&pt=".$pagevalue."&page=".$page."'>UnApprove</a>";
+			echo "<a href='?id=".show_sql($row[id])."&what=unapprove&pt=".$pagevalue."&page=".$page."'>".Admin_15."</a>";
 		}
 		if ($row['feature'] == "0" ){	
 			if ($pagevalue == "all"){
-				echo "<p><a href='?id=".show_sql($row[id])."&what=featureapprove&pt=".$pagevalue."&page=".$page."'>Feature</a></p>";
+				echo "<p><a href='?id=".show_sql($row[id])."&what=featureapprove&pt=".$pagevalue."&page=".$page."'>".Admin_18."</a></p>";
 			}else{
-				echo "<p><a href='?id=".show_sql($row[id])."&what=featureapprove&pt=".$pagevalue."&page=".$page."'>Approve then Feature</a></p>";
+				echo "<p><a href='?id=".show_sql($row[id])."&what=featureapprove&pt=".$pagevalue."&page=".$page."'>".Admin_35."</a></p>";
 			}
 		}else{
-			echo "<p><a href='?id=".show_sql($row[id])."&what=unfeature&pt=".$pagevalue."&page=".$page."'>UnFeature</a></p>";
+			echo "<p><a href='?id=".show_sql($row[id])."&what=unfeature&pt=".$pagevalue."&page=".$page."'>".Admin_17."</a></p>";
 		}
 
 		if ($_GET['pt'] == "rejected"){
-			echo "<a href='?id=".show_sql($row[id])."&what=unreject&pt=".$pagevalue."&page=".$page."'>Approve</a> or ";
+			echo "<a href='?id=".show_sql($row[id])."&what=unreject&pt=".$pagevalue."&page=".$page."'>".Admin_16."</a> or ";
 		}else{
-			echo "<a href='?id=".show_sql($row[id])."&what=reject&pt=".$pagevalue."&page=".$page."'>Reject</a> or ";
+			echo "<a href='?id=".show_sql($row[id])."&what=reject&pt=".$pagevalue."&page=".$page."'>".Admin_19."</a> or ";
 		}
-			echo "<a href='?id=".show_sql($row[id])."&what=delete&pt=".$pagevalue."&page=".$page."'>Delete</a>";
+			echo "<a href='?id=".show_sql($row[id])."&what=delete&pt=".$pagevalue."&page=".$page."'>".Admin_21."</a>";
 		?>
 	</td>
 	</tr>
@@ -189,13 +188,13 @@ if ($checking < $limit){
 }else{
     if($page != 1){ 
         $pageprev = $page-1;
-        echo("<p><a href='admin_manage.php?pt=$pagevalue&page=$pageprev'>PREV</a>&nbsp;&nbsp;");  
+        echo("<p><a href='admin_manage.php?pt=$pagevalue&page=$pageprev'>".LAN_18."</a>&nbsp;&nbsp;");  
 			/* Tip: It is a good idea NOT to use $PHP_SELF in this link. It may work, 
 			but to be 99.9% sure that it will, be sure to use the actual name of the file 
 			this script will be running on. Also, the   adds a space to the end of 
 			PREV, and gives some room between the numbers. */
     }else{
-        echo("PREV&nbsp;&nbsp;"); 
+        echo("".LAN_18."&nbsp;&nbsp;"); 
 	}
 
 		$numofpages = $checking / $limit; 
@@ -226,10 +225,10 @@ if ($checking < $limit){
 			/* This statement checks to see if there are more rows remaining, meaning there are pages in front of the current one. */
 			$pagenext   = $page+1;
 			// Fancy way of adding 1 to page
-			echo("&nbsp;&nbsp;<a href='admin_manage.php?pt=".$pagevalue."&page=".$pagenext."'>NEXT</a> ");
+			echo("&nbsp;&nbsp;<a href='admin_manage.php?pt=".$pagevalue."&page=".$pagenext."'>".LAN_19."</a> ");
 			/* Since there are pages remaining, this outputs NEXT in link form. */ 
 		}else{
-			echo("&nbsp;&nbsp;NEXT"); 
+			echo("&nbsp;&nbsp;".LAN_19.""); 
 			/* If we're on the last page possible, NEXT will NOT be displayed in link form. */
 		}
  

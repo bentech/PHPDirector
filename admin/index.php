@@ -8,8 +8,8 @@ if (!isset($_COOKIE["admin"])){
 <body>
 
 <?php include("admin_header.php")?>
-<h2 align="center">Welcome To Admin</h2>
-<p>Please select a tab choosing what to do </p>
+<h2 align="center"><?php echo Admin_33; ?></h2>
+<p><?php echo Admin_32; ?></p>
 <br>
 <br>
 <script type='text/javascript' src='http://www.crossstar.co.uk/phpdirector_test/version/version.js'>

@@ -15,6 +15,5 @@ header('Location: ../');
 <html>
 <head>
 <body>
-Logged Out
 </body>
 <html>

@@ -32,21 +32,18 @@ $result2 = mysql_query("SELECT * FROM pp_config");
 
 $row2 = mysql_fetch_array($result2);
 ?>
-<h2 align="center">Options</h2>
+<h2 align="center"><?php echo Admin_8; ?></h2>
 <form action="options.php" method="POST">
-<center><b>Everything is required, Nothing can be blank</b>
+<center><b><?php echo Admin_30; ?></b>
 <p>
 <pre>
 
 <table border="0" width="auto" height="auto">
-<tr><td>Name:</td><td><input type="text" value="<?php echo $row2["name"]; ?>" name="name"></td></tr>
-<tr><td>Videos Per Page:</td><td><input type="text" value="<?php echo $row2["vids_per_page"]; ?>" name="vids_per_page"></td></tr>
-<tr><td>*Your own Header?:</td><td><input type="text" value="<?php echo $row2["exerntalheader"]; ?>" name="exerntalheader"></td></tr>
-<tr><td>**Header URL:</td><td><input type="text" value="<?php echo $row2["externalheaderurl"]; ?>" name="externalheaderurl"></td></tr>
-<tr><td>**Header Height:</td><td><input type="text" value="<?php echo $row2["header_height"]; ?>" name="header_height"></td></tr>
-<tr><td>***Logo:</td><td><input type="text" value="<?php echo $row2["logo"]; ?>" name="logo"></td></tr>
-<tr><td>CSS Url:</td><td><input type="text" value="<?php echo $row2["cssstyle"]; ?>" name="cssstyle"></td></tr>
-<tr><td>****Lang:</td><td><input type="text" value="<?php echo $row2["lang"]; ?>" name="lang"></td></tr>
+<tr><td><?php echo Admin_22; ?>:</td><td><input type="text" value="<?php echo $row2["name"]; ?>" name="name"></td></tr>
+<tr><td><?php echo Admin_23; ?>:</td><td><input type="text" value="<?php echo $row2["vids_per_page"]; ?>" name="vids_per_page"></td></tr>
+<tr><td>*<?php echo Admin_24; ?>:</td><td><input type="text" value="<?php echo $row2["logo"]; ?>" name="logo"></td></tr>
+<tr><td><?php echo Admin_25; ?>:</td><td><input type="text" value="<?php echo $row2["cssstyle"]; ?>" name="cssstyle"></td></tr>
+<tr><td>**<?php echo Admin_26; ?>:</td><td><input type="text" value="<?php echo $row2["lang"]; ?>" name="lang"></td></tr>
 <tr><td></td><td><tr><td><input type="hidden" name="options"></td><td>
 <tr><td colspan="2"><center><input type="submit" value="Edit"></center></td></tr>
 </table>
@@ -55,13 +52,11 @@ $row2 = mysql_fetch_array($result2);
 <br>
 <br>
 </center>
-* : If you have a header you would like instead of our type in the URL otherwish type false
 <br>
-** : If you have your own Header
 <br>
-*** : If default logo type in default otherwise type in URL
+* : <?php echo Admin_28; ?>
 <br>
-**** : English or German
+** : <?php echo Admin_29; ?>
 
 
 </pre>
