@@ -59,7 +59,7 @@ echo'
 </span></a>
 </li>
 <li>
-<a <?php if ($pagetype == "random"){echo "class='current'";}?> href='index.php?pt=random' accesskey='r'><span class='key'>
+<a <?php if ($pagetype == "random"){echo "class='current'";}?> href='videos.php' accesskey='r'><span class='key'>
 <?php echo LAN_39 ?>
 </span></a>
 </li>
