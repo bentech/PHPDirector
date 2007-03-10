@@ -26,4 +26,16 @@ Type - varchar(225)
 Collation - Latin1_swedish_ci
 Default - Welcome
 
+ADDED
+Table - pp_catigories
+
+Field - id
+Type - int(225)
+Extra - auto_increment
+
+Field - name
+Type - varchar(225)
+Collation - Latin1_swedish_ci
+
+
 $sql = 'ALTER TABLE `pp_files` ADD `resonforreject` VARCHAR(255) NOT NULL DEFAULT \'No Reason Given\' AFTER `reject`;';
