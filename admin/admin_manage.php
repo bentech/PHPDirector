@@ -1,12 +1,6 @@
 <?php
-session_start();
-// is the one accessing this page logged in or not?
-if (!isset($_SESSION['phpdirector'])
-    || $_SESSION['phpdirector'] !== true) {
-
-    // not logged in, move to login page
-    header('Location: login.php');
-    exit;
+if (!isset($_COOKIE["admin"])){
+    header('location: login.php');
 }
 $pagevalue = $_GET["pt"];
 $id = $_GET["id"];

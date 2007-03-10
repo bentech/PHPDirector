@@ -1,11 +1,10 @@
 <?php
 // i will keep yelling this
 // DON'T FORGET TO START THE SESSION !!!
-session_start();
 
 // if the user is logged in, unset the session
-if (isset($_SESSION['phpdirector'])) {
-   unset($_SESSION['phpdirector']);
+if (isset($_COOKIE["admin"])) {
+	setcookie("admin", "login", time()-3600);
 }
 
 // now that the user is logged out,
@@ -13,9 +12,9 @@ if (isset($_SESSION['phpdirector'])) {
 header('Location: ../');
 ?>
 
-
+<html>
 <head>
 <body>
 Logged Out
 </body>
-<?php session_destroy(); ?>
+<html>

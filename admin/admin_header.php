@@ -18,7 +18,7 @@ include("../includes/function.inc.php");?>
   <h1><?php echo config('name');?> - Admin </h1>
 </div>
 <ul id="admin-menu">
-<li><a href="../index.php?admin=true">Home</a> <a href="logout.php">Logout</a></li>
+<li><a href="../index.php">Home</a> <a href="logout.php">Logout</a></li>
 </ul>
 <ul id="admin-submenu">
 <li <?php if ($_GET['pt'] == "all"){

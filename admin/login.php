@@ -1,12 +1,11 @@
 <?php
+	setcookie("admin", "login", time()+3600);
 if (isset($_POST['txtUserId']) && ($_POST['txtPassword'])){
     header("location: index.php");
 }
-session_start();
 define("PHPdirector", 1);
 include("../config.php");
 if ($_POST['txtUserId'] == $cfg["admin_user"] && $_POST['txtPassword'] == $cfg["admin_pass"]){
-    $_SESSION['phpdirector'] = true;
 	$errorMessage = '';
 }else{
 	if (isset($_POST['txtUserId']) && ($_POST['txtPassword'])){
