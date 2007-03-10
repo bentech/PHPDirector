@@ -89,6 +89,6 @@ define("Admin_36", "This Video is Currently");
 define("Admin_37", "Approved");
 define("Admin_38", "Rejected");
 define("Admin_39", "Username");
-define("Admin_40", "Passwrod");
+define("Admin_40", "Password");
 define("Admin_41", "News");
 ?>
