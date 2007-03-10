@@ -76,7 +76,7 @@ echo"<li><a class='current' href='admin/admin_manage.php' accesskey='a'><span cl
 </ul>
 	<div id="search">
 				<form method="post" action="index.php">
-					<p><input type="text" name="search" /> <input type="submit" value="Search"/></p>
+					<p><input type="text" name="searching" /> <input type="submit" value="Search"/></p>
 				</form>
 			</div>
 </div>
