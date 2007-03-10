@@ -143,20 +143,20 @@ exit;
 <!--SORT BY-->
 <div align="left">
 <p>
-<b>&nbsp;&nbsp;&nbsp;Sort By:&nbsp;</b>
+<b>&nbsp;&nbsp;&nbsp;<?php echo LAN_7; ?>:&nbsp;</b>
 <?php echo LAN_31; //Ratings?>
 <a href="?sort=rating&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('rateup','','images/arrowupani.gif',1)">
-<img src="images/arrowup.gif" name="rateup" border="0" id="rateup" title="Worst Rated Videos" alt="arrow up" /></a>
+<img src="images/arrowup.gif" name="rateup" border="0" id="rateup" title="<?php echo LAN_8; ?>" alt="arrow up" /></a>
 
-<a href="?sort=rating&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('ratedwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="ratedwn" border="0" id="ratedwn" title="Best Rated Videos" alt="arrow down" /></a>
+<a href="?sort=rating&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('ratedwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="ratedwn" border="0" id="ratedwn" title="<?php echo LAN_9; ?>" alt="arrow down" /></a>
 
 &nbsp;
 <?php echo LAN_32; //views ?>
 
 <a href="?sort=views&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewup','','images/arrowupani.gif',1)">
-<img src="images/arrowup.gif" name="viewup" border="0" id="viewup" title="Least Viewed Videos" alt="arrow up" /></a>
+<img src="images/arrowup.gif" name="viewup" border="0" id="viewup" title="<?php echo LAN_10; ?>" alt="arrow up" /></a>
 
-<a href="?sort=views&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewdwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="viewdwn" border="0" id="viewdwn" title="Most Viewed Videos" alt="arrow down" /></a>
+<a href="?sort=views&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewdwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="viewdwn" border="0" id="viewdwn" title="<?php echo LAN_11; ?>" alt="arrow down" /></a>
 
 &nbsp;
 <?php echo LAN_33; //name ?>
@@ -169,9 +169,9 @@ exit;
 &nbsp;
 <?php echo LAN_34; //date ?>
 
-<a href="?sort=date&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('dateup','','images/arrowupani.gif',1)"> <img src="images/arrowup.gif" name="dateup" border="0" id="dateup" title="Least Recent Videos" alt="arrow up" /></a>
+<a href="?sort=date&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('dateup','','images/arrowupani.gif',1)"> <img src="images/arrowup.gif" name="dateup" border="0" id="dateup" title="<?php echo LAN_12; ?>" alt="arrow up" /></a>
 
-<a href="?sort=date&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('datedown','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="datedown" border="0" id="datedown" title="Most Recent Videos" alt="arrow down" /></a>
+<a href="?sort=date&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('datedown','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="datedown" border="0" id="datedown" title="<?php echo LAN_13; ?>" alt="arrow down" /></a>
 </p>
 </div>
 <?
@@ -185,8 +185,8 @@ while($row = mysql_fetch_array($result)){
 <div class='left'>
 	<div class="left_articles">
 		<div class="buttons">
-			<p align="center"><a href="videos.php?id=<?php echo $row[id]?>" class="bluebtn">View</a>
-			<a href="videopop.php?KeepThis=true&amp;height=530&amp;width=430&amp;id=<?php echo $row[id];?>"class="thickbox greenbtn" rel="gallery-videos" title="<?php echo show_sql($row['name']);?>">Popup</a></p>
+			<p align="center"><a href="videos.php?id=<?php echo $row[id]?>" class="bluebtn"><?php echo LAN_14; ?></a>
+			<a href="videopop.php?KeepThis=true&amp;height=530&amp;width=430&amp;id=<?php echo $row[id];?>"class="thickbox greenbtn" rel="gallery-videos" title="<?php echo show_sql($row['name']);?>"><?php echo LAN_15; ?></a></p>
 		</div>
 		<div class="calendar"><p><?php echo date("M", strtotime($row[date]));?><br /><?php echo date("d", strtotime($row[date]));?></p></div>
 			<h2><a href="videos.php?id=<?php echo $row[id]?>"><?php echo show_sql(substr($row['name'], 0,32));
@@ -196,7 +196,9 @@ while($row = mysql_fetch_array($result)){
 			}
 			?>
 
-			<p class="description"><b>by: </b> <?php echo show_sql(substr($row['creator'], 0,20))?> - <b>Views: </b><?php echo show_sql($row[			 'views'])?></p>
+			<p class="description"><b><?php echo LAN_16; ?>: </b> 
+			<?php echo show_sql(substr($row['creator'], 0,20))?> - <b><?php echo LAN_17; ?>: </b>
+			<?php echo show_sql($row['views'])?></p>
 			<p><img height='97' width='130' src="<?php if ($row['picture'] == ""){
 			echo "images/noimage.bmp";
 			}else{
@@ -229,13 +231,13 @@ if ($totalrows < $limit){
         $pageprev = $page-1;
         // Fancy way of subtracting 1 from $page
 
-        echo("<a href='index.php?pt=$pagetype&amp;page=$pageprev&amp;sort=$sort&amp;order=$order1'>PREV</a> &nbsp;");
+        echo("<a href='index.php?pt=$pagetype&amp;page=$pageprev&amp;sort=$sort&amp;order=$order1'>".LAN_18."</a> &nbsp;");
         /* Tip: It is a good idea NOT to use $PHP_SELF in this link. It may work,
 but to be 99.9% sure that it will, be sure to use the actual name of the file
 this script will be running on. Also, the   adds a space to the end of
 PREV, and gives some room between the numbers. */
     }else{
-        echo("PREV&nbsp;&nbsp;");
+        echo("".LAN_18."&nbsp;&nbsp;");
         // If we're on page 1, PREV is not a link
 		}
 		
@@ -293,11 +295,11 @@ are pages in front of the current one. */
         $pagenext   = $page+1;
         // Fancy way of adding 1 to page
 		?>
-        <a href='index.php?pt=<?php echo $pagetype; ?>&amp;page=<?php echo $pagenext;?>&amp;sort=<?php echo $sort;?>&amp;order=<?php echo $order1;?>'>NEXT</a></div>
+        <a href='index.php?pt=<?php echo $pagetype; ?>&amp;page=<?php echo $pagenext;?>&amp;sort=<?php echo $sort;?>&amp;order=<?php echo $order1;?>'><?php echo LAN_19;?></a></div>
 	<?
         /* Since there are pages remaining, this outputs NEXT in link form. */
     }else{
-        echo("&nbsp;&nbsp;NEXT");
+        echo("&nbsp;&nbsp;".LAN_19."");
     }
 
     mysql_free_result($result);

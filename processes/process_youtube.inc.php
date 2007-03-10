@@ -100,10 +100,9 @@ $videoid = getytid($videourl);
 	or die(mysql_error());
 	$row1 = mysql_fetch_array( $result1 );
 
-if ( $row1['file'] == $videoid){
-echo "<p>".$LAN_22."</p>";
-echo "This Video Allready Exists";
-echo "<p><a href='submit.php'>Submit Another Video?</a></p>";
+if ($row1['file'] == $videoid){
+echo "".LAN_22."";
+echo "<p><a href='submit.php'>".LAN_38."</a></p>";
 include("footer.php");
 exit;
 }	

@@ -47,8 +47,11 @@ require("header.php");
 			<td width="55">&nbsp;</td>
 			<td width="26">&nbsp;</td>
 			<td valign="top" colspan="2">
-			<p align="center"><span class="style2"><span class="style3">&nbsp;Example</span>:<u>http://www.youtube.com/watch?v=jr3JEwXtudA</u><span class="style3">&nbsp;</span></span><p align="center">
-			<span class="style2"><span class="style3">Example</span>:<u>http://video.google.com/videoplay?docid=-6459339159268485356</u></span></td>
+			<p align="center"><span class="style2"><span class="style3">&nbsp;<?php echo LAN_37; ?></span>:<u>
+			http://www.youtube.com/watch?v=jr3JEwXtudA
+			</u><span class="style3">&nbsp;</span></span>
+			<p align="center"><span class="style2"><span class="style3"><?php echo LAN_37; ?></span>:<u>
+			http://video.google.com/videoplay?docid=-6459339159268485356</u></span></td>
 			<td width="83">&nbsp;</td>
 			<td width="14">&nbsp;</td>
 			<td height="76" width="229">&nbsp;</td>

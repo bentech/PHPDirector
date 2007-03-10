@@ -45,20 +45,28 @@ echo'
 <div id='tabs'>
 <ul>
 <li>
-<a <?php if ($pagetype == "feature"){echo "class='current'";}?> href='index.php?pt=feature' accesskey='m'><span class='key'>Featured</span></a>
+<a <?php if ($pagetype == "feature"){echo "class='current'";}?> href='index.php?pt=feature' accesskey='m'><span class='key'>
+<?php echo LAN_2 ?>
+</span></a>
 </li>
 <li>
-<a <?php if ($pagetype == "all"){echo "class='current'";}?> href='index.php?pt=all' accesskey='v'><span class='key'>All</span></a>
+<a <?php if ($pagetype == "all"){echo "class='current'";}?> href='index.php?pt=all' accesskey='v'><span class='key'>
+<?php echo LAN_3 ?>
+</span></a>
 </li>
 <li>
-<a <?php if ($pagetype == "pictures"){echo "class='current'";}?> href='index.php?pt=pictures' accesskey='i'><span class='key'>I</span>mages</a>
+<a <?php if ($pagetype == "pictures"){echo "class='current'";}?> href='index.php?pt=pictures' accesskey='i'><span class='key'>
+<?php echo LAN_4 ?>
+</span></a>
 </li>
 <li>
-<a <?php if ($pagetype == "submit"){echo "class='current'";}?> href='submit.php?pt=submit' accesskey='a'><span class='key'>Submit</span></a>
+<a <?php if ($pagetype == "submit"){echo "class='current'";}?> href='submit.php?pt=submit' accesskey='a'><span class='key'>
+<?php echo LAN_5 ?>
+</span></a>
 </li>
 <?php
 if (isset($_COOKIE["admin"])){
-echo"<li><a class='current' href='admin/admin_manage.php' accesskey='a'><span class='key'>Admin</span></a></li>";
+echo"<li><a class='current' href='admin/admin_manage.php' accesskey='a'><span class='key'>".LAN_6."</span></a></li>";
 }
 ?>
 </ul>
