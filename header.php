@@ -80,7 +80,12 @@ echo"<li><a class='current' href='admin/admin_manage.php' accesskey='a'><span cl
 				</form>
 			</div>
 </div>
+<?php
+$resultnews = mysql_query("SELECT * FROM pp_config");
+$rownews = mysql_fetch_array($resultnews);
+?>
+<br><br>
 <div class="gboxtop"></div>
 <div class="gbox">
-			<p><?php echo $row["news"]; ?></p>
+			<p><?php echo $rownews["news"]; ?></p>
 		</div>
