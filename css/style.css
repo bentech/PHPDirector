@@ -36,7 +36,9 @@ input.button { padding: 3px; }
 #tabs li { display: inline; height: 45px; }
 #tabs li a { float: left; background: #fff url(../images/barbg.gif) no-repeat; color: #808080; padding: 7px 0; width: 82px; text-align: center; font-weight: bold; text-decoration: none; }
 #tabs li a:hover { background: #fff url(../images/barcurrent.gif) no-repeat; color: #000; }	
-#tabs li a.current { background: #fff url(../images/barcurrent.gif) no-repeat; color: #2C71AE; }	
+#tabs li a.current { background: #fff url(../images/barcurrent.gif) no-repeat; color: #2C71AE; }
+
+#search { background: #fff url(../images/searchbg.gif) no-repeat; color: #2C71AE; text-align: center;}
 .key { text-decoration: underline; }
 
 /* search form */

@@ -40,8 +40,12 @@ if(isset($_GET["order"])){
 $limit = config('vids_per_page');
 
     // count(*) is better for large databases (thanks Greg!)
+	if(isset($_POST["searching"])){
+	$query_count   = mysql_query("SELECT * FROM pp_files WHERE name like '%$_POST[searching]%'");
+	}else{
 	if ($pagetype == "all"){
     $query_count   = mysql_query("SELECT * FROM pp_files WHERE approved='1' AND reject='0'");
+	}
 	}
 
 		if ($pagetype == "feature"){ 
@@ -62,6 +66,9 @@ if ((empty($page)) || ($page <= 0)){
 
   $limitvalue = $page * $limit - $limit;
     // Ex: (2 * 25) - 25 = 25 <- data starts at 25
+	if(isset($_POST["searching"])){
+	$query  = "SELECT * FROM pp_files WHERE name like '%$_POST[searching]%' ORDER BY $sort $order1 LIMIT $limitvalue, $limit ";
+	}else{
 	if($sort1 == "rating"){
 	$query  = "
 	SELECT ppf.*, ppr.total_value/ppr.total_votes as r 
@@ -74,6 +81,7 @@ if ((empty($page)) || ($page <= 0)){
     $query  = "SELECT * FROM pp_files WHERE approved='1' AND reject='0' ORDER BY $sort $order1 LIMIT $limitvalue, $limit ";
     // Pulls what we want from the database
 	}	
+	}
 	}
 
 			if ($pagetype == "pictures"){
@@ -223,7 +231,6 @@ while($row = mysql_fetch_array($result)){
 <p>&nbsp;</p>
 <p>&nbsp;</p>
  <?php
-
 if ($totalrows < $limit){
 }else{
 
