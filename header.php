@@ -56,5 +56,10 @@ echo'
 <li>
 <a <?php if ($pagetype == "submit"){echo "class='current'";}?> href='submit.php?pt=submit' accesskey='a'><span class='key'>Submit</span></a>
 </li>
+<?php
+if (isset($_COOKIE["admin"])){
+echo"<li><a class='current' href='admin/admin_manage.php' accesskey='a'><span class='key'>Admin</span></a></li>";
+}
+?>
 </ul>
 </div>
