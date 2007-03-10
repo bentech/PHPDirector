@@ -82,5 +82,5 @@ echo"<li><a class='current' href='admin/admin_manage.php' accesskey='a'><span cl
 </div>
 <div class="gboxtop"></div>
 <div class="gbox">
-			<p><a href="#">News</a>Test For News</p>
+			<p><?php echo $row["news"]; ?></p>
 		</div>
