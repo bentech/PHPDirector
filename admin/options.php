@@ -22,7 +22,7 @@ if (!isset($_COOKIE["admin"])){
     header('location: login.php');
 }
 ?>
-<?php include("admin_header.php")?>
+<?php include("admin_header.php");?>
 <?php
 $connect2 = mysql_connect($cfg["db_host"], $cfg["db_user"], $cfg["db_pass"]);
 mysql_select_db($cfg["db_name"]) or die(mysql_error());
