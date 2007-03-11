@@ -1,81 +1,57 @@
-{config_load file=test.conf section="setup"}
-{include file="header.tpl" title=foo}
-
-<PRE>
-
-{* bold and title are read from the config file *}
-{if #bold#}<b>{/if}
-{* capitalize the first letters of each word of the title *}
-Title: {#title#|capitalize}
-{if #bold#}</b>{/if}
-
-The current date and time is {$smarty.now|date_format:"%Y-%m-%d %H:%M:%S"}
-
-The value of global assigned variable $SCRIPT_NAME is {$SCRIPT_NAME}
-
-Example of accessing server environment variable SERVER_NAME: {$smarty.server.SERVER_NAME}
-
-The value of {ldelim}$Name{rdelim} is <b>{$Name}</b>
-
-variable modifier example of {ldelim}$Name|upper{rdelim}
-
-<b>{$Name|upper}</b>
-
-
-An example of a section loop:
-
-{section name=outer loop=$FirstName}
-{if $smarty.section.outer.index is odd by 2}
-	{$smarty.section.outer.rownum} . {$FirstName[outer]} {$LastName[outer]}
-{else}
-	{$smarty.section.outer.rownum} * {$FirstName[outer]} {$LastName[outer]}
-{/if}
-{sectionelse}
-	none
-{/section}
-
-An example of section looped key values:
-
-{section name=sec1 loop=$contacts}
-	phone: {$contacts[sec1].phone}<br>
-	fax: {$contacts[sec1].fax}<br>
-	cell: {$contacts[sec1].cell}<br>
-{/section}
+<!--SORT BY-->
+<div align="left">
 <p>
+<b>&nbsp;&nbsp;&nbsp;{LAN_7}:&nbsp;</b>
+{LAN_31}
+<a href="?sort=rating&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('rateup','','images/arrowupani.gif',1)">
+<img src="images/arrowup.gif" name="rateup" border="0" id="rateup" title="<?php echo LAN_8; ?>" alt="arrow up" /></a>
 
-testing strip tags
+<a href="?sort=rating&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('ratedwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="ratedwn" border="0" id="ratedwn" title="{LAN_9}" alt="arrow down" /></a>
+
+&nbsp;
+{LAN_32}
+
+<a href="?sort=views&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewup','','images/arrowupani.gif',1)">
+<img src="images/arrowup.gif" name="viewup" border="0" id="viewup" title="<?php echo LAN_10; ?>" alt="arrow up" /></a>
+
+<a href="?sort=views&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewdwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="viewdwn" border="0" id="viewdwn" title="{LAN_11}" alt="arrow down" /></a>
+
+&nbsp;
+{LAN_33}
+
+<a href="?sort=name&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('nameup','','images/arrowupani.gif',1)">
+<img src="images/arrowup.gif" name="nameup" border="0" id="nameup" title="A-Z" alt="arrow up" /></a>
+
+<a href="?sort=name&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('namedwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="namedwn" border="0" id="namedwn" title="Z-A" alt="arrow down" /></a>
+
+&nbsp;
+{LAN_34}
+
+<a href="?sort=date&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('dateup','','images/arrowupani.gif',1)"> <img src="images/arrowup.gif" name="dateup" border="0" id="dateup" title="{LAN_12}" alt="arrow up" /></a>
+
+<a href="?sort=date&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('datedown','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="datedown" border="0" id="datedown" title="{LAN_13}" alt="arrow down" /></a>
+</p>
+</div>
+<div class='left'>
+	<div class="left_articles">
+		<div class="buttons">
+		{section name=mysec loop=$videos}
 {strip}
-<table border=0>
-	<tr>
-		<td>
-			<A HREF="{$SCRIPT_NAME}">
-			<font color="red">This is a  test     </font>
-			</A>
-		</td>
-	</tr>
-</table>
-{/strip}
+			<p align="center"><a href="videos.php?id={$videos[mysec].id}" class="bluebtn">{LAN_14}</a>
+			<a href="videopop.php?KeepThis=true&amp;height=530&amp;width=430&amp;id={$videos[mysec].id}"class="thickbox greenbtn" rel="gallery-videos" title="{$videos[mysec].name}">{LAN_15}</a></p>
+		</div>
+		<div class="calendar"><p><?php echo date("M", strtotime($row[date]));?><br />{$videos[mysec].date}</p></div>
+			<h2><a href="videos.php?id={$videos[mysec].id}">{$videos[mysec].name}</a></h2>
 
-</PRE>
+			<p class="description"><b>{LAN_16}: </b> 
+			{$videos[mysec].creator} - <b>{LAN_17}: </b>
+			{$videos[mysec].views}</p>
+			<p><img height='97' width='130' src="{$videos[mysec].picture}" class="thumbnail" alt="{$videos[mysec].name}" />
+			{$videos[mysec].description}</p>
+?>
+		</div>
+		{/strip}
+{/section}
 
-This is an example of the html_select_date function:
+{Pages}
 
-<form>
-{html_select_date start_year=1998 end_year=2010}
-</form>
-
-This is an example of the html_select_time function:
-
-<form>
-{html_select_time use_24_hours=false}
-</form>
-
-This is an example of the html_options function:
-
-<form>
-<select name=states>
-{html_options values=$option_values selected=$option_selected output=$option_output}
-</select>
-</form>
-
-{include file="footer.tpl"}
