@@ -12,7 +12,7 @@
 {LAN_32}
 
 <a href="?sort=views&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewup','','images/arrowupani.gif',1)">
-<img src="images/arrowup.gif" name="viewup" border="0" id="viewup" title="<?php echo LAN_10; ?>" alt="arrow up" /></a>
+<img src="images/arrowup.gif" name="viewup" border="0" id="viewup" title="{LAN_10}" alt="arrow up" /></a>
 
 <a href="?sort=views&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewdwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="viewdwn" border="0" id="viewdwn" title="{LAN_11}" alt="arrow down" /></a>
 
