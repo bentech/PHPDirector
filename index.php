@@ -1,4 +1,17 @@
 <?php
+// put full path to Smarty.class.php
+require('libs/Smarty.class.php');
+$smarty = new Smarty();
+
+$smarty->template_dir = './templates/Photine';
+$smarty->compile_dir = './templates_c';
+$smarty->cache_dir = './cache';
+$smarty->config_dir = './configs';
+
+$smarty->assign('name', 'Ned');
+?>
+
+<?php
 define("PHPdirector", 1);
 
 $sort1 = $_GET['sort'];
@@ -317,4 +330,5 @@ scripts have finished executing; however, it's a nice little backup. */
 
 
 include("footer.php");
+//$smarty->display('index.tpl');
 ?>

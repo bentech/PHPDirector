@@ -27,5 +27,8 @@ echo LAN_32.": <b>$display_video_views</b><p>";
 </center>
 <?php
 require('_drawrating.php');
-?>
+?>
+
+<script type="text/javascript" language="javascript" src="js/behavior.js"></script>
+<script type="text/javascript" language="javascript" src="js/rating.js"></script>
 <?php rating_bar($row['id'],5); ?>
