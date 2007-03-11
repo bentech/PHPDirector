@@ -113,7 +113,8 @@ exit;
 		$insertthumb  = safe_sql_insert(getthumb($videoid));
 		$ip           = safe_sql_insert($_SERVER['REMOTE_ADDR']);
 
-mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture) VALUES ('$inserttitle', 'YouTube' , '$insertauthor', '$insertdes', CURDATE(), '$videoid', '0', '$ip', '$insertthumb')")	or die(mysql_error());
+$category = $_POST["catigory"];
+mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture, category) VALUES ('$inserttitle', 'YouTube' , '$insertauthor', '$insertdes', CURDATE(), '$videoid', '0', '$ip', '$insertthumb', '$category')")	or die(mysql_error());
 
 				echo "<P>".LAN_24." <b><u>".$inserttitle."</b></u>".LAN_25."</P>";
 				include("footer.php");

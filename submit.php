@@ -24,11 +24,28 @@ require("header.php");
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 			<td valign="middle" colspan="2">
-			<div align="center">
-				<form action="process.php" method="post">
-					<input type="text" name="videourl" size="50" /> </div></td>
-			<td valign="top" colspan="2">
-			<input name="submit" type="submit" value="Submit Video" /></form></td>
+				<div align="center">
+					<form action="process.php" method="post">
+					<input type="text" name="videourl" size="50" /> 
+				</div>
+			</td>
+			<td valign="middle">
+				<select name='catigory'>
+					<?php 
+					$resultcati = mysql_query("SELECT * FROM pp_catigories");
+					while($rowcati = mysql_fetch_array($resultcati)){
+					echo"
+					<option value='$rowcati[name]'>$rowcati[name]</option>
+					";
+					}
+					?>
+				</select>
+			</td>
+			<td valign="middle" colspan="3">
+				&nbsp;
+				<input name="submit" type="submit" value="Submit Video" />
+				</form>
+			</td>
 			<td>&nbsp;</td>
 			<td height="30">&nbsp;</td>
 			</tr>

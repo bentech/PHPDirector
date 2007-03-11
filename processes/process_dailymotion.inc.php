@@ -94,8 +94,8 @@ echo "<p><a href='submit.php'>".LAN_38."</a></p>";
 include("footer.php");
 exit;
 }	
-
-mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture) VALUES ('$inserttitle', 'dailymotion' , '$insertauthor', '$insertdes', CURDATE(), '$file', '0', '$ip', '$insertthumb')")	or die(mysql_error());
+$category = $_POST["catigory"];
+mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture, category) VALUES ('$inserttitle', 'dailymotion' , '$insertauthor', '$insertdes', CURDATE(), '$file', '0', '$ip', '$insertthumb', '$category')")	or die(mysql_error());
 
 				echo "<P>".LAN_24." <b><u>".$inserttitle."</b></u>".LAN_25."</P>";
 				include("footer.php");

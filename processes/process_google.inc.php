@@ -93,7 +93,8 @@ exit;
 }	
 
 $ip = $_SERVER['REMOTE_ADDR'];
-mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture) VALUES ('$gettitle', 'GoogleVideo' ,'$getauthor', '$getdesc', CURDATE(), '$geturl', '0', '$ip', '$getimage2')")	or die(mysql_error());
+$category = $_POST["catigory"];
+mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture, category) VALUES ('$gettitle', 'GoogleVideo' ,'$getauthor', '$getdesc', CURDATE(), '$geturl', '0', '$ip', '$getimage2', '$category')")	or die(mysql_error());
 
 	echo "<center><P>".LAN_24." <b><u> $gettitle</b></u> ".LAN_25."</P>";
 	echo "<p><a href='submit.php'>Submit Another Video?</a></p></center>";
