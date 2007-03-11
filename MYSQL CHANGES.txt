@@ -37,5 +37,8 @@ Field - name
 Type - varchar(225)
 Collation - Latin1_swedish_ci
 
+MODIFY
+Field - catigory
+Type - varchar(225)
 
 $sql = 'ALTER TABLE `pp_files` ADD `resonforreject` VARCHAR(255) NOT NULL DEFAULT \'No Reason Given\' AFTER `reject`;';
