@@ -40,8 +40,9 @@ echo "class='selected'";
 echo "class='selected'";}?>><a href="admin_videos.php?vidpage=approve"><?php echo Admin_7; ?></a></li>
 <li <?php if ($_GET['pt'] == "options"){
 echo "class='selected'";
-}?>><a href="options.php?pt=options"><?php echo Admin_8; ?></a></li><!-- THIS IS JUST SO THE TAB SHOWS AS SELECTED-->
-
-
+}?>><a href="options.php?pt=options"><?php echo Admin_8; ?></a></li>
+<li <?php if ($_GET['pt'] == "catigories"){
+echo "class='selected'";
+}?>><a href="catigories.php?pt=catigories"><?php echo Admin_42; ?></a></li>
 </ul>
 <br />
