@@ -1,5 +1,11 @@
 <?php
-// put full path to Smarty.class.php
+define("PHPdirector", 1);
+
+$sort1 = $_GET['sort'];
+$page = $_GET['page'];
+
+include("header.php");
+
 require('libs/Smarty.class.php');
 $smarty = new Smarty();
 
@@ -9,15 +15,6 @@ $smarty->cache_dir = './cache';
 $smarty->config_dir = './configs';
 
 $smarty->assign('name', 'Ned');
-?>
-
-<?php
-define("PHPdirector", 1);
-
-$sort1 = $_GET['sort'];
-$page = $_GET['page'];
-
-include("header.php");
 ?>
 <?php
 if ($sort1 == "name"){
