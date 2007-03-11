@@ -75,7 +75,7 @@ require("header.php");
 //check if its allready there
 $dmid = getdmid($videourl);
 
-		if($dmid !== null){
+		if($dmid != null){
 		$inserttitle  = safe_sql_insert(gettitle($dmid));
 		$insertauthor = safe_sql_insert(getauthor($dmid));
 		$insertdes    = safe_sql_insert(getdescription($dmid));
@@ -88,7 +88,7 @@ $dmid = getdmid($videourl);
 	or die(mysql_error());
 	$row1 = mysql_fetch_array( $result1 );
 	
-if ($row1['file'] == $videoid){
+if ($row1['file'] == $file){
 echo "".LAN_22."";
 echo "<p><a href='submit.php'>".LAN_38."</a></p>";
 include("footer.php");
@@ -97,7 +97,7 @@ exit;
 $category = $_POST["catigory"];
 mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture, category) VALUES ('$inserttitle', 'dailymotion' , '$insertauthor', '$insertdes', CURDATE(), '$file', '0', '$ip', '$insertthumb', '$category')")	or die(mysql_error());
 
-				echo "<P>".LAN_24." <b><u>".$inserttitle."</b></u>".LAN_25."</P>";
+				echo "<P>".LAN_24." <b><u>".$inserttitle."</b></u> ".LAN_25."</P>";
 				include("footer.php");
 				exit;
 		}//check for blank end
