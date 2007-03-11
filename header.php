@@ -10,7 +10,16 @@ include("lang/".config('lang')."/lang.inc.php");
 <head>
 <title><?php echo config('name');?></title>
 <link rel="stylesheet" href="<?php echo config('cssstyle');?>" type="text/css" />
-<script type="text/javascript" src="js/show_hide.js"></script>
+<script language="Javascript" type="text/javascript">
+<!--
+	function show_hide(tblid, show) {
+		if (tbl = document.getElementById(tblid)) {
+			if (null == show) show = tbl.style.display == 'none';
+			tbl.style.display = (show ? '' : 'none');
+		}
+	}
+//!-->
+</script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/thickbox.js"></script>
 <script type="text/JavaScript" src="js/rollover.js"></script>

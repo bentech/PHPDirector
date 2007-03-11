@@ -12,7 +12,7 @@ WHERE id = '$id'");
 <?php echo "<b>".LAN_36.":</b> ".show_sql($row['creator']); //Creator?>
 <br />
 <a href="javascript:void();" onclick="show_hide('exampletbl')">+/- <?php echo LAN_35; ?></a>
-<?php echo "<b>:</b>  <table border='0' id='exampletbl'><tr><td>".show_sql($row['description'])."</td></tr></table>"; //Description?>
+<?php echo "<b>:</b> <table border='0' id='exampletbl'><tr><td>".show_sql($row['description'])."</td></tr></table>";?>
 <br />
 <?php 
 include("includes/players.inc.php");

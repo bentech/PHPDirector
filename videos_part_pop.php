@@ -13,7 +13,7 @@ include("includes/players.inc.php");
 <br/><span class="Warning">Rate to close the page</span>
 <?php rating_bar($row['id'],5); ?>
 <a href="javascript:void();" onclick="show_hide('exampletbl')">+/- <?php echo LAN_35; ?></a>
-<?php echo "<b>:</b> <table border='0' id='exampletbl'><tr><td>".$row['description']."</td></tr></table>";?>
+<?php echo "<b>:</b> <table border='0' id='exampletbl'><tr><td>".show_sql($row['description'])."</td></tr></table>";?>
 <br>
 <center>
 <?php
