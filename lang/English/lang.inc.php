@@ -92,7 +92,7 @@ define("Admin_38", "Rejected");
 define("Admin_39", "Username");
 define("Admin_40", "Password");
 define("Admin_41", "News");
-define("Admin_42", "Catigories");
+define("Admin_42", "Categories");
 define("Admin_43", "Add");
 define("Admin_43", "Edit");
 ?>

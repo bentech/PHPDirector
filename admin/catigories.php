@@ -41,7 +41,7 @@ $row2 = mysql_fetch_array($result2);
 <h3 align='center'><?php echo Admin_43; ?></h3>
 <?php
 if(isset($_GET["error"])){
-echo "<font color='red'>This Catigory already exists</red>";
+echo "<font color='red'>This Category already exists</red>";
 
 }
 ?>
