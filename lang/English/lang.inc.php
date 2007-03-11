@@ -47,6 +47,7 @@ define("LAN_36", "Made by");
 define("LAN_37", "Example");
 define("LAN_38", "Submit Another Video?");
 define("LAN_39", "Random");
+define("LAN_40", "Categories");
 /*
 Admin
 */

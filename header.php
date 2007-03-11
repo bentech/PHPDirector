@@ -23,6 +23,8 @@ include("lang/".config('lang')."/lang.inc.php");
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/thickbox.js"></script>
 <script type="text/JavaScript" src="js/rollover.js"></script>
+<script type="text/javascript" language="javascript" src="js/behavior.js"></script>
+<script type="text/javascript" language="javascript" src="js/rating.js"></script>
 </head>
 <body onload="MM_preloadImages('images/arrowdownani.gif'), MM_preloadImages('images/arrowupani.gif')">
 
@@ -63,6 +65,10 @@ echo'
 </span></a>
 </li>
 <li>
+<a <?php if ($pagetype == "categories"){echo "class='current'";}?> href='index.php?pt=categories' accesskey='v'><span class='key'>
+<?php echo LAN_40 ?>
+</span></a>
+</li><li>
 <a <?php if ($pagetype == "pictures"){echo "class='current'";}?> href='index.php?pt=pictures' accesskey='i'><span class='key'>
 <?php echo LAN_4 ?>
 </span></a>

@@ -9,7 +9,8 @@ WHERE id = '$id'");
 <br />
 <?php echo "<h2>".show_sql($row['name'])."</h2>";?>
 <br />
-<?php echo "<b>".LAN_36.":</b> ".show_sql($row['creator']); //Creator?>
+<?php echo "<b>".LAN_36.":</b> ".show_sql($row['creator']); //Creator
+?>
 <br />
 <a href="javascript:void();" onclick="show_hide('exampletbl')">+/- <?php echo LAN_35; ?></a>
 <?php echo "<b>:</b> <table border='0' id='exampletbl'><tr><td>".show_sql($row['description'])."</td></tr></table>";?>
@@ -24,10 +25,7 @@ $display_video_views = $row["views"];
 echo LAN_32.": <b>$display_video_views</b><p>";
 ?>
 </center>
-<?php 
+<?php
 require('_drawrating.php');
-?>
-
-<script type="text/javascript" language="javascript" src="js/behavior.js"></script>
-<script type="text/javascript" language="javascript" src="js/rating.js"></script>
+?>
 <?php rating_bar($row['id'],5); ?>
