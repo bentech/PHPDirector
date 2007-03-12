@@ -48,7 +48,6 @@
 			{$videos[mysec].views}</p>
 			<p><img height='97' width='130' src="{$videos[mysec].picture}" class="thumbnail" alt="{$videos[mysec].name}" />
 			{$videos[mysec].description}</p>
-?>
 		</div>
 		{$/strip}
 {$/section}

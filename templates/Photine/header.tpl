@@ -28,26 +28,26 @@
 <div id='tabs'>
 <ul>
 <li><a {$current[0]} href='index.php?pt=feature' accesskey='m'><span class='key'>
-<?php echo LAN_2 ?>
+{$LAN_3}
 </span></a>
 </li>
 <li>
 <a {$current[1]} href='index.php?pt=all' accesskey='v'><span class='key'>
-<?php echo LAN_3 ?>
+{$LAN_4}
 </span></a>
 </li>
 <li>
 <a {$current[2]} href='index.php?pt=categories' accesskey='v'><span class='key'>
-<?php echo LAN_3 ?>
+{$LAN_3}
 </span></a>
 </li><li>
 <a {$current[3]} href='index.php?pt=pictures' accesskey='i'><span class='key'>
-<?php echo LAN_4 ?>
+{$LAN_4}
 </span></a>
 </li>
 <li>
 <a {$current[4]} href='videos.php' accesskey='r'><span class='key'>
-<?php echo LAN_39 ?>
+{LAN_39}
 </span></a>
 </li>
 <li>
