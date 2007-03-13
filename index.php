@@ -3,20 +3,19 @@ define("PHPdirector", 1);
 
 $sort1 = $_GET['sort'];
 $page = $_GET['page'];
-
-include("header.php");
+$pagetype = $_GET["pt"];
 
 require('libs/Smarty.class.php');
+include("includes/check_install.inc.php");
+include("db.php");
+include("includes/function.inc.php");
 $smarty = new Smarty();
-
 $smarty->template_dir = './templates/Photine';
 $smarty->compile_dir = './templates_c';
 $smarty->cache_dir = './cache';
 $smarty->config_dir = './configs';
 
-$smarty->assign('name', 'Ned');
-?>
-<?php
+include("lang/".config('lang')."/lang.inc.php");
 if ($sort1 == "name"){
 	$sort = "name";
 }
@@ -117,11 +116,11 @@ if ((empty($page)) || ($page <= 0)){
     */
 
 	    if(mysql_num_rows($query_count) == 0){
-        echo LAN_29;
+        $smarty->assign('error', $LAN_29);
     }
 
 	if(mysql_num_rows == false){
-	        echo LAN_29;
+	     $smarty->assign('error', $LAN_29);
     }
     // This reads the number of rows returned
     // from the result above.
@@ -130,39 +129,29 @@ if ((empty($page)) || ($page <= 0)){
 however, reading the actual $result from the data you'll be printing to the
 screen is more accurate, and is a surefire way of preventing certain errors. */
 
+$resultnews = mysql_query("SELECT * FROM pp_config");
+$rownews = mysql_fetch_array($resultnews);
+$rownews["news"];
+
 
 if ($pagetype == "pictures"){
-    echo "<b>".LAN_30."</b>";
+
+// For each result that we got from the Database
+while ($row = mysql_fetch_assoc($result))
+{
+ $images[] = $row;
 }
 
-//<!--picture list-->
+// Assign this array to smarty...
+$smarty->assign('images', $images);
 
-	if ($pagetype == "pictures"){
-		echo '<table border="0" width="100%"><tr><td>';
-		while($row = mysql_fetch_array($result)){
-			//this shows 3 images
-			$yt_pic_broken = explode("/", $row['picture']);
-		$yt_pic_final = $yt_pic_broken[5];
- 		if ($yt_pic_final = "2.jpg"){
-		?>
-	   		<a href="videos.php?id=<?php echo $row[id];?>"><img border="0" src="<?php echo $row['picture']?>" align="right" height="97" width="130" alt=""/>
-			<?
-			}
-	}
-	echo '</td></tr><tr><td>';
-	
-include("footer.php");
-echo '</td></tr></table>';
+$smarty->display('images.tpl');
 exit;
-
 	}
+
 
 ?>
-<!--SORT BY-->
-<div align="left">
-<p>
-<b>&nbsp;&nbsp;&nbsp;<?php echo LAN_7; ?>:&nbsp;</b>
-<?php echo LAN_31; //Ratings?>
+echo LAN_31;
 <a href="?sort=rating&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('rateup','','images/arrowupani.gif',1)">
 <img src="images/arrowup.gif" name="rateup" border="0" id="rateup" title="<?php echo LAN_8; ?>" alt="arrow up" /></a>
 
@@ -326,6 +315,5 @@ scripts have finished executing; however, it's a nice little backup. */
 	echo "<br/><br/><br/><br/><br/><br/>";
 
 
-include("footer.php");
-//$smarty->display('index.tpl');
+$smarty->display('index.tpl');
 ?>
