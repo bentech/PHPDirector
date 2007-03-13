@@ -18,17 +18,17 @@
 <div id='tabs'>
 <ul>
 <li><a {$current[0]} href='index.php?pt=feature' accesskey='m'><span class='key'>
-{$LAN_3|default:"lanerror"}
+{$LAN_2|default:"Featured"}
 </span></a>
 </li>
 <li>
 <a {$current[1]} href='index.php?pt=all' accesskey='v'><span class='key'>
-{$LAN_4|default:"lanerror"}
+{$LAN_3|default:"lanerror"}
 </span></a>
 </li>
 <li>
 <a {$current[2]} href='index.php?pt=categories' accesskey='v'><span class='key'>
-{$LAN_3|default:"lanerror"}
+{$LAN_40|default:"lanerror"}
 </span></a>
 </li><li>
 <a {$current[3]} href='index.php?pt=pictures' accesskey='i'><span class='key'>
@@ -57,4 +57,4 @@
 <div class="gbox">
 			<p>{$news|default:"lanerror"}</p>
 		</div>
-{$error|default:"lanerror"}
+{$error|default:""}

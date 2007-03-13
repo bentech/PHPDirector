@@ -125,15 +125,24 @@ if ((empty($page)) || ($page <= 0)){
     // This reads the number of rows returned
     // from the result above.
 
-    /* Tip: You could probably use if($totalrows == 0) for the if statement;
-however, reading the actual $result from the data you'll be printing to the
-screen is more accurate, and is a surefire way of preventing certain errors. */
-
-$resultnews = mysql_query("SELECT * FROM pp_config");
-$rownews = mysql_fetch_array($resultnews);
-$rownews["news"];
 
 
+
+
+
+
+//NEWS//
+$news = config('news');
+
+$smarty->assign('news', $news);
+//NEWS//
+
+
+
+
+
+
+//Pictures
 if ($pagetype == "pictures"){
 
 // For each result that we got from the Database
@@ -142,94 +151,63 @@ while ($row = mysql_fetch_assoc($result))
  $images[] = $row;
 }
 
-// Assign this array to smarty...
+// Assign this array to smarty
+
 $smarty->assign('images', $images);
 
+//Display Images page
 $smarty->display('images.tpl');
 exit;
-	}
+}
+//pictures
 
 
-?>
-echo LAN_31;
-<a href="?sort=rating&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('rateup','','images/arrowupani.gif',1)">
-<img src="images/arrowup.gif" name="rateup" border="0" id="rateup" title="<?php echo LAN_8; ?>" alt="arrow up" /></a>
-
-<a href="?sort=rating&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('ratedwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="ratedwn" border="0" id="ratedwn" title="<?php echo LAN_9; ?>" alt="arrow down" /></a>
-
-&nbsp;
-<?php echo LAN_32; //views ?>
-
-<a href="?sort=views&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewup','','images/arrowupani.gif',1)">
-<img src="images/arrowup.gif" name="viewup" border="0" id="viewup" title="<?php echo LAN_10; ?>" alt="arrow up" /></a>
-
-<a href="?sort=views&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewdwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="viewdwn" border="0" id="viewdwn" title="<?php echo LAN_11; ?>" alt="arrow down" /></a>
-
-&nbsp;
-<?php echo LAN_33; //name ?>
-
-<a href="?sort=name&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('nameup','','images/arrowupani.gif',1)">
-<img src="images/arrowup.gif" name="nameup" border="0" id="nameup" title="A-Z" alt="arrow up" /></a>
-
-<a href="?sort=name&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('namedwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="namedwn" border="0" id="namedwn" title="Z-A" alt="arrow down" /></a>
-
-&nbsp;
-<?php echo LAN_34; //date ?>
-
-<a href="?sort=date&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('dateup','','images/arrowupani.gif',1)"> <img src="images/arrowup.gif" name="dateup" border="0" id="dateup" title="<?php echo LAN_12; ?>" alt="arrow up" /></a>
-
-<a href="?sort=date&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('datedown','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="datedown" border="0" id="datedown" title="<?php echo LAN_13; ?>" alt="arrow down" /></a>
-</p>
-</div>
-<?
-// write a shortcut for arrow down/up
 
 
-// keeps getting the next row until there are no more to get
-while($row = mysql_fetch_array($result)){
- //differnt colours each row
-?>
-<div class='left'>
-	<div class="left_articles">
-		<div class="buttons">
-			<p align="center"><a href="videos.php?id=<?php echo $row[id]?>" class="bluebtn"><?php echo LAN_14; ?></a>
-			<a href="videopop.php?KeepThis=true&amp;height=530&amp;width=430&amp;id=<?php echo $row[id];?>"class="thickbox greenbtn" rel="gallery-videos" title="<?php echo show_sql($row['name']);?>"><?php echo LAN_15; ?></a></p>
-		</div>
-		<div class="calendar"><p><?php echo date("M", strtotime($row[date]));?><br /><?php echo date("d", strtotime($row[date]));?></p></div>
-			<h2><a href="videos.php?id=<?php echo $row[id]?>"><?php echo show_sql(substr($row['name'], 0,32));
-			if (strlen($row['name']) >32){
- 			echo "...</a></h2>";}else{
- 			echo "</a></h2>";
-			}
-			?>
 
-			<p class="description"><b><?php echo LAN_16; ?>: </b> 
-			<?php echo show_sql(substr($row['creator'], 0,20))?> - <b><?php echo LAN_17; ?>: </b>
-			<?php echo show_sql($row['views'])?></p>
-			<p><img height='97' width='130' src="<?php if ($row['picture'] == ""){
-			echo "images/noimage.bmp";
-			}else{
+//main video list
+$result1 = array();
+$i=0;
+while ($row = mysql_fetch_array($result)) {
+
+
+$month = date("M", strtotime($row[date]));
+$day = date("d", strtotime($row[date]));
+$name = substr($row['name'], 0,32);
+if (strlen($row['name']) >32){$name2 = "...";}
+$creator = substr($row['creator'], 0,20);
+
+//image
+if ($row['picture'] !== null){
 			$tehpic = $row[picture];
 			$amp = array("&amp;");
 			$new_replace  = array("&");
 			$newphrase = str_replace("$amp", "$new_replace", "$tehpic");
-			echo"
-			$newphrase
-			";
-			}?>" class="thumbnail" alt="<?php show_sql(substr($row['name'], 0,10))?>" />
-			<?php echo show_sql(substr($row['description'], 0, 450)); //BUGGY: if &quote; or something splitten, you doesn't see &, you see &quo or something 
- 			if (strlen($row['description']) >450){
- 			echo "...</p>";}else{
- 			echo "</p>";
- 			}
-?>
-		</div>
+			$picture = $newphrase;
+			}
+//image			
+			
 
-<? } ?>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
- <?php
+$description = substr($row['description'], 0, 450);
+if (strlen($row['description']) >450){$description2 = "...";}
+      
+            $tmp = array(
+            	 'id'=> $row['id'], 
+            	 'month'=> $month, 
+            	 'day'=> $day,
+                'name'=> $name.$name2,
+            	 'creator'=> $creator,
+            	 'picture'=> $picture,
+            	 'description'=> $description.$description2,
+                    );
+            
+            
+            $result1[$i++] = $tmp;
+}
+//pass the results to the template
+$smarty->assign('videos', $result1);
+$smarty->display('index.tpl');
+
 if ($totalrows < $limit){
 }else{
 
@@ -312,8 +290,4 @@ are pages in front of the current one. */
     /* This line is not required, since MySQL will free the result after all
 scripts have finished executing; however, it's a nice little backup. */
     }
-	echo "<br/><br/><br/><br/><br/><br/>";
-
-
-$smarty->display('index.tpl');
 ?>

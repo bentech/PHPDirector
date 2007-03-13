@@ -1,3 +1,4 @@
+{include file="header.tpl"}
 <!--SORT BY-->
 <div align="left">
 <p>
@@ -12,7 +13,7 @@
 {$LAN_32}
 
 <a href="?sort=views&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewup','','images/arrowupani.gif',1)">
-<img src="images/arrowup.gif" name="viewup" border="0" id="viewup" title="{LAN_10}" alt="arrow up" /></a>
+<img src="images/arrowup.gif" name="viewup" border="0" id="viewup" title="{$LAN_10}" alt="arrow up" /></a>
 
 <a href="?sort=views&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewdwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="viewdwn" border="0" id="viewdwn" title="{$LAN_11}" alt="arrow down" /></a>
 
@@ -35,12 +36,12 @@
 <div class='left'>
 	<div class="left_articles">
 		<div class="buttons">
-		{$section name=mysec loop=$videos}
-{$strip}
+		
+{section name=mysec loop=$videos}
 			<p align="center"><a href="videos.php?id={$videos[mysec].id}" class="bluebtn">{$LAN_14}</a>
 			<a href="videopop.php?KeepThis=true&amp;height=530&amp;width=430&amp;id={$videos[mysec].id}"class="thickbox greenbtn" rel="gallery-videos" title="{$videos[mysec].name}">{$LAN_15}</a></p>
 		</div>
-		<div class="calendar"><p><?php echo date("M", strtotime($row[date]));?><br />{$videos[mysec].date}</p></div>
+		<div class="calendar"><p>{$videos[mysec].month}<br />{$videos[mysec].day}</p></div>
 			<h2><a href="videos.php?id={$videos[mysec].id}">{$videos[mysec].name}</a></h2>
 
 			<p class="description"><b>{$LAN_16}: </b> 
@@ -49,8 +50,12 @@
 			<p><img height='97' width='130' src="{$videos[mysec].picture}" class="thumbnail" alt="{$videos[mysec].name}" />
 			{$videos[mysec].description}</p>
 		</div>
-		{$/strip}
-{$/section}
 
-{$Pages}
+{sectionelse}
+No Results
+{/section} 
+
+{$Pages_prev}{section name=pagevaule loop=$Pages_numbers}{$Pages_numbers[pagevalue].i}{/section}{$Pages_next}
+
+{include file="footer.tpl"}
 
