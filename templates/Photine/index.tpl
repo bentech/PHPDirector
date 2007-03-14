@@ -1,5 +1,4 @@
 {include file="header.tpl"}
-<!--SORT BY-->
 <div align="left">
 <p>
 <b>&nbsp;&nbsp;&nbsp;{$LAN_7}:&nbsp;</b>
@@ -33,29 +32,22 @@
 <a href="?sort=date&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('datedown','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="datedown" border="0" id="datedown" title="{$LAN_13}" alt="arrow down" /></a>
 </p>
 </div>
-<div class='left'>
-	<div class="left_articles">
-		<div class="buttons">
-		
-{section name=mysec loop=$videos}
-			<p align="center"><a href="videos.php?id={$videos[mysec].id}" class="bluebtn">{$LAN_14}</a>
-			<a href="videopop.php?KeepThis=true&amp;height=530&amp;width=430&amp;id={$videos[mysec].id}"class="thickbox greenbtn" rel="gallery-videos" title="{$videos[mysec].name}">{$LAN_15}</a></p>
-		</div>
+
+
+<div class='left'>		
+		{section name=mysec loop=$videos}
+
+<div class="left_articles">
+		<div class="buttons"><p><a href="videos.php?id={$videos[mysec].id}" class="bluebtn">{$LAN_14}</a>	<a href="videopop.php?KeepThis=true&amp;height=530&amp;width=430&amp;id={$videos[mysec].id}"class="thickbox greenbtn" rel="gallery-videos" title="{$videos[mysec].name}">{$LAN_15}</a></p></div>
+
 		<div class="calendar"><p>{$videos[mysec].month}<br />{$videos[mysec].day}</p></div>
-			<h2><a href="videos.php?id={$videos[mysec].id}">{$videos[mysec].name}</a></h2>
-
-			<p class="description"><b>{$LAN_16}: </b> 
-			{$videos[mysec].creator} - <b>{$LAN_17}: </b>
-			{$videos[mysec].views}</p>
-			<p><img height='97' width='130' src="{$videos[mysec].picture}" class="thumbnail" alt="{$videos[mysec].name}" />
-			{$videos[mysec].description}</p>
-		</div>
-
+		<h2><a href="videos.php?id={$videos[mysec].id}">{$videos[mysec].name}</a></h2>
+		<p class="description"><b>{$LAN_16}: </b> {$videos[mysec].creator} - <b>{$LAN_17}: </b> {$videos[mysec].views}</p>
+		<p><img height='97' width='130' src="{$videos[mysec].picture}" class="thumbnail" alt="{$videos[mysec].name}" />{$videos[mysec].description}</p>
+</div>
 {sectionelse}
 No Results
 {/section} 
-
-{$Pages_prev}{section name=pagevaule loop=$Pages_numbers}{$Pages_numbers[pagevalue].i}{/section}{$Pages_next}
 
 {include file="footer.tpl"}
 
