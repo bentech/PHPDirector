@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 
-<b>lan30</b>
+<b>{$lan30}</b>
 <table border="0" width="100%"><tr><td>
 
 {section name=images loop=$images}

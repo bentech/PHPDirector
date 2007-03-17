@@ -22,16 +22,20 @@ while($row = mysql_fetch_array($confresult))
   }
 return $variable;
 }
-?>
 
+function dmgetfile($id){
+$dm_xml_pic_string = @file_get_contents("http://www.dailymotion.com/atom/fr/cluster/extreme/featured/video/".$id);
+$dm_xml_pic_start = explode("/swf/",$dm_xml_pic_string,2);
+$dm_xml_pic_end = explode("\"",$dm_xml_pic_start[1],2);
+$dm_pic = $dm_xml_pic_end[0];
+return $dm_pic;
+}
 
-<?php
 function configupdate($type, $newvalue){
 
 mysql_query("UPDATE pp_config SET $type = '$newvalue'");
 }
-?>
-<?php
+
 define('aadsbr', "<a href=\"http://www.crossst");
 define('asdga', "ar.co.uk/phpdirect");
 define('bgsd', "or/");
