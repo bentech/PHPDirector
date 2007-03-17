@@ -9,8 +9,8 @@
 <br />
 <b>{$LAN_36}:</b>{$video[video].creator}
 <br />
-<a href="javascript:void();" onclick="show_hide('description')">+/- {$LAN_35}</a>
-: <div id="description">{$video[video].description}</div>
+<a href="javascript:viewMore('description');" id="xtwo">+/- {$LAN_35}</a>:
+<div id='description' style="display:none">{$video[video].description}</div>
 <br />
 {include file="players.tpl"}
 <br />

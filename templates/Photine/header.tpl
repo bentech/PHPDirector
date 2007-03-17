@@ -9,6 +9,21 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/thickbox.js"></script>
 	<script type="text/JavaScript" src="js/rollover.js"></script>
+{literal}<script language="Javascript" type="text/javascript">  
+function viewMore(div) {
+	obj = document.getElementById(div);
+	col = document.getElementById("x" + div);
+	
+	if (obj.style.display == "none") {
+		obj.style.display = "block";
+		col.innerHTML = "... less";
+	} else {
+		obj.style.display = "none";
+		col.innerHTML = "... more";
+	}
+}
+
+</script>{/literal}
 </head>
 
 <body onload="MM_preloadImages('images/arrowdownani.gif'), MM_preloadImages('images/arrowupani.gif')">
