@@ -166,17 +166,23 @@ if ($row['picture'] !== null){
 			
 
 $description = substr($row['description'], 0, 450);
-if (strlen($row['description']) >450){$description2 = "...";}
-      
-            $tmp = array(
-            	 'id'=> $row['id'], 
-            	 'month'=> $month, 
-            	 'day'=> $day,
-                'name'=> $name.$name2,
-            	 'creator'=> $creator,
-            	 'picture'=> $picture,
-            	 'description'=> $description.$description2,
-                    );
+$desclenght = strlen($row['description']);
+if ($desclenght > 450){ $description2 = "..."; }
+if ($desclenght < 92){ $br = "<br><br><br><br>"; }
+if ($desclenght > 92 && $desclenght < 182){ $br = "<br><br><br>" ;}
+if ($desclenght > 982 && $desclenght < 272){ $br = "<br><br>"; }
+if ($desclenght > 272 && $desclenght < 362){ $br = "<br>"; }
+if ($desclenght > 362){ $br = null; }
+				$tmp = array(
+            	'id' => $row['id'], 
+            	'month' => $month, 
+            	'day' => $day,
+                'name' => $name.$name2,
+            	'creator' => $creator,
+            	'picture' => $picture,
+            	'description' => $description.$description2,
+				'br' => $br
+                );
             
             
             $result1[$i++] = $tmp;
