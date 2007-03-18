@@ -1,4 +1,3 @@
-{include file="header.tpl"}
 {section name=video loop=$video}
 <div align='center'>
 {if $reject eq "1"}
@@ -20,4 +19,3 @@
 {php}rating_bar($_GET["id"],5){/php}
 </p></div>
 {/section}
-{include file="footer.tpl"}
