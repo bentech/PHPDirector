@@ -1,5 +1,10 @@
 <?php
 define("PHPdirector", 1);
+if(isset($_GET["id"])){
+$id = $_GET["id"];
+$twomonths = 60 * 60 * 24 * 60 + time();
+setcookie("$id", $id, $twomonths);
+}
 require('libs/Smarty.class.php');
 include("includes/check_install.inc.php");
 include("db.php");
@@ -10,12 +15,6 @@ $smarty->compile_dir = './templates_c';
 $smarty->cache_dir = './cache';
 $smarty->config_dir = './configs';
 include("lang/".config('lang')."/lang.inc.php");
-
-if(isset($_GET["id"])){
-$id = $_GET["id"];
-$twomonths = 60 * 60 * 24 * 60 + time();
-setcookie("$id", $id, $twomonths);
-}
 
 
 
