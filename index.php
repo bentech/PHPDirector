@@ -1,21 +1,11 @@
 <?php
-define("PHPdirector", 1);
+require('header.php');
 
 $sort1 = $_GET['sort'];
 $page = $_GET['page'];
 $pagetype = $_GET["pt"];
 
-require('libs/Smarty.class.php');
-include("includes/check_install.inc.php");
-include("db.php");
-include("includes/function.inc.php");
-$smarty = new Smarty();
-$smarty->template_dir = './templates/Photine';
-$smarty->compile_dir = './templates_c';
-$smarty->cache_dir = './cache';
-$smarty->config_dir = './configs';
 
-include("lang/".config('lang')."/lang.inc.php");
 if ($sort1 == "name"){
 	$sort = "name";
 }
@@ -124,19 +114,6 @@ if ((empty($page)) || ($page <= 0)){
     }
     // This reads the number of rows returned
     // from the result above.
-
-
-
-
-
-
-
-//NEWS//
-$news = config('news');
-
-$smarty->assign('news', $news);
-//NEWS//
-
 
 
 
