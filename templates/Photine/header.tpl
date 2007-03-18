@@ -51,6 +51,6 @@ function viewMore(div) {
 
 <div class="gboxtop"></div>
 <div class="gbox">
-			<p>{$news|default:"lanerror"}</p>
+			<p>{$news}</p>
 </div>
 {$error|default:""}
