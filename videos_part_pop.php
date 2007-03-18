@@ -1,11 +1,4 @@
-<?php
-if(!isset($_COOKIE["$id"])){ 
-$old_views = $row["views"];
-$new_views = $old_views + 1;
-mysql_query("UPDATE pp_files SET views = '$new_views'
-WHERE id = '$id'");
-}
-?>
+
 <?php 
 include("includes/players.inc.php");
 ?>

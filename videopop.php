@@ -6,7 +6,14 @@ $id = $_GET["id"];
 $twomonths = 60 * 60 * 24 * 60 + time();
 setcookie("$id", $id, $twomonths);
 ?>
-
+<?php
+if(!isset($_COOKIE["$id"])){ 
+$old_views = $row["views"];
+$new_views = $old_views + 1;
+mysql_query("UPDATE pp_files SET views = '$new_views'
+WHERE id = '$id'");
+}
+?>
 <html>
 <head>
 <script language="Javascript" type="text/javascript">
@@ -24,44 +31,46 @@ setcookie("$id", $id, $twomonths);
 </head>
 <body>
 <?php
+require('libs/Smarty.class.php');
+include("includes/check_install.inc.php");
 include("db.php");
 include("includes/function.inc.php");
-include("lang/".config("lang")."/lang.inc.php");
+$smarty = new Smarty();
+$smarty->template_dir = './templates/Photine';
+$smarty->compile_dir = './templates_c';
+$smarty->cache_dir = './cache';
+$smarty->config_dir = './configs';
+include("lang/".config('lang')."/lang.inc.php");
 ?>
-<?php $id = $_GET["id"];
-if ( $id == "" ) {
-    echo "Please do not browse videos this way<br />";
-}
-// Get a specific result from the "pp_files" table
-$result = mysql_query("SELECT * FROM pp_files
-WHERE id=$id") or die();  
-
-// get the first (and hopefully only) entry from the result
-$row = mysql_fetch_array( $result );
-?>
-
 <?php 
-if($row['approved'] == "1") {
-echo "<div align='center'>";
-include("_drawrating.php");
-include("videos_part_pop.php");
-echo "</div>";
-}
-?>
+$id = $_GET["id"];
+$result = mysql_query("SELECT * FROM pp_files WHERE id=$id") or die();  
+// For each result that we got from the Database
+while ($row = mysql_fetch_assoc($result))
+{
+ $video[] = $row;
+$smarty->assign('vidtype', $row['video_type']);
 
-<?php 
-if($row['approved'] == "0") {
-echo "<p align='center'><b><font size='7' color='#800000'>This video is not approved 
-yet</font></b></p>
-";
+if( $row['video_type'] == "dailymotion"){
+$dmid = dmgetfile($row['file']);
+$smarty->assign('dmid', $dmid);
 }
-?>
+}
 
-<?php 
-if($row['approved'] == "") {
-echo "<p align='center'><b><font size='5' color='#800000'>This is not a valid video Link</font></b></p>
-";
+// Assign this array to smarty
+
+$smarty->assign('video', $video);
+
+
+if(!isset($_COOKIE["$id"])){
+$old_views = $row["views"];
+$new_views = $old_views + 1;
+mysql_query("UPDATE pp_files SET views = '$new_views' WHERE id = '$id'");
 }
+
+
+require('_drawrating.php');
+$smarty->display('viewvidpop.tpl');
 ?>
 </body>
 </html>
