@@ -4,7 +4,7 @@
 <b>&nbsp;&nbsp;&nbsp;{$LAN_7}:&nbsp;</b>
 {$LAN_31}
 <a href="?sort=rating&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('rateup','','images/arrowupani.gif',1)">
-<img src="images/arrowup.gif" name="rateup" border="0" id="rateup" title="<?php echo LAN_8; ?>" alt="arrow up" /></a>
+<img src="images/arrowup.gif" name="rateup" border="0" id="rateup" title="{$LAN_8}" alt="arrow up" /></a>
 
 <a href="?sort=rating&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('ratedwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="ratedwn" border="0" id="ratedwn" title="{$LAN_9}" alt="arrow down" /></a>
 
