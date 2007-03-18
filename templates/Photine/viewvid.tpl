@@ -4,7 +4,6 @@
 {if $reject eq "1"}
 {$LAN_26}
 {/if}
-<br />
 <h2>{$video[video].name}</h2>
 <br />
 <b>{$LAN_36}: </b>{$video[video].creator}
@@ -15,9 +14,10 @@
 {include file="players.tpl"}
 <br />
 <b>{$LAN_32}: </b>{$video[video].views}<p>
+</p></div>
 <script type="text/javascript" language="javascript" src="js/behavior.js"></script>
 <script type="text/javascript" language="javascript" src="js/rating.js"></script>
-{php}rating_bar($_GET["id"],5){/php}
-</p></div>
+{rating_bar units='5' id=$video[video].id}
 {/section}
+
 {include file="footer.tpl"}
