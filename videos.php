@@ -1,22 +1,12 @@
 <?php
+require('header.php');
+
 define("PHPdirector", 1);
 if(isset($_GET["id"])){
 $id = $_GET["id"];
 $twomonths = 60 * 60 * 24 * 60 + time();
 setcookie("$id", $id, $twomonths);
 }
-require('libs/Smarty.class.php');
-include("includes/check_install.inc.php");
-include("db.php");
-include("includes/function.inc.php");
-$smarty = new Smarty();
-$smarty->template_dir = './templates/Photine';
-$smarty->compile_dir = './templates_c';
-$smarty->cache_dir = './cache';
-$smarty->config_dir = './configs';
-include("lang/".config('lang')."/lang.inc.php");
-
-
 
 if(isset($_GET["id"])){
 $result = mysql_query("SELECT * FROM pp_files WHERE id=$id") or die();  
@@ -40,6 +30,8 @@ $smarty->assign('dmid', $dmid);
 // Assign this array to smarty
 
 $smarty->assign('video', $video);
+$smarty->assign('id', $row['id']);
+
 
 
 if(!isset($_COOKIE["$id"])){
