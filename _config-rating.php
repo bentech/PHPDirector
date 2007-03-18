@@ -14,14 +14,17 @@ ryan@masugadesign.com
 include("config.php");
 
 	//Connect to  your rating database
-	$dbhost        = $cfg["db_host"];
-	$dbuser        = $cfg["db_user"];
-	$dbpass        = $cfg["db_pass"];
-	$dbname        = $cfg["db_name"];
-	$tableName     = 'pp_rating';
+	$dbhost		= $cfg["db_host"];
+	$dbuser		= $cfg["db_user"];
+	$dbpass		= $cfg["db_pass"];
+	$dbname		= $cfg["db_name"];
+	$recordUrl	= "db_rating.php";
+	$tableID		= "id";
+	$units		= 5;	
+	$tableName	='pp_rating';
 	
 	$unitwidth     = 30; // the width (in pixels) of each rating unit (star, etc.)
-	// if you changed your graphic to be 50 pixels wide, you should change the value above
+	// if you changed your sssssgraphic to be 50 pixels wide, you should change the value above
 	
 $conn = mysql_connect($dbhost, $dbuser, $dbpass) or die  ('Error connecting to mysql');
 	mysql_select_db($dbname);
