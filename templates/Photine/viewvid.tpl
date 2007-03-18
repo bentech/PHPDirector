@@ -17,7 +17,7 @@
 <b>{$LAN_32}:</b>{$video[video].views}<p>
 <script type="text/javascript" language="javascript" src="js/behavior.js"></script>
 <script type="text/javascript" language="javascript" src="js/rating.js"></script>
-{php}rating_bar($_GET["id"],5);{/php}
+{php}rating_bar($_GET["id"],5){/php}
 </p></div>
 {/section}
 {include file="footer.tpl"}
