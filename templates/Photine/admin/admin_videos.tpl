@@ -1,30 +1,3 @@
-<?php
-if (!isset($_COOKIE["admin"])){
-    header('location: login.php');
-}
-?>
-
-<?php include("admin_header.php")?>
-<?php require("../db.php");?>
-<body>
-<?php 
-if ($_GET['vidpage'] !== "approve"){
-if ( $_GET['id'] == "" ) {
-    echo "Please do not browse videos this way<br />";
-}
-}
-
-$id = $_GET['id'];
-
-if ($_GET['vidpage'] == "approve"){
-// Get a specific result from the "pp_files" table
-$result = mysql_query("SELECT * FROM pp_files
-WHERE approved='0' AND reject='0'") or die();  
-}else{
-$result = mysql_query("SELECT * FROM pp_files
-WHERE id=$id") or die();  }
-
-
 // get the first (and hopefully only) entry from the result
 $row = mysql_fetch_array( $result );
 
@@ -138,11 +111,8 @@ include("../includes/players.inc.php");
 <br />
 
 <?
-$what = $_GET['what'];
-$id = $_GET['id'];
-include("includes/admin_videos_functions.php");
+
 echo "<br>&nbsp;<b>ID:</b>".$row['id'];
 				?>
 </div>
 </html>
-<?php mysql_close($mysql_link); ?>
