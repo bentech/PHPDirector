@@ -16,7 +16,7 @@ include("../db.php");
 include("../includes/function.inc.php");
 $smarty = new Smarty();
 $smarty->template_dir = '../templates/Photine/admin';
-$smarty->compile_dir = '../templates_c';
+$smarty->compile_dir = '../templates_c/admin';
 $smarty->cache_dir = '../cache';
 $smarty->config_dir = '../configs';
 
