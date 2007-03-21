@@ -1,5 +1,13 @@
 <?php
 /*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GNU General Public License
+|		$Website: phpdirector.co.uk
++----------------------------------------------------------------------------+
+*/
+
+/*
 Page:           db.php
 Created:        Aug 2006
 This page handles the database update if the user

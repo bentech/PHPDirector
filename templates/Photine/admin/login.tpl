@@ -1,3 +1,4 @@
+{include file="admin_header.tpl"}
 {if isset($errorMessage)}
 <div align="center"><strong><font color="#990000">{$error}</font></strong></div>
   <?php

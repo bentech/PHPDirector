@@ -1,8 +1,11 @@
-<!--<a href="rss.php">RSS Feed</a> &middot; 
-<a href="#">Most Popular</a> &middot; 
-<a href="#">Today's Favorites</a> &middot; 
-<a href="#">All Time Favorites</a><br>-->
 <?php
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GNU General Public License
+|		$Website: phpdirector.co.uk
++----------------------------------------------------------------------------+
+*/
 $v3 = ' is &'.ghasdnd.'; Copyright';
 $v1 = ellalgae;
 $v4 = ' '.aadsbr.''.asdga.''.bgsd.'">'.ellalgae.'Dire';

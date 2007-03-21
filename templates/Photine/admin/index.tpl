@@ -1,3 +1,4 @@
+{include file="admin_header.tpl"}
 <h2 align="center">{$admin_31}</h2>
 <p>{$admin_32}</p>
 <br>

@@ -3,110 +3,18 @@
 + ----------------------------------------------------------------------------+
 |     PHPDirector - Language File.
 |     $Author: Ben Swanson, Dennis Berko
+|		$License: GNU General Public License
 +----------------------------------------------------------------------------+
 */
 /*
 Regular Pages
 */
-define("LAN_1", "Error");
-define("LAN_2", "Featured");
-define("LAN_3", "All");
-define("LAN_4", "Images");
-define("LAN_5", "Submit");
-define("LAN_6", "Admin");
-define("LAN_7", "Sort By");
-define("LAN_8", "Worst Rated Videos");
-define("LAN_9", "Best Rated Videos");
-define("LAN_10", "Least Viewed Videos");
-define("LAN_11", "Most Viewed Videos");
-define("LAN_12", "Least Recent Videos");
-define("LAN_13", "Most Recent Videos");
-define("LAN_14", "View");
-define("LAN_15", "Popup");
-define("LAN_16", "By");
-define("LAN_17", "Views");
-define("LAN_18", "Prev");
-define("LAN_19", "Next");
-define("LAN_20", "Good Video but no thanks, this is the example.");
-define("LAN_21", "No Link submitted, would you like to submit a video?");
-define("LAN_22", "This video already exists.");
-define("LAN_23", "Please enter a valid link.");
-define("LAN_24", "Thanks for sumbitting.");
-define("LAN_25", "It will be reviewed shortly.");
-define("LAN_26", "Sorry this video has been rejected.");
-define("LAN_27", "This Video doesn't exist");
-define("LAN_28", "Please do not browse videos this way.");
-define("LAN_29", "Nothing to Display");
-define("LAN_30", "New way to browse Videos");
-define("LAN_31", "Rating");
-define("LAN_32", "Views");
-define("LAN_33", "Name");
-define("LAN_34", "Date");
-define("LAN_35", "Description");
-define("LAN_36", "Made by");
-define("LAN_37", "Example");
-define("LAN_38", "Submit Another Video?");
-define("LAN_39", "Random");
-define("LAN_40", "Categories");
-
-/*
-Admin
-*/
-define("Admin_0", "Admin");
-define("Admin_1", "Home");
-define("Admin_2", "Logout");
-define("Admin_3", "List All");
-define("Admin_4", "Approve Videos");
-define("Admin_5", "Featured Videos");
-define("Admin_6", "Rejected Videos");
-define("Admin_7", "Easy Approve");
-define("Admin_8", "Options");
-define("Admin_9", "Video Name");
-define("Admin_10", "Description");
-define("Admin_11", "Date");
-define("Admin_12", "Author");
-define("Admin_13", "Pictures");
-define("Admin_14", "Actions");
-define("Admin_15", "UnApprove");
-define("Admin_16", "Approve");
-define("Admin_17", "UnFeature");
-define("Admin_18", "Feature");
-define("Admin_19", "Reject");
-define("Admin_20", "or");
-define("Admin_21", "Delete");
-define("Admin_22", "Name");
-define("Admin_23", "Videos Per Page");
-define("Admin_24", "Logo");
-define("Admin_25", "CSS Url");
-define("Admin_26", "Lang");
-define("Admin_27", "If you have a header you would like instead of our type in the URL otherwise type false");
-define("Admin_28", "If default logo type in default otherwise type in URL");
-define("Admin_29", "English or German");
-define("Admin_30", "Everything is required, Nothing can be blank");
-define("Admin_31", "No Videos To Approve");
-define("Admin_32", "Please select a tab choosing what to do");
-define("Admin_33", "Welcome To Admin");
-define("Admin_34", "Videos");
-define("Admin_35", "Approve then Feature");
-define("Admin_36", "This Video is Currently");
-define("Admin_37", "Approved");
-define("Admin_38", "Rejected");
-define("Admin_39", "Username");
-define("Admin_40", "Password");
-define("Admin_41", "News");
-define("Admin_42", "Categories");
-define("Admin_43", "Add");
-define("Admin_43", "Edit");
-?>
-
-<?php 
-///////SMARTY
 $smarty->assign('LAN_1', 'Error');
 $smarty->assign('LAN_2', 'Featured');
 $smarty->assign('LAN_3', 'All');
 $smarty->assign('LAN_4', 'Images');
 $smarty->assign('LAN_5', 'Submit');
-$smarty->assign('LAN_6', 'Admin');
+$smarty->assign('LAN_6', 'admin');
 $smarty->assign('LAN_7', 'Sort By');
 $smarty->assign('LAN_8', 'Worst Rated Videos');
 $smarty->assign('LAN_9', 'Best Rated Videos');
@@ -141,4 +49,53 @@ $smarty->assign('LAN_37', 'Example');
 $smarty->assign('LAN_38', 'Submit Another Video?');
 $smarty->assign('LAN_39', 'Random');
 $smarty->assign('LAN_40', 'Categories');
+
+/*
+admin
+*/
+$smarty->assign('admin_0', 'admin');
+$smarty->assign('admin_1', 'Home');
+$smarty->assign('admin_2', 'Logout');
+$smarty->assign('admin_3', 'List All');
+$smarty->assign('admin_4', 'Approve Videos');
+$smarty->assign('admin_5', 'Featured Videos');
+$smarty->assign('admin_6', 'Rejected Videos');
+$smarty->assign('admin_7', 'Easy Approve');
+$smarty->assign('admin_8', 'Options');
+$smarty->assign('admin_9', 'Video Name');
+$smarty->assign('admin_10', 'Description');
+$smarty->assign('admin_11', 'Date');
+$smarty->assign('admin_12', 'Author');
+$smarty->assign('admin_13', 'Pictures');
+$smarty->assign('admin_14', 'Actions');
+$smarty->assign('admin_15', 'UnApprove');
+$smarty->assign('admin_16', 'Approve');
+$smarty->assign('admin_17', 'UnFeature');
+$smarty->assign('admin_18', 'Feature');
+$smarty->assign('admin_19', 'Reject');
+$smarty->assign('admin_20', 'or');
+$smarty->assign('admin_21', 'Delete');
+$smarty->assign('admin_22', 'Name');
+$smarty->assign('admin_23', 'Videos Per Page');
+$smarty->assign('admin_24', 'Logo');
+$smarty->assign('admin_25', 'CSS Url');
+$smarty->assign('admin_26', 'Lang');
+$smarty->assign('admin_27', 'If you have a header you would like instead of our type in the URL otherwise type false');
+$smarty->assign('admin_28', 'If default logo type in default otherwise type in URL');
+$smarty->assign('admin_29', 'English or German');
+$smarty->assign('admin_30', 'Everything is required, Nothing can be blank');
+$smarty->assign('admin_31', 'No Videos To Approve');
+$smarty->assign('admin_32', 'Please select a tab choosing what to do');
+$smarty->assign('admin_33', 'Welcome To admin');
+$smarty->assign('admin_34', 'Videos');
+$smarty->assign('admin_35', 'Approve then Feature');
+$smarty->assign('admin_36', 'This Video is Currently');
+$smarty->assign('admin_37', 'Approved');
+$smarty->assign('admin_38', 'Rejected');
+$smarty->assign('admin_39', 'Username');
+$smarty->assign('admin_40', 'Password');
+$smarty->assign('admin_41', 'News');
+$smarty->assign('admin_42', 'Categories');
+$smarty->assign('admin_43', 'Add');
+$smarty->assign('admin_43', 'Edit');
 ?>

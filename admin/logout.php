@@ -1,4 +1,11 @@
 <?php
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GNU General Public License
+|		$Website: phpdirector.co.uk
++----------------------------------------------------------------------------+
+*/
 // i will keep yelling this
 // DON'T FORGET TO START THE SESSION !!!
 

@@ -1,4 +1,11 @@
 <?php
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GNU General Public License
+|		$Website: phpdirector.co.uk
++----------------------------------------------------------------------------+
+*/
 require('header.php');
 
 $result = mysql_query("SELECT * FROM pp_catigories") or die("Error: " . mysql_error());

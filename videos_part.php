@@ -1,4 +1,11 @@
 <?php 
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GNU General Public License
+|		$Website: phpdirector.co.uk
++----------------------------------------------------------------------------+
+*/
 if(!isset($_COOKIE["$id"])){
 $old_views = $row["views"];
 $new_views = $old_views + 1;

@@ -1,5 +1,12 @@
 <?php
 /*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GNU General Public License
+|		$Website: phpdirector.co.uk
++----------------------------------------------------------------------------+
+*/
+/*
 Page:           rpc.php
 Created:        Aug 2006
 This page handles the 'AJAX' type response if the user

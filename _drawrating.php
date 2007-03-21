@@ -1,5 +1,12 @@
 <?php
 /*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GNU General Public License
+|		$Website: phpdirector.co.uk
++----------------------------------------------------------------------------+
+*/
+/*
 Page:           _drawrating.php
 Created:        Aug 2006
 The function that draws the rating bar.	

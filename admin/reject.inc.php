@@ -1,4 +1,11 @@
-<?php if (isset($submitted)) {
+<?php
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GNU General Public License
+|		$Website: phpdirector.co.uk
++----------------------------------------------------------------------------+
+*/ if (isset($submitted)) {
 if ($_POST['reject'] == "reject"){
 $reason = $_POST['reason'];
 

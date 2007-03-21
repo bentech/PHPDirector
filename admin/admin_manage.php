@@ -1,4 +1,11 @@
 <?php
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GNU General Public License
+|		$Website: phpdirector.co.uk
++----------------------------------------------------------------------------+
+*/
 if (!isset($_COOKIE["admin"])){
     header('location: login.php');
 }

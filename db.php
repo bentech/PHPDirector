@@ -1,4 +1,11 @@
 <?php
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GNU General Public License
+|		$Website: phpdirector.co.uk
++----------------------------------------------------------------------------+
+*/
 require("config.php");
 
 $mysql_link = mysql_connect($cfg["db_host"], $cfg["db_user"], $cfg["db_pass"]) or die(mysql_error());

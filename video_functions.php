@@ -1,4 +1,11 @@
 <?php
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GNU General Public License
+|		$Website: phpdirector.co.uk
++----------------------------------------------------------------------------+
+*/
 class video_views{
 	function add_views(){
 		$new_views = $row["views"] + 1;

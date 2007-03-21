@@ -1,5 +1,11 @@
-
 <?php 
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GNU General Public License
+|		$Website: phpdirector.co.uk
++----------------------------------------------------------------------------+
+*/
 include("includes/players.inc.php");
 ?>
 <br /><?php echo "<b>".LAN_36.":</b> ".$row['creator'];?>

@@ -1,5 +1,11 @@
 <?php
-
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GNU General Public License
+|		$Website: phpdirector.co.uk
++----------------------------------------------------------------------------+
+*/
 require('_config-rating.php'); // get the db connection info
 $id_sent = $_GET['q'];
 //getting the values
