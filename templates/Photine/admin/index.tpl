@@ -10,7 +10,7 @@ version = {$version}
 {if $up2date eq "1"}
 <b>Your version is recent. Good Job!</b>
 {else}
-<b>Time to upgrade!</b> <a href='http://www.phpdirector.co.uk'>Upgrade!</a>
+<b>Time to upgrade!</b> <a href='http://sourceforge.net/projects/phpdirector/'>Upgrade!</a>
 {/if}
 </script>
 
