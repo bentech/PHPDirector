@@ -1,13 +1,11 @@
 <?php
 define("PHPdirector", 1);
-<?php
 $filename = "installed.php";
 $handle = fopen($filename, "r");
 $contents = fread($handle, filesize($filename));
 if($contents == "<?phpNo?>"){
 	header("location: install/index.php");
 }
-?>
 require('libs/Smarty.class.php');
 include("db.php");
 include("includes/function.inc.php");
