@@ -14,10 +14,10 @@
 {include file="players.tpl"}
 <br />
 <b>{$LAN_32}: </b>{$video[video].views}<p>
-</p></div>
+</p>
 <script type="text/javascript" language="javascript" src="js/behavior.js"></script>
 <script type="text/javascript" language="javascript" src="js/rating.js"></script>
 {rating_bar units='5' id=$video[video].id}
 {/section}
-
+</div>
 {include file="footer.tpl"}
