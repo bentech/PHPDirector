@@ -19,5 +19,5 @@
 <script type="text/javascript" language="javascript" src="js/rating.js"></script>
 {rating_bar units='5' id=$video[video].id}
 {/section}
-</div>
 {include file="footer.tpl"}
+</div>
