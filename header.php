@@ -8,6 +8,11 @@ if($contents == "<?phpNo?>"){
 }
 require('libs/Smarty.class.php');
 include("db.php");
+if(isset($_POST["comment"])){
+header("location: videos.php?id=" . $_GET["id"] . "");
+$ip = $_SERVER["REMOTE_ADDR"];
+mysql_query("INSERT INTO pp_comments (video_id, ip, comment) VALUES ('$_GET[id]', '$ip', '$_POST[comment]')");
+}
 include("includes/function.inc.php");
 $smarty = new Smarty();
 $smarty->template_dir = './templates/Photine';

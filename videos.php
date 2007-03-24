@@ -11,9 +11,7 @@ $id = $_GET["id"];
 $twomonths = 60 * 60 * 24 * 60 + time();
 setcookie("$id", $id, $twomonths);
 }
-
 require('header.php');
-
 
 if(isset($_GET["id"])){
 $result = mysql_query("SELECT * FROM pp_files WHERE id=$id") or die();  
@@ -50,5 +48,6 @@ mysql_query("UPDATE pp_files SET views = '$new_views' WHERE id = '$id'");
 
 require('_drawrating.php');
 $smarty->display('viewvid.tpl');
+include("comments.php");
 
 ?>

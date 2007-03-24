@@ -1,4 +1,4 @@
-
+Table - pp_files
 ADDED
 Feild - video_type 
 Type - varchar(225)
@@ -26,6 +26,10 @@ Type - varchar(225)
 Collation - Latin1_swedish_ci
 Default - Welcome
 
+
+
+Table - pp_catigories
+
 ADDED
 Table - pp_catigories
 
@@ -37,8 +41,24 @@ Field - name
 Type - varchar(225)
 Collation - Latin1_swedish_ci
 
-MODIFY
 Field - catigory
 Type - varchar(225)
 
-$sql = 'ALTER TABLE `pp_files` ADD `resonforreject` VARCHAR(255) NOT NULL DEFAULT \'No Reason Given\' AFTER `reject`;';
+
+Table - pp_comments
+
+ADDED
+Table - pp_comments
+
+Field - id
+Type - int(225)
+Extra - auto_increment
+
+Field - video_id
+Type - int(225)
+
+Field - ip
+Type - varchar(225)
+
+Field - comment
+Type - varchar(225)
