@@ -39,7 +39,6 @@ WHERE id = '$id'");
 <body>
 <?php
 require('libs/Smarty.class.php');
-include("includes/check_install.inc.php");
 include("db.php");
 include("includes/function.inc.php");
 $smarty = new Smarty();
