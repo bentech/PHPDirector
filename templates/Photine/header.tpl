@@ -27,18 +27,21 @@ function viewMore(div) {
 </head>
 
 <body onload="MM_preloadImages('images/arrowdownani.gif'), MM_preloadImages('images/arrowupani.gif')">
-	<div id='content'>	
+
+	<div id='content'>	
 		<div id='header'>
 <!--<p id="top_info">Browse <a href="#">Today's favorites</a> or <a href="#">All time favorites</a>.<br />Please <a href="#">Log in</a> to share and download files.</p>-->
 			<div id="logo">
 				<h1><a href="index.php" title="home"><img src="images/phpdirectorbeta.png" width="243" height="52" alt="Php Director" border="0" /></a>
 			</div>
-</div>
+</div>
+
 <div id='tabs'>
 	<ul>
 			<li><a {$current[0]} href='index.php?pt=feature' accesskey='m'><span class='key'>{$LAN_2|default:"Featured"}</span></a></li>
 			<li><a {$current[1]} href='index.php?pt=all' accesskey='v'><span class='key'>{$LAN_3|default:"lanerror"}</span></a></li>
-			<li><a {$current[2]} href='index.php?pt=categories' accesskey='v'><span class='key'>{$LAN_40|default:"lanerror"}</span></a></li>			<li><a {$current[3]} href='index.php?pt=pictures' accesskey='i'><span class='key'>{$LAN_4|default:"lanerror"}</span></a></li>
+			<li><a {$current[2]} href='index.php?pt=categories' accesskey='v'><span class='key'>{$LAN_40|default:"lanerror"}</span></a></li>
+			<li><a {$current[3]} href='pictures.php' accesskey='i'><span class='key'>{$LAN_4|default:"lanerror"}</span></a></li>
 			<li><a {$current[4]} href='videos.php' accesskey='r'><span class='key'>{$LAN_39|default:"lanerror"}</span></a></li>
 			<li><a {$current[5]} href='submit.php?pt=submit' accesskey='a'><span class='key'>{$LAN_5|default:"lanerror"}</span></a></li>
 	</ul>
