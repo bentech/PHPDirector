@@ -1,44 +1,36 @@
-{if $pagevalue eq ""}
-    <div align='center'><p><h2><?php echo Admin_33;?></h2></p></div>
-{elseif $pagevalue eq "home"}
-<h2>FRAMED HOME</h2>
-<p>
-<iframe name="homepage" src="../" width="100%" height="2050" border="0" frameborder="0" marginwidth="1" marginheight="1" scrolling="no" align="top">
-Please Use Firefox
-</iframe></p>
-{else}
-{if $vidsammount == "0"}
-	{if $pagevalue eq "approve"}
-	<div align='center'><h2>No Videos To Approve</h2></div>
-	{else}
-	<div align='center'><h2>No Videos Here</div></h2>
-	{/if}
-{else}
-{if $pagevalue eq "all"}
- <h2>{$admin34}</tr></h2>   
-
-{elseif $pagevalue eq "feature"}
-<h2>{$admin5}</h2></tr>
-
-{elseif $pagevalue eq "approve"}
-<h2>{$admin4}</h2></tr>
-
-{elseif $pagevalue eq "rejected"}
-<h2>{$admin6}</h2></tr>
-{/if}
+{include file="admin_header.tpl"}
+{$ytpic}
+		{if $vidsammount == "0"}
+			{if $pagevalue eq "approve"}
+				<div align='center'><h2>No Videos To Approve</h2></div>
+			{else}
+				<div align='center'><h2>No Videos Here</div></h2>
+			{/if}
+			
+		{else}
+			
+			{if $pagevalue eq "all"}
+				<h2>{$admin_34}</tr></h2>   
+			{elseif $pagevalue eq "feature"}
+				<h2>{$admin_5}</h2></tr>
+			{elseif $pagevalue eq "approve"}
+				<h2>{$admin_4}</h2></tr>
+			{elseif $pagevalue eq "rejected"}
+				<h2>{$admin_6}</h2></tr>
+			{/if}
+			
 <table cellspacing="0" cellpadding="0" border="1" id="categorias"><tbody>
 	<tr class="categoria_h">
 		<th class="s1">ID</th>
-		<th class="s2">{$admin9}</th>
-		<th class="s3">{$admin10}</th>
-		<th class="s4">{$admin11}</th>
-		<th class="s5">{$admin12}</th>
-		<th class="s6">{$admin13}</th>
-		<th class="s7">{$admin14}</th>
+		<th class="s2">{$admin_9}</th>
+		<th class="s3">{$admin_10}</th>
+		<th class="s4">{$admin_11}</th>
+		<th class="s5">{$admin_12}</th>
+		<th class="s6">{$admin_13}</th>
+		<th class="s7">{$admin_14}</th>
 	</tr>
 
 {section name=video loop=$video}		
-
 <tr class="subcategoria">
 	<td class="s1">	
 		<a href="admin_videos.php?id={$video[video].id}" target="_blank">
@@ -60,24 +52,24 @@ Please Use Firefox
 	<td class="s5">	
 		{$video[video].creator}
 	</td>
-
 	<td class="s6">
-<a href='videos.php?id={$video[video].id}'><img border='0' src='images/noimage.bmp' height='64'></a>
-
+<a href='admin_videos.php?id={$video[video].id}'>
+<img border='0' src='{if $video[video].video_type eq "YouTube"}{$video[video].ytpic}1.jpg' height='64'><img border='0' src='{$video[video].ytpic}2.jpg' height='64'><img border='0' src='{$video[video].ytpic}3.jpg' height='64'>
+{else}{$video[video].picture}' height='64'>{/if}</a>
 	</td>
 
+
 	<td class="s7">
-<a href='?id={$video[video].id}&what={$approve}&pt={$pagevalue}&page={$video[video].page}'>{$approve}</a>
-<p><a href='?id={$video[video].id}&what={$featureapprove}&pt={$pagevalue}&page={$page}'>{$featureapprove}</a></p>
-<p><a href='?id={$video[video].id}&what={$feature}&pt={$pagevalue}&page={$page}'>{$feature}</a></p>
-<p><a href='?id={$video[video].id}&what={$reject}&pt={$pagevalue}&page={$page}'>{$reject}</a></p>
+<a href='?id={$video[video].id}&what=approve&pt={$pagevalue}&page={$video[video].page}'>{$admin_16}</a>
+<p><a href='?id={$video[video].id}&what=featureapprove&pt={$pagevalue}&page={$page}'>{$admin_35}</a></p>
+<p><a href='?id={$video[video].id}&what=reject&pt={$pagevalue}&page={$page}'>{$admin_19}</a></p>
 	</td>
 	</tr>
 </tbody>
-{section}
+{/section}
 	</table>
 	</font></p>
 
 </body>
 </html>
-{/if}{/if}
+{/if}

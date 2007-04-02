@@ -15,33 +15,14 @@ $page = $_GET['page'];
 $text = $_GET["text"];
 $what = $_GET['what'];
 include("admin_header.php");
-?>
-<?php 
-	if ($pagevalue == ""){
-	?>
-    <div align='center'><p><h2><?php echo Admin_33;?></h2></p></div>
-	<?
-	exit;
-	}
-	
-	if ($pagevalue == "home"){
-	?>
-	
-<h2>
-FRAMED HOME</h2>
-<p>
-<iframe name="homepage" src="../" width="100%" height="2050" border="0" frameborder="0" marginwidth="1" marginheight="1" scrolling="no" align="top">
-Please Use Firefox
-</iframe></p>
-	<?
-	exit;
-	}
-	
-	
+include("includes/admin_videos_functions.php");
+$smarty->assign('id', $id);
+$smarty->assign('pagevalue', $pagevalue);
 $limit = config('vids_per_page');
 if ((empty($page)) || ($page <= 0)){
     $page = 1;
 } 
+
 $limitvalue = $page * $limit - $limit; 
   
 	// count(*) is better for large databases (thanks Greg!)
@@ -63,134 +44,40 @@ if ($pagevalue == "rejected"){
 }
 $check = mysql_fetch_array($result_check);
 $checking = $check["cnt"];
-	if($checking == "0"){
-		if ($pagevalue == "approve"){
-			echo("<div align='center'><h2>No Videos To Approve</h2></div>");
-		}else{
-			echo("<div align='center'><h2>No Videos Here</div></h2>");
-		}
-		exit;
+
+
+$result1 = array();
+$i=0;
+while ($row = mysql_fetch_array($result)) {
+	
+	//PICTURE
+		if($row["video_type"] == "YouTube"){
+			$yt_pic_broken = explode("/", show_sql($row['picture']));
+			$yt_pic_final = $yt_pic_broken[5];
+		if ($yt_pic_final = "2.jpg"){
+			$yt_pic_getstart = explode("2.jpg", show_sql($row['picture']));
+			$ytpic = $yt_pic_getstart[0];
+	}
 	}
 	
-if ($pagevalue == "all"){
-    echo "<h2>".Admin_34."</tr></h2>";   
-}	
-if ($pagevalue == "feature"){
-    echo "<h2>".Admin_5."</h2></tr>";
+	
+	$tmp = array(
+'id' => $row['id'], 
+'name' => $row['name'],
+'creator' => $row['creator'],
+'picture' => $row['picture'],
+'ytpic' => $ytpic,
+'description' => $row['description'],
+'date' => $row['date'],
+'video_type' => $row['video_type']
+);
+$result1[$i++] = $tmp;
 }
-if ($pagevalue == "approve"){
-    echo "<h2>".Admin_4."</h2></tr>";
-}	
-if ($pagevalue == "rejected"){
-    echo "<h2>".Admin_6."</h2></tr>";
-}
-?>	
-<table cellspacing="0" cellpadding="0" border="1" id="categorias"><tbody>
-	<tr class="categoria_h">
-		<th class="s1">ID</th>
-		<th class="s2"><?php echo Admin_9; ?></th>
-		<th class="s3"><?php echo Admin_10; ?></th>
-		<th class="s4"><?php echo Admin_11; ?></th>
-		<th class="s5"><?php echo Admin_12; ?></th>
-		<th class="s6"><?php echo Admin_13; ?></th>
-		<th class="s7"><?php echo Admin_14; ?></th>
-	</tr>
-<?php
-while($row = mysql_fetch_array($result)){				
-?>
-<tr class="subcategoria">
-	<td class="s1">	
-		<a href="admin_videos.php?id=<?php echo show_sql($row["id"]); ?>" target="_blank">
-		<?php echo show_sql($row["id"]); ?></a>
-	</td>
-	
-	<td class="s2">
-		<a href="admin_videos.php?id=<?php echo show_sql($row["id"]); ?>" target="_blank">
-		<?php echo show_sql(substr($row['name'], 0,40)); ?></a>
-	</td>
-	
-	<td class="s3">	
-		<?php echo show_sql(substr($row['description'], 0,100)); ?>
-	</td>
-	
-	<td class="s4">
-		<?php echo show_sql($row['date']);?>
-	</td>
-	<td class="s5">	
-		<?php echo show_sql($row['creator']);?>
-	</td>
+//PICTURE_END
+$smarty->assign('video', $result1);
 
-	<td class="s6">
-	<?php 
-		if ($row['picture'] == null){
-			echo "<td><a href='videos.php?id=".show_sql($row["id"])."'><img border='0' src='images/noimage.bmp' height='64'></a>";
-		}else{
-			if($row["video_type"] == "YouTube"){
-				$yt_pic_broken = explode("/", show_sql($row['picture']));
-				$yt_pic_final = $yt_pic_broken[5];
-				if ($yt_pic_final = "2.jpg"){
-						$yt_pic_getstart = explode("2.jpg", show_sql($row['picture']));
-						$yt_pic_link_final = $yt_pic_getstart[0];
-						echo"
-							<a href='admin_videos.php?id=".show_sql($row[id])."'>
-							<img border='1' src='".$yt_pic_link_final."3.jpg' height='64'>
-							<img border='1' src='".$yt_pic_link_final."2.jpg' height='64'>
-							<img border='1' src='".$yt_pic_link_final."1.jpg' height='64'>
-							</a>
-						";
-			}else{
-			echo "
-				<td>
-					<a href='videos.php?id=".show_sql($row[id])."'>
-					<img border='0' src='".show_sql($row['picture'])."' height='64'>
-				</a>
-			";
-			}
-			}else{
-			$tehpic = $row[picture];
-			$amp = array("&amp;");
-			$new_replace  = array("&");
-			$newphrase = str_replace("$amp", "$new_replace", "$tehpic");
-			echo"
-			<a href='admin_videos.php?id=".show_sql($row[id])."'>
-			<center><img border='1' src='$newphrase' height='64'><center>
-			</a>
-			";
-			}
-			}
-?>
-	</td>
-	
-	<td class="s7">
-		<?php
-		if ($row['approved'] == "0"){
-			echo "<a href='?id=".show_sql($row[id])."&what=approve&pt=".$pagevalue."&page=".$page."'>".Admin_16."</a>";
-		}else{
-			echo "<a href='?id=".show_sql($row[id])."&what=unapprove&pt=".$pagevalue."&page=".$page."'>".Admin_15."</a>";
-		}
-		if ($row['feature'] == "0" ){	
-			if ($pagevalue == "all"){
-				echo "<p><a href='?id=".show_sql($row[id])."&what=featureapprove&pt=".$pagevalue."&page=".$page."'>".Admin_18."</a></p>";
-			}else{
-				echo "<p><a href='?id=".show_sql($row[id])."&what=featureapprove&pt=".$pagevalue."&page=".$page."'>".Admin_35."</a></p>";
-			}
-		}else{
-			echo "<p><a href='?id=".show_sql($row[id])."&what=unfeature&pt=".$pagevalue."&page=".$page."'>".Admin_17."</a></p>";
-		}
+$smarty->display('admin_manage.tpl');
 
-		if ($_GET['pt'] == "rejected"){
-			echo "<a href='?id=".show_sql($row[id])."&what=unreject&pt=".$pagevalue."&page=".$page."'>".Admin_16."</a> or ";
-		}else{
-			echo "<a href='?id=".show_sql($row[id])."&what=reject&pt=".$pagevalue."&page=".$page."'>".Admin_19."</a> or ";
-		}
-			echo "<a href='?id=".show_sql($row[id])."&what=delete&pt=".$pagevalue."&page=".$page."'>".Admin_21."</a>";
-		?>
-	</td>
-	</tr>
-<?php  
-	echo "</tbody>";
-}
-	echo "</table>";
 if ($checking < $limit){
 }else{
     if($page != 1){ 
@@ -240,9 +127,3 @@ if ($checking < $limit){
 		}
  
 	}
-?> 
-</font></p>
-
-</body>
-</html>
-<?php mysql_close($mysql_link); ?>
