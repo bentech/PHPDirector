@@ -6,9 +6,7 @@
 |		$Website: phpdirector.co.uk
 +----------------------------------------------------------------------------+
 */
-if (!isset($_COOKIE["admin"])){
-    header('location: login.php');
-}
+
 $pagevalue = $_GET["pt"];
 $id = $_GET["id"];
 $page = $_GET['page'];
@@ -19,6 +17,13 @@ include("includes/admin_videos_functions.php");
 $smarty->assign('id', $id);
 $smarty->assign('pagevalue', $pagevalue);
 $limit = config('vids_per_page');
+
+if($pagevalue == null){
+$smarty->display('admin_manage.tpl');
+exit;
+}
+
+
 if ((empty($page)) || ($page <= 0)){
     $page = 1;
 } 

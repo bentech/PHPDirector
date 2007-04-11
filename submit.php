@@ -8,7 +8,7 @@
 */
 require('header.php');
 
-$result = mysql_query("SELECT * FROM pp_catigories") or die("Error: " . mysql_error());
+$result = mysql_query("SELECT * FROM pp_categories") or die("Error: " . mysql_error());
 
 // For each result that we got from the Database
 
@@ -23,7 +23,7 @@ while ($row = mysql_fetch_array($result)) {
             $result1[$i++] = $tmp;
 }
 //pass the results to the template
-$smarty->assign('catigories', $result1);
+$smarty->assign('categories', $result1);
 
 //Display Images page
 $smarty->display('submit.tpl');

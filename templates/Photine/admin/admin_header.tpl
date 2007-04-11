@@ -12,15 +12,19 @@
 </div>
 
 <ul id="admin-menu">
-<li><a href="../index.php">{$admin_1}</a> <a href="logout.php">{$admin_2}</a></li>
+<li><a href="../index.php">{$admin_1}</a></li><li {if $pag eq "vid"}class='selected'{/if}> <a href="admin_manage.php?pag=vid">{$admin_34}</a> </li><li {if $pag eq "options"}class='selected'{/if}><a href="options.php?pt=options&pag=options">{$admin_8}</a> </li><li><a href="logout.php">{$admin_2}</a></li>
 </ul>
 
 <ul id="admin-submenu">
-<li {if $pagetype eq "all"}class='selected'{/if}<a href="admin_manage.php?pt=all">{$admin_3}</a></li>
-<li {if $pagetype eq "approve"}class='selected'{/if}><a href="admin_manage.php?pt=approve">{$admin_4}</a></li>
-<li {if $pagetype eq "all"}class='feature'{/if}><a href="admin_manage.php?pt=feature">{$admin_5}</a></li>
-<li {if $pagetype eq "rejected"}class='selected'{/if}><a href="admin_manage.php?pt=rejected">{$admin_6}</a></li>
-<li {if $pagetype eq "videos"}class='selected'{/if}><a href="admin_videos.php?vidpage=approve&pt=videos">{$admin_7}</a></li>
-<li {if $pagetype eq "all"}class='options'{/if}><a href="options.php?pt=options">{$admin_8}</a></li>
-<li {if $pagetype eq "categories"}class='selected'{/if}><a href="categories.php?pt=categories">{$admin_42}</a></li>
+{if $pag eq "vid"}
+<li {if $pagetype eq "all"}class='selected'{/if}<a href="admin_manage.php?pt=all&pag=vid">{$admin_3}</a></li>
+<li {if $pagetype eq "approve"}class='selected'{/if}><a href="admin_manage.php?pt=approve&pag=vid">{$admin_4}</a></li>
+<li {if $pagetype eq "feature"}class='selected'{/if}><a href="admin_manage.php?pt=feature&pag=vid">{$admin_5}</a></li>
+<li {if $pagetype eq "rejected"}class='selected'{/if}><a href="admin_manage.php?pt=rejected&pag=vid">{$admin_6}</a></li>
+<li {if $pagetype eq "easyapprove"}class='selected'{/if}><a href="admin_videos.php?pt=easyapprove&pag=vid">{$admin_7}</a></li>
+{/if}
+{if $pag eq "options"}
+<li {if $pagetype eq "options"}class='selected'{/if}><a href="options.php?pt=options&pag=options">{$admin_8}</a></li>
+<li {if $pagetype eq "categories"}class='selected'{/if}><a href="categories.php?pt=categories&pag=options">{$admin_42}</a></li>
+{/if}
 </ul>

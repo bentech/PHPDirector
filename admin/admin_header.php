@@ -31,5 +31,7 @@ if ($_POST['txtUserId'] == $cfg["admin_user"] && $_POST['txtPassword'] == $cfg["
 }
 $cnf_name = config('name');
 $smarty->assign('config_name', $cnf_name);
+$smarty->assign('pagetype', $_GET["pt"]);
+$smarty->assign('pag', $_GET["pag"]);
 include("../lang/".config('lang')."/lang.inc.php");
 ?>

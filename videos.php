@@ -48,6 +48,4 @@ mysql_query("UPDATE pp_files SET views = '$new_views' WHERE id = '$id'");
 
 require('_drawrating.php');
 $smarty->display('viewvid.tpl');
-include("comments.php");
-
 ?>

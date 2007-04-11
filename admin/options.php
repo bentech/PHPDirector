@@ -7,9 +7,6 @@
 +----------------------------------------------------------------------------+
 */
 
-if (!isset($_COOKIE["admin"])){
-    header('location: login.php');
-}
 include("admin_header.php");
 if(isset($_POST["options"])){
 mysql_query("UPDATE pp_config SET name = '$_POST[name]'");

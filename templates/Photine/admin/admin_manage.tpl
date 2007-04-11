@@ -1,5 +1,5 @@
 {include file="admin_header.tpl"}
-{$ytpic}
+
 		{if $vidsammount == "0"}
 			{if $pagevalue eq "approve"}
 				<div align='center'><h2>No Videos To Approve</h2></div>
@@ -30,20 +30,21 @@
 		<th class="s7">{$admin_14}</th>
 	</tr>
 
-{section name=video loop=$video}		
+{section name=video loop=$video}	
 <tr class="subcategoria">
 	<td class="s1">	
-		<a href="admin_videos.php?id={$video[video].id}" target="_blank">
+		<a href="admin_videos.php?id={$video[video].id}&pag=vid" target="_blank">
 		{$video[video].id}</a>
 	</td>
 	
 	<td class="s2">
-		<a href="admin_videos.php?id={$video[video].id}" target="_blank">
+		<a href="admin_videos.php?id={$video[video].id}&pag=vid" target="_blank">
 		{$video[video].name}</a>
 	</td>
 	
 	<td class="s3">	
 		{$video[video].description}
+	
 	</td>
 	
 	<td class="s4">
@@ -53,16 +54,16 @@
 		{$video[video].creator}
 	</td>
 	<td class="s6">
-<a href='admin_videos.php?id={$video[video].id}'>
+<a href='admin_videos.php?id={$video[video].id}&pag=vid'>
 <img border='0' src='{if $video[video].video_type eq "YouTube"}{$video[video].ytpic}1.jpg' height='64'><img border='0' src='{$video[video].ytpic}2.jpg' height='64'><img border='0' src='{$video[video].ytpic}3.jpg' height='64'>
 {else}{$video[video].picture}' height='64'>{/if}</a>
 	</td>
 
 
 	<td class="s7">
-<a href='?id={$video[video].id}&what=approve&pt={$pagevalue}&page={$video[video].page}'>{$admin_16}</a>
-<p><a href='?id={$video[video].id}&what=featureapprove&pt={$pagevalue}&page={$page}'>{$admin_35}</a></p>
-<p><a href='?id={$video[video].id}&what=reject&pt={$pagevalue}&page={$page}'>{$admin_19}</a></p>
+<a href='?id={$video[video].id}&what=approve&pt={$pagevalue}&page={$video[video].page}&pag=vid'>{$admin_16}</a>
+<p><a href='?id={$video[video].id}&what=featureapprove&pt={$pagevalue}&page={$page}&pag=vid'>{$admin_35}</a></p>
+<p><a href='?id={$video[video].id}&what=reject&pt={$pagevalue}&page={$page}&pag=vid'>{$admin_19}</a></p>
 	</td>
 	</tr>
 </tbody>
@@ -72,4 +73,9 @@
 
 </body>
 </html>
+{/if}
+{if $pagetype eq ""}
+<br />
+<h1 align='center'>Video Section</h1>
+Please Select A Tab
 {/if}

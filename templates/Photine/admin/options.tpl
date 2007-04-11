@@ -1,6 +1,11 @@
 {include file="admin_header.tpl"}
+{if $pagetype eq "main"}
+<h1 align='center'>Welcome to Admin</h1>
+Your Version is :<br />
+You are upto date.
+{else}
 <h2 align="center">{$admin_8}</h2>
-<form action="options.php" method="POST">
+<form action="options.php?pt=options&pag=options" method="POST">
 <center><b>{$admin_30}</b>
 <p>
 <pre>
@@ -24,3 +29,4 @@
 </pre>
 </body>
 </html>
+{/if}
