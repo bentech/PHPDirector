@@ -64,7 +64,6 @@ $voted=mysql_num_rows(mysql_query("SELECT used_ips FROM $tableName WHERE used_ip
 		<p<?php if($voted){?> class="voted"<?php } ?> >Rating: <strong> <?php echo @number_format($current_rating/$count,1) ?></strong>/<?php echo $units ?> (<?php echo $count ?> <?php echo $tense ?> cast)	    <span class="style1"><br />
 		 </span></p>
 </div>
-<?
+<?php
 }
 ?>
-
