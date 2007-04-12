@@ -39,11 +39,11 @@ function viewMore(div) {
 <div id='tabs'>
 	<ul>
 			<li><a {$current[0]} href='index.php?pt=feature' accesskey='m'><span class='key'>{$LAN_2|default:"Featured"}</span></a></li>
-			<li><a {$current[1]} href='index.php?pt=all' accesskey='v'><span class='key'>{$LAN_3|default:"lanerror"}</span></a></li>
-			<li><a {$current[2]} href='index.php?pt=categories' accesskey='v'><span class='key'>{$LAN_40|default:"lanerror"}</span></a></li>
-			<li><a {$current[3]} href='pictures.php' accesskey='i'><span class='key'>{$LAN_4|default:"lanerror"}</span></a></li>
-			<li><a {$current[4]} href='videos.php' accesskey='r'><span class='key'>{$LAN_39|default:"lanerror"}</span></a></li>
-			<li><a {$current[5]} href='submit.php?pt=submit' accesskey='a'><span class='key'>{$LAN_5|default:"lanerror"}</span></a></li>
+			<li><a {$current[1]} href='index.php?pt=all' accesskey='v'><span class='key'>{$LAN_3|default:"All"}</span></a></li>
+			<li><a {$current[2]} href='categories.php' accesskey='v'><span class='key'>{$LAN_40|default:"Categories"}</span></a></li>
+			<li><a {$current[3]} href='images.php' accesskey='i'><span class='key'>{$LAN_4|default:"Images"}</span></a></li>
+			<li><a {$current[4]} href='videos.php' accesskey='r'><span class='key'>{$LAN_39|default:"Videos"}</span></a></li>
+			<li><a {$current[5]} href='submit.php?pt=submit' accesskey='a'><span class='key'>{$LAN_5|default:"Submit"}</span></a></li>
 	</ul>
 	<div id="search">
 				<form method="post" action="index.php">
