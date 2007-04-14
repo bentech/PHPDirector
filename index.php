@@ -43,13 +43,14 @@ if(isset($_GET["order"])){
 // Get all the data from the " pp_files" table
 
 $limit = config('vids_per_page');
-
+$query_count = mysql_query("SELECT * FROM pp_files WHERE approved='1' AND reject='0'");
 // count(*) is better for large databases (thanks Greg!)
 if(isset($_POST["searching"])){
 	$query_count = mysql_query("SELECT * FROM pp_files WHERE name like '%$_POST[searching]%'");
 }
-$query_count = mysql_query("SELECT * FROM pp_files WHERE approved='1' AND reject='0'");
+
 $totalrows  = mysql_num_rows($query_count);
+$smarty->assign('totalrows', $totalrows);
 // This counts the number of users
 
 

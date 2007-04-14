@@ -49,7 +49,8 @@
 </div>
 {sectionelse}
 No Results
-{/section} 
-
+{/section}
+<br />
+{pager rowcount=$totalrows limit="20" txt_first=$L_MORE class_num="fl" class_numon="fl" class_text="fl"}
 {include file="footer.tpl"}
 

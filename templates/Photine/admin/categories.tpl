@@ -16,7 +16,7 @@
 <table border='0' cellpadding='10'>
 <pre>
 {section name=cat loop=$cat}
-<tr><td>{$cat[cat].name}&nbsp;&nbsp;&nbsp;</td><td><a href='categories.php?pt=categories&pag=options&del={$cat[cat].name}'>{$admin_21}</a></td></tr>
+<tr><td>{$cat[cat].name}&nbsp;&nbsp;&nbsp;</td><td><a href='categories.php?pt=categories&pag=options&del={$cat[cat].id}'>{$admin_21}</a></td></tr>
 {/section}
 </pre>
 </table>

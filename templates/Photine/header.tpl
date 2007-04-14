@@ -32,7 +32,7 @@ function viewMore(div) {
 		<div id='header'>
 <!--<p id="top_info">Browse <a href="#">Today's favorites</a> or <a href="#">All time favorites</a>.<br />Please <a href="#">Log in</a> to share and download files.</p>-->
 			<div id="logo">
-				<h1><a href="index.php" title="home"><img src="images/phpdirectorbeta.png" width="243" height="52" alt="Php Director" border="0" /></a>
+				<h1><a href="index.php" title="home"><img src="images/phpdirectorbeta.png" width="243" height="52" alt="Php Director" border="0" /></a></h1>
 			</div>
 </div>
 

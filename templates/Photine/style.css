@@ -97,7 +97,7 @@ input.button { padding: 3px; }
 /* misc */
 .buttons { text-align: right; padding: 4px 3px 0 0;}
 .left_articles .buttons { float: right; height: 20px; }
-.bluebtn { background: #488EB2 url('images/bluebtn.gif') no-repeat; width: 100px; padding: 1px 16px 5px 16px; color: #fff; text-decoration: none; }
+.bluebtn { background: #488EB2 url('images/bluebtn.gif') no-repeat; padding: 1px 17px 5px 16px; color: #fff; text-decoration: none; }
 .greenbtn { background: #488EB2 url('images/greenbtn.gif') no-repeat; padding: 1px 17px 5px 10px; color: #fff; text-decoration: none; }
 .bluebtn:hover, .greenbtn:hover { background: #488EB2 url('images/hoverbtn.gif') no-repeat; color: #fff; }
 

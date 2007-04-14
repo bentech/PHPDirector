@@ -69,8 +69,6 @@ $dm_pic = $dm_xml_pic_end[0];
 return $dm_pic;
 }
 
-define("PHPdirector", 1);	       // for config foo
-define("submtitab", 1);
 require("header.php");    
 //check if its allready there
 $dmid = getdmid($videourl);
