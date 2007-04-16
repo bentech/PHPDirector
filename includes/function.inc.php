@@ -36,11 +36,11 @@ function configupdate($type, $newvalue){
 mysql_query("UPDATE pp_config SET $type = '$newvalue'");
 }
 
-define('aadsbr', "<a href=\"http://www.crossst");
-define('asdga', "ar.co.uk/phpdirect");
-define('bgsd', "or/");
-define('ghasdnd', "copy");
-define('ellalgae', "PHP");
-define('ehjrty', "Group");
-define('hd23', "tor");
+function getsource($url){
+
+//checks if valid youtube link
+$check = explode(".", $url);
+
+return $check[1];
+}
 ?>

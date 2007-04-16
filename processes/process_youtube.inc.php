@@ -89,38 +89,25 @@ $yt_xml_view_count_end = explode("</view_count>",$yt_xml_view_count_start[1],2);
 $yt_view_count = $yt_xml_view_count_end[0];
 return $yt_view_count;
 }
-?>
-<?php
-define("PHPdirector", 1);	       // for config foo
-define("submtitab", 1);
-require("header.php");    
 //check if its allready there
 $videoid = getytid($videourl);
 	$result1 = mysql_query("SELECT * FROM pp_files WHERE file='$videoid'")
 	or die(mysql_error());
 	$row1 = mysql_fetch_array( $result1 );
 
-if ($row1['file'] == $videoid){
-echo "".LAN_22."";
-echo "<p><a href='submit.php'>".LAN_38."</a></p>";
-include("footer.php");
-exit;
-}	
+//Allready Exists ERROR (NOT FINSHED)
 		if($videoid !== null){
-		$inserttitle  = safe_sql_insert(gettitle($videoid));
-		$insertauthor = safe_sql_insert(getauthor($videoid));
-		$insertdes    = safe_sql_insert(getdescription($videoid));
-		$insertthumb  = safe_sql_insert(getthumb($videoid));
+		$title  = safe_sql_insert(gettitle($videoid));
+		$smarty->assign('title', $title);
+		$author = safe_sql_insert(getauthor($videoid));
+		$smarty->assign('author', $author);
+		$des    = safe_sql_insert(getdescription($videoid));
+		$smarty->assign('description', $des);
+		$thumb[]  = safe_sql_insert(getthumb($videoid));
+		$smarty->assign('image', $thumb);
 		$ip           = safe_sql_insert($_SERVER['REMOTE_ADDR']);
 
-$category = $_POST["catigory"];
-mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture, category) VALUES ('$inserttitle', 'YouTube' , '$insertauthor', '$insertdes', CURDATE(), '$videoid', '0', '$ip', '$insertthumb', '$category')")	or die(mysql_error());
+//mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture, category) VALUES ('$inserttitle', 'YouTube' , '$insertauthor', '$insertdes', CURDATE(), '$videoid', '0', '$ip', '$insertthumb', '$category')")	or die(mysql_error());
 
-				echo "<P>".LAN_24." <b><u>".$inserttitle."</b></u>".LAN_25."</P>";
-				include("footer.php");
-				exit;
-		}//check for blank end
-
-		echo "<p><a href='submit.php'>".LAN_21."</a></p>";
-		include("footer.php");
+				}//check for blank end
  ?>

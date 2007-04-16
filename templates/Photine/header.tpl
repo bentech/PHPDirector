@@ -8,25 +8,25 @@
 	<script language="Javascript" type="text/javascript"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/thickbox.js"></script>
-	<script type="text/JavaScript" src="js/rollover.js"></script>
-{literal}<script language="Javascript" type="text/javascript">  
-function viewMore(div) {
-	obj = document.getElementById(div);
-	col = document.getElementById("x" + div);
-	
-	if (obj.style.display == "none") {
-		obj.style.display = "block";
-		col.innerHTML = "... less";
-	} else {
-		obj.style.display = "none";
-		col.innerHTML = "... more";
-	}
-}
-
-</script>{/literal}
+	<!--<script type="text/JavaScript" src="js/rollover.js"></script>-->
+	{literal}
+  <script>
+    function SetState(obj_checkbox, obj_textarea)
+    {  if(obj_checkbox.checked)
+       { obj_textarea.disabled = true;
+       }
+       else
+       { obj_textarea.disabled = false;
+       }
+    }
+</script>
+{/literal}
 </head>
 
 <body onload="MM_preloadImages('images/arrowdownani.gif'), MM_preloadImages('images/arrowupani.gif')">
+<!--[if IE 6]>
+Sorry But this browser is not supported if you wish to use a good browser which is supported please use firefox
+<![endif]-->
 
 	<div id='content'>	
 		<div id='header'>
@@ -38,12 +38,12 @@ function viewMore(div) {
 
 <div id='tabs'>
 	<ul>
-			<li><a {$current[0]} href='index.php?pt=feature' accesskey='m'><span class='key'>{$LAN_2|default:"Featured"}</span></a></li>
-			<li><a {$current[1]} href='index.php?pt=all' accesskey='v'><span class='key'>{$LAN_3|default:"All"}</span></a></li>
-			<li><a {$current[2]} href='categories.php' accesskey='v'><span class='key'>{$LAN_40|default:"Categories"}</span></a></li>
-			<li><a {$current[3]} href='images.php' accesskey='i'><span class='key'>{$LAN_4|default:"Images"}</span></a></li>
-			<li><a {$current[4]} href='videos.php' accesskey='r'><span class='key'>{$LAN_39|default:"Videos"}</span></a></li>
-			<li><a {$current[5]} href='submit.php?pt=submit' accesskey='a'><span class='key'>{$LAN_5|default:"Submit"}</span></a></li>
+			<li><a {if $pagetype eq "feature"}class="current"{/if} href='index.php?pt=feature' accesskey='m'><span class='key'>{$LAN_2|default:"Featured"}</span></a></li>
+			<li><a {if $pagetype eq "all"}class="current"{/if} href='index.php?pt=all' accesskey='v'><span class='key'>{$LAN_3|default:"All"}</span></a></li>
+			<li><a {if $pagetype eq "categories"}class="current"{/if} href='categories.php?pt=categories' accesskey='v'><span class='key'>{$LAN_40|default:"Categories"}</span></a></li>
+			<li><a {if $pagetype eq "images"}class="current"{/if} href='images.php?pt=images' accesskey='i'><span class='key'>{$LAN_4|default:"Images"}</span></a></li>
+			<li><a {if $pagetype eq "videos"}class="current"{/if} href='videos.php?pt=videos' accesskey='r'><span class='key'>{$LAN_39|default:"Videos"}</span></a></li>
+			<li><a {if $pagetype eq "submit"}class="current"{/if} href='submit.php?pt=submit&part=1' accesskey='a'><span class='key'>{$LAN_5|default:"Submit"}</span></a></li>
 	</ul>
 	<div id="search">
 				<form method="post" action="index.php">

@@ -22,6 +22,10 @@ $smarty->config_dir = './configs';
 
 include("lang/".config('lang')."/lang.inc.php");
 
+$sort1 = $_GET['sort'];
+$page = $_GET['page'];
+$pagetype = $_GET["pt"];
+$smarty->assign('pagetype', $pagetype);
 
 //NEWS//
 $news = config('news');

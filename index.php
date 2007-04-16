@@ -8,10 +8,6 @@
 */
 require('header.php');
 
-$sort1 = $_GET['sort'];
-$page = $_GET['page'];
-$pagetype = $_GET["pt"];
-
 switch ($sort1){
 case "name":
 	$sort = "name";

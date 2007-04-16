@@ -23,6 +23,7 @@
  * units - number of units for the rating bar
  * recordUrl - non javascript rating script location
  * id - (REQUIRED) id of the item being rated
+ * static - static or dynamic rating bar
  * configs - alternate defaults location
  * 
  * Sample Usage:
@@ -36,11 +37,12 @@ function smarty_function_rating_bar($params, &$smarty) {
 
 	require($params['configs']); // get the db connection info
 	//Set Defaults
-	if (empty($params['unitwidth'])) $params['unitwidth'] = $unitwidth;
-	if (empty($params['tableName'])) $params['tableName'] = $tableName;
-	if (empty($params['tableID'])) $params['tableID'] = $tableID;
-	if (empty($params['units'])) $params['units'] = $units;
-	if (empty($params['recordUrl'])) $params['recordUrl'] = $recordUrl;
+	if (empty($params['unitwidth'])) $params['unitwidth'] = $rating_unitwidth;
+	if (empty($params['tableName'])) $params['tableName'] = $rating_tableName;
+	if (empty($params['tableID'])) $params['tableID'] = $rating_tableID;
+	if (empty($params['units'])) $params['units'] = $rating_units;
+	if (empty($params['recordUrl'])) $params['recordUrl'] = $rating_recordUrl;
+	if (empty($params['static'])) $params['static'] = $rating_static;
 	
 	
 	// Set variables
@@ -53,42 +55,73 @@ function smarty_function_rating_bar($params, &$smarty) {
 	$units		=	$params['units'];
 	$recordUrl	=	$params['recordUrl'];
 	$id			=	$params['id'];
+	if (empty($id)) $id	 = "error";
+	$static		=	$params['static'];
 	
-	$query = mysql_query("SELECT total_votes, total_value, used_ips FROM $tableName WHERE $tableID = '$id' ")or die(" Error: ".mysql_error());
-	$numbers = mysql_fetch_assoc($query);
-	$count = $numbers['total_votes']; //how many total_votes total
-	$current_rating = $numbers['total_value']; //total number of rating added together and stored
-	$tense = ($count == 1) ? "vote" : "total_votes"; //plural form total_votes/vote
+	$query=mysql_query("SELECT total_votes, total_value, used_ips FROM $rating_dbname.$tableName WHERE $tableID='$id' ")or die(" Error: ".mysql_error());
+	
+	// insert the id in the DB if it doesn't exist already
+	// see: http://www.masugadesign.com/the-lab/scripts/unobtrusive-ajax-star-rating-bar/#comment-121
+	if (mysql_num_rows($query) == 0) {
+		$sql = "INSERT INTO $rating_dbname.$tableName (`".$tableID."`,`total_votes`, `total_value`, `used_ips`) VALUES ('$id', '0', '0', '')";
+		$result = mysql_query($sql);
+	}
+	$numbers=mysql_fetch_assoc($query);
+	
+	if ($numbers['total_votes'] < 1) {
+		$count = 0;
+	} else {
+		$count=$numbers['total_votes']; //how many votes total
+	}
+	$current_rating=$numbers['total_value']; //total number of rating added together and stored
+	$tense=($count==1) ? "vote" : "votes"; //plural form votes/vote
 	
 	// determine whether the user has voted, so we know how to draw the ul/li
-	$voted = mysql_num_rows(mysql_query("SELECT used_ips FROM $tableName WHERE used_ips LIKE '%".$ip."%' AND $tableID = '".$id."' ")); 
+	$voted=mysql_num_rows(mysql_query("SELECT used_ips FROM $rating_dbname.$tableName WHERE used_ips LIKE '%".$ip."%' AND $tableID='".$id."' ")); 
 	
 	// now draw the rating bar
-	$returner = '<div class="ratingblock">';	
-	$returner.= '<div id="unit_long'.$id.'">';
-	$returner.= '<ul id="unit_ul'.$id.'" class="unit-rating" style="width:';
-	$gerth = $unitwidth*$units;
-	$returner.= $gerth.'px;">';
-	$returner.= '<li class="current-rating" style="width:';
-	$Num1 = @number_format($current_rating/$count,2)*$unitwidth;
-	$returner.= $Num1.'px;">Currently ';
-	$Num2 = @number_format($current_rating/$count,2);
-	$returner.= $Num2.'/'.$units.'</li>';
-	
-	for ($ncount = 1; $ncount <= $units; $ncount++) { // loop from 1 to the number of units
-		if(!$voted) { // if the user hasn't yet voted, draw the voting stars 
-	$returner.= '<li><a href="'.$recordUrl.'?j='.$ncount.'&amp;q='.$id.'&amp;t='.$ip.'&amp;c='.$units.'" title="'.$ncount.' out of '.$units.'" class="r'.$ncount.'-unit rater">'.$ncount.'</a></li>';
-		} 
-	}
-	$ncount=0; // resets the count
-	$returner.= '</ul><p';
-	if($voted){
-	$returner.= ' class="voted"';
-	}
-	$returner.= '>Rating: <strong> ';
-	$Num3 = @number_format($current_rating/$count,1);
-	$returner.= $Num3 .'</strong>/'.$units.' ('.$count.' '.$tense.' cast)</p></div></div>';
+	$rating_width = @number_format($current_rating/$count,2)*$unitwidth;
+	$rating1 = @number_format($current_rating/$count,1);
+	$rating2 = @number_format($current_rating/$count,2);
+	$gerth = @number_format($unitwidth*$units,0,'.','');
 
-	return $returner;
+	if ($static == 'static') {
 	
+		$static_rater = array();
+		$static_rater[] .= '<div id="unit_long'.$id.'">';
+		$static_rater[] .= '<ul id="unit_ul'.$id.'" class="unit-rating" style="width:'.$gerth.'px;">';
+		$static_rater[] .= '<li class="current-rating" style="width:'.$rating_width.'px;">Currently '.$rating2.'/'.$units.'</li>';
+		$static_rater[] .= '</ul>';
+		$static_rater[] .= '<p class="static">'.$id.'. Rating: <strong> '.$rating1.'</strong>/'.$units.' ('.$count.' '.$tense.' cast) <em>This is \'static\'.</em></p>';
+		$static_rater[] .= '</div>';
+		$static_rater[] .= '</div>'."\n\n";
+		
+		return join("\n", $static_rater);
+	
+	} else {
+	
+		$rater ='';
+		//$rater.='<div class="ratingblock">';
+		
+		$rater.='<div id="unit_long'.$id.'">';
+		$rater.='  <ul id="unit_ul'.$id.'" class="unit-rating" style="width:'.$gerth.'px;">';
+		$rater.='     <li class="current-rating" style="width:'.$rating_width.'px;">Currently '.$rating2.'/'.$units.'</li>';
+		
+		for ($ncount = 1; $ncount <= $units; $ncount++) { // loop from 1 to the number of units
+			if(!$voted) { // if the user hasn't yet voted, draw the voting stars
+				$rater.='<li><a href="'.$recordUrl.'?j='.$ncount.'&amp;q='.$id.'&amp;t='.$ip.'&amp;c='.$units.'" title="'.$ncount.' out of '.$units.'" class="r'.$ncount.'-unit rater" rel="nofollow">'.$ncount.'</a></li>';
+			}
+		}
+		$ncount=0; // resets the count
+		
+		$rater.='  </ul>';
+		$rater.='  <p';
+		if($voted){ $rater.=' class="voted"'; }
+		$rater.='>Rating: <strong> '.$rating1.'</strong>/'.$units.' ('.$count.' '.$tense.' cast)';
+		$rater.='  </p>';
+		$rater.='</div>';
+		//$rater.='</div>';
+		return $rater;
+	}
 }
+?>

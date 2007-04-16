@@ -9,7 +9,7 @@
 <br />
 <script type="text/javascript" language="javascript" src="js/behavior.js"></script>
 <script type="text/javascript" language="javascript" src="js/rating.js"></script>
-{php}rating_bar($_GET["id"],5){/php}
+{rating_bar units='5' id=$video[video].id}
 <br />
 <a href="javascript:viewMore('description');" id="xtwo">+/- {$LAN_35}</a>:
 <div id='description'>{$video[video].description}</div>

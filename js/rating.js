@@ -1,6 +1,7 @@
 /*
 Page:           rating.js
 Created:        Aug 2006
+Last Mod:       Mar 11 2007
 Handles actions and requests for rating bars.	
 --------------------------------------------------------- 
 ryan masuga, masugadesign.com
