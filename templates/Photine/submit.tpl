@@ -16,9 +16,9 @@ text-decoration:underline;}
 			<td width="22" height="61"></td>
 		    <td colspan="6" valign="middle">
 			  <p align="center">
-			    <img border="0" src="images/ytlogo.gif" width="198" height="48">&nbsp;&nbsp;
-			    <img border="0" src="images/google.gif" width="150" height="48">&nbsp;&nbsp;
-	        <img border="0" src="images/dailymotion.jpg" width="147" height="48"></td>
+			    <img border="0" src="templates/Photine/images/ytlogo.gif" width="198" height="48">&nbsp;&nbsp;
+			    <img border="0" src="templates/Photine/images/google.gif" width="150" height="48">&nbsp;&nbsp;
+	        <img border="0" src="templates/Photine/images/dailymotion.jpg" width="147" height="48"></td>
 		<td width="108">&nbsp;</td>
 		</tr>
 		<tr>

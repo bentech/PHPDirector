@@ -4,32 +4,32 @@
 <b>&nbsp;&nbsp;&nbsp;{$LAN_7}:&nbsp;</b>
 {$LAN_31}
 <a href="?sort=rating&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('rateup','','images/arrowupani.gif',1)">
-<img src="images/arrowup.gif" name="rateup" border="0" id="rateup" title="{$LAN_8}" alt="arrow up" /></a>
+<img src="templates/Photine/images/arrowup.gif" name="rateup" border="0" id="rateup" title="{$LAN_8}" alt="arrow up" /></a>
 
-<a href="?sort=rating&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('ratedwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="ratedwn" border="0" id="ratedwn" title="{$LAN_9}" alt="arrow down" /></a>
+<a href="?sort=rating&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('ratedwn','','images/arrowdownani.gif',1)"><img src="templates/Photine/images/arrowdown.gif" name="ratedwn" border="0" id="ratedwn" title="{$LAN_9}" alt="arrow down" /></a>
 
 &nbsp;
 {$LAN_32}
 
 <a href="?sort=views&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewup','','images/arrowupani.gif',1)">
-<img src="images/arrowup.gif" name="viewup" border="0" id="viewup" title="{$LAN_10}" alt="arrow up" /></a>
+<img src="templates/Photine/images/arrowup.gif" name="viewup" border="0" id="viewup" title="{$LAN_10}" alt="arrow up" /></a>
 
-<a href="?sort=views&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewdwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="viewdwn" border="0" id="viewdwn" title="{$LAN_11}" alt="arrow down" /></a>
+<a href="?sort=views&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('viewdwn','','images/arrowdownani.gif',1)"><img src="templates/Photine/images/arrowdown.gif" name="viewdwn" border="0" id="viewdwn" title="{$LAN_11}" alt="arrow down" /></a>
 
 &nbsp;
 {$LAN_33}
 
 <a href="?sort=name&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('nameup','','images/arrowupani.gif',1)">
-<img src="images/arrowup.gif" name="nameup" border="0" id="nameup" title="A-Z" alt="arrow up" /></a>
+<img src="templates/Photine/images/arrowup.gif" name="nameup" border="0" id="nameup" title="A-Z" alt="arrow up" /></a>
 
-<a href="?sort=name&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('namedwn','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="namedwn" border="0" id="namedwn" title="Z-A" alt="arrow down" /></a>
+<a href="?sort=name&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('namedwn','','images/arrowdownani.gif',1)"><img src="templates/Photine/images/arrowdown.gif" name="namedwn" border="0" id="namedwn" title="Z-A" alt="arrow down" /></a>
 
 &nbsp;
 {$LAN_34}
 
-<a href="?sort=date&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('dateup','','images/arrowupani.gif',1)"> <img src="images/arrowup.gif" name="dateup" border="0" id="dateup" title="{$LAN_12}" alt="arrow up" /></a>
+<a href="?sort=date&amp;order=up" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('dateup','','images/arrowupani.gif',1)"> <img src="templates/Photine/images/arrowup.gif" name="dateup" border="0" id="dateup" title="{$LAN_12}" alt="arrow up" /></a>
 
-<a href="?sort=date&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('datedown','','images/arrowdownani.gif',1)"><img src="images/arrowdown.gif" name="datedown" border="0" id="datedown" title="{$LAN_13}" alt="arrow down" /></a>
+<a href="?sort=date&amp;order=down" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('datedown','','images/arrowdownani.gif',1)"><img src="templates/Photine/images/arrowdown.gif" name="datedown" border="0" id="datedown" title="{$LAN_13}" alt="arrow down" /></a>
 </p>
 </div>
 

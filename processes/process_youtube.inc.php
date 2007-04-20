@@ -21,20 +21,6 @@ return $gotid;
 }
 }
 /**
- * Gets thumb from youtube id
- *
- * @param Youtube Id
- * @return $yt_pic
- */
-function getthumb($id){
-$yt_xml_pic_string = @file_get_contents("http://www.youtube.com/api2_rest?method=youtube.videos.get_details&dev_id=BnvzCjJ_Bzw&video_id=".$id);
-$yt_xml_pic_start = explode("<thumbnail_url>",$yt_xml_pic_string,2);
-$yt_xml_pic_end = explode("</thumbnail_url>",$yt_xml_pic_start[1],2);
-$yt_pic = $yt_xml_pic_end[0];
-return $yt_pic;
-}
-
-/**
  * Gets Author from youtube id
  *
  * @param Youtube Id
@@ -90,7 +76,8 @@ $yt_view_count = $yt_xml_view_count_end[0];
 return $yt_view_count;
 }
 //check if its allready there
-$videoid = getytid($videourl);
+$videoid_untrim = getytid($videourl);
+$videoid= trim($videoid_untrim);  //removes whitespaces at the end
 	$result1 = mysql_query("SELECT * FROM pp_files WHERE file='$videoid'")
 	or die(mysql_error());
 	$row1 = mysql_fetch_array( $result1 );
@@ -99,12 +86,18 @@ $videoid = getytid($videourl);
 		if($videoid !== null){
 		$title  = safe_sql_insert(gettitle($videoid));
 		$smarty->assign('title', $title);
+		
 		$author = safe_sql_insert(getauthor($videoid));
 		$smarty->assign('author', $author);
+		
 		$des    = safe_sql_insert(getdescription($videoid));
 		$smarty->assign('description', $des);
-		$thumb[]  = safe_sql_insert(getthumb($videoid));
+		
+		$thumb[0]  = "http://img.youtube.com/vi/".$videoid."/1.jpg";	
+		$thumb[1]  = "http://img.youtube.com/vi/".$videoid."/2.jpg";
+		$thumb[2]  = "http://img.youtube.com/vi/".$videoid."/3.jpg";	
 		$smarty->assign('image', $thumb);
+		
 		$ip           = safe_sql_insert($_SERVER['REMOTE_ADDR']);
 
 //mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture, category) VALUES ('$inserttitle', 'YouTube' , '$insertauthor', '$insertdes', CURDATE(), '$videoid', '0', '$ip', '$insertthumb', '$category')")	or die(mysql_error());

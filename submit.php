@@ -23,6 +23,11 @@ $smarty->display('submit.tpl');
 
 //Source
 $videourl = $_POST['videourl'];
+if ($videourl == null){
+$smarty->assign('error', 'Please Do Not Submit Blank Links');
+$smarty->display('error.tpl');
+exit;
+}
 $source = getsource($videourl);
 
 if ($source == "youtube"){ //youtube
@@ -30,11 +35,15 @@ include("processes/process_youtube.inc.php");
 $smarty->assign('vidtype', 'YouTube');
 $smarty->assign('videoid', $videoid);
 }elseif ($source == "google"){ //google
+$smarty->assign('vidtype', 'google');
+$smarty->assign('videoid', $videoid);
 //include("processes/process_google.inc.php");
 }elseif ($source == "dailymotion"){ //dailymotion
 //include("processes/process_dailymotion.inc.php");
 }else{
-echo "This Source is not supported"; //not supported
+$smarty->assign('error', 'This Source Is Not Supported');
+$smarty->display('error.tpl');
+exit;
 }
 //Source End
 $smarty->assign('source', $source);

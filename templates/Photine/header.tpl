@@ -5,22 +5,18 @@
 	<meta name="author" content="Ben Swanson"/>
 	<title>{$title|default:"PhpDirector"}</title>
 	<link rel="stylesheet" href="templates/Photine/style.css" type="text/css" />
-	<script language="Javascript" type="text/javascript"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/thickbox.js"></script>
-	<!--<script type="text/JavaScript" src="js/rollover.js"></script>-->
-	{literal}
-  <script>
-    function SetState(obj_checkbox, obj_textarea)
-    {  if(obj_checkbox.checked)
-       { obj_textarea.disabled = true;
-       }
-       else
-       { obj_textarea.disabled = false;
-       }
-    }
-</script>
-{/literal}
+	{literal}<script>
+    	function SetState(obj_checkbox, obj_textarea)
+    	{  if(obj_checkbox.checked)
+      	 { obj_textarea.disabled = true;
+      	 }
+      	 else
+      	 { obj_textarea.disabled = false;
+       	}
+    	}
+	</script>{/literal}
 </head>
 
 <body onload="MM_preloadImages('images/arrowdownani.gif'), MM_preloadImages('images/arrowupani.gif')">
@@ -30,9 +26,8 @@ Sorry But this browser is not supported if you wish to use a good browser which 
 
 	<div id='content'>	
 		<div id='header'>
-<!--<p id="top_info">Browse <a href="#">Today's favorites</a> or <a href="#">All time favorites</a>.<br />Please <a href="#">Log in</a> to share and download files.</p>-->
 			<div id="logo">
-				<h1><a href="index.php" title="home"><img src="images/phpdirectorbeta.png" width="243" height="52" alt="Php Director" border="0" /></a></h1>
+				<h1><a href="index.php" title="home"><img src="templates/Photine/images/phpdirectorbeta.png" width="243" height="52" alt="Php Director" border="0" /></a></h1>
 			</div>
 </div>
 
@@ -52,8 +47,9 @@ Sorry But this browser is not supported if you wish to use a good browser which 
 			</div>
 </div>
 
+{if $news eq ""}
+<br /><br />
+{else}
 <div class="gboxtop"></div>
-<div class="gbox">
-			<p>{$news}</p>
-</div>
-{$error|default:""}
+<div class="gbox"><p>{$news}</p></div>
+{/if}
