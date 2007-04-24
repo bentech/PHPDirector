@@ -64,43 +64,44 @@ return $dm_pic;
 function getdescription($id){
 $dm_xml_pic_string = @file_get_contents("http://www.dailymotion.com/atom/fr/cluster/extreme/featured/video/".$id);
 $dm_xml_pic_start = explode("<content type=\"html\">",$dm_xml_pic_string,2);
-$dm_xml_pic_end = explode("&",$dm_xml_pic_start[1],2);
+$dm_xml_pic_end = explode("<",$dm_xml_pic_start[1],2);
 $dm_pic = $dm_xml_pic_end[0];
 return $dm_pic;
 }
 
-require("header.php");    
-//check if its allready there
-$dmid = getdmid($videourl);
+/**
+ * Gets description from dailymotion id
+ *
+ * @param dailymotion Id
+ * @return $dm_description
+ */
+function getswf($id){
+$dm_xml_pic_string = @file_get_contents("http://www.dailymotion.com/atom/fr/cluster/extreme/featured/video/".$id);
+$dm_xml_pic_start = explode("/swf/",$dm_xml_pic_string,2);
+$dm_xml_pic_end = explode("\"",$dm_xml_pic_start[1],2);
+$dm_pic = $dm_xml_pic_end[0];
+return $dm_pic;
+}
 
-		if($dmid != null){
-		$inserttitle  = safe_sql_insert(gettitle($dmid));
-		$insertauthor = safe_sql_insert(getauthor($dmid));
-		$insertdes    = safe_sql_insert(getdescription($dmid));
-		$insertthumb  = safe_sql_insert(getthumb($dmid));
-		$file 		  = safe_sql_insert($dmid);
-		$ip           = safe_sql_insert($_SERVER['REMOTE_ADDR']);
-		
-		
-	$result1 = mysql_query("SELECT * FROM pp_files WHERE file='$file'")
-	or die(mysql_error());
-	$row1 = mysql_fetch_array( $result1 );
-	
-if ($row1['file'] == $file){
-echo "".LAN_22."";
-echo "<p><a href='submit.php'>".LAN_38."</a></p>";
-include("footer.php");
-exit;
-}	
-$category = $_POST["catigory"];
-mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture, category) VALUES ('$inserttitle', 'dailymotion' , '$insertauthor', '$insertdes', CURDATE(), '$file', '0', '$ip', '$insertthumb', '$category')")	or die(mysql_error());
+$videoid = getdmid($videourl);
+$dmid = getswf($videoid);
+$smarty->assign('dmid', $dmid);
 
-				echo "<P>".LAN_24." <b><u>".$inserttitle."</b></u> ".LAN_25."</P>";
-				include("footer.php");
-				exit;
+		if($videoid != null){
+		$title  = safe_sql_insert(gettitle($videoid));
+		$author = safe_sql_insert(getauthor($videoid));
+		$des    = safe_sql_insert(getdescription($videoid));
+		$thumb[0]  = safe_sql_insert(getthumb($videoid));
+		$file 	= safe_sql_insert($videoid);
+		$ip     = safe_sql_insert($_SERVER['REMOTE_ADDR']);
+		
+		$smarty->assign('title', $title);
+		$smarty->assign('author', $author);
+		$smarty->assign('description', $des);
+		$smarty->assign('image', $thumb);
+		
+//mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture, category) VALUES ('$inserttitle', 'dailymotion' , '$insertauthor', '$insertdes', CURDATE(), '$file', '0', '$ip', '$insertthumb', '$category')")	or die(mysql_error());
+
 		}//check for blank end
-
-		echo "<p><a href='submit.php'>".LAN_21."</a></p>";
-		include("footer.php");
 ?>
  

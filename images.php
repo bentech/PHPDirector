@@ -1,7 +1,7 @@
 <?php
 require("header.php");
 $query_count = mysql_query("SELECT * FROM pp_files WHERE approved='1' AND reject='0'");
-$query = "SELECT * FROM pp_files WHERE approved='1' AND reject='0' LIMIT 0, 110 ";
+$query = "SELECT * FROM pp_files WHERE approved='1' AND reject='0'";
 $totalrows = mysql_num_rows($query_count);
 $result = mysql_query($query);
 if (!$result)

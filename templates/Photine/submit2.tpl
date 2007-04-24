@@ -1,34 +1,57 @@
 {include file="header.tpl"}
-{if $noshow eq "1"}
-{$submiterror}
-{else}
-{literal}
-<script language="javascript"> 
-function checkscript() {
-	if (some value is/is not something) {
-		// something is wrong
-		alert('alert user of problem');
-		return false;
+{literal}<script>
+function checkform()
+{
+	if (document.video.titletext.value == '') {
+	alert('Please Enter A Title');
+	return false;
 	}
-	else if (another value is/is not something) {
+	
+	else if (document.video.descriptiontext.value == '')
+	{
 		// something else is wrong
-		alert('alert user of problem');
+		alert('Please Enter A description');
 		return false;
 	}
-
-	// If the script makes it to here, everything is OK,
-	// so you can submit the form
-
+	
+	else if (document.video.authortext.value == '')
+	{
+		// something else is wrong
+		alert('Please Enter A Author');
+		return false;
+	}
+	else if (!document.video.titlecheck.checked) {
+	alert('Please Confirm The Title');
+	return false;
+	}
+	else if (!document.video.authorcheck.checked) {
+	alert('Please Confirm The Author');
+	return false;
+	}
+	else if (!document.video.descriptioncheck.checked) {
+	alert('Please Confirm The Description');
+	return false;
+	}
+	else if (!document.video.categorycheck.checked) {
+	alert('Please Confirm The Category');
+	return false;
+	}
+	else if(!document.video.picture[0].checked && !document.video.picture[1].checked && !document.video.picture[2].checked) {
+	// no radio button is selected
 	return false;
 }
-</script>
+	// If the script gets this far through all of your fields
+	// without problems, it's ok and you can submit the form
+
+	return true;
+}</script>
 {/literal}
 <div align="center">
 	<!--Center Page-->
 	<h3><b>Source</b>:{$source}</h3>
 	<!--Source Of Media-->
-	<b>Choose Default Screenshot</b>
-	<form name="video" method="post" action="something.pl" onsubmit="return checkscript()">
+	<b>Confirm Default Screenshot</b>
+	<form name="video" method="post" action="submit.php?pt=submit&part=3" onSubmit="return checkform()">
 		<table width="136" border="0">
 			<!--Shows All The Images-->
 			<tr> {section name=default loop=$image}
@@ -40,15 +63,14 @@ function checkscript() {
 				{/section} </tr>
 		</table>
 		<!-- END - Shows All The Images-->
-		<br />
 		<table width="83" border="0">
 			<tr>
 				<td height="21" align="center"><b>Title</b></td>
 			</tr>
 			<tr>
-				<td height="21" align="center"><textarea name="title" cols="50" rows="1" id="title" style="text-align:center; text-shadow:#990000"{if $title eq ""}{else}disabled{/if}>{$title}</textarea></td>
+				<td height="21" align="center"><textarea name="titletext" cols="50" rows="1" id="titletext" style="text-align:center; text-shadow:#990000"{if $title eq ""}{else}disabled{/if}>{$title}</textarea></td>
 				<td>
-				<input name="authorcheck2" type="checkbox" onclick="SetState(this, this.form.title)" value="1" {if $author eq ""}{else}checked="checked"{/if}/></td>
+				<input name="titlecheck" type="checkbox" onclick="SetState(this, this.form.titletext)" value="1" {if $title eq ""}{else}checked="checked"{/if}/></td>
 			</tr>
 			<tr>
 				<td width="77" height="21" align="center"><b>Author</b></td>
@@ -70,17 +92,17 @@ function checkscript() {
 			<tr>
 				<td height="104" align="center"><select name="category" size="6">
 						
-        {section name=cat loop=$cat}<option value="{$cat[cat].id}">{$cat[cat].name}</option>{/section}
+        {section name=cat loop=$cat}<option value="{$cat[cat].id}" {if $cat[cat].id eq "1"}selected="selected"{/if}>{$cat[cat].name}</option>{/section}
 
-					</select>				</td>
+					
+				</select>				</td>
 				<td><input name="categorycheck" type="checkbox" onClick="SetState(this, this.form.category)" value="1"/></td>
 			</tr>
 		</table>
 		<p align="center">{include file="players.tpl"} </p>
 		<p align="center">
-			<input type="submit" value="Submit" onClick="document.forms[0].submit()">
+			<input type="submit" value="Submit">
 		</p>
 	</form>
 </div>
-{/if}
 {include file="footer.tpl"}

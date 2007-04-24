@@ -5,9 +5,10 @@
 	<meta name="author" content="Ben Swanson"/>
 	<title>{$title|default:"PhpDirector"}</title>
 	<link rel="stylesheet" href="templates/Photine/style.css" type="text/css" />
+	<script type="text/javascript" src="js/reflection.js"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/thickbox.js"></script>
-	{literal}<script>
+		{literal}<script>
     	function SetState(obj_checkbox, obj_textarea)
     	{  if(obj_checkbox.checked)
       	 { obj_textarea.disabled = true;
@@ -19,9 +20,9 @@
 	</script>{/literal}
 </head>
 
-<body onload="MM_preloadImages('images/arrowdownani.gif'), MM_preloadImages('images/arrowupani.gif')">
+<body>
 <!--[if IE 6]>
-Sorry But this browser is not supported if you wish to use a good browser which is supported please use firefox
+Sorry Currently Internet Explorer Is Not Supported By PHP Director, Please Use Firefox (Some Parts may seem to work but not aswell as firefox).
 <![endif]-->
 
 	<div id='content'>	
