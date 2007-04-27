@@ -1,4 +1,11 @@
 {include file="header.tpl"}
+
+<!--{*
+Things not used that you might find usefull
+{$paginate.first}
+{$paginate.last}
+{$paginate.total} //tota
+*}-->
 <div align="left">
 <p>
 <b>&nbsp;&nbsp;&nbsp;{$LAN_7}:&nbsp;</b>
@@ -51,5 +58,8 @@
 No Results
 {/section}
 <br />
+
+    {* display pagination info *}
+    {paginate_prev} {paginate_middle} {paginate_next}
 {include file="footer.tpl"}
 

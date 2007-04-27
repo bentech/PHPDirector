@@ -7,6 +7,7 @@ if($contents == "<?phpNo?>"){
 	header("location: install/index.php");
 }
 require('libs/Smarty.class.php');
+require('libs/SmartyPaginate.class.php');
 include("db.php");
 if(isset($_POST["comment"])){
 header("location: videos.php?id=" . $_GET["id"] . "");
@@ -31,4 +32,5 @@ $smarty->assign('pagetype', $pagetype);
 $news = config('news');
 $smarty->assign('news', $news);
 //NEWS//
+
 ?>
