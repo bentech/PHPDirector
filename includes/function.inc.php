@@ -9,9 +9,6 @@ function show_sql($variable) {
 $variable = stripslashes($variable);
 return $variable;
 }
-?>
-
-<?php
 function config($type){
 
 $confresult = mysql_query("SELECT * FROM pp_config");
@@ -36,11 +33,10 @@ function configupdate($type, $newvalue){
 mysql_query("UPDATE pp_config SET $type = '$newvalue'");
 }
 
-function getsource($url){
 
-//checks if valid youtube link
-$check = explode(".", $url);
-
-return $check[1];
+function between($beg, $end, $str) {
+$a = explode($beg, $str, 2);
+$b = explode($end, $a[1]);
+return $beg . $b[0] . $end;
 }
 ?>

@@ -1,4 +1,10 @@
 {include file="admin_header.tpl"}
+<!--{*
+Things not used that you might find usefull
+{$paginate.first}
+{$paginate.last}
+{$paginate.total} //tota
+*}-->
 <h2 align="center">{$admin_31}</h2>
 <p>{$admin_32}</p>
 <br>

@@ -1,24 +1,16 @@
 {include file="admin_header.tpl"}
-
-		{if $vidsammount == "0"}
-			{if $pagevalue eq "approve"}
-				<div align='center'><h2>No Videos To Approve</h2></div>
-			{else}
-				<div align='center'><h2>No Videos Here</div></h2>
-			{/if}
-			
-		{else}
-			
 			{if $pagevalue eq "all"}
-				<h2>{$admin_34}</tr></h2>   
+				<h2>{$admin_34}</h2>   
 			{elseif $pagevalue eq "feature"}
-				<h2>{$admin_5}</h2></tr>
+				<h2>{$admin_5}</h2>
 			{elseif $pagevalue eq "approve"}
-				<h2>{$admin_4}</h2></tr>
+				<h2>{$admin_4}</h2>
 			{elseif $pagevalue eq "rejected"}
-				<h2>{$admin_6}</h2></tr>
+				<h2>{$admin_6}</h2>
 			{/if}
 			
+			{if paginate_middle eq ""}
+			no vids{else}
 <table cellspacing="0" cellpadding="0" border="1" id="categorias"><tbody>
 	<tr class="categoria_h">
 		<th class="s1">ID</th>
@@ -29,7 +21,6 @@
 		<th class="s6">{$admin_13}</th>
 		<th class="s7">{$admin_14}</th>
 	</tr>
-
 {section name=video loop=$video}	
 <tr class="subcategoria">
 	<td class="s1">	
@@ -62,20 +53,16 @@
 
 	<td class="s7">
 <a href='?id={$video[video].id}&what=approve&pt={$pagevalue}&page={$video[video].page}&pag=vid'>{$admin_16}</a>
-<p><a href='?id={$video[video].id}&what=featureapprove&pt={$pagevalue}&page={$page}&pag=vid'>{$admin_35}</a></p>
-<p><a href='?id={$video[video].id}&what=reject&pt={$pagevalue}&page={$page}&pag=vid'>{$admin_19}</a></p>
+<p><a href='?id={$video[video].id}&what=feature&pt={$pagevalue}&page={$page}&pag=vid'>{$admin_35}</a></p>
+<p><a href='?id={$video[video].id}&what=reject&pt={$pagevalue}&page={$page}&pag=vid'>{$admin_19}</a>{$admin_20}<a href='?id={$video[video].id}&what=delete&pt={$pagevalue}&page={$page}&pag=vid'>{$admin_21}</a></p>
 	</td>
 	</tr>
 </tbody>
 {/section}
 	</table>
 	</font></p>
-
+	<br />{* display pagination info *}
+    {paginate_prev} {paginate_middle} {paginate_next}
+	{/if}
 </body>
 </html>
-{/if}
-{if $pagetype eq ""}
-<br />
-<h1 align='center'>Video Section</h1>
-Please Select A Tab
-{/if}

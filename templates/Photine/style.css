@@ -9,6 +9,12 @@ body { padding: 0; margin: 0; font: 0.7em Tahoma, Arial, sans-serif; line-height
 a { color: #003B6E; background: inherit; }
 a:hover { color: #9EC068; background: inherit; }	
 
+.redsmall {
+	color: #FF0000;
+	font-size: 12px;
+}
+
+
 /* headings */
 h1 { font: bold 2.5em "Arial", Sans-Serif; margin: 0; letter-spacing: -1px; }
 h2 { font: bold 2em Arial, Sans-Serif; margin: 0; padding: 0; }

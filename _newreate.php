@@ -12,4 +12,5 @@ $id_sent = $_GET['q'];
 $query = "INSERT INTO pp_rating (id, total_votes, total_value, used_ips) VALUES ('$id_sent', '0', '0', '')";
 mysql_query($query);
 
+mysql_close($rating_conn);
 ?>

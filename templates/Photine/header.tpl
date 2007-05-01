@@ -15,7 +15,7 @@
       	 }
       	 else
       	 { obj_textarea.disabled = false;
-       	}
+       	}yrd
     	}
 	</script>{/literal}
 </head>
@@ -42,7 +42,7 @@ Sorry Currently Internet Explorer Is Not Supported By PHP Director, Please Use F
 			<li><a {if $pagetype eq "submit"}class="current"{/if} href='submit.php?pt=submit&part=1' accesskey='a'><span class='key'>{$LAN_5|default:"Submit"}</span></a></li>
 	</ul>
 	<div id="search">
-				<form method="post" action="index.php">
+				<form method="post" action="index.php" name="search">
 					<p><input type="text" name="searching" class="search"/> <input type="submit" value="Search"  class="button"/></p>
 				</form>
 			</div>

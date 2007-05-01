@@ -10,20 +10,15 @@ require('header.php');
 
 // required connect
     SmartyPaginate::connect();
-// set items per page
-    SmartyPaginate::setLimit(5);
 	
-	$smarty->assign('videos', get_db_results());
-    // assign {$paginate} var
-    SmartyPaginate::assign($smarty);
-    // display results
-    $smarty->display('index.tpl');	
-	  
-	  
- 
-	  
-	    function get_db_results() {
-		
+// set items per page
+	$limit = config('vids_per_page');
+    SmartyPaginate::setLimit($limit);
+	
+	
+	//DB
+	
+			
 		
 		//SORTING???
 		
@@ -54,18 +49,24 @@ if(isset($_GET["order"])){
 }
 		
 		//SORTING END ???
-		$_POST['searching'] = $search;
 if ($_GET["pt"] == "all") {		
 		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `reject` = '0' LIMIT %d,%d";
+		$_query = sprintf($query, SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }elseif ($_GET["pt"] == "feature") {
 		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `feature` = '1' AND `reject` = '0' LIMIT %d,%d ";
-}elseif (isset($search)){
-		$query = 'SELECT SQL_CALC_FOUND_ROWS * FROM `pp_files` WHERE `name` LIKE \'%$search%\' OR `creator` \'%$search%\' OR `description` LIKE \'%$search%\' LIMIT %d,%d';
+		$_query = sprintf($query, SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
+}elseif (isset($_GET["cat"])) {
+$cat = $_GET["cat"];
+		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `category` = '$cat' LIMIT %d,%d ";
+		$_query = sprintf($query, SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
+}elseif (isset($_POST["searching"])){
+		$query  = "SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `name` like '%$_POST[searching]%' LIMIT %d,%d";
+		$_query = array_slice($query , SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }else{
-		//$query = "SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `reject` = '0' LIMIT %d,%d";
+		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `reject` = '0' LIMIT %d,%d";
+		$_query = sprintf($query, SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 };
     
-		$_query = sprintf($query, SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
         $_result = mysql_query($_query);   // assign your db results to the template
 
 $_data = array();
@@ -123,8 +124,28 @@ $i=0;
         SmartyPaginate::setTotal($_row['total']);
 
         mysql_free_result($_result);
-      
-        return $_data;
+ 	
+	///DB
+	
+	
+	$smarty->assign('videos', $_data);
+	
+		if ($_row['total'] == 0){ //if no videos display error.
+	$error = $smarty->get_template_vars('LAN_29');
+	$smarty->assign_by_ref('error', $error);
+	$smarty->display('error.tpl');
+	exit;
+}
+    // assign {$paginate} var
+    SmartyPaginate::assign($smarty);
+    // display results
+    $smarty->display('index.tpl');	
+	  
+	  
+	    function get_db_results() {
 
     }
+	
+	
+mysql_close($mysql_link);
 ?>

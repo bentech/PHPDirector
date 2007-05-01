@@ -44,4 +44,6 @@ while ($row = mysql_fetch_assoc($result)){
 
 $smarty->assign('cat', $cat);
 $smarty->display('categories.tpl');
+
+mysql_close($mysql_link);
 ?>

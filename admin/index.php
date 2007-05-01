@@ -6,6 +6,13 @@
 |		$Website: phpdirector.co.uk
 +----------------------------------------------------------------------------+
 */
+ob_start(); 
+session_start(); 
 include("admin_header.php");
-$smarty->display('index.tpl');
+
+if (checkLoggedin()) 
+    $smarty->display('index.tpl');
+else 
+echo "<H1>You are not logged in - <A href = \"login.php\">login</A></h1></h1>"; 
+mysql_close($mysql_link);
 ?>

@@ -21,7 +21,7 @@ $smarty->compile_dir = './templates_c';
 $smarty->cache_dir = './cache';
 $smarty->config_dir = './configs';
 
-include("lang/".config('lang')."/lang.inc.php");
+include("lang/".config('lang').".inc.php");
 
 $sort1 = $_GET['sort'];
 $page = $_GET['page'];

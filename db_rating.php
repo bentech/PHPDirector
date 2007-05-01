@@ -51,4 +51,5 @@ if(!$voted) {     //if the user hasn't yet voted, then vote normally...
 	header("Location: $referer"); // go back to the page we came from 
 	exit;
 } //end for the "if(!$voted)"
+mysql_close($rating_conn);
 ?>

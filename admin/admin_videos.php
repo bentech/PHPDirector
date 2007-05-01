@@ -7,11 +7,6 @@
 +----------------------------------------------------------------------------+
 */
 
-$pagevalue = $_GET["pt"];
-$id = $_GET["id"];
-$page = $_GET['page'];
-$text = $_GET["text"];
-$what = $_GET['what'];
 include("admin_header.php");
 include("includes/admin_videos_functions.php");
 
@@ -60,4 +55,5 @@ $smarty->assign('page', $page);
 
 $smarty->display('admin_videos.tpl');
 
+mysql_close($mysql_link);
 ?>

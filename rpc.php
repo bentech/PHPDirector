@@ -84,4 +84,5 @@ $allnewback = join("\n", $new_back);
 //name of the div id to be updated | the html that needs to be changed
 $output = "unit_long$id_sent|$allnewback";
 echo $output;
+mysql_close($rating_conn);
 ?>

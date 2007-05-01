@@ -5,19 +5,15 @@
 {$LAN_26}
 {/if}
 <h2>{$video[video].name}</h2>
-<br />
-<b>{$LAN_36}: </b>{$video[video].creator}
-<br />
-<a href="javascript:viewMore('description');" id="xtwo">+/- {$LAN_35}</a>:
+<p><b>{$LAN_36}:</b><br />
+	{$video[video].creator}	</p>
+{include file="players.tpl"}<br />
+{rating_bar units='5' id=$video[video].id}<br />
+		<strong>{$LAN_35}:</strong>
+		<br />
 <div id='description'>{$video[video].description}</div>
 <br />
-{include file="players.tpl"}
-<br />
-<b>{$LAN_32}: </b>{$video[video].views}<p>
-</p>
-<script type="text/javascript" language="javascript" src="js/behavior.js"></script>
-<script type="text/javascript" language="javascript" src="js/rating.js"></script>
-{rating_bar units='5' id=$video[video].id}
+<b>{$LAN_32}: </b>{$video[video].views}
 {/section}
 </div>
 {include file="footer.tpl"}
