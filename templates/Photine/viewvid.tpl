@@ -8,8 +8,8 @@
 <p><b>{$LAN_36}:</b><br />
 	{$video[video].creator}	</p>
 {include file="players.tpl"}<br />
-{rating_bar units='5' id=$video[video].id}<br />
-		<strong>{$LAN_35}:</strong>
+{rating_bar units='5' id=$video[video].id}
+<strong>{$LAN_35}:</strong>
 		<br />
 <div id='description'>{$video[video].description}</div>
 <br />

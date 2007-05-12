@@ -6,7 +6,11 @@
 |		$Website: phpdirector.co.uk
 +----------------------------------------------------------------------------+
 */
+ob_start(); 
+session_start(); 
+
 include("admin_header.php");
+if (checkLoggedin()){
 include("includes/admin_videos_functions.php");
 $smarty->assign('pagevalue', $_GET["pt"]);
 $limit = config('vids_per_page');
@@ -16,20 +20,7 @@ $limit = config('vids_per_page');
 // set items per page
     SmartyPaginate::setLimit($limit);
 	
-	$smarty->assign('video', get_db_results());
-    // assign {$paginate} var
-    SmartyPaginate::assign($smarty);
 	
-	
-if($pagevalue == null){
-$smarty->display('admin_manage.tpl');
-exit;
-}
-
-$smarty->display('admin_manage.tpl');
-
-
-  function get_db_results() {
 	// count(*) is better for large databases (thanks Greg!)
 if ($_GET["pt"]  == "all"){
 	$query = "SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE approved='1' ORDER BY id DESC LIMIT %d,%d";	
@@ -40,7 +31,8 @@ if ($_GET["pt"]  == "all"){
 }elseif ($_GET["pt"] == "rejected"){
 	$query = "SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE approved='0' AND reject='1' ORDER BY id DESC LIMIT %d,%d";	
 }else{
-	$query = "SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE approved='1' ORDER BY id DESC LIMIT %d,%d";
+	$smarty->display('admin_header.tpl');
+	exit;
 }
 
 		$_query = sprintf($query, SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
@@ -54,12 +46,8 @@ $i=0;
 	
 	//PICTURE
 		if($_row["video_type"] == "YouTube"){
-			$yt_pic_broken = explode("/", show_sql($_row['picture']));
-			$yt_pic_final = $yt_pic_broken[5];
-		if ($yt_pic_final = "2.jpg"){
-			$yt_pic_getstart = explode("2.jpg", show_sql($_row['picture']));
-			$ytpic = $yt_pic_getstart[0];
-	}
+		
+	$ytpic = "http://img.youtube.com/vi/".$_row['file']."/";
 	}
 	
 	
@@ -71,13 +59,15 @@ $i=0;
 'ytpic' => $ytpic,
 'description' => $_row['description'],
 'date' => $_row['date'],
+'approved' => $_row['approved'],
+'featured' => $_row['feature'],
+'rejected' => $_row['reject'],
 'video_type' => $_row['video_type']
 );
 
 $_data[$i++] = $tmp;
-}
 //PICTURE_EN
-
+}
         $_query = "SELECT FOUND_ROWS() as total";
         $_result = mysql_query($_query);
         $_row = mysql_fetch_array($_result, MYSQL_ASSOC);
@@ -86,10 +76,20 @@ $_data[$i++] = $tmp;
 
         mysql_free_result($_result);
       
-        return $_data;
+	$smarty->assign('video', $_data);
+    // assign {$paginate} var
+    SmartyPaginate::assign($smarty);
+	SmartyPaginate::setUrl('admin_manage.php?pt='.$_GET["pt"].'&pag=vid');
 
-	}
+if ($_row['total'] == "0"){
+$smarty->assign('message1', 'No Media');
+$smarty->display('admin_header.tpl');
+exit;
+}
 	
-	mysql_close($mysql_link);
-	
-	?>
+$smarty->display('admin_manage.tpl');
+}else{
+header("location: login.php"); 
+}	
+mysql_close($mysql_link);
+?>

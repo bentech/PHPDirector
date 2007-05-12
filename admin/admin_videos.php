@@ -6,10 +6,12 @@
 |		$Website: phpdirector.co.uk
 +----------------------------------------------------------------------------+
 */
+ob_start(); 
+session_start(); 
 
 include("admin_header.php");
+if (checkLoggedin()){
 include("includes/admin_videos_functions.php");
-
 $result1 = array();
 $i=0;
 
@@ -26,13 +28,10 @@ $result = mysql_query("SELECT * FROM pp_files WHERE id=$id") or die();
 // get the first (and hopefully only) entry from the result
 
 
+
 while ($row = mysql_fetch_array($result)) {
 	$video[] = $row;
 	
-	if( $row['video_type'] == "dailymotion"){
-$dmid = dmgetfile($row['file']);
-$smarty->assign('dmid', $dmid);
-}
 $smarty->assign('id', $row['id']);
 $smarty->assign('vidtype', $row['video_type']);
 	
@@ -43,17 +42,19 @@ $smarty->assign('vidtype', $row['video_type']);
 		if ($yt_pic_final = "2.jpg"){
 			$yt_pic_getstart = explode("2.jpg", show_sql($row['picture']));
 			$ytpic = $yt_pic_getstart[0];
-	}
-	
+	}	
 	}
 	}
 	
 $smarty->assign('ytpic', $ytpic);
-
+$smarty->assign('pt', $_GET['pt']);
 $smarty->assign('video', $video);
 $smarty->assign('page', $page);
 
 $smarty->display('admin_videos.tpl');
 
+	}else{
+header("location: login.php");
+}
 mysql_close($mysql_link);
 ?>

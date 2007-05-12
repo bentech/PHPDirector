@@ -7,12 +7,11 @@
 +----------------------------------------------------------------------------+
 */
 session_start();
-setcookie("admin", "login", time()+3600);
 require('../libs/Smarty.class.php');
 require('../libs/SmartyPaginate.class.php');
 include("../db.php");
 include("../includes/function.inc.php");
-require_once ("includes/login_functions.inc.php"); 
+require_once ("functions.php"); 
 $smarty = new Smarty();
 $smarty->template_dir = '../templates/Photine/admin';
 $smarty->compile_dir = '../templates_c/admin';
@@ -23,5 +22,5 @@ $cnf_name = config('name');
 $smarty->assign('config_name', $cnf_name);
 $smarty->assign('pagetype', $_GET["pt"]);
 $smarty->assign('pag', $_GET["pag"]);
-include("../lang/".config('lang').".inc.php");
+include("../lang/".config('lang'));
 ?>

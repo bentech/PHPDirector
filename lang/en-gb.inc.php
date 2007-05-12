@@ -2,8 +2,8 @@
 /*
 + ----------------------------------------------------------------------------+
 |     PHPDirector - Language File.
-|     $Author: Ben Swanson, Dennis Berko
-|		$License: GNU General Public License
+|     $Author: Ben Swanson
+|     $License: GNU General Public License
 +----------------------------------------------------------------------------+
 */
 /*
@@ -44,7 +44,7 @@ $smarty->assign('LAN_32', 'Views');
 $smarty->assign('LAN_33', 'Name');
 $smarty->assign('LAN_34', 'Date');
 $smarty->assign('LAN_35', 'Description');
-$smarty->assign('LAN_36', 'Made by');
+$smarty->assign('LAN_36', 'Author');
 $smarty->assign('LAN_37', 'Example');
 $smarty->assign('LAN_38', 'Submit Another Video?');
 $smarty->assign('LAN_39', 'Random');
@@ -77,4 +77,5 @@ $smarty->assign('LAN_65', 'Edit');
 $smarty->assign('LAN_66', 'You May need to click twice to update');
 $smarty->assign('LAN_67', 'News');
 $smarty->assign('LAN_68', 'Video');
+$smarty->assign('LAN_69', 'Template');
 ?>

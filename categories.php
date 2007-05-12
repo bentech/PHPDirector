@@ -2,7 +2,7 @@
 require("header.php");
 
 
-$query_categories = mysql_query("SELECT * FROM pp_categories");
+$query_categories = mysql_query("SELECT * FROM pp_categories WHERE disable='0'");
 
 
 if(mysql_num_rows($query_categories) == 0){  //if no categories display error.
@@ -17,13 +17,17 @@ $i=0;
 while ($row_cat = mysql_fetch_array($query_categories)) {
 $cat_id = $row_cat['id'];
 //gets info from first media file
+if ($row_cat['image'] == null){
 $query_files = mysql_query("SELECT * FROM pp_files WHERE category = $cat_id");
 $row_file = mysql_fetch_array($query_files);
-
+$picture = $row_file['picture'];
+}else{
+$picture = $row_cat['image'];
+}
 	$tmp = array(
 'id' => $row_cat['id'], 
 'name' => $row_cat['name'],
-'picture' => $row_file['picture']
+'picture' => $picture
 );
 $result[$i++] = $tmp;
 }

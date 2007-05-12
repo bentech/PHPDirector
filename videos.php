@@ -35,7 +35,10 @@ while ($row = mysql_fetch_assoc($result))
 $smarty->assign('vidtype', $row['video_type']);
 
 if( $row['video_type'] == "dailymotion"){
-$dmid = dmgetfile($row['file']);
+$dm_xml_pic_string = @file_get_contents("http://www.dailymotion.com/atom/fr/cluster/extreme/featured/video/".$row['file']);
+$dm_xml_pic_start = explode("/swf/",$dm_xml_pic_string,2);
+$dm_xml_pic_end = explode("\"",$dm_xml_pic_start[1],2);
+$dmid = $dm_xml_pic_end[0];
 $smarty->assign('dmid', $dmid);
 }
 }

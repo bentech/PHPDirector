@@ -80,7 +80,7 @@ return $gv_image;
 $videoid_untrim = getgvid($videourl);
 
 $videoid = trim($videoid_untrim);  //removes whitespaces at the end
-
+		$smarty->assign('videoid', $videoid);
 		if($videoid !== null){
 		$title  = safe_sql_insert(gettitle($videoid));
 		$smarty->assign('title', $title);
@@ -93,6 +93,9 @@ $videoid = trim($videoid_untrim);  //removes whitespaces at the end
 		
 		$thumb[0]  = getimage($videoid);	
 		$smarty->assign('image', $thumb);
+		
+		$smarty->assign('vidtype', 'GoogleVideo');
+		
 		
 
 				}//check for blank end

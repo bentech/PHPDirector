@@ -101,7 +101,7 @@ function smarty_function_rating_bar($params, &$smarty) {
 	} else {
 	
 		$rater ='';
-		//$rater.='<div class="ratingblock">';
+		$rater.='<div class="ratingblock">';
 		
 		$rater.='<div id="unit_long'.$id.'">';
 		$rater.='  <ul id="unit_ul'.$id.'" class="unit-rating" style="width:'.$gerth.'px;">';
@@ -120,7 +120,7 @@ function smarty_function_rating_bar($params, &$smarty) {
 		$rater.='>Rating: <strong> '.$rating1.'</strong>/'.$units.' ('.$count.' '.$tense.' cast)';
 		$rater.='  </div>';
 		$rater.='</div>';
-		//$rater.='</div>';
+		$rater.='</div>';
 		return $rater;
 	}
 }

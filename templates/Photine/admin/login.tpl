@@ -1,20 +1,17 @@
 {include file="admin_header.tpl"}
-{if isset($errorMessage)}
-<div align="center"><strong><font color="#990000">{$error}</font></strong></div>
-  <?php
-{/if}
-<form action="login.php" method="post" name="frmLogin" id="frmLogin">
+
+<font color="#990000">{$error |default:"Login"}&nbsp;</font>
+<form action="login.php?do=login" method="post" onsubmit="return aValidator();" id="frmLogin"> 
   <div align="center">
-    <p>&nbsp;</p>
-    <p><span class="categoria_h">{$admin_39}:</span>
-      <input name="txtUserId" type="text" id="txtUserId">
-      <span class="categoria_h">{$admin_40}:</span>
-      <input name="txtPassword" type="password" id="txtPassword">
-    </p>
-    <p>
-      <input name="btnLogin" type="submit" id="btnLogin" value="Login">
-    </p>
-  </div>
-</form>
+			{$LAN_62}:
+			<input type="text" name="username" id="txtUserId" />
+	 		{$LAN_63}:
+			<input type="password" name="password" id="txtPassword" />
+
+	<div style="visibility:hidden">	<input name="remme" type="checkbox" checked="checked" /></div>
+			<input type="submit" name="submit" value="Login"  id="btnLogin" />
+			</div>
+        </form>
+		
 </body>
 </html>

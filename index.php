@@ -4,6 +4,8 @@
 |     PHPDirector.
 |		$License: GPL General Public License
 |		$Website: phpdirector.co.uk
+|		$Author: Ben Swanson
+|		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
 +----------------------------------------------------------------------------+
 */
 require('header.php');
@@ -14,15 +16,10 @@ require('header.php');
 // set items per page
 	$limit = config('vids_per_page');
     SmartyPaginate::setLimit($limit);
-	
-	
-	//DB
-	
-			
+
+//SORTING???
 		
-		//SORTING???
-		
-switch ($sort1){
+switch ($_GET["sort"]){
 case "name":
 	$sort = "name";
 	break;
@@ -50,36 +47,33 @@ if(isset($_GET["order"])){
 		
 		//SORTING END ???
 if ($_GET["pt"] == "all") {		
-		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `reject` = '0' LIMIT %d,%d";
-		$_query = sprintf($query, SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
+		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `reject` = '0' ORDER BY $sort $order1 LIMIT %d,%d",
+		 SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }elseif ($_GET["pt"] == "feature") {
-		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `feature` = '1' AND `reject` = '0' LIMIT %d,%d ";
-		$_query = sprintf($query, SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
+		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `feature` = '1' AND `reject` = '0' ORDER BY $sort $order1 LIMIT %d,%d",
+            SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }elseif (isset($_GET["cat"])) {
 $cat = $_GET["cat"];
-		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `category` = '$cat' LIMIT %d,%d ";
-		$_query = sprintf($query, SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
+		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `category` = '$cat' ORDER BY $sort $order1 LIMIT %d,%d",
+            SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }elseif (isset($_POST["searching"])){
-		$query  = "SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `name` like '%$_POST[searching]%' LIMIT %d,%d";
-		$_query = array_slice($query , SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
+		
+		$search = $_POST[searching];
+		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `name` like '%%$search%%' ORDER BY $sort $order1 LIMIT %d,%d",
+            SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }else{
-		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `reject` = '0' LIMIT %d,%d";
-		$_query = sprintf($query, SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
+		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `reject` = '0' ORDER BY $sort $order1 LIMIT %d,%d",
+            SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 };
-    
         $_result = mysql_query($_query);   // assign your db results to the template
 
 $_data = array();
 $i=0;
-        while ($_row = mysql_fetch_array($_result, MYSQL_ASSOC)) {
+       while ($_row = mysql_fetch_array($_result, MYSQL_ASSOC)) {
 		
 		
 		$month = date("M", strtotime($_row[date]));
 		$day = date("d", strtotime($_row[date]));
-		$name = substr($_row['name'], 0,32);
-		if (strlen($_row['name']) >32){$name2 = "...";}
-		$creator = substr($_row['creator'], 0,20);
-		
 		//image
 		if ($_row['picture'] !== null){
 			$tehpic = $_row[picture];
@@ -90,23 +84,14 @@ $i=0;
 		}
 		//image
 		
-		$description = substr($_row['description'], 0, 450);
-		$desclenght = strlen($_row['description']);
-		if ($desclenght > 450){ $description2 = "..."; }
-		if ($desclenght < 92){ $br = "<br><br><br><br>"; }
-		if ($desclenght > 92 && $desclenght < 182){ $br = "<br><br><br>" ;}
-		if ($desclenght > 982 && $desclenght < 272){ $br = "<br><br>"; }
-		if ($desclenght > 272 && $desclenght < 362){ $br = "<br>"; }
-		if ($desclenght > 362){ $br = null; }
-		
 		$tmp = array(
 			'id' => $_row['id'], 
 			'month' => $month, 
 			'day' => $day,
-			'name' => $name.$name2,
-			'creator' => $creator,
+			'name' => $_row['name'],
+			'creator' => $_row['creator'],
 			'picture' => $picture,
-			'description' => $description.$description2,
+			'description' => $_row['description'],
 			'br' => $br
 		);
 			
@@ -117,10 +102,10 @@ $i=0;
         }
         
         // now we get the total number of records from the table
+// now we get the total number of records from the table
         $_query = "SELECT FOUND_ROWS() as total";
         $_result = mysql_query($_query);
         $_row = mysql_fetch_array($_result, MYSQL_ASSOC);
-        
         SmartyPaginate::setTotal($_row['total']);
 
         mysql_free_result($_result);
@@ -138,14 +123,9 @@ $i=0;
 }
     // assign {$paginate} var
     SmartyPaginate::assign($smarty);
+	SmartyPaginate::setUrl('index.php?pt='.$_GET["pt"]);
     // display results
     $smarty->display('index.tpl');	
-	  
-	  
-	    function get_db_results() {
-
-    }
-	
-	
+SmartyPaginate::disconnect();
 mysql_close($mysql_link);
 ?>

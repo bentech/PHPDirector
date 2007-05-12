@@ -76,12 +76,15 @@ $yt_view_count = $yt_xml_view_count_end[0];
 return $yt_view_count;
 }
 //check if its allready there
+
+//$videourl is the input link eg http://www.youtube.com/watch?v=VflOBMTZiQw
+//$videoid is the id that gets sorted in mysql for link above it is VflOBMTZiQw
 $videoid_untrim = getytid($videourl);
 
 $videoid = trim($videoid_untrim);  //removes whitespaces at the end
 
 		if($videoid !== null){
-		$title  = safe_sql_insert(gettitle($videoid));
+		$title  = safe_sql_insert(gettitle($videoid)); //Function to make the sql safe
 		$smarty->assign('title', $title);
 		
 		$author = safe_sql_insert(getauthor($videoid));
@@ -90,12 +93,12 @@ $videoid = trim($videoid_untrim);  //removes whitespaces at the end
 		$des    = safe_sql_insert(getdescription($videoid));
 		$smarty->assign('description', $des);
 		
-		$thumb[0]  = "http://img.youtube.com/vi/".$videoid."/1.jpg";	
+		$thumb[0]  = "http://img.youtube.com/vi/".$videoid."/1.jpg";	//Put as many as you need or just one
 		$thumb[1]  = "http://img.youtube.com/vi/".$videoid."/2.jpg";
 		$thumb[2]  = "http://img.youtube.com/vi/".$videoid."/3.jpg";	
 		$smarty->assign('image', $thumb);
-		
-//mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, approved, ip, picture, category) VALUES ('$inserttitle', 'YouTube' , '$insertauthor', '$insertdes', CURDATE(), '$videoid', '0', '$ip', '$insertthumb', '$category')")	or die(mysql_error());
+		$smarty->assign('vidtype', 'YouTube');
+		$smarty->assign('videoid', $videoid);
 
 				}//check for blank end
  ?>

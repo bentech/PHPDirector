@@ -12,14 +12,40 @@ function Install(){
 }
 function License(){
 	echo'
-	<div class="license_agreement">
-	';
-	include("gnu.php");
-	echo'
-	</div>
-	<form action="index.php" method="POST"><div>
-	<input type="hidden" value="Connections" name="Installing">
-	<input type="submit" value="I hearby have read and agreed to the License"></div>
+
+<!-- Creative Commons License -->
+<a href="http://creativecommons.org/licenses/GPL/2.0/">
+<img alt="CC-GNU GPL" border="0" src="http://creativecommons.org/images
+/public/cc-GPL-a.png" /></a><br />
+This software is licensed under the <a href="http://creativecommons.org/licenses/GPL/2.0/">CC-GNU GPL</a>.
+<!-- /Creative Commons License -->
+
+<!--
+
+<rdf:RDF xmlns="http://web.resource.org/cc/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<Work rdf:about="">
+   <license rdf:resource="http://creativecommons.org/licenses/GPL/2.0/" />
+   <dc:type rdf:resource="http://purl.org/dc/dcmitype/Software" />
+</Work>
+
+<License rdf:about="http://creativecommons.org/licenses/GPL/2.0/">
+<permits rdf:resource="http://web.resource.org/cc/Reproduction" />
+   <permits rdf:resource="http://web.resource.org/cc/Distribution" />
+   <requires rdf:resource="http://web.resource.org/cc/Notice" />
+   <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+   <requires rdf:resource="http://web.resource.org/cc/ShareAlike" />
+   <requires rdf:resource="http://web.resource.org/cc/SourceCode" />
+</License>
+
+</rdf:RDF>
+
+-->
+
+	<form ACTION="index.php" METHOD="POST"><div>
+	<input TYPE="hidden" VALUE="Connections" NAME="Installing">
+	<input TYPE="submit" VALUE="I hearby have read and agreed to the License">
 	</form>
 	';
 }
@@ -59,56 +85,59 @@ function Connections2(){
 	}else{
 	mysql_select_db("$name", $con);
 	
-		$sql1 = "CREATE TABLE pp_config 
-	(
-	name varchar(225),
-	vids_per_page int(4),	
-	exerntalheader varchar(225),
-	externalheaderurl varchar(255),
-	header_height int(225),
-	logo varchar(255),
-	cssstyle varchar(225),
-	lang varchar(225),
-	version double
-	)";
-	$sql2 = "CREATE TABLE pp_files
-	(
-	id int(64)   not null auto_increment primary key,
-	name varchar(100),
-	creator varchar(64),
-	description longtext,
-	date date,
-	file varchar(36),
-	approved char(2),
-	feature char(2) NOT NULL default '0',
-	ip varchar(20),
-	picture varchar(60),
-	category varchar(20) NOT NULL default '0',
-	reject char(2) NOT NULL default '0',
-	views int(225) NOT NULL default '0'
-	)";
-	$sql3 = "CREATE TABLE pp_rating
-	(
-	id int(11),
-	total_votes int(225) NOT NULL default '0',
-	total_value int(225) NOT NULL default '0',
-	used_ips longtext
-	)";
+		$sql1 = "CREATE TABLE `pp_config` (
+  `name` varchar(225) default NULL,
+  `news` varchar(225) NOT NULL default 'Welcome!',
+  `vids_per_page` int(4) NOT NULL default '10',
+  `lang` varchar(225) NOT NULL default 'English',
+  `version` double NOT NULL,
+  `template` varchar(255) NOT NULL default 'Photine'
+)";
+	$sql2 = "CREATE TABLE `pp_files` (
+  `id` int(64) NOT NULL auto_increment,
+  `name` varchar(100) NOT NULL default '',
+  `video_type` varchar(225) NOT NULL default 'YouTube',
+  `creator` varchar(64) NOT NULL default '',
+  `description` longtext NOT NULL,
+  `date` date NOT NULL default '2007-01-01',
+  `file` varchar(255) NOT NULL,
+  `approved` char(2) NOT NULL default '',
+  `feature` char(2) NOT NULL default '0',
+  `ip` varchar(20) NOT NULL default '',
+  `picture` varchar(225) NOT NULL,
+  `category` varchar(225) NOT NULL default '0',
+  `reject` char(2) default '0',
+  `views` int(225) NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+)";
+	$sql3 = "CREATE TABLE `pp_rating` (
+  `id` int(11) NOT NULL,
+  `total_votes` int(225) NOT NULL default '0',
+  `total_value` int(225) NOT NULL default '0',
+  `used_ips` longtext NOT NULL,
+  PRIMARY KEY  (`id`)
+)";
+	$sql4 = "CREATE TABLE `pp_categories` (
+  `id` int(225) NOT NULL auto_increment,
+  `name` varchar(225) NOT NULL,
+  `disable` varchar(2) NOT NULL default '0',
+  `image` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+)";
 	mysql_query($sql1,$con);
 	mysql_query($sql2,$con);
 	mysql_query($sql3,$con);
+	mysql_query($sql4,$con);
 	
 	$filename = '../config.php';
 	$somecontent = '
 <?php
-if (defined("PHPdirector")){
 $cfg["db_host"] = "'.$host.'";
 $cfg["db_name"] = "'.$name.'";
 $cfg["db_user"] = "'.$username.'";
 $cfg["db_pass"] = "'.$password.'"; 
 $cfg["admin_user"] = "'.$ausername.'"; 
 $cfg["admin_pass"] = "'.$apassword.'"; 	
-}
 ?>';
 	if (is_writable($filename)) {
 		if (!$handle = fopen($filename, 'a')) {
@@ -137,38 +166,20 @@ $cfg["admin_pass"] = "'.$apassword.'";
 }
 
 function Options(){
-	echo'
-	<center><b>Everything is required, Nothing can be blank</b></center>
+	echo'<center><b>Everything is required, Nothing can be blank except News</b></center>
 	<p>
 	<pre>
-
-	<table border="0" width="auto" height="auto">
+	<table BORDER="0" WIDTH="auto" HEIGHT="auto">
 	<form action="complete_install.php" method="POST">
-	<tr><td>Name:</td><td><input type="text" value="PHP Director" name="name"></td></tr>
-	<tr><td>Videos Per Page:</td><td><input type="text" value="10" name="vids_per_page"></td></tr>
-	<tr><td>*Your own Header?:</td><td><input type="text" value="false" name="exerntalheader"></td></tr>
-	<tr><td>**Header URL:</td><td><input type="text" value="none" name="externalheaderurl"></td></tr>
-	<tr><td>**Header Height:</td><td><input type="text" value="0" name="header_height"></td></tr>
-	<tr><td>***Logo:</td><td><input type="text" value="default" name="logo"></td></tr>
-	<tr><td>CSS Url:</td><td><input type="text" value="css/style.css" name="cssstyle"></td></tr>
-	<tr><td>****Lang:</td><td><input type="text" value="English" name="lang"></td></tr>
-	<tr><td></td><td><tr><td><input type="hidden" name="Editing"></td><td>
-	<tr><td colspan="2"><center><input type="submit" value="Edit"></center></td></tr>
+	<tr><td>Name:</td><td><input TYPE="text" VALUE="Bens Videos" NAME="name"></td></tr>
+	<tr><td>Videos Per Page:</td><td><input TYPE="text" VALUE="10" NAME="vids_per_page"></td></tr>
+	<tr><td>News:</td><td><input TYPE="text" VALUE="PHP Director Just Installed" NAME="exerntalheader"></td></tr>
+	<tr><td>Lang:</td><td><input TYPE="text" VALUE="English" NAME="lang"></td></tr>
+	<tr><td></td><td><tr><td><input TYPE="hidden" NAME="Editing"></td><td>
+	<tr><td COLSPAN="2"><center><input TYPE="submit" VALUE="Edit"></center></td></tr>
 	</table>
 	</form>
-	<br>
-	<br>
-	<br>
-	</center>
-	* : If you have a header you would like instead of our type in the URL otherwish type false
-	<br>
-	** : If you have your own Header
-	<br>
-	*** : If default logo type in default otherwise type in URL
-	<br>
-	**** : English or German
-	</pre>	
-	';
+	</pre>';
 }
 ?>
 <?php

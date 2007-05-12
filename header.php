@@ -1,11 +1,4 @@
 <?php
-define("PHPdirector", 1);
-$filename = "installed.php";
-$handle = fopen($filename, "r");
-$contents = fread($handle, filesize($filename));
-if($contents == "<?phpNo?>"){
-	header("location: install/index.php");
-}
 require('libs/Smarty.class.php');
 require('libs/SmartyPaginate.class.php');
 include("db.php");
@@ -21,16 +14,25 @@ $smarty->compile_dir = './templates_c';
 $smarty->cache_dir = './cache';
 $smarty->config_dir = './configs';
 
-include("lang/".config('lang').".inc.php");
+include("lang/".config('lang'));
 
 $sort1 = $_GET['sort'];
 $page = $_GET['page'];
 $pagetype = $_GET["pt"];
 $smarty->assign('pagetype', $pagetype);
+$smarty->assign('next', $_GET["next"]);
 
 //NEWS//
 $news = config('news');
 $smarty->assign('news', $news);
 //NEWS//
 
+//Firefox?
+$HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'];
+if (!(strpos($HTTP_USER_AGENT,'Mozilla/5') === false)) {
+$smarty->assign('firefox', '1');
+} else {
+$smarty->assign('firefox', '0');
+}
+//Firefox? END
 ?>

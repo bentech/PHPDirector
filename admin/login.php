@@ -1,7 +1,8 @@
 <?php 
 ob_start(); 
 session_start(); 
-require_once ("functions.php"); 
+
+require_once ("admin_header.php"); 
 $returnurl = urlencode(isset($_GET["returnurl"])?$_GET["returnurl"]:""); 
 if($returnurl == "") 
     $returnurl = urlencode(isset($_POST["returnurl"])?$_POST["returnurl"]:""); 
@@ -12,28 +13,7 @@ switch($do)
 case "": 
     if (checkLoggedin()) 
     { 
-        echo "<H1>You are already logged in - <A href = \"login.php?do=logout\">logout</A></h1>"; 
-    } 
-    else 
-    { 
-        ?> 
-        <form NAME="login1" ACTION="login.php?do=login" METHOD="POST" ONSUBMIT="return aValidator();"> 
-        <TABLE cellspacing="3"> 
-        <TR> 
-            <TD>Username:</TD> 
-            <TD><input TYPE="TEXT" NAME="username"></TD> 
-            <TD>Password:</TD> 
-            <TD><input TYPE="PASSWORD" NAME="password"></TD> 
-        </TR> 
-        <TR> 
-            <TD colspan="4" ALIGN="center"><input TYPE="CHECKBOX" NAME="remme">&nbsp;Remember me for the next time I visit</TD> 
-        </TR> 
-        <TR> 
-            <TD ALIGN="CENTER" COLSPAN="4"><input TYPE="SUBMIT" name="submit" value="Login"></TD> 
-        </TR> 
-        </form> 
-        </TABLE> 
-    <?php
+        $smarty->assign('error', 'You are already logged in.'); 
     } 
     break; 
 case "login": 
@@ -41,7 +21,7 @@ case "login":
     $password = isset($_POST["password"])?$_POST["password"]:""; 
     if ($username=="" or $password=="" ) 
     { 
-        echo "<h1>Username or password is blank</h1>"; 
+       $smarty->assign('error', 'Username or password is blank.');
         clearsessionscookies(); 
         header("location: login.php"); 
     } 
@@ -54,7 +34,7 @@ case "login":
         } 
         else 
         { 
-            echo "<h1>Invalid Username and/Or password</h1>"; 
+		$smarty->assign('error', 'Invalid Username and/Or password.');
             clearsessionscookies(); 
             header("location: login.php"); 
         } 
@@ -64,4 +44,6 @@ case "logout":
     header("location: logout.php"); 
     break; 
 } 
+
+$smarty->display("login.tpl");
 ?>

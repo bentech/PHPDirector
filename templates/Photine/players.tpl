@@ -8,7 +8,7 @@
 
 {elseif $vidtype eq "dailymotion"}
 
-<div><object width="425" height="335"><param name="movie" value="http://www.dailymotion.com/swf/{$dmid}"></param><param name="allowfullscreen" value="true"></param><embed src="http://www.dailymotion.com/swf/{if $dmid eq ""}{$videoid}{else}{$dmid}{/if}" type="application/x-shockwave-flash" width="425" height="334" allowfullscreen="true"></embed></object></div>
+<div><object width="425" height="335"><param name="movie" value="http://www.dailymotion.com/swf/{if $video[video].file eq ""}{$videoid}{else}{$video[video].file}{/if}"></param><param name="allowfullscreen" value="true"></param><embed src="http://www.dailymotion.com/swf/{if $video[video].file eq ""}{$videoid}{else}{$video[video].file}{/if}" type="application/x-shockwave-flash" width="425" height="334" allowfullscreen="true"></embed></object></div>
 
 {else}
 This video type is currently unsuppotred

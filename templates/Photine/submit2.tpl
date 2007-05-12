@@ -28,18 +28,23 @@ function checkform()
 }</script>
 {/literal}
 <div align="center">
+<form action="submit.php?pt=submit&amp;part=3" method="post" name="video" onSubmit="return checkform()">
 	<!--Center Page-->
-	<h3><b>Source</b>:{$source}</h3>
+	<h3><b>Source</b>:{$source}
+	</h3>
 	<!--Source Of Media-->
 	<b>Confirm Default Screenshot</b>
-	<form action="submit.php?pt=submit&part=3" method="post" name="video" onSubmit="return checkform()">
+	<input name="videoid" type="hidden" value="{$videoid}" />
+	<input name="vidtype" type="hidden" value="{$vidtype}" />
+	<input name="file2" type="hidden" value="{$file2}" />
+	
 		<table width="136" border="0">
 			<!--Shows All The Images-->
 			<tr> {section name=default loop=$image}
 				<td  align="center" width="130"><img src="{$image[default]}" alt="{$title}" width="130" height="97" /> </td>
 				{/section} </tr>
 			<tr> {section name=default loop=$image}
-				<td align="center"><input name="picture" type="radio" value="{$image[default]}" />
+				<td align="center"><input name="picture" type="radio" value="{$image[default]}" checked="checked" />
 				</td>
 				{/section} </tr>
 		</table>

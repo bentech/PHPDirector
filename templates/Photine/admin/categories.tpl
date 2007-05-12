@@ -1,26 +1,29 @@
 {include file="admin_header.tpl"}
-<h2 align="center">{$admin_42}<br><br></h2>
-<h3 align='center'>{$admin_43}</h3>
-<center>
-<form action="categories.php?pt=categories&pag=options" method="POST">
-<pre>
-<table border="0" width="auto" height="auto">
-<h3 align='center'>{$error}</h3>
-<tr><td>{$admin_43}:</td><td><input type="text" name="add"></td><td><center><input type="submit" value="Add"></center></td></tr>
-</table>
+<h2 align="center">{$LAN_40}<br></h2>
+<h3 align="center">{$error}<br></h3>
+<center><form action="categories.php?pt=categories&pag=options" method="POST"><pre><input type="text" name="add" /><input name="submit" type="submit" value="Add" /></form>
 </pre>
-</form>
-<br>
-<h3 align='center'>{$admin_21}</h3>
+<br />
+<h3 align='center'>{$LAN_65}</h3>
 
-<table border='0' cellpadding='10'>
-<pre>
+<table width="410" border='0' cellpadding='10'>
+<tr><td width="113"></td><td width="79" align="center"><a href='categories.php?pt=categories&pag=options&del={$cat[cat].id}'></a>
+{$LAN_4}</td>
+	<td width="79" align="center"></td>
+	<td width="242"></td>
+</tr>
+
 {section name=cat loop=$cat}
-<tr><td>{$cat[cat].name}&nbsp;&nbsp;&nbsp;</td><td><a href='categories.php?pt=categories&pag=options&del={$cat[cat].id}'>{$admin_21}</a></td></tr>
+<form action="categories.php?pt=categories&pag=options" method="POST">
+<tr><td width="113"><input name="name" type="text" value="{$cat[cat].name}" size="25" /></td><td width="79">
+	<input name="image" type="text" value="{$cat[cat].image}" size="25" /></td>
+	<td width="79"><input name="imageid" type="hidden" value="{$cat[cat].id}" />	<input type="submit" name="Submit" value="Update" />
+	</form></td>
+	<td width="242"><a href='categories.php?pt=categories&amp;pag=options&amp;del={$cat[cat].id}'>{$LAN_56}</a>
+		</td></tr>
 {/section}
-</pre>
 </table>
-<br>
+</p>
 </center>
 </pre>
 </body>
