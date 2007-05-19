@@ -67,7 +67,7 @@ return $yt_description;
  *
  * @param Youtube Id
  * @return $yt_view_count
- */
+ *//*
 function getviewcount($videoid){
 $yt_xml_view_count_string = @file_get_contents("http://www.youtube.com/api2_rest?method=youtube.videos.get_details&dev_id=BnvzCjJ_Bzw&video_id=".$videoid);
 $yt_xml_view_count_start = explode("<view_count>",$yt_xml_view_count_string,2);
@@ -75,6 +75,7 @@ $yt_xml_view_count_end = explode("</view_count>",$yt_xml_view_count_start[1],2);
 $yt_view_count = $yt_xml_view_count_end[0];
 return $yt_view_count;
 }
+*/
 //check if its allready there
 
 //$videourl is the input link eg http://www.youtube.com/watch?v=VflOBMTZiQw

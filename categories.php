@@ -1,4 +1,13 @@
 <?php
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GPL General Public License
+|		$Website: phpdirector.co.uk
+|		$Author: Ben Swanson
+|		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
++----------------------------------------------------------------------------+
+*/
 require("header.php");
 
 
@@ -18,7 +27,7 @@ while ($row_cat = mysql_fetch_array($query_categories)) {
 $cat_id = $row_cat['id'];
 //gets info from first media file
 if ($row_cat['image'] == null){
-$query_files = mysql_query("SELECT * FROM pp_files WHERE category = $cat_id");
+$query_files = mysql_query("SELECT * FROM pp_files WHERE category = $cat_id AND approved = '1'");
 $row_file = mysql_fetch_array($query_files);
 $picture = $row_file['picture'];
 }else{

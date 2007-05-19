@@ -1,4 +1,13 @@
 <?php 
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GPL General Public License
+|		$Website: phpdirector.co.uk
+|		$Author: Ben Swanson
+|		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
++----------------------------------------------------------------------------+
+*/
 ob_start(); 
 session_start(); 
 
@@ -23,20 +32,18 @@ case "login":
     { 
        $smarty->assign('error', 'Username or password is blank.');
         clearsessionscookies(); 
-        header("location: login.php"); 
     } 
     else 
     { 
         if(confirmuser($username,$password)) 
         { 
             createsessions($username,$password); 
-                header("Location: index.php"); 
+			header("Location: index.php");
         } 
         else 
         { 
 		$smarty->assign('error', 'Invalid Username and/Or password.');
             clearsessionscookies(); 
-            header("location: login.php"); 
         } 
     } 
     break; 

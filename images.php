@@ -1,4 +1,13 @@
 <?php
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GPL General Public License
+|		$Website: phpdirector.co.uk
+|		$Author: Ben Swanson
+|		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
++----------------------------------------------------------------------------+
+*/
 require("header.php");
 $query = "SELECT * FROM pp_files WHERE approved='1' AND reject='0' ORDER BY RAND()";
 $query_count = mysql_query($query);

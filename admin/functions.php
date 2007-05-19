@@ -1,5 +1,13 @@
-<?php 
-
+<?php
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GPL General Public License
+|		$Website: phpdirector.co.uk
+|		$Author: Ben Swanson
+|		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
++----------------------------------------------------------------------------+
+*/
 function createsessions($username,$password) 
 { 
     //Add additional member to Session array as per requirement 
@@ -14,6 +22,7 @@ function createsessions($username,$password)
         setcookie("gdpassword", $_SESSION['gdpassword'], time()+60*60*24*100, "/"); 
         return; 
     } 
+
 } 
 function clearsessionscookies() 
 { 
@@ -29,10 +38,13 @@ function confirmUser($username,$password)
 { 
     $md5pass = md5($password); 
     /* Validate from the database but as for now just demo username and password */ 
-    if($username == "demo" && $password == "demo") 
+	include("../config.php");
+	$username1 = $cfg["admin_user"];
+    if($username == $username1 && $password == $cfg["admin_pass"]) {
         return true; 
-    else 
+    }else{ 
         return false; 
+	}
 } 
 function checkLoggedin() 
 { 

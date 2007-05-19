@@ -1,4 +1,13 @@
 <?php 
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GPL General Public License
+|		$Website: phpdirector.co.uk
+|		$Author: Ben Swanson
+|		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
++----------------------------------------------------------------------------+
+*/
 $id = $_GET["id"];
 $page = $_GET['page'];
 $text = $_GET["text"];

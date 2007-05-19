@@ -42,8 +42,8 @@
 <ul id="admin-submenu">
 {if $pag eq "vid"}
 <li {if $pagetype eq "all"}class='selected'{/if}<a href="admin_manage.php?pt=all&pag=vid">{$LAN_43}</a></li>
-<li {if $pagetype eq "approve"}class='selected'{/if}><a href="admin_manage.php?pt=approve&amp;pag=vid&amp;next=1">{$LAN_44}</a></li>
 <li {if $pagetype eq "feature"}class='selected'{/if}><a href="admin_manage.php?pt=feature&amp;pag=vid&amp;next=1">{$LAN_45}</a></li>
+<li {if $pagetype eq "approve"}class='selected'{/if}><a href="admin_manage.php?pt=approve&amp;pag=vid&amp;next=1">{$LAN_44}</a></li>
 <li {if $pagetype eq "rejected"}class='selected'{/if}><a href="admin_manage.php?pt=rejected&amp;pag=vid&amp;next=1">{$LAN_46}</a></li>
 <li {if $pagetype eq "easyapprove"}class='selected'{/if}><a href="admin_videos.php?pt=easyapprove&amp;pag=vid">{$LAN_47}</a></li>
 {/if}

@@ -58,6 +58,8 @@
 {/if}
 {if $video[video].featured eq "0"}
 <p><a href='?id={$video[video].id}&what=feature&pt={$pagevalue}&page={$page}&pag=vid'>{$LAN_53}</a></p>
+{else}
+<p><a href='?id={$video[video].id}&what=unfeature&pt={$pagevalue}&page={$page}&pag=vid'>Un{$LAN_53}</a></p>
 {/if}
 {if $video[video].rejected eq "0"}<p><a href='?id={$video[video].id}&what=reject&pt={$pagevalue}&page={$page}&pag=vid'>{$LAN_54}</a>
 {$LAN_55}{else}<p>{/if}

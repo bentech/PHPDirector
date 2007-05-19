@@ -54,12 +54,12 @@ if ($_GET["pt"] == "all") {
             SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }elseif (isset($_GET["cat"])) {
 $cat = $_GET["cat"];
-		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `category` = '$cat' ORDER BY $sort $order1 LIMIT %d,%d",
+		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `category` = '$cat' AND `approved` = '1' ORDER BY $sort $order1 LIMIT %d,%d",
             SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }elseif (isset($_POST["searching"])){
 		
 		$search = $_POST[searching];
-		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `name` like '%%$search%%' ORDER BY $sort $order1 LIMIT %d,%d",
+		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `name` like '%%$search%%' AND `approved` = '1' ORDER BY $sort $order1 LIMIT %d,%d",
             SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }else{
 		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `reject` = '0' ORDER BY $sort $order1 LIMIT %d,%d",

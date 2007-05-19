@@ -1,4 +1,13 @@
 <?php
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GPL General Public License
+|		$Website: phpdirector.co.uk
+|		$Author: Ben Swanson
+|		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
++----------------------------------------------------------------------------+
+*/
 // Prevent SQL Injections!
 function safe_sql_insert($variable) {
 $variable = mysql_real_escape_string(htmlentities($variable));

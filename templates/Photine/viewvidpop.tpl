@@ -4,6 +4,8 @@
 		{$LAN_26}
 		{/if}
 	{include file="players.tpl"}<br />
+	<script type="text/javascript" language="javascript" src="js/behavior.js"></script>
+<script type="text/javascript" language="javascript" src="js/rating.js"></script>
 	{rating_bar units='5' id=$video[video].id}<span class="redsmall">Rate To Close</span><br />
 	
 		<b>{$LAN_36}: </b>{$video[video].creator} <br />

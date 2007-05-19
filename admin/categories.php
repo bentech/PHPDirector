@@ -2,9 +2,10 @@
 /*
 + ----------------------------------------------------------------------------+
 |     PHPDirector.
-|		$License: GNU General Public License
+|		$License: GPL General Public License
 |		$Website: phpdirector.co.uk
-|		$author: Ben Swanson
+|		$Author: Ben Swanson
+|		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
 +----------------------------------------------------------------------------+
 */
 ob_start(); 

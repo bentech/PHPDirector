@@ -1,7 +1,7 @@
 {include file="admin_header.tpl"}
 <h2 align="center">{$LAN_48}</h2>
 <form action="options.php?pt=options&pag=options" method="POST">
-	<p>{$LAN_59}
+	<p>
 		{section name=options loop=$options}</p>
 	<p align="center"> {$LAN_33}<br />
 		<input name="name" type="text" value="{$options[options].name}" size="30" maxlength="200" />
