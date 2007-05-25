@@ -24,7 +24,7 @@
 <div style='border:3px dashed #808080; position: absolute; z-index: 1; left: 200px; top: 350px; padding-left:4px; padding-right:4px; padding-top:1px; padding-bottom:1px;' id='layer1'>
 
 {if $video[video].approved eq "0"}
-<a href='?{if $pt eq "approve"}id={$video[video].id}&amp;{/if}what=feature&amp;pag=vid&amp;pt={$pt}&amp;id={$id}'>{$LAN_52}</a>
+<a href='?{if $pt eq "approve"}id={$video[video].id}&amp;{/if}what=approve&amp;pag=vid&amp;pt={$pt}&amp;id={$id}'>{$LAN_52}</a>
 {/if}
 
 {if $video[video].feature eq "0"}

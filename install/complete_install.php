@@ -9,11 +9,11 @@ if(isset($_POST["Editing"])){
 	include("../includes/function.inc.php");
 	$connect1 = mysql_connect($cfg["db_host"], $cfg["db_user"], $cfg["db_pass"]);
 	mysql_select_db($cfg["db_name"], $connect1) or die(mysql_error());
-	mysql_query("INSERT INTO pp_config (name, vids_per_page, exerntalheader, externalheaderurl, header_height, logo, cssstyle, lang, version) 
-VALUES ('$_POST[name]', '$_POST[vids_per_page]', '$_POST[exerntalheader]', '$_POST[externalheaderurl]', '$_POST[header_height]', '$_POST[logo]', '$_POST[cssstyle]', '$_POST[lang]', '0.1')");
+	mysql_query("INSERT INTO pp_config (name, news, vids_per_page, version) 
+VALUES ('$_POST[name]', '$_POST[news]', '$_POST[vids_per_page]', '0.2')");
 
 $filename = '../installed.php';
-$somecontent = "Yes";
+$somecontent = "Yes;";
 
 // Let's make sure the file exists and is writable first.
 if (is_writable($filename)) {
@@ -32,7 +32,9 @@ if (is_writable($filename)) {
        exit;
    }
 
-   echo "You have succesfuly installed PHPDirector now you can feel free to delete the install folder if you want to.<p><a href='../admin/'>This is a link to the admin section if you forget the url just look into the readme file</a><p>";
+   echo "<p>You have sucesfully installed PHP Director</p>
+<p>You must Delete the install folder now.</p>
+<p>You can visit the <a href=\"../admin\">admin section </a> where i recommend you add a category </p>";
 
    fclose($handle);
 

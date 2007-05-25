@@ -6,7 +6,7 @@
 	<!--ROWS EG change max=???-->
 	<tr> {section name=images loop=$images start=$smarty.section.i.index max=6}
 		<!-- COLUMNS EG change max=??? to the ammount and step=??? to the same ammount-->
-		<td><a href="videos.php?id={$images[images].id}"><img src="{$images[images].picture}" align="center" border="0" height="97" width="130" alt="" {if $firefox eq "1"}class="reflect rheight20 ropacity50"{/if}/></a></td>
+		<td align="center"><a href="videos.php?id={$images[images].id}"><img src="{$images[images].picture}" border="0" height="97" width="130" alt="" {if $firefox eq "1"}class="reflect rheight20 ropacity50"{/if}/></a></td>
 		{/section} </tr>
 	{/section}
 </table>

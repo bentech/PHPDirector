@@ -9,8 +9,7 @@
 +----------------------------------------------------------------------------+
 */
 include("header.php");
-?>
-<?php
+
 function Install(){
 	echo'Welcome Php Director Install
 	<form action="index.php" method="POST"><div>
@@ -19,10 +18,11 @@ function Install(){
 	</form></p>
 	';	
 }
+
 function License(){
 	echo'
-
-<!-- Creative Commons License -->
+<br /><br />
+<!-- Creative Commons License --><br /><br /><br /><br />
 <a href="http://creativecommons.org/licenses/GPL/2.0/">
 <img alt="CC-GNU GPL" border="0" src="http://creativecommons.org/images
 /public/cc-GPL-a.png" /></a><br />
@@ -51,30 +51,31 @@ This software is licensed under the <a href="http://creativecommons.org/licenses
 </rdf:RDF>
 
 -->
-
+<br /><br /><br /><br /><br /><br />
 	<form ACTION="index.php" METHOD="POST"><div>
-	<input TYPE="hidden" VALUE="Connections" NAME="Installing">
+	<input type="hidden" value="Connections" name="Installing">
 	<input TYPE="submit" VALUE="I hearby have read and agreed to the License">
-	</form>
+	</form>	
 	';
 }
+
 function Connections(){
 	echo'
 	<p>
 <div align="center">
 <form action="index.php"  method="POST">
 <input type="hidden" value="Connections2" name="Installing">
-<div>Database Host:<input name="Host" type="text" size="50"><br />
+<div>Database Host:<input name="Host" type="text" size="50" value="localhost" ><br />
 Database Username:<input name="Username" type="text" size="50"><br />
 Database Password:<input name="Password" type="password" size="50"><br />
 Database Name:<input name="Name" type="text" size="50"><br />
 Admin Username:<input name="AUsername" type="text" size="50"><br />
 Admin Password:<input name="Apassword" type="password" size="50"><br />
-<input type="submit" value="Create Mysql Table">
-	  </div>
-	</form></p>
+<input type="submit" value="Create Mysql Table"> </div>
+</form></p>
 	';
 }
+
 function Connections2(){
 	$host = $_POST["Host"];
 	$username = $_POST["Username"];
@@ -98,7 +99,7 @@ function Connections2(){
   `name` varchar(225) default NULL,
   `news` varchar(225) NOT NULL default 'Welcome!',
   `vids_per_page` int(4) NOT NULL default '10',
-  `lang` varchar(225) NOT NULL default 'English',
+  `lang` varchar(225) NOT NULL default 'en-gb.inc.php',
   `version` double NOT NULL,
   `template` varchar(255) NOT NULL default 'Photine'
 )";
@@ -110,6 +111,7 @@ function Connections2(){
   `description` longtext NOT NULL,
   `date` date NOT NULL default '2007-01-01',
   `file` varchar(255) NOT NULL,
+  `file2` varchar(255) NOT NULL,
   `approved` char(2) NOT NULL default '',
   `feature` char(2) NOT NULL default '0',
   `ip` varchar(20) NOT NULL default '',
@@ -140,7 +142,14 @@ function Connections2(){
 	
 	$filename = '../config.php';
 	$somecontent = '
-<?php
+<?php/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector Config File
+|		$License: GPL General Public License
+|		$Website: phpdirector.co.uk
+|		$Author: Ben Swanson
++----------------------------------------------------------------------------+
+*/
 $cfg["db_host"] = "'.$host.'";
 $cfg["db_name"] = "'.$name.'";
 $cfg["db_user"] = "'.$username.'";
@@ -175,20 +184,17 @@ $cfg["admin_pass"] = "'.$apassword.'";
 }
 
 function Options(){
-	echo'<center><b>Everything is required, Nothing can be blank except News</b></center>
-	<p>
-	<pre>
+	echo'
+	<br /><br /><br /><br /><br /><br /><br /><br /><br />
 	<table BORDER="0" WIDTH="auto" HEIGHT="auto">
 	<form action="complete_install.php" method="POST">
 	<tr><td>Name:</td><td><input TYPE="text" VALUE="Bens Videos" NAME="name"></td></tr>
 	<tr><td>Videos Per Page:</td><td><input TYPE="text" VALUE="10" NAME="vids_per_page"></td></tr>
-	<tr><td>News:</td><td><input TYPE="text" VALUE="PHP Director Just Installed" NAME="exerntalheader"></td></tr>
-	<tr><td>Lang:</td><td><input TYPE="text" VALUE="English" NAME="lang"></td></tr>
-	<tr><td></td><td><tr><td><input TYPE="hidden" NAME="Editing"></td><td>
-	<tr><td COLSPAN="2"><center><input TYPE="submit" VALUE="Edit"></center></td></tr>
+	<tr><td>News:</td><td><input TYPE="text" VALUE="PHP Director Just Installed" NAME="news"></td></tr>
+	<tr><td></td><td><tr><td>&nbsp;</td><td>
+	<tr><td COLSPAN="2"><center><input TYPE="hidden" NAME="Editing"><input TYPE="submit" VALUE="Edit"></center></td></tr>
 	</table>
-	</form>
-	</pre>';
+	</form>';
 }
 ?>
 <?php

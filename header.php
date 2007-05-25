@@ -8,6 +8,18 @@
 |		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
 +----------------------------------------------------------------------------+
 */
+
+//Installed?
+$filename = "installed.php";
+$handle = fopen($filename, "r");
+$contents = fread($handle, filesize($filename));
+fclose($handle);
+$explode_cont = explode(";", $contents);
+if ($explode_cont[1] !== "Yes"){
+header("Location: install/index.php");
+}
+//Installed?
+
 require('libs/Smarty.class.php');
 require('libs/SmartyPaginate.class.php');
 include("db.php");
