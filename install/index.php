@@ -142,7 +142,8 @@ function Connections2(){
 	
 	$filename = '../config.php';
 	$somecontent = '
-<?php/*
+<?php
+/*
 + ----------------------------------------------------------------------------+
 |     PHPDirector Config File
 |		$License: GPL General Public License
@@ -158,7 +159,7 @@ $cfg["admin_user"] = "'.$ausername.'";
 $cfg["admin_pass"] = "'.$apassword.'"; 	
 ?>';
 	if (is_writable($filename)) {
-		if (!$handle = fopen($filename, 'a')) {
+		if (!$handle = fopen($filename, 'w')) {
 			echo "Cannot write to file please set permissions to 777";
 			exit;
 	}

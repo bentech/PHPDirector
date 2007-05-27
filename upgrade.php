@@ -197,6 +197,7 @@ define("PHPdirector", 1);
 mysql_query("ALTER TABLE `pp_config` DROP `exerntalheader`, DROP `externalheaderurl`, DROP `header_height`, DROP `cssstyle`, DROP `logo`;");
 mysql_query("ALTER TABLE `pp_config` ADD `news` VARCHAR(255) NOT NULL");
 mysql_query("ALTER TABLE `pp_config` ADD `news` VARCHAR(255) NOT NULL");
+mysql_query("ALTER TABLE `pp_config` ADD `video_type` VARCHAR(255) NOT NULL");
 mysql_query("ALTER TABLE `pp_config` ADD `template` VARCHAR(255) NOT NULL");
 mysql_query("UPDATE `pp_config` SET `version` = '0.2'");
 mysql_query("UPDATE `pp_config` SET `template` = 'Photine'");
