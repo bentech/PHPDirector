@@ -251,17 +251,25 @@ margin-top: expression(0 - parseInt(this.offsetHeight / 2) + (TBWindowMargin = d
   margin-top:1px;
   _margin-bottom:1px;
 }
-/*  styles for the unit rater     */
+/*  styles for the unit rater
+--------------------------------------------------------- 
+ryan masuga, masugadesign.com
+ryan@masugadesign.com 
+Licensed under a Creative Commons Attribution 3.0 License.
+http://creativecommons.org/licenses/by/3.0/
+See readme.txt for full credit details.
+--------------------------------------------------------- */
+
 .ratingblock {
-	width: 50%;
 	display:block;
+	border-bottom:1px solid #999;
 	padding-bottom:8px;
 	margin-bottom:8px;
 	}
 
 .loading {
 	height: 30px;
-	background: url('images/working.gif') 50% 50% no-repeat;
+	background: url('../images/working.gif') 50% 50% no-repeat;
 	}
 	
 .unit-rating { /* the UL */
@@ -270,7 +278,7 @@ margin-top: expression(0 - parseInt(this.offsetHeight / 2) + (TBWindowMargin = d
 	padding:0px;
 	height: 30px;
 	position: relative;
-	background: url('images/starrating.gif') top left repeat-x;		
+	background: url('../images/starrating.gif') top left repeat-x;		
 	}
 
 .unit-rating li{
@@ -295,7 +303,7 @@ margin-top: expression(0 - parseInt(this.offsetHeight / 2) + (TBWindowMargin = d
 	}
 	
 .unit-rating li a:hover{
-	background: url('images/starrating.gif') left center;
+	background: url('../images/starrating.gif') left center;
 	z-index: 2;
 	left: 0px;
 	}
@@ -322,8 +330,8 @@ margin-top: expression(0 - parseInt(this.offsetHeight / 2) + (TBWindowMargin = d
 .unit-rating a.r10-unit:hover{width: 300px;}
 
 .unit-rating li.current-rating {
-	background: url('images/starrating.gif') left bottom;
-	position: center;
+	background: url('../images/starrating.gif') left bottom;
+	position: absolute;
 	height: 30px;
 	display: block;
 	text-indent: -9000px;
@@ -332,8 +340,4 @@ margin-top: expression(0 - parseInt(this.offsetHeight / 2) + (TBWindowMargin = d
 
 .voted {color:#999;}
 .thanks {color:#36AA3D;}
-.Warning {
-	color: #FF0000;
-	font-size: 12px;
-	font-style: italic;
-}
+.static {color:#5D3126;}		

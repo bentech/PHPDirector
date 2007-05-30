@@ -55,7 +55,6 @@ function smarty_function_rating_bar($params, &$smarty) {
 	$units		=	$params['units'];
 	$recordUrl	=	$params['recordUrl'];
 	$id			=	$params['id'];
-	if (empty($id)) $id	 = "error";
 	$static		=	$params['static'];
 	
 	$query=mysql_query("SELECT total_votes, total_value, used_ips FROM $rating_dbname.$tableName WHERE $tableID='$id' ")or die(" Error: ".mysql_error());
@@ -88,11 +87,12 @@ function smarty_function_rating_bar($params, &$smarty) {
 	if ($static == 'static') {
 	
 		$static_rater = array();
+		$static_rater[] .= "\n".'<div class="ratingblock">';
 		$static_rater[] .= '<div id="unit_long'.$id.'">';
 		$static_rater[] .= '<ul id="unit_ul'.$id.'" class="unit-rating" style="width:'.$gerth.'px;">';
 		$static_rater[] .= '<li class="current-rating" style="width:'.$rating_width.'px;">Currently '.$rating2.'/'.$units.'</li>';
 		$static_rater[] .= '</ul>';
-		$static_rater[] .= '<div class="static">Rating: <strong> '.$rating1.'</strong>/'.$units.' ('.$count.' '.$tense.' cast) <em>This is \'static\'.</em></div>';
+		$static_rater[] .= '<p class="static">'.$id.'. Rating: <strong> '.$rating1.'</strong>/'.$units.' ('.$count.' '.$tense.' cast) <em>This is \'static\'.</em></p>';
 		$static_rater[] .= '</div>';
 		$static_rater[] .= '</div>'."\n\n";
 		
@@ -115,10 +115,10 @@ function smarty_function_rating_bar($params, &$smarty) {
 		$ncount=0; // resets the count
 		
 		$rater.='  </ul>';
-		$rater.='  <div';
+		$rater.='  <p';
 		if($voted){ $rater.=' class="voted"'; }
-		$rater.='>Rating: <strong> '.$rating1.'</strong>/'.$units.' ('.$count.' '.$tense.' cast)';
-		$rater.='  </div>';
+		$rater.='>'.$id.' Rating: <strong> '.$rating1.'</strong>/'.$units.' ('.$count.' '.$tense.' cast)';
+		$rater.='  </p>';
 		$rater.='</div>';
 		$rater.='</div>';
 		return $rater;
