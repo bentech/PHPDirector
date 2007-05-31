@@ -133,20 +133,22 @@ width:200px;
 </ul>
 <div align="center">
 <?php
+function Install(){
+define("PHPdirector", 1);
 require("db.php");
 	$confresult = mysql_query("SELECT * FROM pp_config");
-	$row = mysql_fetch_array($confresult);
-function Install(){
-	//if($row[version] == "0.1"){
+	$row1 = mysql_fetch_array($confresult);
+	
+	if($row1["version"] == "0.1"){
 	echo'Welcome Php Director Upgrader<br />
 	<form action="upgrade.php" method="POST"><div>
 	<input type="hidden" value="License" name="Installing">
 	<input type="submit" value="Upgrade"></div>
 	</form></p>
 	';
-	//}else{
+	}else{
 	echo "Wrong Version";
-	//}
+	}
 }
 
 function License(){
@@ -192,12 +194,16 @@ Cliking this will also start the upgrade process
 
 function Upgrade(){
 define("PHPdirector", 1);
+require("db.php");
 
 //CONFIG
-mysql_query("ALTER TABLE `pp_config` DROP `exerntalheader`, DROP `externalheaderurl`, DROP `header_height`, DROP `cssstyle`, DROP `logo`;");
+mysql_query("ALTER TABLE `pp_config` DROP `exerntalheader");
+mysql_query("ALTER TABLE `pp_config` DROP `externalheaderurl`");
+mysql_query("ALTER TABLE `pp_config` DROP `header_height`");
+mysql_query("ALTER TABLE `pp_config` DROP DROP `cssstyle`");
+mysql_query("ALTER TABLE `pp_config` DROP `logo`");
 mysql_query("ALTER TABLE `pp_config` ADD `news` VARCHAR(255) NOT NULL");
 mysql_query("ALTER TABLE `pp_config` ADD `news` VARCHAR(255) NOT NULL");
-mysql_query("ALTER TABLE `pp_config` ADD `video_type` VARCHAR(255) NOT NULL");
 mysql_query("ALTER TABLE `pp_config` ADD `template` VARCHAR(255) NOT NULL");
 mysql_query("UPDATE `pp_config` SET `version` = '0.2'");
 mysql_query("UPDATE `pp_config` SET `template` = 'Photine'");
@@ -206,6 +212,7 @@ mysql_query("UPDATE `pp_config` SET `template` = 'Photine'");
  
 mysql_query("ALTER TABLE `pp_files` CHANGE `category` `category` VARCHAR( 255 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '0'");
 mysql_query("ALTER TABLE `pp_files` ADD `file2` VARCHAR(255) NOT NULL");
+mysql_query("ALTER TABLE `pp_files` ADD `video_type` VARCHAR(255) NOT NULL");
 
 //Categories
 
@@ -250,10 +257,14 @@ $cfg["admin_pass"] = "'.$cfg[admin_pass].'";
 	} else {
 		echo "Cannot write to file please change permissions";
 	}
-	if($row[template] == "Photine"){
 	
-	echo"<br />Success<br /><b>VERY IMPORTANT-</b> Must delete upgrade.php and install director if there";
-	}else{echo"<br />Failed -mysql conumications- Please see phpdirector forums";
+	$confresult = mysql_query("SELECT * FROM pp_config");
+	$row1 = mysql_fetch_array($confresult);
+	if($row1[template] == "Photine"){
+	
+	echo"<br />Success<br /><b>VERY IMPORTANT-</b> Must delete upgrade.php and install director if there<br /><a href='../'>Goto Site</a>";
+	}else{
+	echo"<br />Failed -mysql conumications- Please see phpdirector forums <br /> <a href='../'>Check Anyway?</a>";
 	}
 	}
 

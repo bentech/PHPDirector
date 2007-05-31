@@ -8,9 +8,6 @@ does NOT have Javascript enabled.
 --------------------------------------------------------- 
 ryan masuga, masugadesign.com
 ryan@masugadesign.com 
-Licensed under a Creative Commons Attribution 3.0 License.
-http://creativecommons.org/licenses/by/3.0/
-See readme.txt for full credit details.
 --------------------------------------------------------- */
 header("Cache-Control: no-cache");
 header("Pragma: nocache");
@@ -27,7 +24,7 @@ $referer  = $_SERVER['HTTP_REFERER'];
 if ($vote_sent > $units) die("Sorry, vote appears to be invalid."); // kill the script because normal users will never see this.
 
 //connecting to the database to get some information
-$query = mysql_query("SELECT total_votes, total_value, used_ips FROM $rating_dbname.$rating_tableName WHERE id='$id_sent' ")or die(" Error: ".mysql_error());
+$query = mysql_query("SELECT total_votes, total_value, used_ips FROM $rating_dbname.$rating_tableName WHERE $rating_tableID='$id_sent' ")or die(" Error: ".mysql_error());
 $numbers = mysql_fetch_assoc($query);
 $checkIP = unserialize($numbers['used_ips']);
 $count = $numbers['total_votes']; //how many votes total
@@ -44,15 +41,15 @@ $tense = ($count==1) ? "vote" : "votes"; //plural form votes/vote
 $insertip=serialize($checkIP);
 
 //IP check when voting
-$voted=mysql_num_rows(mysql_query("SELECT used_ips FROM $rating_dbname.$rating_tableName WHERE used_ips LIKE '%".$ip."%' AND id='".$id_sent."' "));
+$voted=mysql_num_rows(mysql_query("SELECT used_ips FROM $rating_dbname.$rating_tableName WHERE used_ips LIKE '%".$ip."%' AND $rating_tableID='".$id_sent."' "));
 if(!$voted) {     //if the user hasn't yet voted, then vote normally...
 
-
-if (($vote_sent >= 1 && $vote_sent <= $units) && ($ip == $ip_num)) { // keep votes within range
-	$update = "UPDATE $rating_dbname.$rating_tableName SET total_votes='".$added."', total_value='".$sum."', used_ips='".$insertip."' WHERE id='$id_sent'";
-	$result = mysql_query($update);		
-} 
-header("Location: $referer"); // go back to the page we came from 
-exit;
+	if (($vote_sent >= 1 && $vote_sent <= $units) && ($ip == $ip_num)) { // keep votes within range
+		$update = "UPDATE $rating_dbname.$rating_tableName SET total_votes='".$added."', total_value='".$sum."', used_ips='".$insertip."' WHERE $rating_tableID='$id_sent'";
+		$result = mysql_query($update);		
+	} 
+	header("Location: $referer"); // go back to the page we came from 
+	exit;
 } //end for the "if(!$voted)"
+mysql_close($rating_conn);
 ?>

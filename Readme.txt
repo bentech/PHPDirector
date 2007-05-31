@@ -8,17 +8,6 @@
 +----------------------------------------------------------------------------+
 */
 
-----------Beta Release----------
-
---Things you should know--
-
-1.This beta version is for website owners to test the script on there site.
-
-2.So far it only works properally in firefox
-
-3.Please register with out forums and let us know what needs to be added ect.
-
-
 --To Install--
 
 1.copy all files to server.
@@ -35,7 +24,7 @@
 
 --Help and Support--
 
-http://www.crossstar.co.uk/phpdirector/
+http://www.phpdirector.co.uk
 
 
 

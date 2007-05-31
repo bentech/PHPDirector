@@ -8,10 +8,10 @@
 |		$Author: Ben Swanson
 +----------------------------------------------------------------------------+
 */
-$cfg["db_host"] = "localhost";
-$cfg["db_name"] = "phpdirector";
-$cfg["db_user"] = "ben";
-$cfg["db_pass"] = "123dop"; 
-$cfg["admin_user"] = "12"; 
-$cfg["admin_pass"] = "12"; 	
+$cfg["db_host"] = "";
+$cfg["db_name"] = "";
+$cfg["db_user"] = "";
+$cfg["db_pass"] = ""; 
+$cfg["admin_user"] = ""; 
+$cfg["admin_pass"] = ""; 	
 ?>
