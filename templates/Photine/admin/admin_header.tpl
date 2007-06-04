@@ -36,12 +36,12 @@
 </div>
 
 <ul id="admin-menu">
-<li><a href="../index.php">{$LAN_41}</a></li><li {if $pag eq "vid"}class='selected'{/if}> <a href="admin_manage.php?pag=vid">{$LAN_68}s</a> </li><li {if $pag eq "options"}class='selected'{/if}><a href="options.php?pt=options&pag=options">{$LAN_48}</a> </li><li><a href="logout.php">{$LAN_42}</a></li>
+<li><a href="../index.php">{$LAN_41}</a></li><li {if $pag eq "vid"}class='selected'{/if}> <a href="admin_manage.php?pag=vid">{$LAN_68}s</a> </li><li {if $pag eq "options"}class='selected'{/if}><a href="options.php?pt=options&amp;pag=options">{$LAN_48}</a> </li><li><a href="logout.php">{$LAN_42}</a></li>
 </ul>
 
 <ul id="admin-submenu">
 {if $pag eq "vid"}
-<li {if $pagetype eq "all"}class='selected'{/if}<a href="admin_manage.php?pt=all&pag=vid">{$LAN_43}</a></li>
+<li {if $pagetype eq "all"}class='selected'{/if}><a href="admin_manage.php?pt=all&amp;pag=vid">{$LAN_43}</a></li>
 <li {if $pagetype eq "feature"}class='selected'{/if}><a href="admin_manage.php?pt=feature&amp;pag=vid&amp;next=1">{$LAN_45}</a></li>
 <li {if $pagetype eq "approve"}class='selected'{/if}><a href="admin_manage.php?pt=approve&amp;pag=vid&amp;next=1">{$LAN_44}</a></li>
 <li {if $pagetype eq "rejected"}class='selected'{/if}><a href="admin_manage.php?pt=rejected&amp;pag=vid&amp;next=1">{$LAN_46}</a></li>

@@ -22,7 +22,7 @@
  * @copyright 2001-2005 New Digital Group, Inc.
  * @author Monte Ohrt <monte at newdigitalgroup dot com>
  * @package SmartyPaginate
- * @version 1.5
+ * @version 1.6
  */
 
 

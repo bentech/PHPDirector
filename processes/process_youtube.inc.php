@@ -91,7 +91,7 @@ $videoid = trim($videoid_untrim);  //removes whitespaces at the end
 		$author = safe_sql_insert(getauthor($videoid));
 		$smarty->assign('author', $author);
 		
-		$des    = safe_sql_insert(getdescription($videoid));
+		$des    = getdescription($videoid);
 		$smarty->assign('description', $des);
 		
 		$thumb[0]  = "http://img.youtube.com/vi/".$videoid."/1.jpg";	//Put as many as you need or just one

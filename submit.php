@@ -93,7 +93,7 @@ $smarty->display('submit.tpl');
 $insertthumb = $_POST["picture"];
 $inserttitle = $_POST["titletext"];
 $insertauthor = $_POST["authortext"];
-$insertdes = $_POST["descriptiontext"];
+$insertdes = safe_sql_insert($_POST["descriptiontext"]);
 $insetycat = $_POST["category"];
 $videoid = $_POST["videoid"];
 $source = $_POST["vidtype"];

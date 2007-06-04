@@ -29,8 +29,9 @@ $ip = $_SERVER["REMOTE_ADDR"];
 mysql_query("INSERT INTO pp_comments (video_id, ip, comment) VALUES ('$_GET[id]', '$ip', '$_POST[comment]')");
 }
 include("includes/function.inc.php");
+$template = config('template');
 $smarty = new Smarty();
-$smarty->template_dir = './templates/Photine';
+$smarty->template_dir = './templates/'.$template;
 $smarty->compile_dir = './templates_c';
 $smarty->cache_dir = './cache';
 $smarty->config_dir = './configs';

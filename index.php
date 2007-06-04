@@ -8,6 +8,7 @@
 |		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
 +----------------------------------------------------------------------------+
 */
+
 require('header.php');
 
 // required connect

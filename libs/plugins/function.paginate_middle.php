@@ -23,7 +23,7 @@
  * @copyright 2001-2005 New Digital Group, Inc.
  * @author Monte Ohrt <monte at newdigitalgroup dot com>
  * @package SmartyPaginate
- * @version 1.5
+ * @version 1.6-dev
  */
 
 function smarty_function_paginate_middle($params, &$smarty) {
@@ -94,7 +94,8 @@ function smarty_function_paginate_middle($params, &$smarty) {
     
     $_item = 1;
     $_page = 1;
-    $_displayed_pages = 0;
+    $_display_pages = 0;
+    $_ret = '';
     
     $_attrs = !empty($_attrs) ? ' ' . implode(' ', $_attrs) : '';
     
@@ -111,7 +112,7 @@ function smarty_function_paginate_middle($params, &$smarty) {
     }
             
     while($_item <= $_total) {
-        if($params['format'] == 'page') {
+        if(isset($params['format']) && $params['format'] == 'page') {
             $_text = $_prefix . $_page . $_suffix;            
         } else {
             $_text = $_prefix . $_item . '-';

@@ -71,7 +71,7 @@
 	</table>
 	</font></p>
 	<br />{* display pagination info *}
-    {paginate_prev} {paginate_middle} {paginate_next}
+    <p align="center">&nbsp;&nbsp;{paginate_prev}&nbsp;&nbsp;{paginate_next} <br />{paginate_middle page_limit="20"} </p>
 	{/if}
 </body>
 </html>

@@ -52,7 +52,7 @@ Things not used that you might find usefull
 			<div class="description"><b>{$LAN_16}:</b>{$videos[mysec].creator|truncate:20:'...'}</div>
 			<br />
 	<table width="0" border="0" cellspacing="0" height="0">		
-<td><img height='89' width='120' src="{$videos[mysec].picture}" class="thumbnail" alt="thumbnail" /></td>
+<td><a href="videos.php?id={$videos[mysec].id}"><img height='89' width='120' src="{$videos[mysec].picture}" class="thumbnail" alt="thumbnail" /></a></td>
 		<td>{$videos[mysec].description|truncate:580:'...'}</td>		</tr>
 
 	</table>		
@@ -67,11 +67,11 @@ Things not used that you might find usefull
 	{/section}
 	
 
-	</div>
+</div>
 	
 <div class="left"> {* display pagination info *}
 
-	<p>&nbsp;&nbsp;{paginate_prev} {paginate_middle} {paginate_next}</p>
+	<p align="center">&nbsp;&nbsp;{paginate_prev}&nbsp;&nbsp;{paginate_next} <br />{paginate_middle page_limit="20"} </p>
 	
 </div>
 

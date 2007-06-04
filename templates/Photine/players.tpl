@@ -1,6 +1,6 @@
 {if $vidtype eq "YouTube"}
 
-<object width="425" height="350"><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/{if $video[video].file eq ""}{$videoid}{else}{$video[video].file}{/if}" type="application/x-shockwave-flash" wmode="transparent" width="425" height="350"></embed></object>
+<object width="425" height="350"><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/{if $video[video].file eq ""}{$videoid}{else}{$video[video].file}{/if}&autoplay=1" type="application/x-shockwave-flash" wmode="transparent" width="425" height="350"></embed></object>
 
 {elseif $vidtype eq "GoogleVideo"}
 

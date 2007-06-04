@@ -10,7 +10,7 @@
 */
 // Prevent SQL Injections!
 function safe_sql_insert($variable) {
-$variable = mysql_real_escape_string(htmlentities($variable));
+$variable = htmlentities($variable);
 return $variable;
 }
 

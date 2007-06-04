@@ -18,9 +18,13 @@ $viewaddone = true;
 require('header.php');
 
 if(isset($id)){
-$result = mysql_query("SELECT * FROM pp_files WHERE id=$id") or die();  
+$result = mysql_query("SELECT * FROM pp_files WHERE id=$id LIMIT 1") or die();  
+}elseif (isset($_GET["name"])){
+$name = $_GET["name"];
+$result = mysql_query("SELECT * FROM pp_files WHERE `approved` = '1' AND `name` = '$name' LIMIT 1") or die();  
+
 }else{
-$result = mysql_query("select * from pp_files WHERE approved='1' AND reject='0' order by rand() limit 1") or die();  
+$result = mysql_query("select * from pp_files WHERE approved='1' AND reject='0' order by rand() LIMIT 1") or die();  
 }
 // For each result that we got from the Database
 while ($row = mysql_fetch_assoc($result))

@@ -207,6 +207,7 @@ mysql_query("ALTER TABLE `pp_config` ADD `news` VARCHAR(255) NOT NULL");
 mysql_query("ALTER TABLE `pp_config` ADD `template` VARCHAR(255) NOT NULL");
 mysql_query("UPDATE `pp_config` SET `version` = '0.2'");
 mysql_query("UPDATE `pp_config` SET `template` = 'Photine'");
+mysql_query("UPDATE `pp_config` SET `lang` = 'en-gb.inc.php'");
 
 //Files
  
