@@ -124,7 +124,13 @@ $i=0;
 }
     // assign {$paginate} var
     SmartyPaginate::assign($smarty);
+	if (isset($_GET["pt"])){
 	SmartyPaginate::setUrl('index.php?pt='.$_GET["pt"]);
+	}elseif(isset($_GET["cat"])){
+	SmartyPaginate::setUrl('index.php?cat='.$_GET["cat"]);
+	}else{
+	
+	}
     // display results
     $smarty->display('index.tpl');	
 SmartyPaginate::disconnect();
