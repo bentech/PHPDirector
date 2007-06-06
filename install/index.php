@@ -188,7 +188,7 @@ function Options(){
 	echo'
 	<br /><br /><br /><br /><br /><br /><br /><br /><br />
 	<table BORDER="0" WIDTH="auto" HEIGHT="auto">
-	<form action="h2_install.php" method="POST">
+	<form action="complete_install_install.php" method="POST">
 	<tr><td>Name:</td><td><input TYPE="text" VALUE="Bens Videos" NAME="name"></td></tr>
 	<tr><td>Videos Per Page:</td><td><input TYPE="text" VALUE="10" NAME="vids_per_page"></td></tr>
 	<tr><td>News:</td><td><input TYPE="text" VALUE="PHP Director Just Installed" NAME="news"></td></tr>
