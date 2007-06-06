@@ -1,0 +1,63 @@
+---0.2---
+
+Random Videos
+
+Images show random images, not just the most recent
+
+GoogleVideo
+
+Dailymtoion
+
+Smarty Template Engine
+
+Categories
+
+Search
+
+-admin-
+
+Ammount to approve
+
+options
+
+templates
+
+Language
+
+News
+
+
+---0.1----
+
+0.1---Popup Images
+Thickbox popups.
+
+0.1---Ratings
+Ajax rating system.
+
+0.1---Information From YouTube
+Gets information on each videos from youtube.
+
+0.1---Video List
+shows the videos in a easy to read list.
+
+0.1---Featured Videos
+Allows admins to choose videos to feature.
+
+0.1---Images Page
+Shows a selection of video screenshots.
+
+0.1---Sort by
+allows users to sort the video lists.
+
+0.1---Submit
+Allows users to submit there own videos.
+
+0.1---Admin Approval
+Allows admins to approve the videos.
+
+0.1---Admin Options
+Allows admins to change the functions of phpdirector.
+
+0.1---Admin Easy Approve
+Allows admins to easily approve videos.

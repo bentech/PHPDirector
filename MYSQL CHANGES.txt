@@ -1,0 +1,73 @@
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GPL General Public License
+|		$Website: phpdirector.co.uk
+|		$Author: Ben Swanson
+|		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
++----------------------------------------------------------------------------+
+*/
+Table - pp_files
+ADDED
+Feild - video_type 
+Type - varchar(225)
+Collation - Latin1_swedish_ci
+Default - YouTube  	
+
+ADDED
+Field - resonforreject
+Type - varchar(225)
+Collation - Latin1_swedish_ci
+Default - No Reason Given
+
+Changed
+Field - picture
+Type - varchar(225)
+
+DELTED
+exerntalheader
+externalheaderurl
+header_height
+
+ADDED
+Field - news
+Type - varchar(225)
+Collation - Latin1_swedish_ci
+Default - Welcome
+
+
+
+Table - pp_catigories
+
+ADDED
+Table - pp_catigories
+
+Field - id
+Type - int(225)
+Extra - auto_increment
+
+Field - name
+Type - varchar(225)
+Collation - Latin1_swedish_ci
+
+Field - catigory
+Type - varchar(225)
+
+
+Table - pp_comments
+
+ADDED
+Table - pp_comments
+
+Field - id
+Type - int(225)
+Extra - auto_increment
+
+Field - video_id
+Type - int(225)
+
+Field - ip
+Type - varchar(225)
+
+Field - comment
+Type - varchar(225)
