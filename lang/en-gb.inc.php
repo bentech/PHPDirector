@@ -78,4 +78,7 @@ $smarty->assign('LAN_66', 'You May need to click twice to update');
 $smarty->assign('LAN_67', 'News');
 $smarty->assign('LAN_68', 'Video');
 $smarty->assign('LAN_69', 'Template');
+$smarty->assign('LAN_69', 'Source');
+$smarty->assign('LAN_70', 'Enable');
+$smarty->assign('LAN_71', 'Disable');
 ?>
