@@ -83,19 +83,21 @@ function Connections2(){
 	$name = $_POST["Name"];
 	$ausername = $_POST["AUsername"];
 	$apassword = $_POST["Apassword"];
-	$con = mysql_connect("$host","$username","$password");
-	if (!$con){
-	echo'
-	<script type="text/javascript">
-	<!--
-	window.location = "index.php?connect=connect"
-	//-->
-	</script>
-	';
-	}else{
-	mysql_select_db("$name", $con);
-	
-		$sql1 = "CREATE TABLE `pp_config` (
+	$sql = array();
+	if(!$con = mysql_connect($host, $username, $password)){
+		echo'
+		<script type="text/javascript"><!--
+		window.location = "index.php?connect=connect"
+		//--></script>';
+	}
+	if(!mysql_select_db($name, $con)){
+		echo'
+		<script type="text/javascript"><!--
+		window.location = "index.php?connect=db"
+		//--></script>';
+	}
+
+	$sql[] = "CREATE TABLE `pp_config` (
   `name` varchar(225) default NULL,
   `news` varchar(225) NOT NULL default 'Welcome!',
   `vids_per_page` int(4) NOT NULL default '10',
@@ -103,7 +105,7 @@ function Connections2(){
   `version` double NOT NULL,
   `template` varchar(255) NOT NULL default 'Photine'
 )";
-	$sql2 = "CREATE TABLE `pp_files` (
+	$sql[] = "CREATE TABLE `pp_files` (
   `id` int(64) NOT NULL auto_increment,
   `name` varchar(100) NOT NULL default '',
   `video_type` varchar(225) NOT NULL default 'YouTube',
@@ -121,25 +123,36 @@ function Connections2(){
   `views` int(225) NOT NULL default '0',
   PRIMARY KEY  (`id`)
 )";
-	$sql3 = "CREATE TABLE `pp_rating` (
+	$sql[] = "CREATE TABLE `pp_rating` (
   `id` int(11) NOT NULL,
   `total_votes` int(225) NOT NULL default '0',
   `total_value` int(225) NOT NULL default '0',
   `used_ips` longtext NOT NULL,
   PRIMARY KEY  (`id`)
 )";
-	$sql4 = "CREATE TABLE `pp_categories` (
+	$sql[] = "CREATE TABLE `pp_categories` (
   `id` int(225) NOT NULL auto_increment,
   `name` varchar(225) NOT NULL,
   `disable` varchar(2) NOT NULL default '0',
   `image` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`)
 )";
-	mysql_query($sql1,$con);
-	mysql_query($sql2,$con);
-	mysql_query($sql3,$con);
-	mysql_query($sql4,$con);
-	
+
+	$errors = array();
+	foreach($sql as $k => $query){
+		if(!mysql_query($query, $con)){
+			$errors[] = array('err'=>mysql_error(), 'in'=>$k);
+		}
+	}
+
+	if($ce = count($errors)){
+		echo "There is ".$ce." errors during MySQL queries.<br />";
+		foreach($errors as $de){
+			echo "<span style=\"color: red;\">".$de['err']."</span> in ".$sql[$de['in']]."<br />";
+		}
+		return FALSE;
+	}
+
 	$filename = '../config.php';
 	$somecontent = '
 <?php
@@ -162,20 +175,17 @@ $cfg["admin_pass"] = "'.$apassword.'";
 		if (!$handle = fopen($filename, 'w')) {
 			echo "Cannot write to file please set permissions to 777";
 			exit;
-	}
-   if (fwrite($handle, $somecontent) === FALSE) {
-       echo "Cannot write to file please set permissions to 777";
-       exit;
-	}
-	echo "Success, Wrote DB data to file.\n";
-	fclose($handle);
+		}
+		if (fwrite($handle, $somecontent) === FALSE) {
+			echo "Cannot write to file please set permissions to 777";
+			exit;
+		}
+		fclose($handle);
+		echo "Success, Wrote DB data to file.\n";
 	} else {
 		echo "Cannot write to file please set permissions to 777";
 	}
 
-	
-	echo"Success";
-	}
 	echo'
 	<form action="index.php" method="POST"><div>
 	<input type="hidden" value="Options" name="Installing">
@@ -217,8 +227,11 @@ if(isset($_POST["Installing"])){
 
 
 }else{
-if(isset($_GET["connect"])){
-echo"Could not connect";
+if(@$_GET["connect"] == 'connect'){
+echo "Could not connect";
+	Connections();
+}elseif(@$_GET["connect"] == 'db'){
+echo "Could not select database";
 	Connections();
 }else{
 	Install();
