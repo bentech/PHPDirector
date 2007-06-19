@@ -11,20 +11,12 @@ Things not used that you might find usefull
 	<div class="box">
 	
 		<p align="center">
-		<b>{$LAN_7}</b>
-		<br /><br />
-			&nbsp;{$LAN_31}
-			<!--Sort By Rating-->
-			<a href="?sort=rating&amp;order=up&amp;next={$next}&amp;pt={$pagetype}"><img src="templates/Photine/images/arrowup.gif" alt="error" border="0"/></a> <a href="?sort=rating&amp;order=down&amp;next={$next}&amp;pt={$pagetype}" ><img src="templates/Photine/images/arrowdown.gif" border="0" alt="error"/></a>&nbsp;&nbsp;	&nbsp;	&nbsp;		{$LAN_32}
-			<!--Sort By Views-->
-			<a href="?sort=views&amp;order=up&amp;next={$next}&amp;pt={$pagetype}"><img src="templates/Photine/images/arrowup.gif" border="0" alt="error"/></a> <a href="?sort=views&amp;order=down&amp;next={$next}&amp;pt={$pagetype}"><img src="templates/Photine/images/arrowdown.gif" border="0" alt="error"/></a><br />
-			&nbsp;{$LAN_33}
-			<!--Sort By Name-->
-			<a href="?sort=name&amp;order=up&amp;next={$next}&amp;pt={$pagetype}"><img src="templates/Photine/images/arrowup.gif" border="0" alt="error"/></a> <a href="?sort=name&amp;order=down&amp;next={$next}&amp;pt={$pagetype}"><img src="templates/Photine/images/arrowdown.gif" border="0" alt="error"/></a>&nbsp;	&nbsp;	&nbsp;	&nbsp;	{$LAN_34}
-			<!--Sort By Date-->
-			<a href="?sort=date&amp;order=up&amp;next={$next}&amp;pt={$pagetype}"> <img src="templates/Photine/images/arrowup.gif" border="0" alt="error"/></a> <a href="?sort=date&amp;order=down&amp;next={$next}&amp;pt={$pagetype}"><img src="templates/Photine/images/arrowdown.gif" border="0" alt="error"/></a><br />
-			{paginate_prev}&nbsp;&nbsp;{paginate_next}</p>
-	</div>
+		<b>{$LAN_7}</b>		</p>
+		<p align="center"><a href="?sort=views&amp;order=down&amp;next={$next}&amp;pt={$pagetype}">Most Viewed</a></p>
+		<p align="center"><a href="?sort=views&amp;order=up&amp;next={$next}&amp;pt={$pagetype}">Least Viewed</a></p>
+		<p align="center"><a href="?sort=date&amp;order=down&amp;next={$next}&amp;pt={$pagetype}">Newest Videos</a></p>
+		<p align="center">	    {paginate_prev}&nbsp;&nbsp;{paginate_next}</p>
+  </div>
 	
 </div>
 

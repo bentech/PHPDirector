@@ -6,8 +6,7 @@
 <meta name="author" content="Ben Swanson"/>
 <meta name="theme" content="luka cvrk"/>
 
-
-<title>{$config_name}{section name=video loop=$video}-{$video[video].name}{/section}</title>
+<title>{$config_name|default:"Php Director"}{section name=video loop=$video}-{$video[video].name}{/section}</title>
 
 <link rel="stylesheet" href="templates/Photine/style.css" type="text/css" />
 <script type="text/javascript" src="js/behavior.js"></script>

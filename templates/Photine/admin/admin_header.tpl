@@ -49,6 +49,7 @@
 {/if}
 {if $pag eq "options"}
 <li {if $pagetype eq "options"}class='selected'{/if}><a href="options.php?pt=options&amp;pag=options">{$LAN_48}</a></li>
+<li {if $pagetype eq "sources"}class='selected'{/if}><a href="sources.php?pt=sources&amp;pag=options">{$LAN_69}</a></li>
 <li {if $pagetype eq "categories"}class='selected'{/if}><a href="categories.php?pt=categories&amp;pag=options">{$LAN_40}</a></li>
 {/if}
 </ul>
