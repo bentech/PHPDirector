@@ -1,9 +1,9 @@
 <?php
 /*
 + ----------------------------------------------------------------------------+
-|     PHPDirector - Language File.
-|     $Author: Ben Swanson
-|     $License: GPL General Public License
+|	PHPDirector - Language File.
+|	$Author: Ben Swanson
+|	$License: GPL General Public License
 |	$Language: Italian
 |	$Translator: Matteo Ferrabone (desmoteo-at-gmail.com)
 +----------------------------------------------------------------------------+
