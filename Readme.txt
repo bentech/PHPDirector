@@ -5,6 +5,7 @@
 |		$Website: phpdirector.co.uk
 |		$Author: Ben Swanson
 |		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
+|		$Version - 0.3
 +----------------------------------------------------------------------------+
 */
 
