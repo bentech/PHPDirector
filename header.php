@@ -9,16 +9,13 @@
 +----------------------------------------------------------------------------+
 */
 
-//Installed?
-$filename = "installed.php";
-$handle = fopen($filename, "r");
-$contents = fread($handle, filesize($filename));
-fclose($handle);
-$explode_cont = explode(";", $contents);
-if ($explode_cont[1] !== "Yes"){
-header("Location: install/index.php");
-}
-//Installed?
+// Redirect user to install page if not installed. We will check for the presence
+// of the install file. If it is there, PHPDirector has not been installed.
+$install_file = 'install/index.php';
+if (file_exists($install_file)) {
+    header('Location: ' . $install_file);
+    exit;
+} define('PHPDIRECTOR_INSTALLED', 1);
 
 require('libs/Smarty.class.php');
 require('libs/SmartyPaginate.class.php');

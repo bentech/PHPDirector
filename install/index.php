@@ -8,6 +8,22 @@
 |		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
 +----------------------------------------------------------------------------+
 */
+
+// If our filename ends in _old.php, we know that the name has been changed to
+// prevent accidental reinstallation. We'll redirect to the main page.
+$filename = basename(__FILE__, '.php');
+
+    // Convenience function to clarify code
+    function endsWith($str, $sub) {
+        return (substr($str, strlen($str) - strlen($sub)) === $sub);
+    }
+
+if (endsWith($filename, '_old')) {
+    header('Location: ../index.php');
+    exit;
+}
+
+
 include("header.php");
 
 function Install(){
@@ -16,7 +32,7 @@ function Install(){
 	<input type="hidden" value="License" name="Installing">
 	<input type="submit" value="Install"></div>
 	</form></p>
-	';	
+	';
 }
 
 function License(){
@@ -55,7 +71,7 @@ This software is licensed under the <a href="http://creativecommons.org/licenses
 	<form ACTION="index.php" METHOD="POST"><div>
 	<input type="hidden" value="Connections" name="Installing">
 	<input TYPE="submit" VALUE="I hearby have read and agreed to the License">
-	</form>	
+	</form>
 	';
 }
 
@@ -167,9 +183,9 @@ function Connections2(){
 $cfg["db_host"] = "'.$host.'";
 $cfg["db_name"] = "'.$name.'";
 $cfg["db_user"] = "'.$username.'";
-$cfg["db_pass"] = "'.$password.'"; 
-$cfg["admin_user"] = "'.$ausername.'"; 
-$cfg["admin_pass"] = "'.$apassword.'"; 	
+$cfg["db_pass"] = "'.$password.'";
+$cfg["admin_user"] = "'.$ausername.'";
+$cfg["admin_pass"] = "'.$apassword.'";
 ?>';
 	if (is_writable($filename)) {
 		if (!$handle = fopen($filename, 'w')) {
@@ -190,7 +206,7 @@ $cfg["admin_pass"] = "'.$apassword.'";
 	<form action="index.php" method="POST"><div>
 	<input type="hidden" value="Options" name="Installing">
 	<input type="submit" value="Continue"></div>
-	</form>	
+	</form>
 	';
 }
 
@@ -198,7 +214,7 @@ function Options(){
 	echo'
 	<br /><br /><br /><br /><br /><br /><br /><br /><br />
 	<table BORDER="0" WIDTH="auto" HEIGHT="auto">
-	<form action="h2_install.php" method="POST">
+	<form action="complete_install.php" method="POST">
 	<tr><td>Name:</td><td><input TYPE="text" VALUE="Bens Videos" NAME="name"></td></tr>
 	<tr><td>Videos Per Page:</td><td><input TYPE="text" VALUE="10" NAME="vids_per_page"></td></tr>
 	<tr><td>News:</td><td><input TYPE="text" VALUE="PHP Director Just Installed" NAME="news"></td></tr>
@@ -211,7 +227,7 @@ function Options(){
 <?php
 if(isset($_POST["Installing"])){
 	$installing = $_POST["Installing"];
-	
+
 	if($installing == "License"){
 		License();
 	}

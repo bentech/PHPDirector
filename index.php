@@ -13,13 +13,13 @@ require('header.php');
 
 // required connect
     SmartyPaginate::connect();
-	
+
 // set items per page
 	$limit = config('vids_per_page');
     SmartyPaginate::setLimit($limit);
 
 //SORTING???
-		
+
 switch ($_GET["sort"]){
 case "name":
 	$sort = "name";
@@ -35,7 +35,7 @@ default:
 	$order1 = "DESC";
 }
 
-//Check if theres a Get called order then is its down order by DESC if its up dont order by DESC if no get varriable order by non DESC
+//Check if theres a Get called order then is its down order by DESC if its up dont order by DESC if no get variable order by non DESC
 if(isset($_GET["order"])){
 	$order = $_GET["order"];
 	if($order == "up"){
@@ -45,9 +45,9 @@ if(isset($_GET["order"])){
 		$order1 = "DESC";
 	}
 }
-		
+
 		//SORTING END ???
-if ($_GET["pt"] == "all") {		
+if ($_GET["pt"] == "all") {
 		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `reject` = '0' ORDER BY $sort $order1 LIMIT %d,%d",
 		 SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }elseif ($_GET["pt"] == "feature") {
@@ -58,7 +58,7 @@ $cat = $_GET["cat"];
 		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `category` = '$cat' AND `approved` = '1' ORDER BY $sort $order1 LIMIT %d,%d",
             SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }elseif (isset($_POST["searching"])){
-		
+
 		$search = $_POST[searching];
 		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `name` like '%%$search%%' AND `approved` = '1' ORDER BY $sort $order1 LIMIT %d,%d",
             SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
@@ -71,8 +71,8 @@ $cat = $_GET["cat"];
 $_data = array();
 $i=0;
        while ($_row = mysql_fetch_array($_result, MYSQL_ASSOC)) {
-		
-		
+
+
 		$month = date("M", strtotime($_row[date]));
 		$day = date("d", strtotime($_row[date]));
 		//image
@@ -84,10 +84,10 @@ $i=0;
 			$picture = $newphrase;
 		}
 		//image
-		
+
 		$tmp = array(
-			'id' => $_row['id'], 
-			'month' => $month, 
+			'id' => $_row['id'],
+			'month' => $month,
 			'day' => $day,
 			'name' => $_row['name'],
 			'creator' => $_row['creator'],
@@ -95,13 +95,13 @@ $i=0;
 			'description' => $_row['description'],
 			'br' => $br
 		);
-			
+
 			$_data[$i++] = $tmp;
-		
-		
+
+
             // collect each record into $_data
         }
-        
+
         // now we get the total number of records from the table
 // now we get the total number of records from the table
         $_query = "SELECT FOUND_ROWS() as total";
@@ -110,12 +110,12 @@ $i=0;
         SmartyPaginate::setTotal($_row['total']);
 
         mysql_free_result($_result);
- 	
+
 	///DB
-	
-	
+
+
 	$smarty->assign('videos', $_data);
-	
+
 		if ($_row['total'] == 0){ //if no videos display error.
 	$error = $smarty->get_template_vars('LAN_29');
 	$smarty->assign_by_ref('error', $error);
@@ -129,10 +129,10 @@ $i=0;
 	}elseif(isset($_GET["cat"])){
 	SmartyPaginate::setUrl('index.php?cat='.$_GET["cat"]);
 	}else{
-	
+
 	}
     // display results
-    $smarty->display('index.tpl');	
+    $smarty->display('index.tpl');
 SmartyPaginate::disconnect();
 mysql_close($mysql_link);
 ?>
