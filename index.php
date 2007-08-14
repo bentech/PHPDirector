@@ -5,7 +5,7 @@
 |		$License: GPL General Public License
 |		$Website: phpdirector.co.uk
 |		$Author: Ben Swanson
-|		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
+|		$Contributors - Dennis Berko, Monte Ohrt (Monte Ohrt), Theodore Ni
 +----------------------------------------------------------------------------+
 */
 
@@ -14,56 +14,58 @@ require('header.php');
 // Setup Smarty Pagination
 SmartyPaginate::connect();      // required connect
 
-// set items per page
-	$limit = config($registry, 'vids_per_page');
-    SmartyPaginate::setLimit($limit);
+// Set number of items per page
+$limit = config($registry, 'vids_per_page');
+SmartyPaginate::setLimit($limit);
 
-//SORTING???
-
-switch ($_GET["sort"]){
-case "name":
-	$sort = "name";
-	break;
-case "date":
-	$sort = "id";
-	break;
-case "views":
-	$sort = "views";
-	break;
-default:
-	$sort = "id";
-	$order1 = "DESC";
+/**
+ * SORT THE RESULTS
+ */
+// Set which attribute to sort by
+$sort = 'id';   // default sort
+if (!empty($_GET['sort'])) {
+    $sortReq = strtolower($_GET['sort']);
+    switch ($sortReq) {
+        case 'name':
+            $sort = 'name'; break;
+        case 'date':
+            $sort = 'id'; break;
+        case 'views':
+            $sort = 'views'; break;
+    }
+}
+// Set which order to sort by
+$order = 'DESC';    // default order
+if (!empty($_GET['order'])) {
+    $orderReq = strtolower($_GET['order']);
+    switch ($orderReq) {
+        case 'up':
+        case 'u':
+            $order = 'ASC'; break;
+        case 'down':
+        case 'd':
+            $order = 'DESC'; break;
+    }
 }
 
-//Check if theres a Get called order then is its down order by DESC if its up dont order by DESC if no get variable order by non DESC
-if(isset($_GET["order"])){
-	$order = $_GET["order"];
-	if($order == "up"){
-		$order1 = "";
-	}
-	if($order == "down"){
-		$order1 = "DESC";
-	}
-}
 
-		//SORTING END ???
 if ($_GET["pt"] == "all") {
-		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `reject` = '0' ORDER BY $sort $order1 LIMIT %d,%d",
+		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `reject` = '0' ORDER BY $sort $order LIMIT %d,%d",
 		 SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }elseif ($_GET["pt"] == "feature") {
-		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `feature` = '1' AND `reject` = '0' ORDER BY $sort $order1 LIMIT %d,%d",
+		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `feature` = '1' AND `reject` = '0' ORDER BY $sort $order LIMIT %d,%d",
             SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }elseif (isset($_GET["cat"])) {
 $cat = $_GET["cat"];
-		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `category` = '$cat' AND `approved` = '1' ORDER BY $sort $order1 LIMIT %d,%d",
+		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `category` = '$cat' AND `approved` = '1' ORDER BY $sort $order LIMIT %d,%d",
             SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }elseif (isset($_POST["searching"])){
 
 		$search = $_POST[searching];
-		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `name` like '%%$search%%' AND `approved` = '1' ORDER BY $sort $order1 LIMIT %d,%d",
+		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `name` like '%%$search%%' AND `approved` = '1' ORDER BY $sort $order LIMIT %d,%d",
             SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 }else{
-		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `reject` = '0' ORDER BY $sort $order1 LIMIT %d,%d",
+		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `reject` = '0' ORDER BY $sort $order LIMIT %d,%d",
             SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
 };
         $_result = mysql_query($_query);   // assign your db results to the template
