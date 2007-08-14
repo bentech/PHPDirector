@@ -4,9 +4,15 @@
 |		$License: GPL General Public License
 |		$Website: phpdirector.co.uk
 |		$Author: Ben Swanson
-|		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
+|		$Contributors - Dennis Berko, Monte Ohrt (Monte Ohrt), Theodore Ni
 +----------------------------------------------------------------------------+
 */-->
+
+<?php
+  // Perform output buffering, so we can prepare the entire page first
+  ob_start();
+?>
+
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css.css" />
@@ -19,17 +25,16 @@
 <ul id="install-progress">
 <li><a href="#">Upgrade/Install</a></li>
 <li <?php
-	if (@$_POST["Installing"] == "License"){echo "class='selected'";}
+	if (@$_POST['step'] == "license") { echo 'class="selected"'; }
 ?>><a href="#">License Agreement</a></li>
 <li <?php
-	if (@$_POST["Installing"] == "Connections"){echo "class='selected'";}
-	if (@$_GET["connect"] == "connect"){echo "class='selected'";}
+	if (@$_POST['step'] == "connections") { echo 'class="selected"'; }
 ?>><a href="#">MySQL Connection</a></li>
 <li <?php
-	if (@$_POST["Installing"] == "Connections2"){echo "class='selected'";}
+	if (@$_POST['step'] == "setupdb") { echo 'class="selected"'; }
 ?>><a href="#">Create Tables</a></li>
 <li <?php
-	if (@$_POST["Installing"] == "Options"){echo "class='selected'";}
+	if (@$_POST['step'] == "options") { echo 'class="selected"'; }
 ?>><a href="#">Options</a></li>
 </ul>
 <div align="center">

@@ -5,7 +5,7 @@
 |		$License: GPL General Public License
 |		$Website: phpdirector.co.uk
 |		$Author: Ben Swanson
-|		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
+|		$Contributors - Dennis Berko, Monte Ohrt (Monte Ohrt), Theodore Ni
 +----------------------------------------------------------------------------+
 */
 
@@ -22,95 +22,108 @@ if (endsWith($filename, '_old')) {
     header('Location: ../index.php');
     exit;
 }
+// End installation check
 
+// Force inclusion of compatability file that emulates some newer functions for
+// lower PHP versions.
+require_once '../includes/compatability.php';
 
 include("header.php");
 
-function Install(){
-	echo'Welcome Php Director Install
-	<form action="index.php" method="POST"><div>
-	<input type="hidden" value="License" name="Installing">
-	<input type="submit" value="Install"></div>
-	</form></p>
-	';
+// To maintain form POST yet still allow the flexibility to display errors, we hold
+// a global error variable. The contents can be any type, so each function can choose
+// to display errors differently.
+$GLOBALS['errors'] = null;
+
+// Step 1
+function Install() {
+    $output = <<< CODE
+Welcome to PHP Directory Install
+<form action="{$_SERVER['PHP_SELF']}" method="post">
+<div>
+  <input type="hidden" value="license" name="step">
+  <input type="submit" value="Install">
+</div>
+</form>
+CODE;
+
+    echo $output;
 }
 
-function License(){
-	echo'
-<br /><br />
-<!-- Creative Commons License --><br /><br /><br /><br />
-<a href="http://creativecommons.org/licenses/GPL/2.0/">
-<img alt="CC-GNU GPL" border="0" src="http://creativecommons.org/images
-/public/cc-GPL-a.png" /></a><br />
-This software is licensed under the <a href="http://creativecommons.org/licenses/GPL/2.0/">CC-GNU GPL</a>.
-<!-- /Creative Commons License -->
+// Step 2
+function License() {
+    // Get the license string
+    $license = file_get_contents('license.html');
 
-<!--
+    $output = <<< CODE
+{$license}
+<form action="{$_SERVER['PHP_SELF']}" method="post"><div>
+  <input type="hidden" value="connections" name="step">
+  <input type="submit" value="I hereby have read and agreed to the License">
+</form>
+CODE;
 
-<rdf:RDF xmlns="http://web.resource.org/cc/"
-    xmlns:dc="http://purl.org/dc/elements/1.1/"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-<Work rdf:about="">
-   <license rdf:resource="http://creativecommons.org/licenses/GPL/2.0/" />
-   <dc:type rdf:resource="http://purl.org/dc/dcmitype/Software" />
-</Work>
-
-<License rdf:about="http://creativecommons.org/licenses/GPL/2.0/">
-<permits rdf:resource="http://web.resource.org/cc/Reproduction" />
-   <permits rdf:resource="http://web.resource.org/cc/Distribution" />
-   <requires rdf:resource="http://web.resource.org/cc/Notice" />
-   <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
-   <requires rdf:resource="http://web.resource.org/cc/ShareAlike" />
-   <requires rdf:resource="http://web.resource.org/cc/SourceCode" />
-</License>
-
-</rdf:RDF>
-
--->
-<br /><br /><br /><br /><br /><br />
-	<form ACTION="index.php" METHOD="POST"><div>
-	<input type="hidden" value="Connections" name="Installing">
-	<input TYPE="submit" VALUE="I hearby have read and agreed to the License">
-	</form>
-	';
+    echo $output;
 }
 
-function Connections(){
-	echo'
-	<p>
+function Connections() {
+    $error_string = '';
+    if (!empty($GLOBALS['error'])) {
+        $errors = $GLOBALS['error'];
+        if (!is_array($errors)) {
+            $errors = array($errors);
+        }
+        foreach ($errors as $error) {
+            $error_string .= '<span style="color: red;">' . $error . '</span><br>';
+        }
+    }
+
+	$output = <<< CODE
+{$error_string}
+<p>
 <div align="center">
-<form action="index.php"  method="POST">
-<input type="hidden" value="Connections2" name="Installing">
-<div>Database Host:<input name="Host" type="text" size="50" value="localhost" ><br />
-Database Username:<input name="Username" type="text" size="50"><br />
-Database Password:<input name="Password" type="password" size="50"><br />
-Database Name:<input name="Name" type="text" size="50"><br />
-Admin Username:<input name="AUsername" type="text" size="50"><br />
-Admin Password:<input name="Apassword" type="password" size="50"><br />
-<input type="submit" value="Create Mysql Table"> </div>
-</form></p>
-	';
+<form action="{$_SERVER['PHP_SELF']}" method="post">
+  <input type="hidden" value="setupdb" name="step">
+  <div>
+    Database Host:<input name="Host" type="text" size="50" value="localhost"><br />
+    Database Username:<input name="Username" type="text" size="50"><br />
+    Database Password:<input name="Password" type="password" size="50"><br />
+    Database Name:<input name="Name" type="text" size="50"><br />
+    Admin Username:<input name="AUsername" type="text" size="50"><br />
+    Admin Password:<input name="APassword" type="password" size="50"><br /><br />
+    <input type="submit" value="Create Mysql Table">
+  </div>
+</form>
+</div>
+</p>
+CODE;
+
+	echo $output;
 }
 
-function Connections2(){
-	$host = $_POST["Host"];
-	$username = $_POST["Username"];
-	$password = $_POST["Password"];
-	$name = $_POST["Name"];
-	$ausername = $_POST["AUsername"];
-	$apassword = $_POST["Apassword"];
+function SetupDB() {
+    //:TODO: Input validation, even though this is the administrator installing
+
+    $host       = $_POST['Host'];
+    $username   = $_POST['Username'];
+    $password   = $_POST['Password'];
+    $name       = $_POST['Name'];
+    $ausername  = $_POST['AUsername'];
+    $apassword  = $_POST['APassword'];
+
 	$sql = array();
-	if(!$con = mysql_connect($host, $username, $password)){
-		echo'
-		<script type="text/javascript"><!--
-		window.location = "index.php?connect=connect"
-		//--></script>';
-	}
-	if(!mysql_select_db($name, $con)){
-		echo'
-		<script type="text/javascript"><!--
-		window.location = "index.php?connect=db"
-		//--></script>';
+	if(!($con = @mysql_connect($host, $username, $password))) {
+        // We could not establish a database connection!
+        // Set the error and redisplay the connections form
+        $GLOBALS['error'] = '<b>Could not connect to the database.</b><br>MySQL Error: ' . mysql_error();
+        Connections();
+        return;
+	} else if (!@mysql_select_db($name, $con)) {
+		// We could not select the database!
+		// Set the error and redisplay the connections form
+		$GLOBALS['error'] = '<b>Could not use database \'' . $name . '\'. It may not exist.</b><br>MySQL Error: ' . mysql_error();
+		Connections();
+		return;
 	}
 
 	$sql[] = "CREATE TABLE `pp_config` (
@@ -154,94 +167,123 @@ function Connections2(){
   PRIMARY KEY  (`id`)
 )";
 
+	// Local error array for quick display. We will try to execute each query and record any errors.
 	$errors = array();
-	foreach($sql as $k => $query){
-		if(!mysql_query($query, $con)){
-			$errors[] = array('err'=>mysql_error(), 'in'=>$k);
+	foreach ($sql as $query) {
+		if (mysql_query($query, $con) === false) {
+			$errors[] = mysql_error();
 		}
 	}
 
-	if($ce = count($errors)){
-		echo "There is ".$ce." errors during MySQL queries.<br />";
-		foreach($errors as $de){
-			echo "<span style=\"color: red;\">".$de['err']."</span> in ".$sql[$de['in']]."<br />";
-		}
-		return FALSE;
-	}
 
-	$filename = '../config.php';
-	$somecontent = '
+	// We will try to create the configuration file on the fly -- only if there were no DB errors, though.
+	$num_errors = count($errors);
+	if ($num_errors === 0):
+
+	$config_content = <<< CONFIG
 <?php
 /*
 + ----------------------------------------------------------------------------+
 |     PHPDirector Config File
-|		$License: GPL General Public License
-|		$Website: phpdirector.co.uk
-|		$Author: Ben Swanson
+|		\$License: GPL General Public License
+|		\$Website: phpdirector.co.uk
+|		\$Author: Ben Swanson
 +----------------------------------------------------------------------------+
 */
-$cfg["db_host"] = "'.$host.'";
-$cfg["db_name"] = "'.$name.'";
-$cfg["db_user"] = "'.$username.'";
-$cfg["db_pass"] = "'.$password.'";
-$cfg["admin_user"] = "'.$ausername.'";
-$cfg["admin_pass"] = "'.$apassword.'";
-?>';
-	if (is_writable($filename)) {
-		if (!$handle = fopen($filename, 'w')) {
-			echo "Cannot write to file please set permissions to 777";
-			exit;
-		}
-		if (fwrite($handle, $somecontent) === FALSE) {
-			echo "Cannot write to file please set permissions to 777";
-			exit;
-		}
-		fclose($handle);
-		echo "Success, Wrote DB data to file.\n";
-	} else {
-		echo "Cannot write to file please set permissions to 777";
-	}
+\$cfg['db_host']     = '$host';
+\$cfg['db_name']     = '$name';
+\$cfg['db_user']     = '$username';
+\$cfg['db_pass']     = '$password';
+\$cfg['admin_user']  = '$ausername';
+\$cfg['admin_pass']  = '$apassword';
+?>
+CONFIG;
 
-	echo'
-	<form action="index.php" method="POST"><div>
-	<input type="hidden" value="Options" name="Installing">
-	<input type="submit" value="Continue"></div>
-	</form>
-	';
+	// Let's try to save the configuration file
+    $config_filename = '../config.php';
+    $generic_error = 'Could not write to configuration file. Please set folder permissions to 777';
+    if (($handle = @fopen($filename, 'w')) !== false) {
+        if (fwrite($handle, $config_content) === false) {
+            $errors[] = $generic_error;
+        }
+    } else {
+        $errors[] = $generic_error;
+    }
+
+    endif;      // Ends if clause that tested for DB errors
+
+
+	// We will need to display errors if there were any. Otherwise, we'll just send
+	// the user along to the next step.
+	$num_errors = count($errors);
+	if ($num_errors === 0) {
+	    Options();
+	    return;
+	} else {
+		foreach ($errors as $error) {
+			echo "<span style=\"color: red;\">{$error}</span><br />";
+		}
+
+		echo <<< FORMS
+<br>
+<div>
+<form action="{$_SERVER['PHP_SELF']}" method="post" style="display: inline;">
+  <input type="hidden" value="connections" name="step">
+  <input type="submit" value="Back">
+</form>
+<form action="{$_SERVER['PHP_SELF']}" method="post" style="display: inline;">
+  <input type="hidden" value="setupdb" name="step">
+  <input type="hidden" value="{$host}" name="Host">
+  <input type="hidden" value="{$username}" name="Username">
+  <input type="hidden" value="{$password}" name="Password">
+  <input type="hidden" value="{$name}" name="Name">
+  <input type="hidden" value="{$ausername}" name="AUsername">
+  <input type="hidden" value="{$apassword}" name="APassword">
+  <input type="submit" value="Try Again">
+</form>
+<form action="{$_SERVER['PHP_SELF']}" method="post" style="display: inline;">
+  <input type="hidden" value="options" name="step">
+  <input type="submit" value="Continue">
+</form>
+</div>
+FORMS;
+
+	}
 }
 
-function Options(){
-	echo'
-	<br /><br /><br /><br /><br /><br /><br /><br /><br />
-	<table BORDER="0" WIDTH="auto" HEIGHT="auto">
-	<form action="complete_install.php" method="POST">
-	<tr><td>Name:</td><td><input TYPE="text" VALUE="Bens Videos" NAME="name"></td></tr>
-	<tr><td>Videos Per Page:</td><td><input TYPE="text" VALUE="10" NAME="vids_per_page"></td></tr>
-	<tr><td>News:</td><td><input TYPE="text" VALUE="PHP Director Just Installed" NAME="news"></td></tr>
-	<tr><td></td><td><tr><td>&nbsp;</td><td>
-	<tr><td COLSPAN="2"><center><input TYPE="hidden" NAME="Editing"><input TYPE="submit" VALUE="Edit"></center></td></tr>
-	</table>
-	</form>';
+function Options() {
+    $output = <<< CODE
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+<form action="complete_install.php" method="post">
+  <table border="0">
+    <tr><td align="right">Name: </td><td><input type="text" value="My Videos" name="name"></td></tr>
+	<tr><td align="right">Videos Per Page: </td><td><input type="text" value="10" name="vids_per_page"></td></tr>
+	<tr><td align="right">News: </td><td><input type="text" value="PHP Director Just Installed" name="news"></td></tr>
+	<tr><td align="center" colspan="2"><br><input type="hidden" name="Editing"><input type="submit" value="Edit"></td></tr>
+  </table>
+</form>
+CODE;
+
+    echo $output;
 }
 ?>
 <?php
-if(isset($_POST["Installing"])){
-	$installing = $_POST["Installing"];
+if (!empty($_POST['step'])) {
+	$step = $_POST['step'];
 
-	if($installing == "License"){
-		License();
+	// Decide which step to display
+	switch ($step) {
+	    case 'license':
+	        License(); break;
+	    case 'connections':
+	        Connections(); break;
+	    case 'setupdb':
+	        SetupDB(); break;
+	    case 'options':
+	        Options(); break;
+	    default:
+	        break;
 	}
-	if($installing == "Connections"){
-		Connections();
-	}
-	if($installing == "Connections2"){
-		Connections2();
-	}
-	if($installing == "Options"){
-		Options();
-	}
-
-
 }else{
 if(@$_GET["connect"] == 'connect'){
 echo "Could not connect";
