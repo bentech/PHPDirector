@@ -11,11 +11,11 @@
 
 require('header.php');
 
-// required connect
-    SmartyPaginate::connect();
+// Setup Smarty Pagination
+SmartyPaginate::connect();      // required connect
 
 // set items per page
-	$limit = config('vids_per_page');
+	$limit = config($registry, 'vids_per_page');
     SmartyPaginate::setLimit($limit);
 
 //SORTING???

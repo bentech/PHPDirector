@@ -8,8 +8,7 @@
 |		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
 +----------------------------------------------------------------------------+
 */
-ob_start(); 
-session_start(); 
+ob_start();
 include("admin_header.php");
 if (checkLoggedin()){
 if(isset($_GET["del"])){
@@ -27,14 +26,14 @@ $row1 = mysql_fetch_array($result1);
 
  if($row1["name"] == $add){ //Check if allready exists
  $result2 = mysql_query("SELECT * FROM `pp_categories` WHERE name='$add' AND disable='1'");
-$row2 = mysql_fetch_array($result2); 
+$row2 = mysql_fetch_array($result2);
 		if($row2["name"] == $add){//if exists check if it jas been disabled
 		mysql_query("UPDATE `pp_categories` SET `disable` = '0' WHERE name = '$add'"); //if it was disabled undisable it
 		}else{
 		$smarty->assign('error', 'This Category Allready Exists'); //if not disabled error message
 	}
 
-		
+
 }else{//end of check exists
 mysql_query("INSERT INTO pp_categories (name) VALUES ('$_POST[add]')"); ///if it doesnt exists create new record
 }

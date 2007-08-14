@@ -8,8 +8,7 @@
 |		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
 +----------------------------------------------------------------------------+
 */
-ob_start(); 
-session_start(); 
+ob_start();
 include("admin_header.php");
 
 if (checkLoggedin()){
@@ -21,7 +20,7 @@ $ver_start = explode("<version>",$ver_string,2);
 $ver_end = explode("</version>",$ver_start[1],2);
 $ver1 = addslashes($ver_end[0]);//Gets version from phpdirector.co.uk
 
-$ver = config("version");  //Gets version from sql
+$ver = config($registry, "version");  //Gets version from sql
 
 
 //Gets ammont of videos to approve

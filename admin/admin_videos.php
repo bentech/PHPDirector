@@ -8,8 +8,7 @@
 |		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
 +----------------------------------------------------------------------------+
 */
-ob_start(); 
-session_start(); 
+ob_start();
 include("admin_header.php");
 
 if (checkLoggedin()){
@@ -19,7 +18,7 @@ $i=0;
 
 if ($_POST[category] !== null){  //Category Change
 
-$sql = 'UPDATE `pp_files` SET `category` = '.$_POST[category].' WHERE `pp_files`.`id` = '.$_POST[id].' LIMIT 1;'; 
+$sql = 'UPDATE `pp_files` SET `category` = '.$_POST[category].' WHERE `pp_files`.`id` = '.$_POST[id].' LIMIT 1;';
 mysql_query($sql) or die();
 }
 
@@ -30,7 +29,7 @@ if ($_GET['pt'] == "easyapprove"){
 
 
 $result = mysql_query("SELECT * FROM `pp_files` WHERE `approved` = CONVERT( _utf8 '0' USING latin1 )COLLATE latin1_swedish_ci AND `reject` = CONVERT( _utf8 '0'
-USING latin1 ) COLLATE latin1_swedish_ci LIMIT 0 , 1") or die();  
+USING latin1 ) COLLATE latin1_swedish_ci LIMIT 0 , 1") or die();
 }else{
 $result = mysql_query("SELECT * FROM pp_files WHERE id=$id") or die();
  }
@@ -42,7 +41,7 @@ $result = mysql_query("SELECT * FROM pp_files WHERE id=$id") or die();
 
 while ($row = mysql_fetch_array($result)) {
 	$video[] = $row; //Assignes row to video as a variable
-	
+
 $smarty->assign('id', $row['id']); //Smarty Assign, id to row id
 $smarty->assign('vidtype', $row['video_type']);
 
@@ -65,13 +64,13 @@ while ($rowc = mysql_fetch_assoc($query_categories)){
 		if ($yt_pic_final = "2.jpg"){
 			$yt_pic_getstart = explode("2.jpg", show_sql($row['picture']));
 			$ytpic = $yt_pic_getstart[0];
-	}	
 	}
 	}
-	
-	
-	
-	
+	}
+
+
+
+
 	//Smarty Assings
 $smarty->assign('ytpic', $ytpic);
 $smarty->assign('pt', $_GET['pt']);
