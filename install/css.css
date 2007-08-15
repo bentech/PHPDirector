@@ -1,26 +1,18 @@
 html, body {
-background:#BFE4FF;
-font-family:"Trebuchet MS",Helvetica,Arial,sans-serif;
-font-size:12px;
-height:100%;
-left:0pt;
-margin:0pt;
-min-width:700px;
-padding:0pt;
-position:absolute;
-top:0pt;
-width:100%;
+  margin: 0px;
 }
-a {
-color:#333333;
+
+body {
+  width: 100%;
+  background: #BFE4FF;
+  font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
+  min-width: 700px;
 }
-a:hover {
-text-decoration:none;
-}
-h1, h2, h3, h4, h5, h6 {
-margin: 0 0 0 0;
-padding:0pt;
-}
+
+a { color: #333; text-decoration: underline; }
+a:link { color: #333; text-decoration: underline; }
+a:hover { color: #333; text-decoration: none; }
+
 img {
 border:0px none;
 }
@@ -38,52 +30,45 @@ float:left;
 #license_agreement{
 text-align:center;
 }
+
 #install-header {
-margin: auto auto auto -10px;
-background:#00487D;
-border-bottom:8px solid #0066B3;
-color:#FFFFFF;
-height:60px;
-vertical-align:top;
+  height: 60px;
+  width: 100%;
+  color: #FFF;
+  background: #00487D;
+  border-bottom: 8px solid #0066B3;
+  line-height: 60px;
 }
 #install-header h1 {
-font-family:"Trebuchet MS",Helvetica,Arial,sans-serif;
-font-size:30px;
-font-weight:bold;
-padding-left:14px;
-padding-top:14px;
-vertical-align:top;
-width:auto;
+  display: inline;
+  margin-left: 14px;
+  font-size: 2em;
+  font-weight: bold;
 }
 #install-progress {
-background:#80C9FF none repeat scroll 0%;
-clear:both;
-color:#00487D;
-float:left;
-height:40px;
-list-style-image:none;
-list-style-position:outside;
-list-style-type:none;
-margin:0pt 0pt 0pt 0px;
-padding:0px;
-width:100%;
+  float: left;
+  clear: both;
+  height: 40px;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  background: #80C9FF;
+  list-style-type: none;
 }
-#install-progress li a {
-float:left;
-position:relative;
-color:#FFFFFF;
-display:block;
-float:left;
-font-weight:bold;
-height:20px;
-margin:5px 2px;
-padding:7px 15px 3px;
-text-decoration:none;
-vertical-align:middle;
+#install-progress li {
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  margin: 5px 2px;
+  padding: 0px 15px;
+  color: #000;
 }
-#install-progress li.selected a {
-background:#0066B3 none repeat scroll 0%;
+#install-progress li.selected {
+  color: #FFF;
+  background: #0066B3;
+  font-weight: bold;
 }
+
 form {
 margin-bottom:20px;
 }
