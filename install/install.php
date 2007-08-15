@@ -242,7 +242,7 @@ CONFIG;
 <form action="{$_SERVER['PHP_SELF']}" method="post" style="display: inline;">
   <input type="hidden" value="options" name="step" />
   <input type="submit" value="Continue" />
-</form>
+</form><br />
 FORMS;
 
 	}
@@ -253,17 +253,60 @@ FORMS;
 function Options() {
     $output = <<< CODE
 <br /><br /><br /><br /><br /><br /><br /><br /><br />
-<form action="complete_install.php" method="post">
+<form action="{$_SERVER['PHP_SELF']}" method="post">
+  <input type="hidden" value="done" name="step">
   <table border="0">
     <tr><td align="right">Name: </td><td><input type="text" value="My Videos" name="name" /></td></tr>
 	<tr><td align="right">Videos Per Page: </td><td><input type="text" value="10" name="vids_per_page" /></td></tr>
 	<tr><td align="right">News: </td><td><input type="text" value="PHP Director Just Installed" name="news" /></td></tr>
-	<tr><td align="center" colspan="2"><br /><input type="hidden" name="Editing"><input type="submit" value="Edit" /></td></tr>
+	<tr><td align="center" colspan="2"><br /><input type="submit" value="Edit" /></td></tr>
   </table>
 </form>
 CODE;
 
     return $output;
+}
+
+function Done() {
+    // :TODO: Input validation!
+    $name        = $_POST['name'];
+    $news        = $_POST['news'];
+    $vidsPerPage = $_POST['vids_per_page'];
+
+    // Since we are finished, we can go ahead and include our configuration file
+    require_once '../config.php';
+    $con = @mysql_connect($cfg['db_host'], $cfg['db_user'], $cfg['db_pass']);
+    mysql_select_db($cfg['db_name'], $con);
+
+    // Add some config variables to the database
+    $query = sprintf('INSERT INTO `pp_config` (`name`, `news`, `vids_per_page`, `version`) VALUES ("%s", "%s", "%s", "%s")',
+                mysql_real_escape_string($name),
+                mysql_real_escape_string($news),
+                mysql_real_escape_string($vidsPerPage),
+                '0.3'
+             );
+
+    mysql_query($query, $con);
+
+	$success_msg = "<p>Congratulations, you have successfully installed PHP Director!</p>\n"
+	   . "<p>You should delete the install folder or disable access to it from the browser now.</p>\n"
+	   . "<p>You can visit the <a href=\"../admin/index.php\">Admin Section</a>, where I recommend you add some categories.</p>\n";
+	$warning_msg = '<span style="color: red;">We were unable to rename your install file to prevent unwanted access to it.'
+	   . "You MUST prevent public access to your install folder.</span>\n";
+
+    // We will rename the install file so that even if the user does not delete the install folder,
+    // the program is not open to tampering. The new name is a PHP file so malicious users cannot
+    // see the source. The install page will have logic built to detect whether it should be active
+    // or not.
+    $install_file = 'install.php';
+    $new_install_file = basename($install_file, '.php') . '_old.php';
+    if (file_exists($install_file)) {
+        if (rename($install_file, $new_install_file)) {
+            $warning_msg = '';      // successful! so we don't need the warning anymore
+        }
+    }
+
+    return $success_msg . $warning_msg;
 }
 
 /**
@@ -276,7 +319,7 @@ $step = 'start';
 if (!empty($_POST['step'])) {
     $step = strtolower($_POST['step']);
 
-    $allowed_steps = array('start', 'license', 'connections', 'setupdb', 'options');
+    $allowed_steps = array('start', 'license', 'connections', 'setupdb', 'options', 'done');
     if (!in_array($step, $allowed_steps)) {
         $step = 'start';
     }
@@ -295,6 +338,8 @@ switch ($step) {
         $body = SetupDB(); break;
     case 'options':
         $body = Options(); break;
+    case 'done':
+        $body = Done(); break;
     default:
         break;
 }
@@ -303,7 +348,8 @@ $steps = array(
     'start'         => '<li' . ($step == 'start' ? ' class="selected"' : '') . '>Start</li>',
     'license'       => '<li' . ($step == 'license' ? ' class="selected"' : '') . '>License Agreement</li>',
     'connections'   => '<li' . ($step == 'connections' || $step == 'setupdb' ? ' class="selected"' : '') . '>MySQL Connection</li>',
-    'options'       => '<li' . ($step == 'options' ? ' class="selected"' : '') . '>Options</li>'
+    'options'       => '<li' . ($step == 'options' ? ' class="selected"' : '') . '>Options</li>',
+    'done'          => '<li' . ($step == 'done' ? ' class="selected"' : '') . '>Finish</li>'
 );
 
 // Output HTML header
@@ -324,6 +370,7 @@ echo <<< HEADER
   {$steps['license']}
   {$steps['connections']}
   {$steps['options']}
+  {$steps['done']}
 </ul>
 <div align="center">
 HEADER;
