@@ -22,7 +22,7 @@ function _parsePath($path) {
 
 // Redirect user to install page if not installed. We will check for the presence
 // of the install file. If it is there, PHPDirector has not been installed.
-$install_file = _parsePath(PHPDIRECTOR_ROOT . 'install/index.php');
+$install_file = _parsePath(PHPDIRECTOR_ROOT . 'install/install.php');
 if (file_exists($install_file)) {
     header('Location: ' . $install_file);
     exit;

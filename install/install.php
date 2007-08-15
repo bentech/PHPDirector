@@ -28,8 +28,6 @@ if (endsWith($filename, '_old')) {
 // lower PHP versions.
 require_once '../includes/compatability.php';
 
-include("header.php");
-
 // To maintain form POST yet still allow the flexibility to display errors, we hold
 // a global error variable. The contents can be any type, so each function can choose
 // to display errors differently.
@@ -41,13 +39,13 @@ function Install() {
 Welcome to PHP Directory Install
 <form action="{$_SERVER['PHP_SELF']}" method="post">
 <div>
-  <input type="hidden" value="license" name="step">
-  <input type="submit" value="Install">
+  <input type="hidden" value="license" name="step" />
+  <input type="submit" value="Install" />
 </div>
 </form>
 CODE;
 
-    echo $output;
+    return $output;
 }
 
 // Step 2
@@ -58,12 +56,12 @@ function License() {
     $output = <<< CODE
 {$license}
 <form action="{$_SERVER['PHP_SELF']}" method="post"><div>
-  <input type="hidden" value="connections" name="step">
-  <input type="submit" value="I hereby have read and agreed to the License">
+  <input type="hidden" value="connections" name="step" />
+  <input type="submit" value="I hereby have read and agreed to the License" />
 </form>
 CODE;
 
-    echo $output;
+    return $output;
 }
 
 function Connections() {
@@ -74,34 +72,35 @@ function Connections() {
             $errors = array($errors);
         }
         foreach ($errors as $error) {
-            $error_string .= '<span style="color: red;">' . $error . '</span><br>';
+            $error_string .= '<span style="color: red;">' . $error . '</span><br />';
         }
     }
 
 	$output = <<< CODE
 {$error_string}
 <p>
-<div align="center">
 <form action="{$_SERVER['PHP_SELF']}" method="post">
   <input type="hidden" value="setupdb" name="step">
   <div>
-    Database Host:<input name="Host" type="text" size="50" value="localhost"><br />
-    Database Username:<input name="Username" type="text" size="50"><br />
-    Database Password:<input name="Password" type="password" size="50"><br />
-    Database Name:<input name="Name" type="text" size="50"><br />
-    Admin Username:<input name="AUsername" type="text" size="50"><br />
-    Admin Password:<input name="APassword" type="password" size="50"><br /><br />
-    <input type="submit" value="Create Mysql Table">
+    Database Host:<input name="Host" type="text" size="50" value="localhost" /><br />
+    Database Username:<input name="Username" type="text" size="50" /><br />
+    Database Password:<input name="Password" type="password" size="50" /><br />
+    Database Name:<input name="Name" type="text" size="50" /><br />
+    Admin Username:<input name="AUsername" type="text" size="50" /><br />
+    Admin Password:<input name="APassword" type="password" size="50" /><br /><br />
+    <input type="submit" value="Create Mysql Table" />
   </div>
 </form>
-</div>
 </p>
 CODE;
 
-	echo $output;
+	return $output;
 }
 
 function SetupDB() {
+    global $step;       // we may change steps
+
+    $output = '';
     //:TODO: Input validation, even though this is the administrator installing
 
     $host       = $_POST['Host'];
@@ -115,15 +114,15 @@ function SetupDB() {
 	if(!($con = @mysql_connect($host, $username, $password))) {
         // We could not establish a database connection!
         // Set the error and redisplay the connections form
-        $GLOBALS['error'] = '<b>Could not connect to the database.</b><br>MySQL Error: ' . mysql_error();
-        Connections();
-        return;
+        $GLOBALS['error'] = '<b>Could not connect to the database.</b><br />MySQL Error: ' . mysql_error();
+        $output = Connections();
+        return $output;
 	} else if (!@mysql_select_db($name, $con)) {
 		// We could not select the database!
 		// Set the error and redisplay the connections form
-		$GLOBALS['error'] = '<b>Could not use database \'' . $name . '\'. It may not exist.</b><br>MySQL Error: ' . mysql_error();
-		Connections();
-		return;
+		$GLOBALS['error'] = '<b>Could not use database \'' . $name . '\'. It may not exist.</b><br />MySQL Error: ' . mysql_error();
+		$output = Connections();
+		return $output;
 	}
 
 	$sql[] = "CREATE TABLE `pp_config` (
@@ -217,38 +216,38 @@ CONFIG;
 	// the user along to the next step.
 	$num_errors = count($errors);
 	if ($num_errors === 0) {
-	    Options();
-	    return;
+	    $step = 'options';             // modify the global step variable to reflect new step
+	    $output = Options();
 	} else {
 		foreach ($errors as $error) {
-			echo "<span style=\"color: red;\">{$error}</span><br />";
+			$output .= "<span style=\"color: red;\">{$error}</span><br />";
 		}
 
-		echo <<< FORMS
+		$output .= <<< FORMS
 <br>
-<div>
 <form action="{$_SERVER['PHP_SELF']}" method="post" style="display: inline;">
-  <input type="hidden" value="connections" name="step">
-  <input type="submit" value="Back">
+  <input type="hidden" value="connections" name="step" />
+  <input type="submit" value="Back" />
 </form>
 <form action="{$_SERVER['PHP_SELF']}" method="post" style="display: inline;">
-  <input type="hidden" value="setupdb" name="step">
-  <input type="hidden" value="{$host}" name="Host">
-  <input type="hidden" value="{$username}" name="Username">
-  <input type="hidden" value="{$password}" name="Password">
-  <input type="hidden" value="{$name}" name="Name">
-  <input type="hidden" value="{$ausername}" name="AUsername">
-  <input type="hidden" value="{$apassword}" name="APassword">
-  <input type="submit" value="Try Again">
+  <input type="hidden" value="setupdb" name="step" />
+  <input type="hidden" value="{$host}" name="Host" />
+  <input type="hidden" value="{$username}" name="Username" />
+  <input type="hidden" value="{$password}" name="Password" />
+  <input type="hidden" value="{$name}" name="Name" />
+  <input type="hidden" value="{$ausername}" name="AUsername" />
+  <input type="hidden" value="{$apassword}" name="APassword" />
+  <input type="submit" value="Try Again" />
 </form>
 <form action="{$_SERVER['PHP_SELF']}" method="post" style="display: inline;">
-  <input type="hidden" value="options" name="step">
-  <input type="submit" value="Continue">
+  <input type="hidden" value="options" name="step" />
+  <input type="submit" value="Continue" />
 </form>
-</div>
 FORMS;
 
 	}
+
+	return $output;
 }
 
 function Options() {
@@ -256,46 +255,114 @@ function Options() {
 <br /><br /><br /><br /><br /><br /><br /><br /><br />
 <form action="complete_install.php" method="post">
   <table border="0">
-    <tr><td align="right">Name: </td><td><input type="text" value="My Videos" name="name"></td></tr>
-	<tr><td align="right">Videos Per Page: </td><td><input type="text" value="10" name="vids_per_page"></td></tr>
-	<tr><td align="right">News: </td><td><input type="text" value="PHP Director Just Installed" name="news"></td></tr>
-	<tr><td align="center" colspan="2"><br><input type="hidden" name="Editing"><input type="submit" value="Edit"></td></tr>
+    <tr><td align="right">Name: </td><td><input type="text" value="My Videos" name="name" /></td></tr>
+	<tr><td align="right">Videos Per Page: </td><td><input type="text" value="10" name="vids_per_page" /></td></tr>
+	<tr><td align="right">News: </td><td><input type="text" value="PHP Director Just Installed" name="news" /></td></tr>
+	<tr><td align="center" colspan="2"><br /><input type="hidden" name="Editing"><input type="submit" value="Edit" /></td></tr>
   </table>
 </form>
 CODE;
 
-    echo $output;
+    return $output;
 }
-?>
-<?php
-if (!empty($_POST['step'])) {
-	$step = $_POST['step'];
 
-	// Decide which step to display
-	switch ($step) {
-	    case 'license':
-	        License(); break;
-	    case 'connections':
-	        Connections(); break;
-	    case 'setupdb':
-	        SetupDB(); break;
-	    case 'options':
-	        Options(); break;
-	    default:
-	        break;
-	}
-}else{
-if(@$_GET["connect"] == 'connect'){
-echo "Could not connect";
-	Connections();
-}elseif(@$_GET["connect"] == 'db'){
-echo "Could not select database";
-	Connections();
-}else{
-	Install();
+/**
+ * PAGE ENTRY POINT. THIS IS WHERE WE START OUTPUTTING EVERYTHING
+ */
+
+// Figure out on which step we are. This may be changed by each individual step if they
+// redirect. This emulates redirect without a real redirect ;-)
+$step = 'start';
+if (!empty($_POST['step'])) {
+    $step = strtolower($_POST['step']);
+
+    $allowed_steps = array('start', 'license', 'connections', 'setupdb', 'options');
+    if (!in_array($step, $allowed_steps)) {
+        $step = 'start';
+    }
 }
+
+// Decide which step to display
+$body = '';
+switch ($step) {
+    case 'start':
+        $body = Install(); break;
+    case 'license':
+        $body = License(); break;
+    case 'connections':
+        $body = Connections(); break;
+    case 'setupdb':
+        $body = SetupDB(); break;
+    case 'options':
+        $body = Options(); break;
+    default:
+        break;
 }
-?>
-<?php
-include("footer.php");
+
+$steps = array(
+    'start'         => '<li' . ($step == 'start' ? ' class="selected"' : '') . '>Start</li>',
+    'license'       => '<li' . ($step == 'license' ? ' class="selected"' : '') . '>License Agreement</li>',
+    'connections'   => '<li' . ($step == 'connections' || $step == 'setupdb' ? ' class="selected"' : '') . '>MySQL Connection</li>',
+    'options'       => '<li' . ($step == 'options' ? ' class="selected"' : '') . '>Options</li>'
+);
+
+// Output HTML header
+echo <<< HEADER
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>PHP Director Install Wizard</title>
+<link rel="stylesheet" type="text/css" href="css.css" />
+</head>
+<body>
+<div id="install-header">
+  <h1>PHP Director Installation</h1>
+</div>
+<ul id="install-progress">
+  {$steps['start']}
+  {$steps['license']}
+  {$steps['connections']}
+  {$steps['options']}
+</ul>
+<div align="center">
+HEADER;
+
+echo $body;
+
+// Output HTML footer
+echo <<< FOOTER
+<a href="http://www.phpdirector.co.uk/">Powered by PHP Director 0.3</a> | PHPDIRECTOR &copy; 2007, Ben Swanson
+<br />
+
+<!-- Creative Commons License -->
+This software is licensed under the <a href="http://creativecommons.org/licenses/GPL/2.0/">CC-GNU GPL</a>.
+<!-- /Creative Commons License -->
+
+<!--
+
+<rdf:RDF xmlns="http://web.resource.org/cc/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<Work rdf:about="">
+   <license rdf:resource="http://creativecommons.org/licenses/GPL/2.0/" />
+   <dc:type rdf:resource="http://purl.org/dc/dcmitype/Software" />
+</Work>
+
+<License rdf:about="http://creativecommons.org/licenses/GPL/2.0/">
+<permits rdf:resource="http://web.resource.org/cc/Reproduction" />
+   <permits rdf:resource="http://web.resource.org/cc/Distribution" />
+   <requires rdf:resource="http://web.resource.org/cc/Notice" />
+   <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+   <requires rdf:resource="http://web.resource.org/cc/ShareAlike" />
+   <requires rdf:resource="http://web.resource.org/cc/SourceCode" />
+</License>
+
+</rdf:RDF>
+
+-->
+</div>
+</body>
+</html>
+FOOTER;
 ?>
