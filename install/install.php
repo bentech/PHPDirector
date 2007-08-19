@@ -64,6 +64,7 @@ CODE;
     return $output;
 }
 
+// Step 3
 function Connections() {
     $error_string = '';
     if (!empty($GLOBALS['error'])) {
@@ -97,11 +98,11 @@ CODE;
 	return $output;
 }
 
+// Step 4
 function SetupDB() {
     global $step;       // we may change steps
 
     $output = '';
-    //:TODO: Input validation, even though this is the administrator installing
 
     $host       = $_POST['Host'];
     $username   = $_POST['Username'];
@@ -224,7 +225,7 @@ CONFIG;
 		}
 
 		$output .= <<< FORMS
-<br>
+<br />
 <form action="{$_SERVER['PHP_SELF']}" method="post" style="display: inline;">
   <input type="hidden" value="connections" name="step" />
   <input type="submit" value="Back" />
@@ -250,6 +251,7 @@ FORMS;
 	return $output;
 }
 
+// Step 5
 function Options() {
     $output = <<< CODE
 <br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -267,8 +269,8 @@ CODE;
     return $output;
 }
 
+// Step 6
 function Done() {
-    // :TODO: Input validation!
     $name        = $_POST['name'];
     $news        = $_POST['news'];
     $vidsPerPage = $_POST['vids_per_page'];
