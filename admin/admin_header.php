@@ -55,12 +55,10 @@ $registry->set('dbhost', $cfg['db_host']);
 $registry->set('dbuser', $cfg['db_user']);
 $registry->set('dbpass', $cfg['db_pass']);
 $registry->set('dbname', $cfg['db_name']);
-$registry->set('db', dbConnect($registry));
 
-// If we do not have our configuration variables, create them and store them in the registry. After,
-// all our config variables will be stored in an associative array as 'config' in the registry.
 if (!$registry->has('config')) {
-    loadConfig($registry);
+    connect($registry);                                         // connect to the database
+    $registry->set('config', loadConfig($registry->get('db'))); // load configuration vars
 }
 
 $template = config($registry, 'template');

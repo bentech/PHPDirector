@@ -34,4 +34,11 @@ function &dbConnect(&$registry) {
 
     return $conn;
 }
+
+// Connect to the database if necessary. This lets the registry hold a single connection
+function connect(&$registry) {
+    if (!$registry->has('db')) {
+        $registry->set('db', dbConnect($registry));
+    }
+}
 ?>

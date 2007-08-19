@@ -10,16 +10,10 @@
 */
 
 // Load all of the configuration variable at one time
-function loadConfig(&$registry) {
-    if (($conn = $registry->get('db')) === null) {
-        return false;
-    }
-
-    // do our query
+function &loadConfig(&$conn) {
     $result = @mysql_query('SELECT * FROM `pp_config`', $conn);
     $config = @mysql_fetch_assoc($result);
-    $registry->set('config', $config);
-    return true;
+    return $config;
 }
 
 // Load the configuration variable from the registry
