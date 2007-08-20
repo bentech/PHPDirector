@@ -1,6 +1,15 @@
+.edit {
+  float: left;
+  clear: both;
+  border-bottom: 1px solid black;
+  width: 100%;
+  background: rgb(225, 255, 225);
+}
+
 .edit div.video {
   float: left;
   clear: left;
+  border-right: 1px solid black;
 }
 
 .edit div.info {
