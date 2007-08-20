@@ -8,10 +8,15 @@
 |		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
 +----------------------------------------------------------------------------+
 */
-ob_start();
-include("admin_header.php");
 
-if (checkLoggedin()){
+require_once 'admin_header.php';
+require_once 'functions.php';
+
+if ( !checkLoggedin() ) {
+    header('Location: login.php');
+    exit;
+}
+
 include("includes/admin_videos_functions.php");
 $result1 = array();
 $i=0;
@@ -81,8 +86,5 @@ $smarty->assign('categories_current', $cat1);  //Got the categorys and assigned 
 
 $smarty->display('admin_videos.tpl');
 
-	}else{
-header("location: login.php");
-}
 mysql_close($mysql_link);
 ?>

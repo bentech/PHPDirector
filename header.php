@@ -65,13 +65,15 @@ $ip = $_SERVER["REMOTE_ADDR"];
 mysql_query("INSERT INTO pp_comments (video_id, ip, comment) VALUES ('$_GET[id]', '$ip', '$_POST[comment]')");
 }
 $template = config($registry, 'template');
-$smarty = new Smarty();
-$smarty->template_dir = './templates/'.$template;
-$smarty->compile_dir = './templates_c';
-$smarty->cache_dir = './cache';
-$smarty->config_dir = './configs';
 
-include(PHPDIRECTOR_ROOT . 'lang/' . config($registry, 'lang'));
+// Create and set our Smarty object
+$smarty = new Smarty();
+$smarty->template_dir   = './templates/' . $template;
+$smarty->compile_dir    = './templates_c';
+$smarty->cache_dir      = './cache';
+$smarty->config_dir     = './configs';
+
+include_once(_parsePath(PHPDIRECTOR_ROOT . 'lang/' . config($registry, 'lang')));
 
 $sort1 = $_GET['sort'];
 $page = $_GET['page'];

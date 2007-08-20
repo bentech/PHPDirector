@@ -1,0 +1,68 @@
+.edit div.video {
+  float: left;
+  clear: left;
+}
+
+.edit div.info {
+  float: left;
+  clear: right;
+  text-align: left;
+}
+
+.edit form {
+  margin: 0px;
+  padding: 0px;
+}
+
+.edit form div {
+  margin-bottom: .5em;
+  padding: 0px;
+  float: left;
+  clear: both;
+}
+
+.edit form div label {
+  float: left;
+  width: 100px;
+  padding: 3px 12px 3px 0px;
+  text-align: right;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.edit form div input, .edit form div textarea {
+  float: left;
+  clear: right;
+  border-top: 1px solid #555;
+  border-left: 1px solid #555;
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  padding: 1px;
+  color: #333;
+}
+
+.edit form div input {
+  width: 220px;
+}
+
+.edit form div input.checkbox {
+  width: auto;
+}
+
+.edit form div input.button {
+  width: auto;
+  border: 1px solid black;
+  background: #ccc;
+  padding: 3px 1em;
+  margin-left: 114px;
+}
+
+.edit form div textarea {
+  width: 220px;
+  height: 60px;
+}
+
+.edit form div select {
+  padding: 1px;
+  width: 240px;
+}

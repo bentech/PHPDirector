@@ -7,6 +7,7 @@
 <meta content="Copyright 2007 Cross Star Studios" name="copyright" />
 <meta content="Ben Swanson and Dennis Berko" name="author" />
 <link media="screen" type="text/css" href="../templates/Photine/admin/admin_main.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="../templates/Photine/admin/tempother.css" />
 <!--
 
 <rdf:RDF xmlns="http://web.resource.org/cc/"
