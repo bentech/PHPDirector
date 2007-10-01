@@ -8,7 +8,7 @@
 */
 
 $id = $_GET["id"];
-
+//add a new view?
 if(!isset($_COOKIE[$id])){
 $twomonths = 60 * 60 * 24 * 60 + time();
 setcookie("$id", $id, $twomonths);
@@ -18,12 +18,17 @@ $viewaddone = true;
 require('header.php');
 
 if(isset($id)){
+//get the video from the id
 $result = mysql_query("SELECT * FROM pp_files WHERE id=$id LIMIT 1") or die();  
 }elseif (isset($_GET["name"])){
+
+//this is so you can use videos.php?name=ben ect
 $name = $_GET["name"];
 $result = mysql_query("SELECT * FROM pp_files WHERE `approved` = '1' AND `name` = '$name' LIMIT 1") or die();  
 
 }else{
+
+//if no video is specified it uses a random one
 $result = mysql_query("select * from pp_files WHERE approved='1' AND reject='0' order by rand() LIMIT 1") or die();  
 }
 // For each result that we got from the Database
@@ -35,16 +40,11 @@ while ($row = mysql_fetch_assoc($result))
 		$new_views = $row["views"] + 1;
 		mysql_query("UPDATE pp_files SET views = '$new_views' WHERE id = '$id'");
 	}
+$play = true;
+$videoid = $row['file'];
+include("processes/process_".strtolower($row['video_type']).".inc.php");	
+$smarty->assign('player_code', $player_code);
 
-$smarty->assign('vidtype', $row['video_type']);
-
-if( $row['video_type'] == "dailymotion"){
-$dm_xml_pic_string = @file_get_contents("http://www.dailymotion.com/atom/fr/cluster/extreme/featured/video/".$row['file']);
-$dm_xml_pic_start = explode("/swf/",$dm_xml_pic_string,2);
-$dm_xml_pic_end = explode("\"",$dm_xml_pic_start[1],2);
-$dmid = $dm_xml_pic_end[0];
-$smarty->assign('dmid', $dmid);
-}
 }
 
 // Assign this array to smarty

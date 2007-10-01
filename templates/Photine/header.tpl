@@ -20,7 +20,7 @@
 <div id='content'>
 <div id='header'><p id="top_info">Login</p>
 <div id="logo">
-<h1><a href="index.php" title="home"><img src="templates/Photine/images/phpdirectorbeta.png" width="243" height="52" alt="PHP Director" border="0" /></a></h1>
+<h1>{if $title eq ""}<a href="index.php" title="home"><img src="templates/Photine/images/phpdirectorbeta.png" width="243" height="52" alt="PHP Director" border="0" /></a>{else}{$title}{/if}</h1>
 </div>
 </div>
 <div id='tabs'>
@@ -33,8 +33,9 @@
 <li><a {if $pagetype eq "submit"}class="current"{/if} href='submit.php?pt=submit&amp;part=1' accesskey='s'><span class='key'>{$LAN_5|default:"Submit"}</span></a></li>
 </ul>
 <div id="search">
-<form method="post" action="index.php" name="search1">
-<p><input type="text" name="searching" class="search"/><input type="submit" value="Search"  class="button"/></p>
+<form method="get" action="index.php" name="search1">
+<p><input type="text" name="search" class="search"/>
+<input type="submit" value="Search"  class="button"/></p>
 </form>
 </div>
 </div>

@@ -8,22 +8,18 @@
 |		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
 +----------------------------------------------------------------------------+
 */
+ob_start(); 
+session_start(); 
+include("admin_header.php");
 
-require_once 'admin_header.php';
-require_once 'functions.php';
-
-if ( !checkLoggedin() ) {
-    header('Location: login.php');
-    exit;
-}
-
+if (checkLoggedin()){
 include("includes/admin_videos_functions.php");
 $result1 = array();
 $i=0;
 
 if ($_POST[category] !== null){  //Category Change
 
-$sql = 'UPDATE `pp_files` SET `category` = '.$_POST[category].' WHERE `pp_files`.`id` = '.$_POST[id].' LIMIT 1;';
+$sql = 'UPDATE `pp_files` SET `category` = '.$_POST[category].' WHERE `pp_files`.`id` = '.$_POST[id].' LIMIT 1;'; 
 mysql_query($sql) or die();
 }
 
@@ -34,7 +30,7 @@ if ($_GET['pt'] == "easyapprove"){
 
 
 $result = mysql_query("SELECT * FROM `pp_files` WHERE `approved` = CONVERT( _utf8 '0' USING latin1 )COLLATE latin1_swedish_ci AND `reject` = CONVERT( _utf8 '0'
-USING latin1 ) COLLATE latin1_swedish_ci LIMIT 0 , 1") or die();
+USING latin1 ) COLLATE latin1_swedish_ci LIMIT 0 , 1") or die();  
 }else{
 $result = mysql_query("SELECT * FROM pp_files WHERE id=$id") or die();
  }
@@ -46,7 +42,7 @@ $result = mysql_query("SELECT * FROM pp_files WHERE id=$id") or die();
 
 while ($row = mysql_fetch_array($result)) {
 	$video[] = $row; //Assignes row to video as a variable
-
+	
 $smarty->assign('id', $row['id']); //Smarty Assign, id to row id
 $smarty->assign('vidtype', $row['video_type']);
 
@@ -60,7 +56,9 @@ $query_categories = mysql_query("SELECT * FROM pp_categories WHERE disable='0'")
 while ($rowc = mysql_fetch_assoc($query_categories)){
 	$cat2[] = $rowc;
 }
-
+$play = true;
+$videoid = $row['file'];
+include("../processes/process_".strtolower($row['video_type']).".inc.php");	
 
 	//PICTURE
 		if($row["video_type"] == "YouTube"){
@@ -69,14 +67,16 @@ while ($rowc = mysql_fetch_assoc($query_categories)){
 		if ($yt_pic_final = "2.jpg"){
 			$yt_pic_getstart = explode("2.jpg", show_sql($row['picture']));
 			$ytpic = $yt_pic_getstart[0];
+	}	
 	}
 	}
-	}
-
-
-
-
+	
+	
+	
+	
 	//Smarty Assings
+
+$smarty->assign('player_code', $player_code);
 $smarty->assign('ytpic', $ytpic);
 $smarty->assign('pt', $_GET['pt']);
 $smarty->assign('video', $video);
@@ -86,5 +86,8 @@ $smarty->assign('categories_current', $cat1);  //Got the categorys and assigned 
 
 $smarty->display('admin_videos.tpl');
 
+	}else{
+header("location: login.php");
+}
 mysql_close($mysql_link);
 ?>

@@ -1,109 +1,129 @@
 <?php
-function getdmid($url){
+/*
++ ----------------------------------------------------------------------------+
+|     PHPDirector.
+|		$License: GPL General Public License
+|		$Website: phpdirector.co.uk
+|		$Author: Ben Swanson
+|		$Contributors - Dennis Berko
++----------------------------------------------------------------------------+
+*/
+$source = "dailymotion";
 
-//checks if valid youtube link
 
-$checkdm = explode(".", $url);
+//This is to get the id from the link eg youtube http://www.youtube.com/watch?v=xxxxxxxx&.....
+//$link_start is the start of where the id is, $link_end is the end which you do not need
 
-if ($checkdm[1] == "dailymotion" ){
+$link_start = "/video/";
+$link_end = "&";
+
+
+
+//IGNORE//
+if ($play !== true){
+$videoid = trim(getytid($videourl,$link_start,$link_end));
+
+}
+///IGNORE//
+
+//Xml Url for the video
+$xml_url = "http://www.dailymotion.com/atom/fr/cluster/extreme/featured/video/".$videoid;
+
+
+
+//IGNORE//
+$dmid = getinfo('/swf/', '"',$xml_url);
+///IGNORE//
+
+
+
+
+//player code
+$player_code = '<object width="425" height="335"><param name="movie" value="http://www.dailymotion.com/swf/'.$dmid.'"></param><param name="allowfullscreen" value="true"></param><embed src="http://www.dailymotion.com/swf/'.$dmid.'" type="application/x-shockwave-flash" width="425" height="335" allowfullscreen="true"></embed></object>';
+
+
+//These are for the xml parsing, you will have to re-write this script completly if it doesnt support this
+
+//These are the tags where the text is
+
+
+//Title
+
+$xml_title_start = "<title>"; //Start
+
+$xml_title_end = "</title>"; //End
+
+//Author
+
+$xml_start = "<author><name>";//Start
+
+$xml_end = "</name>";//End
+
+
+//description
+
+$xml_description_start = "<content type=\"html\">";//Start
+
+$xml_description_end = "</content>";//End
+
+
+
+
+//Images --Put as many as you need or just one
+
+$xml_image_start = 'type="image/jpeg" href="';
+
+$xml_image_end = '" title="';
+
+
+///Most Video Sites You Shouln't Need to Change Below This!!!
+///....////
+
+if ($play == true){
+return;
+}
+
+function getytid($url,$start,$end){
 
 	//gets vid id
-$dm_start = explode("/video/",$url,2);
-$dm_end = explode("&",$dm_start[1],2);
-$gotid = $dm_end[0];
+$yt_start = explode($start,$url,2);
+$yt_end = explode($end,$yt_start[1],2);
+$gotid = $yt_end[0];
 return $gotid;
 }
-}
-/**
- * Gets thumb from dailymotion id
- *
- * @param dailymotion Id
- * @return $dm_pic
- */
-function getthumb($file){
-$dm_xml_pic_start = explode("type=\"image/jpeg\" href=\"",$file,2);
-$dm_xml_pic_end = explode("\"",$dm_xml_pic_start[1],2);
-$dm_pic = $dm_xml_pic_end[0];
-return $dm_pic;
+
+function getinfo($start,$end,$xml_url){
+$yt_xml_string = @file_get_contents($xml_url);
+$yt_xml_start = explode($start,$yt_xml_string,2);
+$yt_xml_end = explode($end,$yt_xml_start[1],2);
+$yt = addslashes($yt_xml_end[0]);
+return $yt;
 }
 
-/**
- * Gets Author from dailymotion id
- *
- * @param dailymotion Id
- * @return $dm_author
- */
-function getauthor($file){
-$dm_xml_pic_start = explode("<author><name>",$file,2);
-$dm_xml_pic_end = explode("</name><uri>",$dm_xml_pic_start[1],2);
-$dm_pic = $dm_xml_pic_end[0];
-return $dm_pic;
-}
-/**
- * Gets Title from dailymotion id
- *
- * @param dailymotion Id
- * @return $dm_title_noslash
- */
-function gettitle($file){
-$dm_xml_pic_start = explode("<title>",$file,2);
-$dm_xml_pic_end = explode("</title>",$dm_xml_pic_start[1],2);
-$dm_pic = $dm_xml_pic_end[0];
-return $dm_pic;
-}
+//check if its allready there
 
-/**
- * Gets description from dailymotion id
- *
- * @param dailymotion Id
- * @return $dm_description
- */
-function getdescription($file){
-$dm_xml_pic_start = explode("<content type=\"html\">",$file,2);
-$dm_xml_pic_end = explode("<",$dm_xml_pic_start[1],2);
-$dm_pic = $dm_xml_pic_end[0];
-return $dm_pic;
-}
-
-/**
- * Gets description from dailymotion id
- *
- * @param dailymotion Id
- * @return $dm_description
- */
-function getswf($file){
-$dm_xml_pic_start = explode("/swf/",$file,2);
-$dm_xml_pic_end = explode("\"",$dm_xml_pic_start[1],2);
-$dm_pic = $dm_xml_pic_end[0];
-return $dm_pic;
-}
-
-		$did = getdmid($videourl);
-		$file = @file_get_contents("http://www.dailymotion.com/atom/fr/cluster/extreme/featured/video/".$did);
-		$videoid = getswf($file);
-		if($did != null){
-		$title  = safe_sql_insert(gettitle($file));
-		$author = safe_sql_insert(getauthor($file));
-		$des    = safe_sql_insert(getdescription($file));
-		$thumb[0]  = safe_sql_insert(getthumb($file));
-		$file 	= safe_sql_insert(getswf($file));
-		$ip     = safe_sql_insert($_SERVER['REMOTE_ADDR']);
-		$smarty->assign('file2', $did);
+		if($videoid !== null){
+		$title  = safe_sql_insert(getinfo($xml_title_start,$xml_title_end,$xml_url)); //Function to make the sql safe
+		
 		$smarty->assign('title', $title);
+		
+		$author = safe_sql_insert(getinfo($xml_start,$xml_end,$xml_url));
 		$smarty->assign('author', $author);
+		
+		$des    = safe_sql_insert(getinfo($xml_description_start,$xml_description_end,$xml_url));
 		$smarty->assign('description', $des);
+		
+		$thumb[0] = safe_sql_insert(getinfo($xml_image_start,$xml_image_end,$xml_url));
+
 		$smarty->assign('image', $thumb);
-		$smarty->assign('videoid', $file);
-		$smarty->assign('vidtype', 'dailymotion');
+		
+		$smarty->assign('videoid', $videoid);
+		
+		$smarty->assign('vidtype', $source);
+		
+		$smarty->assign('player_code', $player_code);
+		
 
-		}//check for blank end
-
-			$didfile = mysql_query("SELECT * FROM `pp_files` WHERE `file2` = CONVERT(_utf8 '$did' USING latin1) COLLATE latin1_swedish_ci  LIMIT 0 , 1")or die(mysql_error());
-			$rowdid = mysql_fetch_array($didfile);
-			if ($rowdid['file2'] == $did){
-				$smarty->assign('error', 'This Video Has Allready Been Submitted');
-				$smarty->display('error.tpl');
-				exit;
-			}
-?>
- 
+				}//check for blank end
+			
+ ?>

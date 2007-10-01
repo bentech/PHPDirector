@@ -72,7 +72,7 @@ function smarty_function_paginate_next($params, &$smarty) {
     } else {
         $_show = false;   
     }
-    return $_show ? '<a href="' . str_replace('&','&amp;', $_url) . '"' . $_attrs . '>' . $_text . '</a>' : '';
+    return $_show ? '<a href="' . str_replace('&','&amp;', $_url) . '"' . $_attrs . '>' . $_text . '</a>' : 'next';
 }
 
 ?>

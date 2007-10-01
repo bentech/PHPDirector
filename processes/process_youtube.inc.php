@@ -9,7 +9,15 @@
 +----------------------------------------------------------------------------+
 */
 $source = "YouTube";
-//This is to get the id from the link eg youtube http://www.youtube.com/watch?v=xxxxxxxx
+
+if ($play == true){
+
+//player code
+$player_code = '<object width="425" height="350"><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/'.$row['file'].'&autoplay=1" type="application/x-shockwave-flash" wmode="transparent" width="425" height="350"></embed></object>';
+return;
+}
+
+//This is to get the id from the link eg youtube http://www.youtube.com/watch?v=xxxxxxxx&.....
 //$link_start is the start of where the id is, $link_end is the end which you do not need
 $link_start = "v=";
 $link_end = "&";
@@ -41,7 +49,7 @@ $xml_author_end = "</author>";//End
 
 //description
 
-$xml_description_start = "</description>";//Start
+$xml_description_start = "<description>";//Start
 
 $xml_description_end = "</description>";//End
 
@@ -50,14 +58,13 @@ $xml_description_end = "</description>";//End
 
 //Images --Put as many as you need or just one
 
+//use php code if needed
+
 $thumb[0]  = "http://img.youtube.com/vi/".$videoid."/1.jpg";	
 $thumb[1]  = "http://img.youtube.com/vi/".$videoid."/2.jpg";
 $thumb[2]  = "http://img.youtube.com/vi/".$videoid."/3.jpg";
 
-
-
-///....////
-///Most Video Sites You Shoulnt Need to Change Below This!!!
+///Most Video Sites You Shouln't Need to Change Below This!!!
 ///....////
 
 
@@ -127,7 +134,7 @@ return $yt_description;
 		$author = safe_sql_insert(getauthor($videoid,$xml_author_start,$xml_author_end,$xml_url));
 		$smarty->assign('author', $author);
 		
-		$des    = getdescription($videoid,$xml_description_start,$xml_description_end,$xml_url);
+		$des    = safe_sql_insert(getdescription($videoid,$xml_description_start,$xml_description_end,$xml_url));
 		$smarty->assign('description', $des);
 		
 		$smarty->assign('image', $thumb);
@@ -138,4 +145,5 @@ return $yt_description;
 		
 
 				}//check for blank end
+			
  ?>

@@ -73,7 +73,7 @@ function smarty_function_paginate_prev($params, &$smarty) {
         $_show = false;   
     }
     
-    return $_show ? '<a href="' . str_replace('&','&amp;', $_url) . '"' . $_attrs . '>' . $_text . '</a>' : '';
+    return $_show ? '<a href="' . str_replace('&','&amp;', $_url) . '"' . $_attrs . '>' . $_text . '</a>' : 'prev';
 }
 
 ?>

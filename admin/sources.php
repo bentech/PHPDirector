@@ -9,9 +9,10 @@
 +----------------------------------------------------------------------------+
 */
 ob_start();  //Standard Admin Only
+session_start(); 
 include("admin_header.php");
 if (checkLoggedin()){
-
+	
 //Enable Or Disable
 if(isset($_GET[enable])){
 

@@ -7,7 +7,7 @@
 <h2>{$video[video].name}</h2>
 <p><b>{$LAN_36}:</b><br />
 	{$video[video].creator}	</p>
-{include file="players.tpl"}<br />
+{$player_code}<br />
 {rating_bar units='5' id=$video[video].id}
 <strong>{$LAN_35}:</strong>
 		<br />

@@ -5,86 +5,51 @@
 |		$License: GPL General Public License
 |		$Website: phpdirector.co.uk
 |		$Author: Ben Swanson
-|		$Contributors - Dennis Berko, Monte Ohrt (Monte Ohrt), Theodore Ni
+|		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
 +----------------------------------------------------------------------------+
 */
 
-// Find file root and set as contant
-if (!defined('PHPDIRECTOR_ROOT')) {
-    define('PHPDIRECTOR_ROOT', dirname(__FILE__) . DIRECTORY_SEPARATOR);
+//Installed?
+$filename = "installed.php";
+$handle = fopen($filename, "r");
+$contents = fread($handle, filesize($filename));
+fclose($handle);
+$explode_cont = explode(";", $contents);
+if ($explode_cont[1] !== "Yes"){
+header("Location: install/index.php");
 }
+//Installed?
 
-// Very useful utility function for maximum compatability across servers. Include this in all headers that
-// follow this format
-function _parsePath($path) {
-    return str_replace('/', DIRECTORY_SEPARATOR, $path);
-}
-
-// Redirect user to install page if not installed. We will check for the presence
-// of the install file. If it is there, PHPDirector has not been installed.
-$install_file = 'install/install.php';
-if (file_exists($install_file)) {
-    header('Location: ' . $install_file);
-    exit;
-} define('PHPDIRECTOR_INSTALLED', 1);
-
-// Include necessary files
-require_once(_parsePath(PHPDIRECTOR_ROOT . 'includes/Registry.php'));              // registry
-require_once(_parsePath(PHPDIRECTOR_ROOT . 'libs/Smarty.class.php'));              // base Smarty engine
-require_once(_parsePath(PHPDIRECTOR_ROOT . 'libs/SmartyPaginate.class.php'));      // Smarty pagination add-on
-require_once(_parsePath(PHPDIRECTOR_ROOT . 'includes/db.php'));                    // database information and functions
-require_once(_parsePath(PHPDIRECTOR_ROOT . 'includes/functions.php'));             // misc. functions
-
-// Begin session. This is especially useful for user data and Smarty pagination
-session_start();
-
-// Retrieve our registry if it already exists. If not, create one, then attach it to the session
-// so that it is persistent for the whole session.
-if (isset($_SESSION['registry'])) {
-    $registry = &$_SESSION['registry'];
-} else {
-    $registry = &new Registry();
-    $_SESSION['registry'] = &$registry;
-}
-
-// Create our database connection
-require_once(_parsePath(PHPDIRECTOR_ROOT . 'config.php'));
-$registry->set('dbhost', $cfg['db_host']);
-$registry->set('dbuser', $cfg['db_user']);
-$registry->set('dbpass', $cfg['db_pass']);
-$registry->set('dbname', $cfg['db_name']);
-
-if (!$registry->has('config')) {
-    connect($registry);                                         // connect to the database
-    $registry->set('config', loadConfig($registry->get('db'))); // load configuration vars
-}
-
-if(isset($_POST["comment"])){
-header("location: videos.php?id=" . $_GET["id"] . "");
-$ip = $_SERVER["REMOTE_ADDR"];
-mysql_query("INSERT INTO pp_comments (video_id, ip, comment) VALUES ('$_GET[id]', '$ip', '$_POST[comment]')");
-}
-$template = config($registry, 'template');
-
-// Create and set our Smarty object
+require('libs/Smarty.class.php');
+require('libs/SmartyPaginate.class.php');
+include("db.php");
+include("includes/function.inc.php");
+$template = config('template');
 $smarty = new Smarty();
-$smarty->template_dir   = './templates/' . $template;
-$smarty->compile_dir    = './templates_c';
-$smarty->cache_dir      = './cache';
-$smarty->config_dir     = './configs';
-
-include_once(_parsePath(PHPDIRECTOR_ROOT . 'lang/' . config($registry, 'lang')));
+$smarty->template_dir = './templates/'.$template;
+$smarty->compile_dir = './templates_c';
+$smarty->cache_dir = './cache';
+$smarty->config_dir = './configs';
 
 $sort1 = $_GET['sort'];
 $page = $_GET['page'];
 $pagetype = $_GET["pt"];
 $smarty->assign('pagetype', $pagetype);
+$smarty->assign('cat', $_GET[cat]);
 $smarty->assign('next', $_GET["next"]);
-$cnf_name = config($registry, 'name');
+
+
+$cnf_name = config('name');
 $smarty->assign('config_name', $cnf_name);
 
+$cnf_image = config('image');
+$smarty->assign('config_image', $cnf_image);
+
+$cnf_slogan = config('slogan');
+$smarty->assign('config_slogan', $cnf_slogan);
+
 //NEWS//
-$news = config($registry, 'news');
+$news = config('news');
 $smarty->assign('news', $news);
 //NEWS//
 

@@ -20,51 +20,59 @@ Things not used that you might find usefull
 	
 </div>
 
+
+		<b>{$LAN_7}</b>:
+		<a href="?sort=views&amp;order=down&amp;next={$next}&amp;pt={$pagetype}">Most Viewed</a>&nbsp;| &nbsp;
+		<a href="?sort=views&amp;order=up&amp;next={$next}&amp;pt={$pagetype}">Least Viewed</a>&nbsp;| &nbsp;
+		<a href="?sort=date&amp;order=down&amp;next={$next}&amp;pt={$pagetype}">Newest Videos</a>
+		<p>{paginate_prev}&nbsp;| &nbsp; {paginate_next}</p>
+
+ <br />
+
+{* Alligning *}
 <div align="left">
+<table width="1" border="0">
 
-{section name=mysec loop=$videos}
 
-	<div class="left">
-	
-		<div class="left_articles">
-		
-			<div class="buttons">
-			
-				<div> <a href="videos.php?id={$videos[mysec].id}" class="bluebtn">{$LAN_14}</a> <a href="videos.php?KeepThis=true&amp;height=530&amp;width=430&amp;id={$videos[mysec].id}&amp;pop=1" class="greenbtn thickbox" title="{$videos[mysec].name|truncate:60:'...'}">{$LAN_15}</a></div>
-				
-			</div>
-			
-			<div class="calendar">
-				<p>{$videos[mysec].month}<br />
-					{$videos[mysec].day}</p>
-			</div>
-			
-			<h2><a href="videos.php?id={$videos[mysec].id}">{$videos[mysec].name|truncate:32:'...'}</a></h2>
-			
-			<div class="description"><b>{$LAN_16}:</b>{$videos[mysec].creator|truncate:20:'...'}</div>
-			<br />
-	<table width="0" border="0" cellspacing="0" height="0">		
-<td><a href="videos.php?id={$videos[mysec].id}"><img height='89' width='120' src="{$videos[mysec].picture}" class="thumbnail" alt="thumbnail" /></a></td>
-		<td>{$videos[mysec].description|truncate:580:'...'}</td>		</tr>
+{* Change max = for rows *}
+	 {section name=i loop=$videos step=6 max=4}
 
-	</table>		
-		</div>
-		
-	</div>
+	 
+{* Change max = below for columns and step = above *}
+	<tr>
+    {section name=videos loop=$videos start=$smarty.section.i.index max=4}
 	
-	{sectionelse}
 	
-	No Results
-	
+
+		<td> 
+
+{*This table is so the image is aligned at the top*}
+
+
+<table width="132" border="0" align="left">
+  <tr>
+    <td><a href="videos.php?id={$videos[videos].id}"><img src="{$videos[videos].picture}" alt="Image Error" width="130" height="97" border="0" align="top" {if $firefox eq "1"}class="reflect rheight20 ropacity50"{/if} /></a></td>
+  </tr>
+  <tr>
+    <td height="60" align="top" valign="top"><a href="videos.php?id={$videos[videos].id}">{$videos[videos].name|truncate:128:'..'}</a></td>
+  </tr>
+</table>
+
+
+
+		</td>
+	  {/section} </tr>
+
 	{/section}
+</table>
+</div>
+
+
+	
+{* display pagination info *}
+
+	<p>&nbsp;&nbsp;{paginate_prev}&nbsp;&nbsp;{paginate_next} <br />{paginate_middle page_limit="20"} </p>
 	
 
-</div>
-	
-<div class="left"> {* display pagination info *}
-
-	<p align="center">&nbsp;&nbsp;{paginate_prev}&nbsp;&nbsp;{paginate_next} <br />{paginate_middle page_limit="20"} </p>
-	
-</div>
 
 {include file="footer.tpl"}

@@ -7,7 +7,6 @@
 <meta content="Copyright 2007 Cross Star Studios" name="copyright" />
 <meta content="Ben Swanson and Dennis Berko" name="author" />
 <link media="screen" type="text/css" href="../templates/Photine/admin/admin_main.css" rel="stylesheet"/>
-<link rel="stylesheet" type="text/css" href="../templates/Photine/admin/tempother.css" />
 <!--
 
 <rdf:RDF xmlns="http://web.resource.org/cc/"
@@ -54,4 +53,4 @@
 <li {if $pagetype eq "categories"}class='selected'{/if}><a href="categories.php?pt=categories&amp;pag=options">{$LAN_40}</a></li>
 {/if}
 </ul>
-{if $message eq ""}{else}<p><h1 align="center">{$message1}</h1></p>{/if}
+{if $message1 eq ""}{else}<p><h1 align="center">{$message1}</h1></p>{/if}

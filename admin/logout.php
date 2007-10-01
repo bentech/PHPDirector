@@ -8,10 +8,9 @@
 |		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
 +----------------------------------------------------------------------------+
 */
-require_once 'functions.php';
-session_start();
-
-ClearSessionCookies();
-header('Location: ../index.php');
-exit;
+ob_start(); 
+session_start(); 
+require_once ("functions.php"); 
+clearsessionscookies(); 
+header("location: ../index.php");
 ?>

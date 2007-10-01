@@ -8,7 +8,8 @@
 |		$Contributors - Dennis Berko and Monte Ohrt (Monte Ohrt)
 +----------------------------------------------------------------------------+
 */
-ob_start();
+ob_start(); 
+session_start(); 
 include("admin_header.php");
 if (checkLoggedin()){
 if(isset($_POST["options"])){

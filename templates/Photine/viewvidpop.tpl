@@ -3,7 +3,7 @@
 {if $reject eq "1"}
 		{$LAN_26}
 		{/if}
-	{include file="players.tpl"}<br />
+	{$player_code}<br />
 	<script type="text/javascript" language="javascript" src="js/behavior.js"></script>
 <script type="text/javascript" language="javascript" src="js/rating.js"></script>
 	{rating_bar units='5' id=$video[video].id}<span class="redsmall">Rate To Close</span><br />

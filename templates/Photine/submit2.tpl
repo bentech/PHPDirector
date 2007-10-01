@@ -103,7 +103,7 @@ function checkform()
 				<td>&nbsp;</td>
 			</tr>
 		</table>
-		<p align="center">{include file="players.tpl"} </p>
+		<p align="center">{$player_code} </p>
 		<p align="center">
 			<input type="submit" value="Submit">
 		</p>

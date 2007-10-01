@@ -48,7 +48,7 @@ if(!$voted) {     //if the user hasn't yet voted, then vote normally...
 		$update = "UPDATE $rating_dbname.$rating_tableName SET total_votes='".$added."', total_value='".$sum."', used_ips='".$insertip."' WHERE $rating_tableID='$id_sent'";
 		$result = mysql_query($update);		
 	} 
-	echo '<meta http-equiv="refresh" content="0;url='.$referer.'">';
+	header("Location: $referer"); // go back to the page we came from 
 	exit;
 } //end for the "if(!$voted)"
 mysql_close($rating_conn);
