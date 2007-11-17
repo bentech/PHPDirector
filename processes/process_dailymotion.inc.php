@@ -71,9 +71,11 @@ $xml_description_end = "</content>";//End
 
 //Images --Put as many as you need or just one
 
-$xml_image_start = 'type="image/jpeg" href="';
+//CUSTOM CODE FOR DAILY MOTION
+$xml_image_start = '/preview/';
 
-$xml_image_end = '" title="';
+$xml_image_end = '?';
+
 
 
 ///Most Video Sites You Shouln't Need to Change Below This!!!
@@ -114,8 +116,9 @@ return $yt;
 		$smarty->assign('description', $des);
 		
 		$thumb[0] = safe_sql_insert(getinfo($xml_image_start,$xml_image_end,$xml_url));
+$thumbpart2 = "http://limelight-450.static.dailymotion.com/dyn/preview/160x120/".$thumb[0];
 
-		$smarty->assign('image', $thumb);
+		$smarty->assign('image', $thumbpart2);
 		
 		$smarty->assign('videoid', $videoid);
 		

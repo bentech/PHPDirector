@@ -1,13 +1,13 @@
 {include file="admin_header.tpl"}
 <center>
-<h2>{$LAN_69|default:"Source"}<br></h2>
+<h2>Source:<br></h2>
 
 {* If there is a error show this *}
 {if $error ne ""}
 <h3>{$error}<br></h3>
 {/if}
 <br />
-<h3>{$LAN_65|default:"Edit"}</h3>
+<h3>Edit</h3>
 
 <table width="200" border="0">
   {section name=source loop=$source}
@@ -25,9 +25,9 @@
     
     </td>
     {if $source[source].disable eq "1"}
-    <td><a href='sources.php?pt=sources&amp;pag=options&amp;enable={$source[source].id}'>{$LAN_70|default:"Enable"}</a></td>
+    <td><a href='sources.php?pt=sources&amp;pag=options&amp;enable={$source[source].id}'>Enable</a></td>
     {else}
-    <td><a href='sources.php?pt=sources&amp;pag=options&amp;disable={$source[source].id}'>{$LAN_71|default:"Disable"}</a></td>
+    <td><a href='sources.php?pt=sources&amp;pag=options&amp;disable={$source[source].id}'>Disable</a></td>
     {/if}
   </tr>
 

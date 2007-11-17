@@ -57,7 +57,7 @@ $extension = $check[$extensionwhere];// Returns eg wmv
 				include("processes/process_youtube.inc.php");
 							
 				}elseif ($source == "google"){ //google
-				include("processes/process_google.inc.php");
+				include("processes/process_googlevideo.inc.php");
 						
 				}elseif ($source == "dailymotion"){ //dailymotion
 				include("processes/process_dailymotion.inc.php");
@@ -67,8 +67,7 @@ $extension = $check[$extensionwhere];// Returns eg wmv
 				
 				
 				}else{
-					$error = $smarty->get_template_vars('LAN_22');
-					$smarty->assign_by_ref('error', $error);
+					$smarty->assign_by_ref('error', 'Invalid Source');
 					$smarty->display('error.tpl');
 					exit;
 				}
@@ -116,10 +115,63 @@ $file2 = $_POST["file2"];
 				$smarty->display('error.tpl');
 				exit;
 			}
-mysql_query("INSERT INTO pp_files (name, video_type, creator, description, date, file, file2, approved, ip, picture, category) VALUES ('$inserttitle', '$source' , '$insertauthor', '$insertdes', CURDATE(), '$videoid', '$file2', '0', '$ip', '$insertthumb', '$insetycat')")	or die(mysql_error());
+			
+			
+//Generate Id//
+function pdid(){
+  // define possible characters
+  $possible = "0123456789ABCDEFGHIJKLMNOPQRSTUVWYXZabcdfghjkmnpqrstvwxyz"; 
+    
+  // set up a counter
+  $i = 0; 
+    
+  // add random characters to $password until $length is reached
+  while ($i < rand(5,12)) { 
 
-	$error = $smarty->get_template_vars('LAN_24');
-	$smarty->assign_by_ref('error', $error);
+    // pick a random character from the possible ones
+    $char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
+        
+    // we don't want this character if it's already in the pdid
+    if (!strstr($password, $char)) { 
+      $pdid .= $char;
+      $i++;
+    }
+
+  }
+
+ $checkexists = mysql_query("SELECT `id` FROM `pp_files` WHERE `id` = '$pdid'");
+if (mysql_num_rows($checkexists) !== 0){
+
+$pdid = pdid();
+
+}
+
+  
+  return $pdid;
+}	
+
+
+
+$pdid = pdid();
+
+//genid end//
+			
+//TAGS//
+$tag1 = $_POST["tagstext1"];
+$tag2 = $_POST["tagstext2"];
+$tag3 = $_POST["tagstext3"];
+$tag4 = $_POST["tagstext4"];
+$tag5 = $_POST["tagstext5"];
+
+$sql = mysql_query("INSERT INTO `phpdirector`.`pp_tags` (`id`, `name`, `video_id`) VALUES (NULL, '".$_POST["tagstext1"]."', '".$pdid."'), (NULL, '".$_POST["tagstext2"]."', '".$pdid."'), (NULL, '".$_POST["tagstext3"]."', '".$pdid."'), (NULL, '".$_POST["tagstext4"]."', '".$pdid."'), (NULL, '".$_POST["tagstext5"]."', '".$pdid."');");
+
+///TAGS_end//		
+
+
+
+mysql_query("INSERT INTO pp_files (id, name, video_type, creator, description, date, file, file2, approved, ip, picture, category) VALUES ('$pdid', '$inserttitle', '$source' , '$insertauthor', '$insertdes', CURDATE(), '$videoid', '$file2', '0', '$ip', '$insertthumb', '$insetycat')")	or die(mysql_error());
+
+	$smarty->assign('error', 'Thanks for Submitting '.$inserttitle);
 	$smarty->display('error.tpl');
 	exit;
 	}

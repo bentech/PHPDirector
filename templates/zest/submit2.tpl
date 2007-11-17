@@ -63,31 +63,43 @@ function checkform()
 				
 		</table>
         
-        	<br />
-
-				<!-- END - Shows All The Images-->
-		<b>Title</b><br /><textarea name="titletext" cols="50" rows="1" id="titletext" style="text-align:center; text-shadow:#990000">{$title}</textarea>	<br />
-		
-        	<b>Author/b><br /><textarea name="authortext" cols="50" rows="1" style="text-align:center;">{$author}</textarea>	<br />
-            
-           <b>Description</b><br /><textarea name="descriptiontext" cols="50" rows="6" style="text-align:center;">{$description}</textarea>
-           
-           						<br />
-           <b>Category</b><br /><select name="category" size="6">
-
-						
-        {section name=cat loop=$cat}
-						<option value="{$cat[cat].id}" {if $cat[cat].id eq "1"}selected="selected"{/if}>{$cat[cat].name}</option>
-		{/section}
-
-					
-		
-
-				
-					</select>	
-{$player_code}
-
-	<h3><b>Source</b>:{$source}
+        	<p><br />
+        	  
+        	  <!-- END - Shows All The Images-->
+        	          <b>Title</b><br />
+        	  <textarea name="titletext" cols="50" rows="1" id="titletext" style="text-align:center; text-shadow:#990000">{$title}
+		        </textarea>	
+        	  <br />
+        	  
+       	        <b>Author/b><br />
+        	  <textarea name="authortext" cols="50" rows="1" style="text-align:center;">{$author}
+        	    </textarea>	
+        	  <br />
+        	  
+        	       <b>Description</b><br />
+        	  <textarea name="descriptiontext" cols="50" rows="6" style="text-align:center;">{$description}
+                </textarea>
+               <br />  
+                   <b>Tags</b><br />
+        	       <input name="tagstext1" type="text" id="tagstext1" style="text-align:center;" size="15" />
+       	           <input name="tagstext2" type="text" id="tagstext2" style="text-align:center;" size="15" />
+       	           <input name="tagstext3" type="text" id="tagstext3" style="text-align:center;" size="15" />
+              <input name="tagstext4" type="text" id="tagstext4" style="text-align:center;" size="15" />
+   	          <input name="tagstext5" type="text" id="tagstext5" style="text-align:center;" size="15" />
+       	  </p>
+       	  <p><b>Category</b><br />
+            <select name="category" size="6">
+                
+                
+              {section name=cat loop=$cat}
+              <option value="{$cat[cat].id}" {if $cat[cat].id eq "1"}selected="selected"{/if}>
+              {$cat[cat].name}
+                      </option>
+              {/section}
+            </select>	
+            {$player_code}
+          </p>
+       	  <h3><b>Source</b>:{$source}
 	</h3>
 		<p align="center">
 			<input type="submit" value="Submit">

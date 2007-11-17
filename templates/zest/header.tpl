@@ -8,9 +8,11 @@
 	<meta name="keywords" content="{$config_keywords}" />	
 	<link rel="stylesheet" type="text/css" href="templates/zest/style.css" media="screen" />
     	<link rel="stylesheet" type="text/css" href="templates/zest/rating.css" media="screen" />
-    
+   
 <script type="text/javascript" src="js/behavior.js"></script>
 <script type="text/javascript" src="js/rating.js"></script>
+<script type="text/javascript" src="js/reflection.js"></script>
+
     
 <title>{$config_name}</title>
 </head>
@@ -23,18 +25,18 @@
 		
 		<div id="logo">
 
-<h1><a href="index.php" title="home">{if isset($config_image)}<img src="{$config_image}" width="243" height="52" alt="PHP Director" border="0" />{else}{$config_name}{/if}</a></h1>
+<h1><a href="index.php" title="home">{if isset($config_image)}<img src="{$config_image}" alt="PHP Director" border="0" />{else}{$config_name}{/if}</a></h1>
 
 
 			{if isset($config_slogan)}<p id="slogan">{$config_slogan}</p>{/if}
 		</div>
 				
 		<ul id="tablist">
-			<li><a{if $pagetype eq "all"} class="current"{/if} href="index.php?pt=all" accesskey="n">Videos</a></li>
-			<li><a{if $pagetype eq "categories"} class="current"{/if} href="categories.php?pt=categories" accesskey="b">Categories</a></li>
+			<li><a{if $pagetype eq "all"} class="current"{/if} href="index.php?pt=all" accesskey="v">Videos</a></li>
+			<li><a{if $pagetype eq "categories"} class="current"{/if} href="categories.php?pt=categories" accesskey="c">Categories</a></li>
 			<li><a{if $pagetype eq "tags"} class="current"{/if} href="tags.php?pt=tags">Tags</a></li>
-			<li><a{if $pagetype eq "channels"} class="current"{/if} href="channels.php?pt=channels" accesskey="p">Channels</a></li>
-			<li><a{if $pagetype eq "submit"} class="current"{/if} href="submit.php?pt=submit" accesskey="r">Submit</a></li>
+			<li><a{if $pagetype eq "images"} class="current"{/if} href="images.php?pt=images" accesskey="i">Images</a></li>
+			<li><a{if $pagetype eq "submit"} class="current"{/if} href="submit.php?pt=submit" accesskey="s">Submit</a></li>
 		</ul>
 		
 		<div id="topics">

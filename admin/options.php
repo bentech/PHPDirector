@@ -13,33 +13,18 @@ session_start();
 include("admin_header.php");
 if (checkLoggedin()){
 if(isset($_POST["options"])){
-mysql_query("UPDATE pp_config SET name = '$_POST[name]'");
-mysql_query("UPDATE pp_config SET news = '$_POST[news]'");
-mysql_query("UPDATE pp_config SET vids_per_page = '$_POST[vids_per_page]'");
-mysql_query("UPDATE pp_config SET cssstyle = '$_POST[cssstyle]'");
-mysql_query("UPDATE pp_config SET lang = '$_POST[lang]'");
-mysql_query("UPDATE pp_config SET template = '$_POST[template]'");
+mysql_query("UPDATE `pp_config` SET `content` = '$_POST[name]' WHERE `name`= 'name' LIMIT 1 ;");
+mysql_query("UPDATE `pp_config` SET `content` = '$_POST[news]' WHERE `name`= 'news' LIMIT 1 ;");
+mysql_query("UPDATE `pp_config` SET `content` = '$_POST[vids_per_page]' WHERE `name`= 'vids_per_page' LIMIT 1 ;");
+mysql_query("UPDATE `pp_config` SET `content` = '$_POST[template]' WHERE `name`= 'template' LIMIT 1 ;");
+mysql_query("UPDATE `pp_config` SET `content` = '$_POST[slogan]' WHERE `name`= 'slogan' LIMIT 1 ;");
+mysql_query("UPDATE `pp_config` SET `content` = '$_POST[image]' WHERE `name`= 'image' LIMIT 1 ;");
 }
 $result = mysql_query("SELECT * FROM pp_config");
 
 while ($row = mysql_fetch_assoc($result)){
-	$options[] = $row;
+	$smarty->assign($row[name], $row[content]);
 }
-$smarty->assign('options', $options);
-
-
-//Gets Languages
-if ($handle = opendir('../lang')) {
-  while (false !== ($lang = readdir($handle)))
-  {
-   if ($lang != "." && $lang != ".." && $lang != "index.html"
-     && $lang != ".svn")
-     $smarty->assign('lang', $lang);
-  }
-  closedir($handle);
-}
-
-////Gets Languages
 
 $smarty->display('options.tpl');
 	}else{

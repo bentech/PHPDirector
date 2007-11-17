@@ -53,6 +53,33 @@ $news = config('news');
 $smarty->assign('news', $news);
 //NEWS//
 
+//Categories
+
+$query_categories = mysql_query("SELECT name, id FROM pp_categories WHERE disable='0'");
+$i = 0;
+while ($row_cat = mysql_fetch_array($query_categories)) {
+	$tmp = array(
+'id' => $row_cat['id'], 
+'name' => $row_cat['name']
+);
+$result[$i++] = $tmp;
+}
+
+$smarty->assign('cat', $result);
+
+//Categorires end//
+
+//Tags//
+
+$query_tags = mysql_query("SELECT id, name FROM pp_tags GROUP BY name ORDER BY COUNT(id) DESC LIMIT 0,50");
+
+while ($row_tag = mysql_fetch_array($query_tags)) {
+$tags[] = $row_tag;
+}
+$smarty->assign('tag', $tags);
+//tags end
+
+
 //Firefox?
 $HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'];
 if (!(strpos($HTTP_USER_AGENT,'Mozilla/5') === false)) {

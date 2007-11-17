@@ -2,12 +2,17 @@
 
  
 			<div class="left_articles">
-            
+            {if $pagetype eq "featured"}
 				<h2>Featured Videos</h2>
+			{elseif $pagetype eq "all"}
+				<h2>All Videos</h2>
+			{else}
+				<h2>Videos</h2>
+			{/if}
                 
 {section name=videos loop=$videos}
 				<p class="date">{$videos[videos].day} &nbsp; {$videos[videos].month}</p><a href="videos.php?id={$videos[videos].id}">
-				<img class="bigimage" src="{$videos[videos].picture}" alt="{$videos[videos].name|truncate:12:'..'}" width="122" height="100"/></a>
+				<img class="bigimage" src="{$videos[videos].picture}" alt="{$videos[videos].name|truncate:12:'..'}" width="122" height="100" /></a>
 			  <h3><a href="videos.php?id={$videos[videos].id}">{$videos[videos].name|truncate:64:'..'}</a></h3>
 		      <p>{$videos[videos].description|truncate:128:'..'}</p>		     
               <p>&nbsp;</p>

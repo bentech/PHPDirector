@@ -25,13 +25,13 @@ case "name":
 	$sort = "name";
 	break;
 case "date":
-	$sort = "id";
+	$sort = "date";
 	break;
 case "views":
 	$sort = "views";
 	break;
 default:
-	$sort = "id";
+	$sort = "date";
 	$order1 = "DESC";
 }
 
@@ -45,18 +45,6 @@ if(isset($_GET["order"])){
 		$order1 = "DESC";
 	}
 }
-
-$query_categories = mysql_query("SELECT * FROM pp_categories WHERE disable='0'");
-
-while ($row_cat = mysql_fetch_array($query_categories)) {
-	$tmp = array(
-'id' => $row_cat['id'], 
-'name' => $row_cat['name']
-);
-$result[$i++] = $tmp;
-}
-
-$smarty->assign('cat', $result);
 		
 		//SORTING END ???
 if ($_GET["pt"] == "all") {		
@@ -69,14 +57,41 @@ if ($_GET["pt"] == "all") {
 $cat = $_GET["cat"];
 		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `category` = '$cat' AND `approved` = '1' ORDER BY $sort $order1 LIMIT %d,%d",
             SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
+			$smarty->assign('pagetype', $cat);
 }elseif (isset($_GET[search])){
-		
+	
 		$search = $_GET[search];
 		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `name` like '%%$search%%' AND `approved` = '1' ORDER BY $sort $order1 LIMIT %d,%d",
             SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
+			$smarty->assign('pagetype', 'Search Results');
+			
+}elseif(isset($_GET[tag])){
+
+//Dam those people who want to see which videos have a tag!
+//This is getting the tags from pp_tags
+$tagquery = mysql_query('SELECT video_id FROM `pp_tags` WHERE `name` LIKE CONVERT(_utf8 \''.$_GET[tag].'\' USING latin1) COLLATE latin1_swedish_ci');
+
+//This is so at the end of $in it doesn't have a extra comma
+$tagrows = mysql_num_rows($tagquery); 
+$in = null;
+$i = 0;
+while ($tags = mysql_fetch_assoc($tagquery)){
+$i++;
+		if($i == $tagrows){//This is so at the end of $in it doesn't have a extra comma
+			$in = $in." '".$tags[video_id]."'";
+		}else{
+			$in = $in." '".$tags[video_id]."',";
+		}
+
+	}
+		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `id` IN (".$in.") AND `reject` = '0' ORDER BY $sort $order1 LIMIT %d,%d",SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit()); //$in is all the rows that have the correct tag
+
+			$smarty->assign('pagetype', 'Tags'); 
 }else{
-		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `reject` = '0' ORDER BY $sort $order1 LIMIT %d,%d",
-            SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
+		$_query = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM pp_files WHERE `approved` = '1' AND `feature` = '1' AND `reject` = '0' ORDER BY $sort $order1 LIMIT %d,%d",
+    SmartyPaginate::getCurrentIndex(), SmartyPaginate::getLimit());
+	$smarty->assign('pagetype', 'Featured Videos');
+	
 };
         $_result = mysql_query($_query);   // assign your db results to the template
 
@@ -129,7 +144,7 @@ $i=0;
 	$smarty->assign('videos', $_data);
 	
 		if ($_row['total'] == 0){ //if no videos display error.
-	$error = $smarty->get_template_vars('LAN_29');
+	$error = "There Where No Results";
 	$smarty->assign_by_ref('error', $error);
 	$smarty->display('error.tpl');
 	exit;

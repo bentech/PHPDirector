@@ -18,37 +18,37 @@ or die(mysql_error());
 
 if ( $id !== null ){
 if ( $what == "approve" ) {
-    $result1 = mysql_query("UPDATE pp_files SET feature='0', approved='1', reject='0' WHERE id=$id") 
+    $result1 = mysql_query("UPDATE pp_files SET feature='0', approved='1', reject='0' WHERE id='$id'") 
 or die(mysql_error());
 $smarty->assign('message', "<br>".$id." has been ".$what."d! <br>");
 }
 
 if ( $what == "unapprove" ) {
-    $result1 = mysql_query("UPDATE pp_files SET feature='0', approved='0', reject='0' WHERE id=$id") 
+    $result1 = mysql_query("UPDATE pp_files SET feature='0', approved='0', reject='0' WHERE id='$id'") 
 or die(mysql_error());
 $smarty->assign('message', "<br>".$id." has been ".$what."d!<br>");
 }
 
 if ( $what == "feature" ) {
-    $result1 = mysql_query("UPDATE pp_files SET feature='1', approved='1', reject='0' WHERE id=$id") 
+    $result1 = mysql_query("UPDATE pp_files SET feature='1', approved='1', reject='0' WHERE id='$id'") 
 or die(mysql_error());
 $smarty->assign('message', "<br>".$id." has been ".$what."d! <br>");
 }
 
 if ( $what == "unfeature" ) {
-$result1 = mysql_query("UPDATE pp_files SET feature='0' WHERE id=$id") 
+$result1 = mysql_query("UPDATE pp_files SET feature='0' WHERE id='$id'") 
 or die(mysql_error());
 $smarty->assign('message', "<br>".$id." has been ".$what."d!<br>");
 }
 
 if ( $what == "delete" ) {
-   $result1 = mysql_query("DELETE FROM pp_files WHERE id=$id") 
+   $result1 = mysql_query("DELETE FROM pp_files WHERE id='$id'") 
 or die(mysql_error());  
 $smarty->assign('message', "<br>id".$id." has been ".$what."d!<br>");
 }
 
 if ( $what == "reject" ) {
-    $result1 = mysql_query("UPDATE pp_files SET reject='1', approved='0', feature='0' WHERE id=$id") 
+    $result1 = mysql_query("UPDATE pp_files SET reject='1', approved='0', feature='0' WHERE id='$id'") 
 or die(mysql_error());
 $smarty->assign('message', "<br>".$id." has been ".$what."d! <br>");
 }

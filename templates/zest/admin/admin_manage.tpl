@@ -1,12 +1,12 @@
 {include file="admin_header.tpl"}
 			{if $pagevalue eq "all"}
-				<h2>{$LAN_68}s</h2>   
+				<h2>All Videos</h2>   
 			{elseif $pagevalue eq "feature"}
-				<h2>{$LAN_53}</h2>
+				<h2>Featured Videos</h2>
 			{elseif $pagevalue eq "approve"}
-				<h2>{$LAN_52}</h2>
+				<h2>Approved Videos</h2>
 			{elseif $pagevalue eq "rejected"}
-				<h2>{$LAN_54}</h2>
+				<h2>Rejected Videos</h2>
 			{/if}
 
 			{if paginate_middle eq ""}
@@ -16,12 +16,12 @@
 <div align="center">{paginate_prev}&nbsp;{paginate_next}</div>
 	<tr class="categoria_h">
 		<th class="s1">ID</th>
-		<th class="s2">{$LAN_33}</th>
-		<th class="s3">{$LAN_35}</th>
-		<th class="s4">{$LAN_34}</th>
-		<th class="s5">{$LAN_36}</th>
-		<th class="s6">{$LAN_4}</th>
-		<th class="s7">{$LAN_51}</th>
+		<th class="s2">Name</th>
+		<th class="s3">Description</th>
+		<th class="s4">Date</th>
+		<th class="s5">Author</th>
+		<th class="s6">Images</th>
+		<th class="s7">Action</th>
 	</tr>
 {section name=video loop=$video}	
 <tr class="subcategoria">
@@ -54,16 +54,15 @@
 
 	<td class="s7">
 {if $video[video].approved eq "0"}
-<a href='?id={$video[video].id}&what=approve&pt={$pagevalue}&page={$video[video].page}&pag=vid'>{$LAN_52}</a>
+<a href='?id={$video[video].id}&what=approve&pt={$pagevalue}&page={$video[video].page}&pag=vid'>Approve</a>
 {/if}
 {if $video[video].featured eq "0"}
-<p><a href='?id={$video[video].id}&what=feature&pt={$pagevalue}&page={$page}&pag=vid'>{$LAN_53}</a></p>
+<p><a href='?id={$video[video].id}&what=feature&pt={$pagevalue}&page={$page}&pag=vid'>Feature</a></p>
 {else}
-<p><a href='?id={$video[video].id}&what=unfeature&pt={$pagevalue}&page={$page}&pag=vid'>Un{$LAN_53}</a></p>
+<p><a href='?id={$video[video].id}&what=unfeature&pt={$pagevalue}&page={$page}&pag=vid'>Unfeature</a></p>
 {/if}
-{if $video[video].rejected eq "0"}<p><a href='?id={$video[video].id}&what=reject&pt={$pagevalue}&page={$page}&pag=vid'>{$LAN_54}</a>
-{$LAN_55}{else}<p>{/if}
-<a href='?id={$video[video].id}&what=delete&pt={$pagevalue}&page={$page}&pag=vid'>{$LAN_56}</a></p>
+{if $video[video].rejected eq "0"}<p><a href='?id={$video[video].id}&what=reject&pt={$pagevalue}&page={$page}&pag=vid'>Reject</a></p>{else}
+<a href='?id={$video[video].id}&what=delete&pt={$pagevalue}&page={$page}&pag=vid'>Delete</a></p>{/if}
 	</td>
 	</tr>
 </tbody>

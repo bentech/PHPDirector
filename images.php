@@ -17,8 +17,7 @@ if (!$result)die(mysql_error()); //If no results end
 
 
 if($totalrows == 0){  //if no videos display error.
-	$error = $smarty->get_template_vars('LAN_29');
-	$smarty->assign_by_ref('error', $error);
+	$smarty->assign('error', 'There Does Not Seem to be any images to show....');
 	$smarty->display('error.tpl');
 	exit;
 }

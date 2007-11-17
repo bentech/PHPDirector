@@ -16,10 +16,11 @@ $viewaddone = true;
 }
 
 require('header.php');
-
 if(isset($id)){
+
 //get the video from the id
-$result = mysql_query("SELECT * FROM pp_files WHERE id=$id LIMIT 1") or die();  
+
+$result = mysql_query(" SELECT * FROM `pp_files` WHERE `id` = CONVERT( _utf8 '$id' USING latin1 ) COLLATE latin1_swedish_ci LIMIT 0 , 1");  
 }elseif (isset($_GET["name"])){
 
 //this is so you can use videos.php?name=ben ect
@@ -32,8 +33,7 @@ $result = mysql_query("SELECT * FROM pp_files WHERE `approved` = '1' AND `name` 
 $result = mysql_query("select * from pp_files WHERE approved='1' AND reject='0' order by rand() LIMIT 1") or die();  
 }
 // For each result that we got from the Database
-while ($row = mysql_fetch_assoc($result))
-{
+while ($row = mysql_fetch_array($result)){
  $video[] = $row;
 
  	if($viewaddone == true){
