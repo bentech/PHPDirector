@@ -8,7 +8,7 @@
 */
 require('header.php');
 include('includes/user_register.class.php');
-
+//I don't remember which of the date goes into INT(10) so I'll add this and also mail options
 $validate = new user_register( $mysql_link );
 $form = $_POST['register'];
 if(!isset( $form )) {
