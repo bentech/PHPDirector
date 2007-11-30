@@ -24,14 +24,14 @@ class user_register {
 		if(!$check || !isset($value)) { return false; } else { return true; }
 	}
 	function user_exists( $user ) {
-	 	if(isset($user) || isset($this->connect)) {
+	 	if(isset($user) && isset($this->connect)) {
 	 		$q = "SELECT memberName FROM pp_members WHERE memberName = '$user' LIMIT 1";
 			$r = mysql_query($q, $this->connect);
 			if(mysql_num_rows( $r ) == 0) { $this->user = $user; return true; }
 		} else { return false; }
 	}	
 	function email_exists( $email ) {
-	 	if(isset($email) || isset($this->connect)) {
+	 	if(isset($email) && isset($this->connect)) {
 	 		$q = "SELECT emailAddress FROM pp_members WHERE emailAddress = '$email' LIMIT 1";
 			$r = mysql_query($q, $this->connect);
 			if(mysql_num_rows( $r ) == 0) { $this->email = $email; return true; }
