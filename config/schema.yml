@@ -1,0 +1,41 @@
+propel:                                                           
+  pp_categories:       
+    _attributes:       { phpName: categories }
+    id:                { type: INTEGER, required: true, autoIncrement: true, primaryKey: true }
+    name:              { type: VARCHAR, size: 225, required: true }
+    disable:           { type: BOOLEAN, default: false }
+    image:             { type: VARCHAR, size: 255, required: true }
+  
+  pp_config:           
+    _attributes:       { phpName: config }
+    name:              { type: VARCHAR, size: 225 }
+    news:              { type: VARCHAR, size: 225, required: true, default: 'Welcome!' }
+    vids_per_page:     { type: INTEGER, required: true, default: 10 }
+    lang:              { type: VARCHAR, size: 225, required: true, default: 'en-gb.inc.php' }
+    version:           { type: DOUBLE, required: true } 
+    template:          { type: VARCHAR, size: 255, required: true, default: Photine }
+  
+  pp_files:            
+    _attributes:       { phpName: files }
+    id:                { type: INTEGER, required: true, autoIncrement: true, primaryKey: true }
+    name:              { type: VARCHAR, size: 100, required: true } 
+    video_type:        { type: VARCHAR, size: 225, required: true, default: 'YouTube' }
+    creator:           { type: VARCHAR, size: 64, required: true }
+    description:       { type: LONGVARCHAR, required: true }
+    date:              { type: DATE, required: true, default: 2007-01-01 }
+    file:              { type: VARCHAR, size: 255, required: true } 
+    file2:             { type: VARCHAR, size: 255, required: true } 
+    approved:          { type: BOOLEAN, default:  false }
+    feature:           { type: BOOLEAN, default: false }
+    ip:                { type: VARCHAR, size: 20, required: true } 
+    picture:           { type: VARCHAR, size: 225, required: true }
+    category_id:       { type: INTEGER, required: true, foreignTable: pp_categories, foreignReference: id }
+    reject:            { type: BOOLEAN, default: false }
+    views:             { type: INTEGER, required: true, default: 0 }
+    
+  pp_rating:           
+    _attributes:       { phpName: rating }
+    files_id:          { type: INTEGER, required: true, foreignTable: pp_files, foreignReference: id } 
+    total_votes:       { type: INTEGER, required: true }
+    total_value:       { type: INTEGER, required: true }
+    used_ips:          { type: LONGVARCHAR, required: true }

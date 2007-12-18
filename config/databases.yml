@@ -1,0 +1,8 @@
+all:
+  propel:
+    class:                sfPropelDatabase
+    param:
+      phptype:            mysql
+      hostspec:           localhost
+      database:           phpdirector
+      username:           root

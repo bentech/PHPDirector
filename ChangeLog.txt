@@ -1,0 +1,3 @@
+18-12-2007  James Moey <jamesmoey@gmail.com>
+--------------------------------------------
+Creating application data model and setting up application directory structure.

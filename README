@@ -1,0 +1,26 @@
+Application environment configuration
+-------------------------------------
+config/config.php - Set the absolute path of this project. [DO NOT COMMIT THIS FILE]
+config/databases.yml - Config the username/password to the database. [DO NOT COMMIT THIS FILE]
+config/propel.ini - Config the absolution location of the propel.output.dir. [DO NOT COMMIT THIS FILE]
+
+
+Application Database Setup
+--------------------------
+To create the database, model file. Command line version of php work better. Execute command under the 
+root directory of the project.
+
+  php symfony propel-build-all
+
+
+Setup Apache for the Application
+--------------------------------
+mod_rewrite must be enabled. You must point apache to web directory.
+Example,
+
+<Directory "C:/work/phpdirector/branches/buildWithSymfony/web">
+    AllowOverride All
+    Options Indexes FollowSymLinks 
+    Order allow,deny
+    Allow from all
+</Directory>
