@@ -31,21 +31,8 @@ class videoDailyMotionProcessor extends videoProcessor {
     else return FALSE;
   }
   
-  public function init() {
-    if (! $this->xml) {
-      $id = $this->getID();
-      if ($id) {
-        $xmlurl = "http://www.dailymotion.com/atom/fr/cluster/extreme/featured/video/".$id;
-        $content = file_get_contents($xmlurl);
-        $this->xml = new DOMDocument();
-        if (! $this->xml->loadXML($content)) {
-          echo "XML ERROR\n";
-          $this->xml = null;
-          return false;
-        }
-      }
-    }
-    return TRUE;
+  protected function getXMLDescriptionURL() {
+    return "http://www.dailymotion.com/atom/fr/cluster/extreme/featured/video/".$this->getID();
   }
   
   public function getDomXPath() {

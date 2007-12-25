@@ -126,7 +126,28 @@ abstract class videoProcessor {
   * Initialise Video Processor
   * @return BOOL Status of Initialisation
   */
-  public abstract function init();
+  public function init() {
+    if (! $this->xml) {
+      $id = $this->getID();
+      if ($id) {
+        $xmlurl = $this->getXMLDescriptionURL();
+        $content = file_get_contents($xmlurl);
+        $this->xml = new DOMDocument();
+        if (! $this->xml->loadXML($content)) {
+          $this->xml = null;
+          return FALSE;
+        }
+      }
+    }
+    return TRUE;
+  }
+  
+  /**
+  * Get XML Description URL.
+  * @return String URL to the video
+  */
+  protected abstract function getXMLDescriptionURL();
+  
   /**
   * Get Video ID
   * @return String

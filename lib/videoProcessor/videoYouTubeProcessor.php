@@ -32,19 +32,7 @@ class videoYouTubeProcessor extends videoProcessor {
     else return FALSE;
   }
   
-  public function init() {
-    if (! $this->xml) {
-      $id = $this->getID();
-      if ($id) {
-        $xmlurl = "http://www.youtube.com/api2_rest?method=youtube.videos.get_details&dev_id=".sfConfig::get("app_youtube_dev_id")."&video_id=".$id;
-        $content = file_get_contents($xmlurl);
-        $this->xml = new DOMDocument();
-        if (! $this->xml->loadXML($content)) {
-          $this->xml = null;
-          return false;
-        }
-      }
-    }
-    return TRUE;
-  }
+  protected function getXMLDescriptionURL() {
+     return "http://www.youtube.com/api2_rest?method=youtube.videos.get_details&dev_id=".sfConfig::get("app_youtube_dev_id")."&video_id=".$this->getID();
+   } 
 }

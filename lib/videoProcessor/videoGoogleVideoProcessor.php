@@ -31,20 +31,8 @@ class videoGoogleVideoProcessor extends videoProcessor {
     else return FALSE;
   }
   
-  public function init() {
-    if (! $this->xml) {
-      $id = $this->getID();
-      if ($id) {
-        $xmlurl = "http://video.google.com/videofeed?docid=".$id;
-        $content = file_get_contents($xmlurl);
-        $this->xml = new DOMDocument();
-        if (! $this->xml->loadXML($content)) {
-          $this->xml = null;
-          return false;
-        }
-      }
-    }
-    return TRUE;
+  protected function getXMLDescriptionURL() {
+    return "http://video.google.com/videofeed?docid=".$this->getID();
   }
   
   public function getDomXPath() {
