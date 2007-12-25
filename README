@@ -1,3 +1,8 @@
+Application Requirement
+-----------------------
+At least PHP 5.x
+
+
 Application environment configuration
 -------------------------------------
 config/config.php - Set the absolute path of this project. [DO NOT COMMIT THIS FILE]

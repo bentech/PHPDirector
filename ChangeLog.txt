@@ -1,3 +1,9 @@
+25-12-2007  James Moey <jamesmoey@gmail.com>
+--------------------------------------------
+Database structure created. Default dataset populate in the datbase.
+VideoProcessor for YouTube, GoogleVideo and DailyMotion are added.
+Additional of videoProcessor Unit Test.
+
 18-12-2007  James Moey <jamesmoey@gmail.com>
 --------------------------------------------
 Creating application data model and setting up application directory structure.

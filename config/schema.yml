@@ -15,11 +15,16 @@ propel:
     version:           { type: DOUBLE, required: true } 
     template:          { type: VARCHAR, size: 255, required: true, default: Photine }
   
-  pp_files:            
-    _attributes:       { phpName: files }
+  pp_mediatype:
+    _attributes:       { phpName: MediaType }
+    id:                { type: INTEGER, required: true, autoIncrement: true, primaryKey: true }
+    name:              { type: VARCHAR, size: 100, required: true }
+  
+  pp_mediaitem:            
+    _attributes:       { phpName: MediaItem }
     id:                { type: INTEGER, required: true, autoIncrement: true, primaryKey: true }
     name:              { type: VARCHAR, size: 100, required: true } 
-    video_type:        { type: VARCHAR, size: 225, required: true, default: 'YouTube' }
+    mediatype_id:      { type: INTEGER, required: true, foreignTable: pp_mediatype, foreignReference: id }
     creator:           { type: VARCHAR, size: 64, required: true }
     description:       { type: LONGVARCHAR, required: true }
     date:              { type: DATE, required: true, default: 2007-01-01 }
@@ -35,7 +40,7 @@ propel:
     
   pp_rating:           
     _attributes:       { phpName: rating }
-    files_id:          { type: INTEGER, required: true, foreignTable: pp_files, foreignReference: id } 
+    files_id:          { type: INTEGER, required: true, foreignTable: pp_mediaitem, foreignReference: id } 
     total_votes:       { type: INTEGER, required: true }
     total_value:       { type: INTEGER, required: true }
     used_ips:          { type: LONGVARCHAR, required: true }

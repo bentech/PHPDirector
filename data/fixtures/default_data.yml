@@ -1,0 +1,7 @@
+MediaType:
+  youtube:
+    name:             youtube
+  dailymotion:
+    name:             dailymotion
+  googlevideo:
+    name:             googlevideo
