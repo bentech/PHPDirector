@@ -26,6 +26,14 @@ class videoYouTubeProcessor extends videoProcessor {
     return false;
   }
   
+  public function getPreviewImages() {
+    if ($this->init()) { 
+      $images[0] = $this->getValueFromXMLSource("/ut_response/video_details/thumbnail_url"); 
+      return $images;
+    }
+    return FALSE;
+  }
+  
   public function getPlayerCode() {
     if ($this->getID() !== FALSE)
       return '<object width="425" height="350"><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/'.$this->getID().'&autoplay=1" type="application/x-shockwave-flash" wmode="transparent" width="425" height="350"></embed></object>';

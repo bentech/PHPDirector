@@ -48,11 +48,13 @@ abstract class videoProcessor {
   /**
   * Get Value from XML Source
   * @param String XPath
-  * @return String|array of String
+  * @param Bool Return raw node?
+  * @return String or array of String or raw node
   */
-  protected function getValueFromXMLSource($xpath) {
+  protected function getValueFromXMLSource($xpath, $raw = FALSE) {
     if (! $this->xpath) $this->xpath = $this->getDomXPath();
     $node = $this->xpath->evaluate($xpath);
+    if ($raw) return $node;
     if ($node instanceof DOMNodelist) {
       if ($node->length == 0) return FALSE;
       if ($node->length == 1) return $node->item(0)->nodeValue;
@@ -116,6 +118,7 @@ abstract class videoProcessor {
       $mediaitem->setDescription($this->getDescription());
       $mediaitem->setName($this->getTitle());
       $mediaitem->setCreator($this->getAuthor());
+      $mediaitem->setPreviewImages($this->getPreviewImages());
       if ($mediaitem->save()) return $mediaitem;
       else return FALSE;
     }
@@ -173,4 +176,9 @@ abstract class videoProcessor {
   * @return String
   */
   public abstract function getPlayerCode();
+  /**
+  * Get Preview Image URLs
+  * @return array of URL String
+  */
+  public abstract function getPreviewImages();
 }

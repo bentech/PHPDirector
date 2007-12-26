@@ -20,4 +20,12 @@ class MediaItem extends BaseMediaItem
     }
     $this->vProcessor->getPlayerCode();
   }
+  
+  public function setPreviewImages($images) {
+    parent::setPreviewImages(implode('# #', $images));
+  }
+  
+  public function getPreviewImages() {
+    return explode('#  #', parent::getPreviewImages());
+  }
 }

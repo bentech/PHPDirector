@@ -28,8 +28,7 @@ propel:
     creator:           { type: VARCHAR, size: 64, required: true }
     description:       { type: LONGVARCHAR, required: true }
     date:              { type: DATE, required: true, default: 2007-01-01 }
-    file:              { type: VARCHAR, size: 255, required: true } 
-    file2:             { type: VARCHAR, size: 255, required: true } 
+    file:              { type: VARCHAR, size: 255, required: true }  
     approved:          { type: BOOLEAN, default:  false }
     feature:           { type: BOOLEAN, default: false }
     ip:                { type: VARCHAR, size: 20, required: true } 
@@ -37,6 +36,7 @@ propel:
     category_id:       { type: INTEGER, required: true, foreignTable: pp_categories, foreignReference: id }
     reject:            { type: BOOLEAN, default: false }
     views:             { type: INTEGER, required: true, default: 0 }
+    preview_images:    { type: LONGVARCHAR }
     
   pp_rating:           
     _attributes:       { phpName: rating }

@@ -25,6 +25,20 @@ class videoGoogleVideoProcessor extends videoProcessor {
     return false;
   }
   
+  public function getPreviewImages() {
+    if ($this->init()) {
+      $result = array();
+      $node = $this->getValueFromXMLSource("/rss/channel/item/media:group/media:thumbnail", TRUE); 
+      if ($node) {
+        for ($i = 0; $i < $node->length; $i++) {
+          $result[] = $node->item($i)->getAttribute('url');
+        }
+      }
+      return $result;
+    }
+    return FALSE;
+  }
+  
   public function getPlayerCode() {
     if ($this->getID() !== FALSE)
       return '<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId='.$this->getID().'&hl=en-US" flashvars=""></embed>';

@@ -25,6 +25,20 @@ class videoDailyMotionProcessor extends videoProcessor {
     return false;
   }
   
+  public function getPreviewImages() {
+    if ($this->init()) {
+      $result = array();
+      $node = $this->getValueFromXMLSource("/feed:feed/feed:entry/feed:link[attribute::type='image/jpeg']", TRUE); 
+      if ($node) {
+        for ($i = 0; $i < $node->length; $i++) {
+          $result[] = $node->item($i)->getAttribute('href');
+        }
+      }
+      return $result;
+    }
+    return FALSE;
+  }
+  
   public function getPlayerCode() {
     if ($this->getID() !== FALSE)
       return '<object width="425" height="335"><param name="movie" value="http://www.dailymotion.com/swf/'.$this->getID().'"></param><param name="allowfullscreen" value="true"></param><embed src="http://www.dailymotion.com/swf/'.$this->getID().'" type="application/x-shockwave-flash" width="425" height="335" allowfullscreen="true"></embed></object>';

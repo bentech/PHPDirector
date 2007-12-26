@@ -1,0 +1,21 @@
+REQUIREMENT
+-----------
+You must be familiar with Symfony framework. For more informatio, please visit http://www.symfony-project.com/.
+
+
+Test Case
+---------
+All new feature implemented, must be tested with a unit/functional test case. Before committing the code into 
+SVN.
+
+
+Coding Convention
+-----------------
+camelCase convention is to be used on php variable name and function name, no underscore. 
+
+
+Documentation
+-------------
+Commenting should follow phpDocumentor (http://www.phpdoc.org/) documentation standard. Functions need to have a 
+description, togerther with @param and @return tags. Class attribute need to commented with a description and a @var 
+tag.

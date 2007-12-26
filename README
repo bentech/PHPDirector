@@ -12,11 +12,12 @@ config/propel.ini - Config the absolution location of the propel.output.dir. [DO
 
 Application Database Setup
 --------------------------
-To create the database, model file. Command line version of php work better. Execute command under the 
+To create the database, model file. Command line version of php work better. Execute commands under the 
 root directory of the project.
 
   php symfony propel-build-all
-
+  php symfony propel-load-data backend
+  
 
 Setup Apache for the Application
 --------------------------------
@@ -29,3 +30,10 @@ Example,
     Order allow,deny
     Allow from all
 </Directory>
+
+
+Unit & Functional Test Case
+---------------------------
+All Test Case are store under test directory. To run these test case, run
+
+  php symfony test-all

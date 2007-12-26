@@ -26,7 +26,7 @@
   Propel::setConfiguration(sfPropelDatabase::getConfiguration());
   Propel::initialize();
   
-  $test = new lime_test(18, new lime_output_color());
+  $test = new lime_test(24, new lime_output_color());
   
   /** Start YouTube Test **/
   $test->isa_ok($vp = videoProcessorFactory::getVideoProcessor("http://www.youtube.com/watch?v=T6DtRbg9BPE"), "videoYouTubeProcessor", "YouTube URL is recorgnise.");
@@ -34,7 +34,9 @@
   $test->is($vp->getTitle(), "Jennifer Love Hewitt Big boobs", "Title match.");
   $test->is($vp->getAuthor(), "papalinaceleb", "Author match.");
   $test->is($vp->getDescription(), "Jennifer Love Hewitt Big boobs", "Description match.");
-  $m = $vp->save();
+  $test->is(is_array($images = $vp->getPreviewImages()), TRUE, "Preview Image is an array.");
+  $test->like($images[0], "/youtube.com/", "Retrieve Preview Image Successfully");
+  $m = $vp->save(TRUE);
   $test->isa_ok($m, "MediaItem", "Save Successfully");
   $m->delete();
   
@@ -44,7 +46,9 @@
   $test->is($vp->getTitle(), "Ridan", "Title match.");
   $test->is($vp->getAuthor(), "Charmade", "Author match.");
   $test->is($vp->getDescription(), "Extrait du clip \"La partie de Golf\" de Ridan", "Description match.");
-  $m = $vp->save();
+  $test->is(is_array($images = $vp->getPreviewImages()), TRUE, "Preview Image is an array.");
+  $test->like($images[0], "/dailymotion.com/", "Retrieve Preview Image Successfully");
+  $m = $vp->save(TRUE);
   $test->isa_ok($m, "MediaItem", "Save Successfully");
   $m->delete();
   
@@ -54,7 +58,9 @@
   $test->is($vp->getTitle(), "really expensive cat toy", "Title match.");
   $test->is($vp->getAuthor(), "mattcoats!", "Author match.");
   $test->is($vp->getDescription(), "This is our kitten, Robot.  She likes computers.  No the screen was not damaged because she doesn't use her claws when playing...  only when attacking, which is more often.", "Description match");
-  $m = $vp->save();
+  $test->is(is_array($images = $vp->getPreviewImages()), TRUE, "Preview Image is an array.");
+  $test->like($images[0], "/google.com/", "Retrieve Preview Image Successfully");
+  $m = $vp->save(TRUE);
   $test->isa_ok($m, "MediaItem", "Save Successfully");
   $m->delete();
 ?>

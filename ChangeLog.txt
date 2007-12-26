@@ -1,3 +1,7 @@
+26-12-2007  James Moey <jamesmoey@gmail.com>
+--------------------------------------------
+Added the function to store and retrieve Thumbnail image. 
+
 25-12-2007  James Moey <jamesmoey@gmail.com>
 --------------------------------------------
 Database structure created. Default dataset populate in the datbase.
