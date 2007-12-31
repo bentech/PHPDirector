@@ -1,5 +1,7 @@
 01-01-2008  James Moey <jamesmoey@gmail.com>
 --------------------------------------------
+Added empty video/view action for viewing video in playable/detail format.
+Added video detail and listing block partial skeleton file await for implementation.
 Added batch to load video for testing purposes.
 
 31-12-2007  James Moey <jamesmoey@gmail.com>

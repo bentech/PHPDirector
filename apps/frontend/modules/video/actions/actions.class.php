@@ -21,6 +21,14 @@ class videoActions extends sfActions
   * Display all video.
   */
   public function executeAll() {
+    $c = new Criteria();
+    $c->setLimit(10);
+    $c->add(MediaItemPeer::APPROVED, TRUE);
+    $c->addAnd(MediaItemPeer::REJECT, FALSE);
+    $result = MediaItemPeer::doSelect($c);
+    if (count($result)> 0) {
+      $this->setVar("MediaList", $result);
+    }
   }
   
   /**
@@ -51,5 +59,11 @@ class videoActions extends sfActions
   * Form to submit video.
   */
   public function executeSubmit() {
+  }
+  
+  /**
+  * View a single video, in playable format.
+  */
+  public function executeView() {
   }
 }
