@@ -11,7 +11,8 @@ SVN.
 
 Coding Convention
 -----------------
-camelCase convention is to be used on php variable name and function name, no underscore. 
+camelCase convention is to be used on php variable name and function name, no underscore. No tab, indentation
+by 2 spaces. 
 
 
 Documentation
@@ -19,3 +20,13 @@ Documentation
 Commenting should follow phpDocumentor (http://www.phpdoc.org/) documentation standard. Functions need to have a 
 description, togerther with @param and @return tags. Class attribute need to commented with a description and a @var 
 tag.
+
+
+IMPORTANT
+---------
+Do not commit changes to the following files:
+  - config/config.php
+  - config/database.yml
+  - config/propel.ini
+
+These files is dependant on your development machine. 

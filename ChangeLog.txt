@@ -1,3 +1,9 @@
+31-12-2007  James Moey <jamesmoey@gmail.com>
+--------------------------------------------
+Added Smarty 2.6.18 for view rendering purpose.
+Added sfSmartyViewPlugin to bridge Smarty and symfony.
+Created an overriding class (phpDirectorThemeView) on top of sfSmartyViewPlugin for Theme purposes.
+
 26-12-2007  James Moey <jamesmoey@gmail.com>
 --------------------------------------------
 Added the function to store and retrieve Thumbnail image. 
