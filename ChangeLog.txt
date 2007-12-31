@@ -1,3 +1,7 @@
+01-01-2008  James Moey <jamesmoey@gmail.com>
+--------------------------------------------
+Added batch to load video for testing purposes.
+
 31-12-2007  James Moey <jamesmoey@gmail.com>
 --------------------------------------------
 Routing frontend application default to video module and index action.

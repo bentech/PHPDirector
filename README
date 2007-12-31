@@ -18,6 +18,9 @@ root directory of the project.
   php symfony propel-build-all
   php symfony propel-load-data backend
   
+To load video for testing purpose, run
+  php batch/loadTestVideo.php
+  
 
 Setup Apache for the Application
 --------------------------------
