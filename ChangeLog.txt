@@ -1,5 +1,11 @@
 31-12-2007  James Moey <jamesmoey@gmail.com>
 --------------------------------------------
+Routing frontend application default to video module and index action.
+Setting up video modules and templates.
+Setting up Zest/Photine template and copying css/images into Symfony.
+Moving main configuration to application's app.yml file.
+Smarty and plugin Configuration.
+
 Added Smarty 2.6.18 for view rendering purpose.
 Added sfSmartyViewPlugin to bridge Smarty and symfony.
 Created an overriding class (phpDirectorThemeView) on top of sfSmartyViewPlugin for Theme purposes.

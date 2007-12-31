@@ -9,9 +9,14 @@ default:
     keywords:     symfony, project
     language:     en
 
-  stylesheets:    [main]
+  stylesheets:
+    - main
+    - <?php echo sfConfig::get('app_site_theme') ?>/style
 
-  javascripts:    []
+  javascripts:    
+    - behavior
+    - rating
+    - reflection
 
   has_layout:     on
   layout:         layout

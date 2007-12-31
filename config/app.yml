@@ -1,6 +1,17 @@
 # default values
 #all:
 
-all:
+all:  
+    
+  site:
+    name:                       My Video Site
+    slogan:                     Funniest video site
+    image:                      phpdirectorbeta.png 
+    theme:                      photine
+  
+  sfSmartyView:
+    class_path:                 %SF_ROOT_DIR%/lib/Smarty-2.6.18/libs
+    template_extension:         .tpl
+
   youtube:
     dev_id:                     BnvzCjJ_Bzw
