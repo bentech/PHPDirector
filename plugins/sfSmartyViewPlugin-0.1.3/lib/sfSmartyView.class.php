@@ -54,7 +54,7 @@ class sfSmartyView extends sfPHPView {
             self::$smarty = new Smarty();
             $smartyDirs = sfConfig::get('app_sfSmartyView_cache_dir' , sfConfig::get('sf_cache_dir') . DIRECTORY_SEPARATOR . 'Smarty');
             if (substr($smartyDirs, -1) != '/') {
-                $smartyDirs .= '/';
+                $smartyDirs .= DIRECTORY_SEPARATOR;
             }
             self::$smarty->compile_dir = $smartyDirs . 'templates_c';
             self::$smarty->cache_dir = $smartyDirs . 'cache';
