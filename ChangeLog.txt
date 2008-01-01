@@ -1,5 +1,6 @@
 01-01-2008  James Moey <jamesmoey@gmail.com>
 --------------------------------------------
+Adding sfFeed2Plugin and sfGuardPlugin.
 Started implementation on video/all, video/featured and video/view.
 Video detail and listing block.
 All Test Video load from loadTestVideo.php is approved by default.
