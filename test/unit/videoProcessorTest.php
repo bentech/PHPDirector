@@ -42,7 +42,7 @@
   
   /** Start DailyMotion Test **/
   $test->isa_ok($vp = videoProcessorFactory::getVideoProcessor("http://www.dailymotion.com/video/x3ssjv_ridan_music"), "videoDailyMotionProcessor", "DailMotion URL is recorgnise.");
-  $test->is($vp->getID(), "x3ssjv_ridan_music", "Daily Motion ID is Good");
+  $test->is($vp->getID(), "x3ssjv", "Daily Motion ID is Good");
   $test->is($vp->getTitle(), "Ridan", "Title match.");
   $test->is($vp->getAuthor(), "Charmade", "Author match.");
   $test->is($vp->getDescription(), "Extrait du clip \"La partie de Golf\" de Ridan", "Description match.");

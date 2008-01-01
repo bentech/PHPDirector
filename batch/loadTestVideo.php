@@ -14,15 +14,27 @@
   
   foreach ($youtubeList as $id) {
     $vp = videoProcessorFactory::getVideoProcessor("http://www.youtube.com/watch?v=".$id);
-    $vp->save(TRUE);    
+    $media = $vp->save(TRUE);    
+    if ($media) {
+      $media->setApproved(TRUE);
+      $media->save();
+    }
   }
   
   foreach ($dailymotionList as $id) {
     $vp = videoProcessorFactory::getVideoProcessor("http://www.dailymotion.com/video/".$id);
-    $vp->save(TRUE);    
+    $media = $vp->save(TRUE);    
+    if ($media) {
+      $media->setApproved(TRUE);
+      $media->save();
+    }    
   }
   
   foreach ($googlevideoList as $id) {
     $vp = videoProcessorFactory::getVideoProcessor("http://video.google.com.au/videoplay?docid=".$id);
-    $vp->save(TRUE);    
+    $media = $vp->save(TRUE);    
+    if ($media) {
+      $media->setApproved(TRUE);
+      $media->save();
+    }    
   }

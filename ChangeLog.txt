@@ -1,5 +1,9 @@
 01-01-2008  James Moey <jamesmoey@gmail.com>
 --------------------------------------------
+Started implementation on video/all, video/featured and video/view.
+Video detail and listing block.
+All Test Video load from loadTestVideo.php is approved by default.
+Bug fix in Daily Motion Video Processor.
 Added empty video/view action for viewing video in playable/detail format.
 Added video detail and listing block partial skeleton file await for implementation.
 Added batch to load video for testing purposes.

@@ -73,18 +73,23 @@
           </form>
         </div>
       </div>
-      {if $news eq ""}
-        {if $firefox eq "1"}
-          <br />
-          <br />
-        {/if}
-      {else}
-        <div class="gboxtop"></div>
-        <div class="gbox">
-	        <p>{$news}</p>
-        </div>
-      {/if}
+      <BR>
+      <BR>
       {$sf_data->getRaw('sf_content')}
     </div>
+    
+    <div class="footer">
+      <p class="right">&copy; 2007 PHPDirector - Ben Swanson</p><!-- There is no obligtion to keep this notice here -->
+      <p>
+        <a href="#">RSS Feed</a> &middot; 
+        <a href="#">Contact</a> &middot; 
+        <a href="#">Accessibility</a> &middot; 
+        <a href="#">Products</a> &middot; 
+        <a href="#">Disclaimer</a> &middot; 
+        <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> and <a href="http://validator.w3.org/check?uri=referer">XHTML</a>
+        <br />
+      </p>
+    </div>
+    
   </body>
 </html>

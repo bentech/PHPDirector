@@ -35,6 +35,15 @@ class videoActions extends sfActions
   * Display featured video only
   */
   public function executeFeatured() {
+    $c = new Criteria();
+    $c->setLimit(10);
+    $c->add(MediaItemPeer::APPROVED, TRUE);
+    $c->addAnd(MediaItemPeer::REJECT, FALSE);
+    $c->addAnd(MediaItemPeer::FEATURE, TRUE);
+    $result = MediaItemPeer::doSelect($c);
+    if (count($result)> 0) {
+      $this->setVar("MediaList", $result);
+    }
   }
   
   /**
@@ -65,5 +74,16 @@ class videoActions extends sfActions
   * View a single video, in playable format.
   */
   public function executeView() {
+    $id = $this->getRequestParameter("id");
+    if ($id) {
+      $mediaitem = MediaItemPeer::retrieveByPK($id);
+      if ($mediaitem) $this->setVar("media", $mediaitem);
+    }
+  }
+  
+  /**
+  * Rate a video.
+  */
+  public function executeRate() {
   }
 }

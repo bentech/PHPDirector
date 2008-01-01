@@ -1,3 +1,4 @@
+<h2>All Videos</h2>
 {if $MediaList}
   {foreach from=$MediaList item=media}
     {include_partial templateName='video/videolistingblock' vars=array('media'=>$media)}

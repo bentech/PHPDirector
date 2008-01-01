@@ -15,10 +15,12 @@ class MediaItem extends BaseMediaItem
   public function getPlayerCode() {
     if ($this->vProcessor == null) {
       $vp = videoProcessorFactory::getVideoProcessorByType($this->getMediaType());
-      if ($vp !== FALSE) $this->vProcessor = $vp;
-      else return FALSE;
+      if ($vp != FALSE) {
+        $this->vProcessor = $vp;
+        $this->vProcessor->setID($this->getFile());
+      } else return FALSE;
     }
-    $this->vProcessor->getPlayerCode();
+    return $this->vProcessor->getPlayerCode();
   }
   
   public function setPreviewImages($images) {

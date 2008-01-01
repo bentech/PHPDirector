@@ -3,7 +3,7 @@ class videoDailyMotionProcessor extends videoProcessor {
   public function getID() {
     if (! $this->id) {
       $matches = array();
-      $matchResult = preg_match("/\/video\/([^&]+)$/i", $this->getURL(), $matches);
+      $matchResult = preg_match("/\/video\/([^_]+)/i", $this->getURL(), $matches);
       if ($matchResult == 0) return FALSE;
       $this->id = $matches[1];
     } 

@@ -146,6 +146,14 @@ abstract class videoProcessor {
   }
   
   /**
+  * Set video ID
+  * @param String ID of the video
+  */
+  public function setID($id) {
+    $this->id = $id;
+  }
+  
+  /**
   * Get XML Description URL.
   * @return String URL to the video
   */
