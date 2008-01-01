@@ -1,3 +1,7 @@
+02-01-2008  James Moey <jamesmoey@gmail.com>
+--------------------------------------------
+Bug fix Google Video in Video Processor Factory.
+
 01-01-2008  James Moey <jamesmoey@gmail.com>
 --------------------------------------------
 Adding sfFeed2Plugin and sfGuardPlugin.

@@ -30,6 +30,7 @@ class videoProcessorFactory {
         $c->add(MediaTypePeer::NAME, "youtube");
         $videoProcessor = new videoYouTubeProcessor();
         break;
+      case "googlevideo":
       case "google":
         $c->add(MediaTypePeer::NAME, "googlevideo"); 
         $videoProcessor = new videoGoogleVideoProcessor();
